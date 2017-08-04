@@ -64,5 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\Tasks.sql" />
+    <Build Include="Tables\Tasks.sql" />
   </ItemGroup>
 </Project>
