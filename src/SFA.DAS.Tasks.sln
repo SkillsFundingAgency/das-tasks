@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.API.Integrati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.Application.UnitTests", "SFA.DAS.Tasks.Application.UnitTests\SFA.DAS.Tasks.Application.UnitTests.csproj", "{09F60916-ACFE-403A-8822-FF5EF4EC3D1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.API.Types", "SFA.DAS.Tasks.API.Types\SFA.DAS.Tasks.API.Types.csproj", "{0FA10E00-F9B9-433A-AAC0-FEE0E4EF179A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{09F60916-ACFE-403A-8822-FF5EF4EC3D1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09F60916-ACFE-403A-8822-FF5EF4EC3D1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09F60916-ACFE-403A-8822-FF5EF4EC3D1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FA10E00-F9B9-433A-AAC0-FEE0E4EF179A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FA10E00-F9B9-433A-AAC0-FEE0E4EF179A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FA10E00-F9B9-433A-AAC0-FEE0E4EF179A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FA10E00-F9B9-433A-AAC0-FEE0E4EF179A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
