@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.Worker.UnitTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.Application", "SFA.DAS.Tasks.Application\SFA.DAS.Tasks.Application.csproj", "{B96FB4DB-3DCE-4D4A-B7F1-EDE97233B177}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.Infrastructure", "SFA.DAS.Tasks.Infrastructure\SFA.DAS.Tasks.Infrastructure.csproj", "{3E3AEAC4-F54F-4532-99B5-E707A9A86D88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.DataAccess", "SFA.DAS.Tasks.Infrastructure\SFA.DAS.Tasks.DataAccess.csproj", "{3E3AEAC4-F54F-4532-99B5-E707A9A86D88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
