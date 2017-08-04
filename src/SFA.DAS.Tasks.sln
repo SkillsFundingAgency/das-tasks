@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SFA.DAS.Tasks.Database", "SFA.DAS.Tasks.Database\SFA.DAS.Tasks.Database.sqlproj", "{FF795555-8AE7-461A-A8AA-E8FD9B0CC541}"
+EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "SFA.DAS.Tasks.CloudService.API", "SFA.DAS.Tasks.CloudService.API\SFA.DAS.Tasks.CloudService.API.ccproj", "{2A07EAE4-4016-41D1-A1AD-BE3A815350D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.API", "SFA.DAS.Tasks.API\SFA.DAS.Tasks.API.csproj", "{452BB742-C90D-4A5C-A043-0C2AC6067B49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.Worker", "SFA.DAS.Tasks.Worker\SFA.DAS.Tasks.Worker.csproj", "{F4163AC8-357E-4C9A-A3B7-C5B0F8708E0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.Domain", "SFA.DAS.Tasks.Domain\SFA.DAS.Tasks.Domain.csproj", "{316591FF-D233-4529-BC3B-FA6B79C2DB11}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D56B9FC1-9B4E-4695-9951-737094E2729F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.API.UnitTests", "SFA.DAS.Tasks.API.UnitTests\SFA.DAS.Tasks.API.UnitTests.csproj", "{A8061FE4-C08C-46AE-9E3E-FE54E6170810}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.Worker.UnitTests", "SFA.DAS.Tasks.Worker.UnitTests\SFA.DAS.Tasks.Worker.UnitTests.csproj", "{BBF03398-57DA-4FFE-AEE1-567E5E4D2461}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.Application", "SFA.DAS.Tasks.Application\SFA.DAS.Tasks.Application.csproj", "{B96FB4DB-3DCE-4D4A-B7F1-EDE97233B177}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.DataAccess", "SFA.DAS.Tasks.DataAccess\SFA.DAS.Tasks.DataAccess.csproj", "{3E3AEAC4-F54F-4532-99B5-E707A9A86D88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.API.IntegrationTests", "SFA.DAS.Tasks.API.IntegrationTests\SFA.DAS.Tasks.API.IntegrationTests.csproj", "{4249EB17-1CB7-43D7-AA52-6A5B1F4939D3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF795555-8AE7-461A-A8AA-E8FD9B0CC541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF795555-8AE7-461A-A8AA-E8FD9B0CC541}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF795555-8AE7-461A-A8AA-E8FD9B0CC541}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FF795555-8AE7-461A-A8AA-E8FD9B0CC541}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF795555-8AE7-461A-A8AA-E8FD9B0CC541}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF795555-8AE7-461A-A8AA-E8FD9B0CC541}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2A07EAE4-4016-41D1-A1AD-BE3A815350D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A07EAE4-4016-41D1-A1AD-BE3A815350D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A07EAE4-4016-41D1-A1AD-BE3A815350D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A07EAE4-4016-41D1-A1AD-BE3A815350D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{452BB742-C90D-4A5C-A043-0C2AC6067B49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{452BB742-C90D-4A5C-A043-0C2AC6067B49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{452BB742-C90D-4A5C-A043-0C2AC6067B49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{452BB742-C90D-4A5C-A043-0C2AC6067B49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4163AC8-357E-4C9A-A3B7-C5B0F8708E0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4163AC8-357E-4C9A-A3B7-C5B0F8708E0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4163AC8-357E-4C9A-A3B7-C5B0F8708E0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4163AC8-357E-4C9A-A3B7-C5B0F8708E0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{316591FF-D233-4529-BC3B-FA6B79C2DB11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{316591FF-D233-4529-BC3B-FA6B79C2DB11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{316591FF-D233-4529-BC3B-FA6B79C2DB11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{316591FF-D233-4529-BC3B-FA6B79C2DB11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8061FE4-C08C-46AE-9E3E-FE54E6170810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8061FE4-C08C-46AE-9E3E-FE54E6170810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8061FE4-C08C-46AE-9E3E-FE54E6170810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8061FE4-C08C-46AE-9E3E-FE54E6170810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBF03398-57DA-4FFE-AEE1-567E5E4D2461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBF03398-57DA-4FFE-AEE1-567E5E4D2461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBF03398-57DA-4FFE-AEE1-567E5E4D2461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBF03398-57DA-4FFE-AEE1-567E5E4D2461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B96FB4DB-3DCE-4D4A-B7F1-EDE97233B177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B96FB4DB-3DCE-4D4A-B7F1-EDE97233B177}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B96FB4DB-3DCE-4D4A-B7F1-EDE97233B177}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B96FB4DB-3DCE-4D4A-B7F1-EDE97233B177}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E3AEAC4-F54F-4532-99B5-E707A9A86D88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E3AEAC4-F54F-4532-99B5-E707A9A86D88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E3AEAC4-F54F-4532-99B5-E707A9A86D88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E3AEAC4-F54F-4532-99B5-E707A9A86D88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4249EB17-1CB7-43D7-AA52-6A5B1F4939D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4249EB17-1CB7-43D7-AA52-6A5B1F4939D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4249EB17-1CB7-43D7-AA52-6A5B1F4939D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4249EB17-1CB7-43D7-AA52-6A5B1F4939D3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A8061FE4-C08C-46AE-9E3E-FE54E6170810} = {D56B9FC1-9B4E-4695-9951-737094E2729F}
+		{BBF03398-57DA-4FFE-AEE1-567E5E4D2461} = {D56B9FC1-9B4E-4695-9951-737094E2729F}
+		{4249EB17-1CB7-43D7-AA52-6A5B1F4939D3} = {D56B9FC1-9B4E-4695-9951-737094E2729F}
+	EndGlobalSection
+EndGlobal
