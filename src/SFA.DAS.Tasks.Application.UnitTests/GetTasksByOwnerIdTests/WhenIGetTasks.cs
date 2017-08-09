@@ -31,7 +31,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.GetTasksByOwnerIdTests
             };
 
             _repository = new Mock<ITaskRepository>();
-            _repository.Setup(x => x.GetTasksByOwnerId(It.IsAny<string>())).ReturnsAsync(_tasks);
+            _repository.Setup(x => x.GetTasks(It.IsAny<string>())).ReturnsAsync(_tasks);
             
             RequestHandler = new GetTasksByOwnerIdHandler(_repository.Object, RequestValidator.Object);
             Query = new GetTasksByOwnerIdRequest{ OwnerId = TaskOwnerId};
@@ -43,7 +43,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.GetTasksByOwnerIdTests
             await RequestHandler.Handle(Query);
 
             //Assert
-            _repository.Verify(x => x.GetTasksByOwnerId(TaskOwnerId), Times.Once);
+            _repository.Verify(x => x.GetTasks(TaskOwnerId), Times.Once);
         }
 
         public override async Task ThenIfTheMessageIsValidTheValueIsReturnedInTheResponse()

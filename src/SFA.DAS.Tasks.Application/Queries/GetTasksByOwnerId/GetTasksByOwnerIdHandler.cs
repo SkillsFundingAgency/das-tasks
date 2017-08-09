@@ -26,7 +26,7 @@ namespace SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId
                 throw new InvalidRequestException(validationResult.ValidationDictionary);
             }
 
-            var result = await _repository.GetTasksByOwnerId(message.OwnerId);
+            var result = await _repository.GetTasks(message.OwnerId);
 
             return new GetTasksByOwnerIdResponse {Tasks = result};
         }

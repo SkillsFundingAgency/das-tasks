@@ -6,6 +6,6 @@ namespace SFA.DAS.Tasks.Domain.Repositories
 {
     public interface ITaskRepository
     {
-        Task<IEnumerable<Task>> GetTasksByOwnerId(string ownerId);
+        Task<IEnumerable<Task>> GetTasks(string ownerId);
     }
 }

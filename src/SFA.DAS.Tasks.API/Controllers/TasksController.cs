@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 
@@ -8,11 +9,10 @@ namespace SFA.DAS.Tasks.API.Controllers
     public class TasksController : ApiController
     {
         [Route("")]
-        public IHttpActionResult GetTasks(string ownerId)
+        public async Task<IHttpActionResult> GetTasks(string ownerId)
         {
             throw new NotImplementedException();
         }
-
       
     }
 }
