@@ -31,7 +31,7 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
             _mediator.Setup(x => x.SendAsync(It.IsAny<GetTasksByOwnerIdRequest>()))
                      .ReturnsAsync(new GetTasksByOwnerIdResponse{ Tasks = _tasks });
 
-            _controller = new TasksController();
+            _controller = new TasksController(_mediator.Object);
         }
 
         [Test]
