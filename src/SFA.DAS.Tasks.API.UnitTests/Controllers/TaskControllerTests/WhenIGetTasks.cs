@@ -35,7 +35,7 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
         }
 
         [Test]
-        public async void ThenTasksShouldBeRequested()
+        public async System.Threading.Tasks.Task ThenTasksShouldBeRequested()
         {
             //Act
             await _controller.GetTasks(OwnerId);
@@ -45,15 +45,16 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
         }
 
         [Test]
-        public async void ThenIShouldGetTheAvailableTasks()
+        public async System.Threading.Tasks.Task ThenIShouldGetTheAvailableTasks()
         {
             //Act
             var response = await _controller.GetTasks(OwnerId);
-            var result = response as OkNegotiatedContentResult<IEnumerable<TaskDto>>;
+            var result = response as OkNegotiatedContentResult<IEnumerable<Task>>;//taskDto?
 
             //Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(_tasks, result.Content);
+
         }
     }
 }

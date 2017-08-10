@@ -15,8 +15,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-using System.ComponentModel;
+using StructureMap;
 
 namespace SFA.DAS.Tasks.API.DependancyResolution
 {

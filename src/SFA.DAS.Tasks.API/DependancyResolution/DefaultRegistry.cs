@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using MediatR;
-using Microsoft.Win32;
 using SFA.DAS.NLog.Logger;
+using StructureMap;
 
 namespace SFA.DAS.Tasks.API.DependancyResolution
 {

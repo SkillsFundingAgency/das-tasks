@@ -21,7 +21,7 @@ namespace SFA.DAS.Tasks.API.Controllers
         [Route("")]
         public async Task<IHttpActionResult> GetTasks(string ownerId)
         {
-            var result = await _mediator.SendAsync<GetTasksByOwnerIdResponse>(new GetTasksByOwnerIdRequest
+            var result = await _mediator.SendAsync(new GetTasksByOwnerIdRequest
             {
                 OwnerId = ownerId
             });
