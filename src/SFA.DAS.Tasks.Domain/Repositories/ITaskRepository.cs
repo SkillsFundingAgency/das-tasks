@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Task = SFA.DAS.Tasks.Domain.Models.Task;
+using Todo = SFA.DAS.Tasks.Domain.Models.Todo;
 
 namespace SFA.DAS.Tasks.Domain.Repositories
 {
     public interface ITaskRepository
     {
-        Task<IEnumerable<Task>> GetTasks(string ownerId);
+        Task<IEnumerable<Todo>> GetTasks(string ownerId);
     }
 }

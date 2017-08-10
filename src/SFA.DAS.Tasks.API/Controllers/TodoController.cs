@@ -11,11 +11,11 @@ using SFA.DAS.Tasks.API.Types.DTOs;
 namespace SFA.DAS.Tasks.API.Controllers
 {
     [RoutePrefix("api/tasks/{ownerId}")]
-    public class TasksController : ApiController
+    public class TodoController : ApiController
     {
         private readonly IMediator _mediator;
 
-        public TasksController(IMediator mediator)
+        public TodoController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -28,7 +28,7 @@ namespace SFA.DAS.Tasks.API.Controllers
                 OwnerId = ownerId
             });
 
-            return Ok(result.Tasks);
+            return Ok(result.Todos);
         }
       
     }

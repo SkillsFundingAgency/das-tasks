@@ -1,6 +1,6 @@
 ﻿namespace SFA.DAS.Tasks.Domain.Enums
 {
-    public enum TaskType
+    public enum TodoType
     {
         LevyDeclarationDue = 1,
         AgreementToSign = 2,

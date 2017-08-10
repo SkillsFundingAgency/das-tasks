@@ -5,33 +5,32 @@ using Moq;
 using NUnit.Framework;
 using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
 using SFA.DAS.Tasks.API.Controllers;
-using SFA.DAS.Tasks.API.Types.DTOs;
 using SFA.DAS.Tasks.Domain.Models;
 
-namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
+namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TodoControllerTests
 {
     public class WhenIGetTasks
     {
         private const string OwnerId = "1234";
 
-        private TasksController _controller;
+        private TodoController _controller;
         private Mock<IMediator> _mediator;
-        private List<Task> _tasks;
+        private List<Todo> _todos;
 
         [SetUp]
         public void Arrange()
         {
-            _tasks = new List<Task>
+            _todos = new List<Todo>
             {
-                new Task()
+                new Todo()
             };
 
             _mediator = new Mock<IMediator>();
 
             _mediator.Setup(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(a=>a.OwnerId==OwnerId)))
-                     .ReturnsAsync(new GetTasksByOwnerIdResponse{ Tasks = _tasks });
+                     .ReturnsAsync(new GetTasksByOwnerIdResponse{ Todos = _todos });
 
-            _controller = new TasksController(_mediator.Object);
+            _controller = new TodoController(_mediator.Object);
         }
 
         [Test]
@@ -49,11 +48,11 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
         {
             //Act
             var response = await _controller.GetTasks(OwnerId);
-            var result = response as OkNegotiatedContentResult<IEnumerable<Task>>;
+            var result = response as OkNegotiatedContentResult<IEnumerable<Todo>>;
 
             //Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(_tasks, result.Content);
+            Assert.AreEqual(_todos, result.Content);
 
         }
     }
