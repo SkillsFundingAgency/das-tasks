@@ -28,7 +28,7 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
 
             _mediator = new Mock<IMediator>();
 
-            _mediator.Setup(x => x.SendAsync(It.IsAny<GetTasksByOwnerIdRequest>()))
+            _mediator.Setup(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(a=>a.OwnerId==OwnerId)))
                      .ReturnsAsync(new GetTasksByOwnerIdResponse{ Tasks = _tasks });
 
             _controller = new TasksController(_mediator.Object);
@@ -49,7 +49,7 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
         {
             //Act
             var response = await _controller.GetTasks(OwnerId);
-            var result = response as OkNegotiatedContentResult<IEnumerable<Task>>;//taskDto?
+            var result = response as OkNegotiatedContentResult<IEnumerable<Task>>;
 
             //Assert
             Assert.IsNotNull(result);

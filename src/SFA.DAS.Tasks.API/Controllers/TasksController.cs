@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Results;
 using MediatR;
 using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
-
+using SFA.DAS.Tasks.API.Types.DTOs;
 
 namespace SFA.DAS.Tasks.API.Controllers
 {
@@ -26,7 +28,7 @@ namespace SFA.DAS.Tasks.API.Controllers
                 OwnerId = ownerId
             });
 
-            return Ok(result);
+            return Ok(result.Tasks);
         }
       
     }

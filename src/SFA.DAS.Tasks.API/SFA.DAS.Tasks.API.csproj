@@ -228,9 +228,17 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SFA.DAS.Tasks.API.Types\SFA.DAS.Tasks.API.Types.csproj">
+      <Project>{0FA10E00-F9B9-433A-AAC0-FEE0E4EF179A}</Project>
+      <Name>SFA.DAS.Tasks.API.Types</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SFA.DAS.Tasks.Application\SFA.DAS.Tasks.Application.csproj">
       <Project>{b96fb4db-3dce-4d4a-b7f1-ede97233b177}</Project>
       <Name>SFA.DAS.Tasks.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SFA.DAS.Tasks.Domain\SFA.DAS.Tasks.Domain.csproj">
+      <Project>{316591ff-d233-4529-bc3b-fa6b79c2db11}</Project>
+      <Name>SFA.DAS.Tasks.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
