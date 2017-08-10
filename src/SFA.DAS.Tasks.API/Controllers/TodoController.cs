@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Results;
 using MediatR;
 using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
-using SFA.DAS.Tasks.API.Types.DTOs;
+using SFA.DAS.Tasks.Domain.Models;
 
 namespace SFA.DAS.Tasks.API.Controllers
 {
@@ -27,6 +24,8 @@ namespace SFA.DAS.Tasks.API.Controllers
             {
                 OwnerId = ownerId
             });
+
+            if (result == null) return Ok(Enumerable.Empty<Todo>());
 
             return Ok(result.Todos);
         }
