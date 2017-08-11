@@ -4,7 +4,6 @@ using System.Web.Http;
 using MediatR;
 using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
 using SFA.DAS.Tasks.Domain.Models;
-using SFA.DAS.Tasks.API.Types.DTOs
 
 namespace SFA.DAS.Tasks.API.Controllers
 {

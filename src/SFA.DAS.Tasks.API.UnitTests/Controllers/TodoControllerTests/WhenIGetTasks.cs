@@ -30,19 +30,10 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TodoControllerTests
 
             _mediator = new Mock<IMediator>();
 
-            _controller = new TodoController(_mediator.Object);
-        }
-
-        private void SetupToReturnTodos()
-        {
             _mediator.Setup(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(a => a.OwnerId == OwnerId)))
                 .ReturnsAsync(new GetTasksByOwnerIdResponse { Todos = _todos });
-        }
 
-        private void SetupToReturnNoTodos()
-        {
-            _mediator.Setup(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(a => a.OwnerId == OwnerId)))
-                .ReturnsAsync(new GetTasksByOwnerIdResponse { Todos = null });
+            _controller = new TodoController(_mediator.Object);
         }
 
         //[Test]
@@ -61,9 +52,6 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TodoControllerTests
         [Test]
         public async Task GivenThereAreTodosThenIShouldGetOkResultWithTodos()
         {
-            //Arrange
-            SetupToReturnTodos();
-
             //Act
             var response = await _controller.GetTasks(OwnerId);
             _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(OwnerId))), Times.Once);
@@ -78,9 +66,6 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TodoControllerTests
         [Test]
         public async Task GivenThereAreTodosButIamADifferentOwnerThenIShouldGetOkResultWithNullTodos()
         {
-            //Arrange
-            SetupToReturnTodos();
-
             //Act
             var response = await _controller.GetTasks(DifferentOwnerId);
             _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(DifferentOwnerId))), Times.Once);
@@ -109,7 +94,8 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TodoControllerTests
         public async Task GivenThereAreNoTodosThenIShouldGetOkResultWithNullTodos()
         {
             //Arrange
-            SetupToReturnNoTodos();
+            _mediator.Setup(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(a => a.OwnerId == OwnerId)))
+                .ReturnsAsync(new GetTasksByOwnerIdResponse { Todos = null });
 
             //Act
             var response = await _controller.GetTasks(OwnerId);
