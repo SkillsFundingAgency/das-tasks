@@ -54,7 +54,7 @@
     <Compile Include="Validation\ValidationResult.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\" />
+    <Folder Include="Commands\SaveTask\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

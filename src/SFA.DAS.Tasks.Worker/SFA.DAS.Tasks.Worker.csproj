@@ -74,6 +74,9 @@
     <Reference Include="SFA.DAS.Configuration.FileStorage, Version=1.0.0.38117, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Configuration.FileStorage.1.0.0.38117\lib\net45\SFA.DAS.Configuration.FileStorage.dll</HintPath>
     </Reference>
+    <Reference Include="SFA.DAS.EmployerAccounts.Events, Version=1.0.0.37967, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.EmployerAccounts.Events.1.0.0.37967\lib\net45\SFA.DAS.EmployerAccounts.Events.dll</HintPath>
+    </Reference>
     <Reference Include="SFA.DAS.Messaging, Version=3.0.0.38118, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Messaging.3.0.0.38118\lib\net45\SFA.DAS.Messaging.dll</HintPath>
     </Reference>
@@ -102,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\Policies\MessagePolicy.cs" />
+    <Compile Include="MessageHandlers\AgreementCreatedMessageHandler.cs" />
     <Compile Include="MessageHandlers\IMessageHandler.cs" />
     <Compile Include="Processors\ITaskMessageProcessor.cs" />
     <Compile Include="Processors\TaskMessageProcessor.cs" />
@@ -111,6 +115,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SFA.DAS.Tasks.Domain\SFA.DAS.Tasks.Domain.csproj">
+      <Project>{316591FF-D233-4529-BC3B-FA6B79C2DB11}</Project>
+      <Name>SFA.DAS.Tasks.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

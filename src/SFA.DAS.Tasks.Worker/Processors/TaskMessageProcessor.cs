@@ -31,7 +31,6 @@ namespace SFA.DAS.Tasks.Worker.Processors
                 try
                 {
                     _handler.Handle(message.Content);
-                   
                 }
                 catch (Exception ex)
                 {

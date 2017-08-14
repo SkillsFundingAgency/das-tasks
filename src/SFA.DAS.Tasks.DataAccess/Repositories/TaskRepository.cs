@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Dapper;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Sql.Client;
+using SFA.DAS.Tasks.Domain.Enums;
 using SFA.DAS.Tasks.Domain.Repositories;
 using Todo = SFA.DAS.Tasks.Domain.Models.Todo;
 
@@ -28,6 +29,16 @@ namespace SFA.DAS.Tasks.Infrastructure.Repositories
                     param: parameters,
                     commandType: CommandType.StoredProcedure);
             });
+        }
+
+        public Task<Todo> GetTask(string ownerId, TodoType type)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SaveTask(Todo task)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
