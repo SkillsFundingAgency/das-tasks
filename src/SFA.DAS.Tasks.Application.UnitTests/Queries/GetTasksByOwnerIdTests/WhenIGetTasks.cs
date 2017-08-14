@@ -6,7 +6,7 @@ using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
 using SFA.DAS.Tasks.Application.Validation;
 using SFA.DAS.Tasks.Domain.Repositories;
 
-namespace SFA.DAS.Tasks.Application.UnitTests.GetTasksByOwnerIdTests
+namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
 {
     public class WhenIGetTasks : QueryBaseTest<GetTasksByOwnerIdHandler, GetTasksByOwnerIdRequest, GetTasksByOwnerIdResponse>
     {
