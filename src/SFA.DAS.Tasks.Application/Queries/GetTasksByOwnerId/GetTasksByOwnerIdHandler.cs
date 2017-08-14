@@ -28,7 +28,7 @@ namespace SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId
 
             var result = await _repository.GetTasks(message.OwnerId);
 
-            return new GetTasksByOwnerIdResponse {Todos = result};
+            return new GetTasksByOwnerIdResponse {Tasks = result};
         }
     }
 }

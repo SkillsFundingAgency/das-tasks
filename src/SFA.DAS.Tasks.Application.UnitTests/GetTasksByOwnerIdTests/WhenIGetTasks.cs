@@ -13,7 +13,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.GetTasksByOwnerIdTests
         private const string TaskOwnerId = "123ACX";
 
         private Mock<ITaskRepository> _repository;
-        private List<Domain.Models.Todo> _tasks;
+        private List<Domain.Models.DasTask> _tasks;
 
         public override GetTasksByOwnerIdRequest Query { get; set; }
         public override GetTasksByOwnerIdHandler RequestHandler { get; set; }
@@ -25,9 +25,9 @@ namespace SFA.DAS.Tasks.Application.UnitTests.GetTasksByOwnerIdTests
         {
             base.SetUp();
 
-            _tasks = new List<Domain.Models.Todo>
+            _tasks = new List<Domain.Models.DasTask>
             {
-                new Domain.Models.Todo()
+                new Domain.Models.DasTask()
             };
 
             _repository = new Mock<ITaskRepository>();
@@ -52,7 +52,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.GetTasksByOwnerIdTests
             var result = await RequestHandler.Handle(Query);
 
             //Assert
-            Assert.AreEqual(_tasks, result.Todos);
+            Assert.AreEqual(_tasks, result.Tasks);
         }
     }
 }

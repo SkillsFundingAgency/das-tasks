@@ -207,7 +207,7 @@
     <Compile Include="App_Start\RequestContext.cs" />
     <Compile Include="App_Start\ValidationErrorResult.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\TodoController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="DependancyResolution\DefaultRegistry.cs" />
     <Compile Include="DependancyResolution\IoC.cs" />
     <Compile Include="Global.asax.cs">

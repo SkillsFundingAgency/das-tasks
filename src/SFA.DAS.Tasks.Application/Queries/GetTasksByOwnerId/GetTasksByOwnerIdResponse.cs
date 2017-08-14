@@ -5,6 +5,6 @@ namespace SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId
 {
     public class GetTasksByOwnerIdResponse
     {
-        public IEnumerable<Todo> Todos { get; set; }
+        public IEnumerable<DasTask> Tasks { get; set; }
     }
 }

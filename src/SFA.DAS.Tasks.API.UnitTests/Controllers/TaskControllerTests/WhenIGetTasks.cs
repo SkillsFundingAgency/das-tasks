@@ -9,105 +9,77 @@ using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
 using SFA.DAS.Tasks.API.Controllers;
 using SFA.DAS.Tasks.Domain.Models;
 
-namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TodoControllerTests
+namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
 {
     public class WhenIGetTasks
     {
         private const string OwnerId = "1234";
         private const string DifferentOwnerId = "differentOwner";
 
-        private TodoController _controller;
+        private TaskController _controller;
         private Mock<IMediator> _mediator;
-        private List<Todo> _todos;
+        private List<DasTask> _tasks;
 
         [SetUp]
         public void Arrange()
         {
-            _todos = new List<Todo>
+            _tasks = new List<DasTask>
             {
-                new Todo()
+                new DasTask()
             };
 
             _mediator = new Mock<IMediator>();
 
             _mediator.Setup(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(a => a.OwnerId == OwnerId)))
-                .ReturnsAsync(new GetTasksByOwnerIdResponse { Todos = _todos });
+                .ReturnsAsync(new GetTasksByOwnerIdResponse { Tasks = _tasks });
 
-            _controller = new TodoController(_mediator.Object);
+            _controller = new TaskController(_mediator.Object);
         }
 
-        //[Test]
-        //public async Task ThenIfThereAreTodosTasksShouldBeRequested()
-        //{
-        //    //Arrange
-        //    SetupToReturnTodos();
-
-        //    //Act
-        //    await _controller.GetTasks(OwnerId);
-
-        //    //Assert
-        //    _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request =>request.OwnerId.Equals(OwnerId))), Times.Once);
-        //}
-
         [Test]
-        public async Task GivenThereAreTodosThenIShouldGetOkResultWithTodos()
+        public async Task GivenThereAreTasksThenIShouldGetOkResultWithTasks()
         {
             //Act
             var response = await _controller.GetTasks(OwnerId);
             _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(OwnerId))), Times.Once);
 
-            var result = response as OkNegotiatedContentResult<IEnumerable<Todo>>;
+            var result = response as OkNegotiatedContentResult<IEnumerable<DasTask>>;
 
             //Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(_todos, result.Content);
+            Assert.AreEqual(_tasks, result.Content);
         }
 
         [Test]
-        public async Task GivenThereAreTodosButIamADifferentOwnerThenIShouldGetOkResultWithNullTodos()
+        public async Task GivenThereAreTasksButIamADifferentOwnerThenIShouldGetOkResultWithNullTasks()
         {
             //Act
             var response = await _controller.GetTasks(DifferentOwnerId);
             _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(DifferentOwnerId))), Times.Once);
 
-            var result = response as OkNegotiatedContentResult<IEnumerable<Todo>>;
+            var result = response as OkNegotiatedContentResult<IEnumerable<DasTask>>;
 
             //Assert
             Assert.IsNotNull(result);
             Assert.False(result.Content.Any());
         }
 
-        //[Test]
-        //public async Task ThenIfThereAreNoTodosTasksShouldBeRequested()
-        //{
-        //    //Arrange
-        //    SetupToReturnTodos();
-
-        //    //Act
-        //    await _controller.GetTasks(OwnerId);
-
-        //    //Assert
-        //    _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(OwnerId))), Times.Once);
-        //}
-
         [Test]
-        public async Task GivenThereAreNoTodosThenIShouldGetOkResultWithNullTodos()
+        public async Task GivenThereAreNoTasksThenIShouldGetOkResultWithNullTasks()
         {
             //Arrange
             _mediator.Setup(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(a => a.OwnerId == OwnerId)))
-                .ReturnsAsync(new GetTasksByOwnerIdResponse { Todos = null });
+                .ReturnsAsync(new GetTasksByOwnerIdResponse { Tasks = null });
 
             //Act
             var response = await _controller.GetTasks(OwnerId);
             _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(OwnerId))), Times.Once);
 
-            var result = response as OkNegotiatedContentResult<IEnumerable<Todo>>;
+            var result = response as OkNegotiatedContentResult<IEnumerable<DasTask>>;
 
             //Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(null, result.Content);
         }
-
-
     }
 }

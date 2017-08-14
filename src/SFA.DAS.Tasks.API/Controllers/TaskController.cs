@@ -8,11 +8,11 @@ using SFA.DAS.Tasks.Domain.Models;
 namespace SFA.DAS.Tasks.API.Controllers
 {
     [RoutePrefix("api/tasks/{ownerId}")]
-    public class TodoController : ApiController
+    public class TaskController : ApiController
     {
         private readonly IMediator _mediator;
 
-        public TodoController(IMediator mediator)
+        public TaskController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -25,9 +25,9 @@ namespace SFA.DAS.Tasks.API.Controllers
                 OwnerId = ownerId
             });
 
-            if (result == null) return Ok(Enumerable.Empty<Todo>());
+            if (result == null) return Ok(Enumerable.Empty<DasTask>());
 
-            return Ok(result.Todos);
+            return Ok(result.Tasks);
         }
       
     }
