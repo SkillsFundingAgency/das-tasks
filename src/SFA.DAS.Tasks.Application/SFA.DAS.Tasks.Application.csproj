@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\SaveTask\SaveTaskCommand.cs" />
+    <Compile Include="Commands\SaveTask\SaveTaskCommandHandler.cs" />
+    <Compile Include="Commands\SaveTask\SaveTaskCommandResponse.cs" />
     <Compile Include="Exceptions\InvalidRequestException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -50,12 +53,13 @@
     <Compile Include="Queries\GetTasksByOwnerId\GetTasksByOwnerIdHandler.cs" />
     <Compile Include="Queries\GetTasksByOwnerId\GetTasksByOwnerIdResponse.cs" />
     <Compile Include="Queries\GetTasksByOwnerId\GetTasksByOwnerIdValidator.cs" />
+    <Compile Include="Queries\GetTask\GetTaskRequest.cs" />
+    <Compile Include="Queries\GetTask\GetTaskRequestHandler.cs" />
+    <Compile Include="Queries\GetTask\GetTaskResponse.cs" />
     <Compile Include="Validation\IValidator.cs" />
     <Compile Include="Validation\ValidationResult.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\SaveTask\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

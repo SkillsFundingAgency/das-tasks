@@ -9,7 +9,7 @@ namespace SFA.DAS.Tasks.Domain.Repositories
     {
         Task<IEnumerable<DasTask>> GetTasks(string ownerId);
 
-        Task<DasTask> GetTask(string ownerId, TodoType type);
+        Task<DasTask> GetTask(string ownerId, TaskType type);
 
         void SaveTask(DasTask task);
     }

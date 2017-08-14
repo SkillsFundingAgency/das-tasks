@@ -4,7 +4,7 @@ namespace SFA.DAS.Tasks.Domain.Models
 {
     public class DasTask
     {
-        public TodoType Type { get; set; }
+        public TaskType Type { get; set; }
         public string TaskOwnerId { get; set; }
         public int ItemsDueCount { get; set; }
     }

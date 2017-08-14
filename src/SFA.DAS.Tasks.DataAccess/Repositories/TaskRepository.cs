@@ -31,7 +31,7 @@ namespace SFA.DAS.Tasks.Infrastructure.Repositories
             });
         }
 
-        public Task<DasTask> GetTask(string ownerId, TodoType type)
+        public Task<DasTask> GetTask(string ownerId, TaskType type)
         {
             throw new System.NotImplementedException();
         }

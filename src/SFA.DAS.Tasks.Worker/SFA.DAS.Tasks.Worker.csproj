@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MediatR, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.2.0.1\lib\net45\MediatR.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
     </Reference>
@@ -117,6 +120,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SFA.DAS.Tasks.Application\SFA.DAS.Tasks.Application.csproj">
+      <Project>{B96FB4DB-3DCE-4D4A-B7F1-EDE97233B177}</Project>
+      <Name>SFA.DAS.Tasks.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SFA.DAS.Tasks.Domain\SFA.DAS.Tasks.Domain.csproj">
       <Project>{316591FF-D233-4529-BC3B-FA6B79C2DB11}</Project>
       <Name>SFA.DAS.Tasks.Domain</Name>
