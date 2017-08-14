@@ -18,6 +18,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.Processors.TaskMessageProcessorTests
         private Mock<ILog> _logger;
         private Mock<IMessageHandler<TestMessage>> _messageHandler;
         private TestMessage _message;
+        private CancellationTokenSource _tokenSource;
 
 
         [SetUp]
@@ -27,18 +28,20 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.Processors.TaskMessageProcessorTests
             _logger = new Mock<ILog>();
             _messageHandler = new Mock<IMessageHandler<TestMessage>>();
             _message = new TestMessage();
+            _tokenSource = new CancellationTokenSource();
 
             _processor = new TaskMessageProcessor<TestMessage>(_messageReciever.Object, _messageHandler.Object, _logger.Object);
 
             _messageReciever.Setup(x => x.ReceiveAsAsync<TestMessage>())
-                .ReturnsAsync(() => new FileSystemMessage<TestMessage>(null, null, _message));
+                .ReturnsAsync(() => new FileSystemMessage<TestMessage>(null, null, _message))
+                .Callback(() => { _tokenSource.Cancel(); });
         }
 
         [Test]
         public async Task ThenTheMessageShouldBeHandledByAHandler()
         {
             //Act
-            await _processor.RunAsync(new CancellationToken());
+            await _processor.RunAsync(_tokenSource.Token);
 
             //Assert
             _messageHandler.Verify(x => x.Handle(_message), Times.Once);
@@ -57,9 +60,23 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.Processors.TaskMessageProcessorTests
             _messageHandler.Verify(x => x.Handle(_message), Times.Once);
         }
 
-        private class TestMessage
+        [Test]
+        public async Task ThenIfMessageIsNullItShouldNotBeHandled()
+        {
+            //Arrange
+            _messageReciever.Setup(x => x.ReceiveAsAsync<TestMessage>())
+                .ReturnsAsync((Message<TestMessage>) null)
+                .Callback(() => { _tokenSource.Cancel(); });
+
+            //Act
+            await _processor.RunAsync(_tokenSource.Token);
+
+            //Assert
+            _logger.Verify(x => x.Fatal(It.IsAny<Exception>(), It.IsAny<string>()), Times.Never);
+            _messageHandler.Verify(x => x.Handle(It.IsAny<TestMessage>()), Times.Never);
+        }
+
+        public class TestMessage
         { }
-
-
-}
+    }
 }

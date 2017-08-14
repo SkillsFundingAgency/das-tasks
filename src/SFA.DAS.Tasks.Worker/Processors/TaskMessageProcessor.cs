@@ -26,9 +26,12 @@ namespace SFA.DAS.Tasks.Worker.Processors
             {
                 var message = await _pollingMessageReceiver.ReceiveAsAsync<T>();
 
+                if (message == null) continue;
+
                 try
                 {
-                    //await ProcessMessage(message);
+                    _handler.Handle(message.Content);
+                   
                 }
                 catch (Exception ex)
                 {
@@ -36,11 +39,6 @@ namespace SFA.DAS.Tasks.Worker.Processors
                     break; //Stop processing anymore messages as this failure needs to be investigated
                 }
             }
-        }
-
-        private Task ProcessMessage(Message<T> message)
-        {
-            throw new NotImplementedException();
         }
     }
 }
