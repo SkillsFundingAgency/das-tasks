@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
 
-namespace SFA.DAS.Tasks.Application.UnitTests.GetTasksByOwnerIdTests
+namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
 {
     public class WhenIValidateTheRequest
     {

@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\SaveTaskCommandTests\WhenISaveATask.cs" />
     <Compile Include="Queries\GetTasksByOwnerIdTests\WhenIGetTasks.cs" />
     <Compile Include="Queries\GetTasksByOwnerIdTests\WhenIValidateTheRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

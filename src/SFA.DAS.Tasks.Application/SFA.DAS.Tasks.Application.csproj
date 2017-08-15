@@ -46,6 +46,7 @@
     <Compile Include="Commands\SaveTask\SaveTaskCommand.cs" />
     <Compile Include="Commands\SaveTask\SaveTaskCommandHandler.cs" />
     <Compile Include="Commands\SaveTask\SaveTaskCommandResponse.cs" />
+    <Compile Include="Commands\SaveTask\SaveTaskCommandValidator.cs" />
     <Compile Include="Exceptions\InvalidRequestException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
