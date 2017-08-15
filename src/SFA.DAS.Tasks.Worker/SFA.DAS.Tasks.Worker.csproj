@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\Policies\MessagePolicy.cs" />
+    <Compile Include="DependencyResolution\DefaultRegistry.cs" />
     <Compile Include="MessageHandlers\AgreementCreatedMessageHandler.cs" />
     <Compile Include="MessageHandlers\IMessageHandler.cs" />
     <Compile Include="Processors\ITaskMessageProcessor.cs" />
