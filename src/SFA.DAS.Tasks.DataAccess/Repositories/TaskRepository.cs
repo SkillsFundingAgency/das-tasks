@@ -31,14 +31,35 @@ namespace SFA.DAS.Tasks.Infrastructure.Repositories
             });
         }
 
-        public Task<DasTask> GetTask(string ownerId, TaskType type)
+        public async Task<DasTask> GetTask(string ownerId, TaskType type)
         {
-            throw new System.NotImplementedException();
+            return await WithConnection(async c =>
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@ownerId", ownerId, DbType.String);
+
+                return await c.QuerySingleAsync<DasTask>(
+                    sql: "[tasks].[[GetTaskByOwnerIdAndType]",
+                    param: parameters,
+                    commandType: CommandType.StoredProcedure);
+            });
         }
 
-        public void SaveTask(DasTask task)
+        public async void SaveTask(DasTask task)
         {
-            throw new System.NotImplementedException();
+            await WithConnection(async c =>
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@Id", task.Id, DbType.Guid);
+                parameters.Add("@ownerId", task.OwnerId, DbType.String);
+                parameters.Add("@type", task.Type, DbType.String);
+                parameters.Add("@itemsDueCount", task.ItemsDueCount, DbType.Int32);
+
+                return await c.ExecuteAsync(
+                    sql: "[tasks].[UpsertTask]",
+                    param: parameters,
+                    commandType: CommandType.StoredProcedure);
+            });
         }
     }
 }
