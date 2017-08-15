@@ -56,6 +56,7 @@
     <Compile Include="Queries\GetTasksByOwnerIdTests\WhenIValidateTheRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\GetTaskTests\WhenIGetATask.cs" />
+    <Compile Include="Queries\GetTaskTests\WhenIValidateTheRequest.cs" />
     <Compile Include="QueryBaseTest.cs" />
   </ItemGroup>
   <ItemGroup>

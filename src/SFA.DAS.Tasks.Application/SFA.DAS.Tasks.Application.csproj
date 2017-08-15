@@ -55,6 +55,7 @@
     <Compile Include="Queries\GetTasksByOwnerId\GetTasksByOwnerIdValidator.cs" />
     <Compile Include="Queries\GetTask\GetTaskRequest.cs" />
     <Compile Include="Queries\GetTask\GetTaskRequestHandler.cs" />
+    <Compile Include="Queries\GetTask\GetTaskRequestValidator.cs" />
     <Compile Include="Queries\GetTask\GetTaskResponse.cs" />
     <Compile Include="Validation\IValidator.cs" />
     <Compile Include="Validation\ValidationResult.cs" />
