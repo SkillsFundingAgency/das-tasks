@@ -32,7 +32,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageHandlers.AgreementCreatedMessage
 
             _task = new DasTask
             {
-                TaskOwnerId = _message.AccountId.ToString(),
+                OwnerId = _message.AccountId.ToString(),
                 Type = TaskType.AgreementToSign,
                 ItemsDueCount = 1
             };
@@ -51,7 +51,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageHandlers.AgreementCreatedMessage
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(c => 
                 c.Task != null &&
-                c.Task.TaskOwnerId.Equals(_message.AccountId.ToString()) &&
+                c.Task.OwnerId.Equals(_message.AccountId.ToString()) &&
                 c.Task.Type.Equals(TaskType.AgreementToSign) &&
                 c.Task.ItemsDueCount.Equals(1))), Times.Once());
         }
@@ -70,7 +70,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageHandlers.AgreementCreatedMessage
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(c =>
                 c.Task != null &&
-                c.Task.TaskOwnerId.Equals(_message.AccountId.ToString()) &&
+                c.Task.OwnerId.Equals(_message.AccountId.ToString()) &&
                 c.Task.Type.Equals(TaskType.AgreementToSign) &&
                 c.Task.ItemsDueCount.Equals(expectedItemCount))), Times.Once());
         }

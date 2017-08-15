@@ -25,7 +25,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
 
             _task = new DasTask
             {
-                TaskOwnerId = "123",
+                OwnerId = "123",
                 ItemsDueCount = 1,
                 Type = TaskType.AddApprentices
             };
@@ -43,7 +43,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
             await RequestHandler.Handle(Query);
 
             //Assert
-            _repository.Verify(x => x.GetTask(_task.TaskOwnerId, _task.Type), Times.Once);
+            _repository.Verify(x => x.GetTask(_task.OwnerId, _task.Type), Times.Once);
         }
 
         public override async Task ThenIfTheMessageIsValidTheValueIsReturnedInTheResponse()

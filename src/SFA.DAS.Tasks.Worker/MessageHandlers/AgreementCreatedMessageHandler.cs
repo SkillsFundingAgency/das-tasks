@@ -26,7 +26,7 @@ namespace SFA.DAS.Tasks.Worker.MessageHandlers
 
             var task = response?.Task ?? new DasTask
             {
-                TaskOwnerId = message.AccountId.ToString(),
+                OwnerId = message.AccountId.ToString(),
                 Type = TaskType.AgreementToSign
             };
 
