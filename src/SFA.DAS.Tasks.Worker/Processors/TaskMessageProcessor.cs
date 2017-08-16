@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using SFA.DAS.Messaging;
+using SFA.DAS.Messaging.Attributes;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Worker.MessageHandlers;
 
@@ -9,6 +10,9 @@ namespace SFA.DAS.Tasks.Worker.Processors
 {
     public class TaskMessageProcessor<T> : ITaskMessageProcessor where T : new()
     {
+        [QueueName]
+        public string taskmessages { get; set; }
+
         private readonly IPollingMessageReceiver _pollingMessageReceiver;
         private readonly IMessageHandler<T> _handler;
         private readonly ILog _logger;

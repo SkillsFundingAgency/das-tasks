@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using SFA.DAS.EmployerAccounts.Events.Messages;
 using SFA.DAS.NLog.Logger;
+using SFA.DAS.Tasks.Worker.Processors;
 using StructureMap;
 
 
@@ -17,6 +19,12 @@ namespace SFA.DAS.Tasks.Worker.DependencyResolution
 
             AddMediatrRegistrations();
             RegisterLogger();
+            RegisterMessageProcessors();
+        }
+
+        private void RegisterMessageProcessors()
+        {
+            For<ITaskMessageProcessor>().Use<TaskMessageProcessor<AgreementCreatedMessage>>();
         }
 
         private void AddMediatrRegistrations()

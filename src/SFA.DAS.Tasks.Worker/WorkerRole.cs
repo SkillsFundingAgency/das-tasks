@@ -4,6 +4,10 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.ServiceRuntime;
+using SFA.DAS.Configuration;
+using SFA.DAS.Tasks.Domain.Configurations;
+using SFA.DAS.Tasks.Worker.Configuration.Policies;
+using SFA.DAS.Tasks.Worker.Configuration.Policies.SFA.DAS.EAS.Infrastructure.DependencyResolution;
 using SFA.DAS.Tasks.Worker.DependencyResolution;
 using SFA.DAS.Tasks.Worker.Processors;
 using StructureMap;
@@ -25,8 +29,8 @@ namespace SFA.DAS.Tasks.Worker
             {
                 var messageProcessors = _container.GetAllInstances<ITaskMessageProcessor>();
 
-                var tasks = messageProcessors.Select(x => x.RunAsync(_cancellationTokenSource.Token)).ToArray();
-                Task.WaitAll(tasks);
+                // var tasks = messageProcessors.Select(x => x.RunAsync(_cancellationTokenSource.Token)).ToArray();
+                // Task.WaitAll(tasks);
             }
             finally
             {
@@ -48,6 +52,8 @@ namespace SFA.DAS.Tasks.Worker
 
             _container = new Container(c =>
             {
+                c.Policies.Add(new ConfigurationPolicy<TasksConfiguration>("SFA.DAS.Tasks"));
+                c.Policies.Add(new MessagePolicy<TasksConfiguration>("SFA.DAS.Tasks"));
                 c.AddRegistry<DefaultRegistry>();
             });
 
