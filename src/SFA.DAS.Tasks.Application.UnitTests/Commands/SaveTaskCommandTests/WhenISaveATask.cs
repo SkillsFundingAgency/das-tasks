@@ -32,7 +32,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
 
             _repository = new Mock<ITaskRepository>();
 
-            RequestHandler = new SaveTaskCommandHandler(_repository.Object);
+            RequestHandler = new SaveTaskCommandHandler(_repository.Object, RequestValidator.Object);
             Query = new SaveTaskCommand {Task = _task};
         }
       
@@ -43,7 +43,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
             await RequestHandler.Handle(Query);
 
             //Assert
-            _repository.Verify(x => x.GetTask(_task.OwnerId, _task.Type), Times.Once);
+            _repository.Verify(x => x.SaveTask(_task), Times.Once);
         }
 
         public override async Task ThenIfTheMessageIsValidTheValueIsReturnedInTheResponse()
