@@ -29,8 +29,8 @@ namespace SFA.DAS.Tasks.Worker
             {
                 var messageProcessors = _container.GetAllInstances<ITaskMessageProcessor>();
 
-                // var tasks = messageProcessors.Select(x => x.RunAsync(_cancellationTokenSource.Token)).ToArray();
-                // Task.WaitAll(tasks);
+                 var tasks = messageProcessors.Select(x => x.RunAsync(_cancellationTokenSource.Token)).ToArray();
+                 Task.WaitAll(tasks);
             }
             finally
             {

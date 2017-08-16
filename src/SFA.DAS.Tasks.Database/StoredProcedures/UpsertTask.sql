@@ -8,4 +8,4 @@ AS
 	USING (SELECT @id AS Id) AS [Source] 
 	ON [Target].Id = [Source].Id
 	WHEN MATCHED THEN  UPDATE SET [Target].ItemsDueCount = @itemsDueCount
-	WHEN NOT MATCHED THEN INSERT (Type, OwnerId, ItemsDueCount) VALUES (@type, @ownerId, @itemsDueCount);
+	WHEN NOT MATCHED THEN INSERT (Id, Type, OwnerId, ItemsDueCount) VALUES (NEWID(),@type, @ownerId, @itemsDueCount);

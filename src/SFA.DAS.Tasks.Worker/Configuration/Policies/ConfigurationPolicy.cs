@@ -18,9 +18,8 @@ namespace SFA.DAS.Tasks.Worker.Configuration.Policies
         
         protected override void apply(Type pluginType, IConfiguredInstance instance)
         {
-
             var serviceConfigurationParamater = instance?.Constructor?.GetParameters().FirstOrDefault(x => x.ParameterType == typeof(T) 
-                                                                                                        || ((System.Reflection.TypeInfo)typeof(T)).GetInterface(x.ParameterType.Name) != null);
+                                                                 || ((System.Reflection.TypeInfo)typeof(T)).GetInterface(x.ParameterType.Name) != null);
 
             if (serviceConfigurationParamater != null)
             {

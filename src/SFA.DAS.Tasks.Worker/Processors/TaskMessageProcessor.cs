@@ -30,11 +30,9 @@ namespace SFA.DAS.Tasks.Worker.Processors
             {
                 var message = await _pollingMessageReceiver.ReceiveAsAsync<T>();
 
-                if (message == null) continue;
-
                 try
                 {
-                    _handler.Handle(message.Content);
+                     await ProcessMessage(message);
                 }
                 catch (Exception ex)
                 {
@@ -42,6 +40,23 @@ namespace SFA.DAS.Tasks.Worker.Processors
                     break; //Stop processing anymore messages as this failure needs to be investigated
                 }
             }
+        }
+
+        private async Task ProcessMessage(Message<T> message)
+        {
+            if (message == null || message.Content.Equals(default(T)))
+            {
+                if (message != null)
+                {
+                    await message.CompleteAsync();
+                }
+
+                return;
+            }
+
+            _handler.Handle(message.Content);
+
+            await message.CompleteAsync();
         }
     }
 }

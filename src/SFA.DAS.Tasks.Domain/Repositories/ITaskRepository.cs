@@ -11,6 +11,6 @@ namespace SFA.DAS.Tasks.Domain.Repositories
 
         Task<DasTask> GetTask(string ownerId, TaskType type);
 
-        void SaveTask(DasTask task);
+        Task SaveTask(DasTask task);
     }
 }

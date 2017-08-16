@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using SFA.DAS.EmployerAccounts.Events.Messages;
 using SFA.DAS.NLog.Logger;
+using SFA.DAS.Tasks.Domain.Repositories;
+using SFA.DAS.Tasks.Infrastructure.Repositories;
 using SFA.DAS.Tasks.Worker.Processors;
 using StructureMap;
 
