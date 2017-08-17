@@ -10,19 +10,14 @@ namespace SFA.DAS.Tasks.Application.Commands.SaveTask
         {
             var validationResults = new ValidationResult();
 
-            if (string.IsNullOrEmpty(item.Task.OwnerId))
+            if (string.IsNullOrEmpty(item.OwnerId))
             {
-                validationResults.AddError(nameof(item.Task.OwnerId), "Cannot save task when owner ID is not given.");
+                validationResults.AddError(nameof(item.OwnerId), "Cannot save task when owner ID is not given.");
             }
 
-            if (item.Task.Type == TaskType.None)
+            if (item.Type == TaskType.None)
             {
-                validationResults.AddError(nameof(item.Task.Type), "Cannot save task when task type is not given.");
-            }
-
-            if (item.Task.ItemsDueCount == 0)
-            {
-                validationResults.AddError(nameof(item.Task.ItemsDueCount), "Cannot save task when task type is not given.");
+                validationResults.AddError(nameof(item.Type), "Cannot save task when task type is not given.");
             }
 
             return validationResults;

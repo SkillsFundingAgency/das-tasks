@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using MediatR;
 using SFA.DAS.Tasks.Application.Exceptions;
 using SFA.DAS.Tasks.Application.Validation;
+using SFA.DAS.Tasks.Domain.Enums;
+using SFA.DAS.Tasks.Domain.Models;
 using SFA.DAS.Tasks.Domain.Repositories;
 
 namespace SFA.DAS.Tasks.Application.Commands.SaveTask
@@ -26,7 +29,21 @@ namespace SFA.DAS.Tasks.Application.Commands.SaveTask
                 throw new InvalidRequestException(validationResult.ValidationDictionary);
             }
 
-            await _repository.SaveTask(message.Task);
+            var task = await _repository.GetTask(message.OwnerId, message.Type) ?? new DasTask
+            {
+                OwnerId = message.OwnerId,
+                Type = message.Type
+            };
+
+            //No current task present so we don't need to decrement or create a task
+            if (task.ItemsDueCount == 0 && message.TaskCompleted)
+            {
+                return new SaveTaskCommandResponse();
+            }
+
+            task.ItemsDueCount += (ushort)(message.TaskCompleted ? -1 : 1);
+
+            await _repository.SaveTask(task);
 
             return new SaveTaskCommandResponse();
         }

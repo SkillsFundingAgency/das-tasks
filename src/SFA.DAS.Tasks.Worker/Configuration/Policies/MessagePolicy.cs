@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using Microsoft.Azure;
 using SFA.DAS.Configuration;
 using SFA.DAS.Configuration.AzureTableStorage;

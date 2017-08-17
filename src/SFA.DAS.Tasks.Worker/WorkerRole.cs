@@ -4,12 +4,11 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.ServiceRuntime;
-using SFA.DAS.Configuration;
+using SFA.DAS.Messaging;
 using SFA.DAS.Tasks.Domain.Configurations;
 using SFA.DAS.Tasks.Worker.Configuration.Policies;
 using SFA.DAS.Tasks.Worker.Configuration.Policies.SFA.DAS.EAS.Infrastructure.DependencyResolution;
 using SFA.DAS.Tasks.Worker.DependencyResolution;
-using SFA.DAS.Tasks.Worker.Processors;
 using StructureMap;
 
 namespace SFA.DAS.Tasks.Worker
@@ -27,7 +26,7 @@ namespace SFA.DAS.Tasks.Worker
 
             try
             {
-                var messageProcessors = _container.GetAllInstances<ITaskMessageProcessor>();
+                var messageProcessors = _container.GetAllInstances<IMessageProcessor>();
 
                  var tasks = messageProcessors.Select(x => x.RunAsync(_cancellationTokenSource.Token)).ToArray();
                  Task.WaitAll(tasks);
