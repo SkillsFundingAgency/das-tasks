@@ -8,22 +8,22 @@ using SFA.DAS.Tasks.Domain.Enums;
 
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
-    public class CreatedEmployerAgreementMessageProcessor : MessageProcessor<AgreementCreatedMessage>
+    public class SignedEmployerAgreementMessageProcessor : MessageProcessor<AgreementSignedMessage>
     {
         private readonly IMediator _mediator;
 
-        public CreatedEmployerAgreementMessageProcessor(IPollingMessageReceiver pollingMessageReceiver, ILog logger, IMediator mediator) : base(pollingMessageReceiver, logger)
+        public SignedEmployerAgreementMessageProcessor(IPollingMessageReceiver pollingMessageReceiver, ILog logger, IMediator mediator) : base(pollingMessageReceiver, logger)
         {
             _mediator = mediator;
         }
         
-        protected override async Task ProcessMessage(AgreementCreatedMessage message)
+        protected override async Task ProcessMessage(AgreementSignedMessage message)
         {
             await _mediator.SendAsync(new SaveTaskCommand
             {
                 OwnerId = message.AccountId.ToString(),
                 Type = TaskType.AgreementToSign,
-                TaskCompleted = false
+                TaskCompleted = true
             });
         }
     }

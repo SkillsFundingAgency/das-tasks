@@ -43,20 +43,18 @@ namespace SFA.DAS.Tasks.Worker.Configuration.Policies
                         .FirstOrDefault(c => c.CustomAttributes.FirstOrDefault(
                                                  x => x.AttributeType.Name == nameof(QueueNameAttribute)) != null);
 
-                    if (queueName != null)
-                    {
-                        var configurationService = new ConfigurationService(GetConfigurationRepository(), new ConfigurationOptions(_serviceName, environment, "1.0"));
+                    
+                    var configurationService = new ConfigurationService(GetConfigurationRepository(), new ConfigurationOptions(_serviceName, environment, "1.0"));
 
-                        var config = configurationService.Get<T>();
-                        if (string.IsNullOrEmpty(config.ServiceBusConnectionString))
-                        {
-                            var queueFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                            instance.Dependencies.AddForConstructorParameter(messagePublisher, new FileSystemMessageService(Path.Combine(queueFolder, queueName.Name)));
-                        }
-                        else
-                        {
-                            instance.Dependencies.AddForConstructorParameter(messagePublisher, new AzureServiceBusMessageService(config.ServiceBusConnectionString, queueName.Name));
-                        }
+                    var config = configurationService.Get<T>();
+                    if (string.IsNullOrEmpty(config.ServiceBusConnectionString))
+                    {
+                        var queueFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                        instance.Dependencies.AddForConstructorParameter(messagePublisher, new FileSystemMessageService(Path.Combine(queueFolder, queueName?.Name ?? string.Empty)));
+                    }
+                    else
+                    {
+                        instance.Dependencies.AddForConstructorParameter(messagePublisher, new AzureServiceBusMessageService(config.ServiceBusConnectionString, queueName?.Name ?? string.Empty));
                     }
                 }
             }
