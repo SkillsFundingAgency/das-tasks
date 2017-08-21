@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using MediatR;
 using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
+using SFA.DAS.Tasks.API.Attributes;
 using SFA.DAS.Tasks.Domain.Models;
 
 namespace SFA.DAS.Tasks.API.Controllers
@@ -18,6 +19,7 @@ namespace SFA.DAS.Tasks.API.Controllers
         }
 
         [Route("")]
+        [ApiAuthorize(Roles = "ReadOwnerTasks")]
         public async Task<IHttpActionResult> GetTasks(string ownerId)
         {
             var result = await _mediator.SendAsync(new GetTasksByOwnerIdRequest
