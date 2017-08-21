@@ -4,7 +4,7 @@ using System.Web.Http;
 using MediatR;
 using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
 using SFA.DAS.Tasks.API.Attributes;
-using SFA.DAS.Tasks.Domain.Models;
+using SFA.DAS.Tasks.API.Types.DTOs;
 
 namespace SFA.DAS.Tasks.API.Controllers
 {
@@ -27,9 +27,16 @@ namespace SFA.DAS.Tasks.API.Controllers
                 OwnerId = ownerId
             });
 
-            if (result == null) return Ok(Enumerable.Empty<DasTask>());
+            if (result?.Tasks == null) return Ok(Enumerable.Empty<TaskDto>());
 
-            return Ok(result.Tasks);
+            var tasks = result.Tasks.Select(x => new TaskDto
+            {
+                OwnerId = x.OwnerId,
+                Type = x.Type.ToString(),
+                ItemsDueCount = x.ItemsDueCount
+            }).ToArray();
+
+            return Ok(tasks);
         }
       
     }
