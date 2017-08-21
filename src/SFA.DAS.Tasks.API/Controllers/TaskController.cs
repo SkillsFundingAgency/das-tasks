@@ -34,7 +34,7 @@ namespace SFA.DAS.Tasks.API.Controllers
                 OwnerId = x.OwnerId,
                 Type = x.Type.ToString(),
                 ItemsDueCount = x.ItemsDueCount
-            }).ToArray();
+            }).AsEnumerable();
 
             return Ok(tasks);
         }

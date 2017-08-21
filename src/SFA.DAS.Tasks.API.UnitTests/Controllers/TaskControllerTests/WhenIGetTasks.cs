@@ -7,6 +7,8 @@ using Moq;
 using NUnit.Framework;
 using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
 using SFA.DAS.Tasks.API.Controllers;
+using SFA.DAS.Tasks.API.Types.DTOs;
+using SFA.DAS.Tasks.Domain.Enums;
 using SFA.DAS.Tasks.Domain.Models;
 
 namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
@@ -25,7 +27,12 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
         {
             _tasks = new List<DasTask>
             {
-                new DasTask()
+                new DasTask
+                {
+                    OwnerId = "123",
+                    Type = TaskType.AgreementToSign,
+                    ItemsDueCount = 2
+                }
             };
 
             _mediator = new Mock<IMediator>();
@@ -43,11 +50,17 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
             var response = await _controller.GetTasks(OwnerId);
             _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(OwnerId))), Times.Once);
 
-            var result = response as OkNegotiatedContentResult<IEnumerable<DasTask>>;
+            var result = response as OkNegotiatedContentResult<IEnumerable<TaskDto>>;
 
             //Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(_tasks, result.Content);
+            Assert.AreEqual(1, result.Content.Count());
+
+            var taskDto = result.Content.First();
+
+            Assert.AreEqual(_tasks[0].OwnerId, taskDto.OwnerId);
+            Assert.AreEqual(_tasks[0].Type.ToString(), taskDto.Type);
+            Assert.AreEqual(_tasks[0].ItemsDueCount, taskDto.ItemsDueCount);
         }
 
         [Test]
@@ -57,7 +70,7 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
             var response = await _controller.GetTasks(DifferentOwnerId);
             _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(DifferentOwnerId))), Times.Once);
 
-            var result = response as OkNegotiatedContentResult<IEnumerable<DasTask>>;
+            var result = response as OkNegotiatedContentResult<IEnumerable<TaskDto>>;
 
             //Assert
             Assert.IsNotNull(result);
@@ -65,7 +78,7 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
         }
 
         [Test]
-        public async Task GivenThereAreNoTasksThenIShouldGetOkResultWithNullTasks()
+        public async Task GivenThereAreNoTasksThenIShouldGetOkResultWithZeroTasks()
         {
             //Arrange
             _mediator.Setup(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(a => a.OwnerId == OwnerId)))
@@ -75,11 +88,11 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
             var response = await _controller.GetTasks(OwnerId);
             _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(OwnerId))), Times.Once);
 
-            var result = response as OkNegotiatedContentResult<IEnumerable<DasTask>>;
+            var result = response as OkNegotiatedContentResult<IEnumerable<TaskDto>>;
 
             //Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(null, result.Content);
+            Assert.IsEmpty(result.Content);
         }
     }
 }
