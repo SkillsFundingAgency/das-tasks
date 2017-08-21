@@ -14,17 +14,11 @@ namespace SFA.DAS.Tasks.Worker.DependencyResolution
             {
                 scan.AssembliesFromApplicationBaseDirectory(a => a.GetName().Name.StartsWith("SFA.DAS."));
                 scan.RegisterConcreteTypesAgainstTheFirstInterface();
+                scan.AddAllTypesOf<IMessageProcessor>();
             });
 
             AddMediatrRegistrations();
             RegisterLogger();
-            RegisterMessageProcessors();
-        }
-
-        private void RegisterMessageProcessors()
-        {
-            For<IMessageProcessor>().Use<CreatedEmployerAgreementMessageProcessor>();
-            For<IMessageProcessor>().Use<SignedEmployerAgreementMessageProcessor>();
         }
 
         private void AddMediatrRegistrations()
