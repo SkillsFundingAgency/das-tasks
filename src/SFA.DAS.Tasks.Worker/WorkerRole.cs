@@ -1,15 +1,24 @@
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.ServiceRuntime;
+using SFA.DAS.Messaging;
+using SFA.DAS.Tasks.Domain.Configurations;
+using SFA.DAS.Tasks.Worker.Configuration.Policies;
+using SFA.DAS.Tasks.Worker.Configuration.Policies.SFA.DAS.EAS.Infrastructure.DependencyResolution;
+using SFA.DAS.Tasks.Worker.DependencyResolution;
+using StructureMap;
 
 namespace SFA.DAS.Tasks.Worker
 {
     public class WorkerRole : RoleEntryPoint
     {
-        private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-        private readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
+        private IContainer _container;
+        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private readonly ManualResetEvent _runCompleteEvent = new ManualResetEvent(false);
+      
 
         public override void Run()
         {
@@ -17,11 +26,14 @@ namespace SFA.DAS.Tasks.Worker
 
             try
             {
-                this.RunAsync(this.cancellationTokenSource.Token).Wait();
+                var messageProcessors = _container.GetAllInstances<IMessageProcessor>();
+
+                 var tasks = messageProcessors.Select(x => x.RunAsync(_cancellationTokenSource.Token)).ToArray();
+                 Task.WaitAll(tasks);
             }
             finally
             {
-                this.runCompleteEvent.Set();
+                _runCompleteEvent.Set();
             }
         }
 
@@ -37,6 +49,13 @@ namespace SFA.DAS.Tasks.Worker
 
             Trace.TraceInformation("SFA.DAS.Tasks.Worker has been started");
 
+            _container = new Container(c =>
+            {
+                c.Policies.Add(new ConfigurationPolicy<TasksConfiguration>("SFA.DAS.Tasks"));
+                c.Policies.Add(new MessagePolicy<TasksConfiguration>("SFA.DAS.Tasks"));
+                c.AddRegistry<DefaultRegistry>();
+            });
+
             return result;
         }
 
@@ -44,22 +63,12 @@ namespace SFA.DAS.Tasks.Worker
         {
             Trace.TraceInformation("SFA.DAS.Tasks.Worker is stopping");
 
-            this.cancellationTokenSource.Cancel();
-            this.runCompleteEvent.WaitOne();
+            _cancellationTokenSource.Cancel();
+            _runCompleteEvent.WaitOne();
 
             base.OnStop();
 
             Trace.TraceInformation("SFA.DAS.Tasks.Worker has stopped");
-        }
-
-        private async Task RunAsync(CancellationToken cancellationToken)
-        {
-            // TODO: Replace the following with your own logic.
-            while (!cancellationToken.IsCancellationRequested)
-            {
-                Trace.TraceInformation("Working");
-                await Task.Delay(1000, cancellationToken);
-            }
         }
     }
 }

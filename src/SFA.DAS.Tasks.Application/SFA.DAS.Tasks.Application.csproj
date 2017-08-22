@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MediatR, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.2.1.0\lib\net45\MediatR.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,11 +44,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\SaveTask\SaveTaskCommand.cs" />
+    <Compile Include="Commands\SaveTask\SaveTaskCommandHandler.cs" />
+    <Compile Include="Commands\SaveTask\SaveTaskCommandResponse.cs" />
+    <Compile Include="Commands\SaveTask\SaveTaskCommandValidator.cs" />
+    <Compile Include="Exceptions\InvalidRequestException.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\GetTasksByOwnerId\GetTasksByOwnerIdRequest.cs" />
+    <Compile Include="Queries\GetTasksByOwnerId\GetTasksByOwnerIdHandler.cs" />
+    <Compile Include="Queries\GetTasksByOwnerId\GetTasksByOwnerIdResponse.cs" />
+    <Compile Include="Queries\GetTasksByOwnerId\GetTasksByOwnerIdValidator.cs" />
+    <Compile Include="Queries\GetTask\GetTaskRequest.cs" />
+    <Compile Include="Queries\GetTask\GetTaskRequestHandler.cs" />
+    <Compile Include="Queries\GetTask\GetTaskRequestValidator.cs" />
+    <Compile Include="Queries\GetTask\GetTaskResponse.cs" />
+    <Compile Include="Validation\IValidator.cs" />
+    <Compile Include="Validation\ValidationResult.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Queries\" />
+    <ProjectReference Include="..\SFA.DAS.Tasks.Domain\SFA.DAS.Tasks.Domain.csproj">
+      <Project>{316591ff-d233-4529-bc3b-fa6b79c2db11}</Project>
+      <Name>SFA.DAS.Tasks.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

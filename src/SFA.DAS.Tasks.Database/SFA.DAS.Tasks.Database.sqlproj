@@ -66,5 +66,8 @@
   <ItemGroup>
     <Build Include="Schemas\Tasks.sql" />
     <Build Include="Tables\Tasks.sql" />
+    <Build Include="StoredProcedures\GetTasksByOwner.sql" />
+    <Build Include="StoredProcedures\GetTaskByOwnerIdAndType.sql" />
+    <Build Include="StoredProcedures\UpsertTask.sql" />
   </ItemGroup>
 </Project>
