@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.8
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SFA.DAS.Tasks.Database", "SFA.DAS.Tasks.Database\SFA.DAS.Tasks.Database.sqlproj", "{FF795555-8AE7-461A-A8AA-E8FD9B0CC541}"
 EndProject
-Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "SFA.DAS.Tasks.CloudService.API", "SFA.DAS.Tasks.CloudService.API\SFA.DAS.Tasks.CloudService.API.ccproj", "{2A07EAE4-4016-41D1-A1AD-BE3A815350D5}"
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "SFA.DAS.Tasks.CloudService", "SFA.DAS.Tasks.CloudService.API\SFA.DAS.Tasks.CloudService.ccproj", "{2A07EAE4-4016-41D1-A1AD-BE3A815350D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.API", "SFA.DAS.Tasks.API\SFA.DAS.Tasks.API.csproj", "{452BB742-C90D-4A5C-A043-0C2AC6067B49}"
 EndProject
@@ -30,6 +30,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.API.Types", "SFA.DAS.Tasks.API.Types\SFA.DAS.Tasks.API.Types.csproj", "{0FA10E00-F9B9-433A-AAC0-FEE0E4EF179A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.API.Client", "SFA.DAS.Tasks.API.Client\SFA.DAS.Tasks.API.Client.csproj", "{C0129D5E-8A92-43A8-9D9B-FD673B2A1F77}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{28EB1890-57D3-4A2E-B0CC-317664F1AE8D}"
+	ProjectSection(SolutionItems) = preProject
+		Build.fsx = Build.fsx
+		CustomTargets.fsx = CustomTargets.fsx
+		DefaultTargets.fsx = DefaultTargets.fsx
+		RunBuild.bat = RunBuild.bat
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

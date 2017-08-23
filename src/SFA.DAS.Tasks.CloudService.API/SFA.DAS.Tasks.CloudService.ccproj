@@ -11,7 +11,7 @@
     <RootNamespace>SFA.DAS.Tasks.CloudService.API</RootNamespace>
     <AssemblyName>SFA.DAS.Tasks.CloudService.API</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
-    <Name>SFA.DAS.Tasks.CloudService.API</Name>
+    <Name>SFA.DAS.Tasks.CloudService</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

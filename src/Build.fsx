@@ -22,12 +22,13 @@ open Fake
    ==>"Run NUnit Tests"
    ==>"Run XUnit Tests"
    ==>"Run Jasmine Tests"
+   ==>"Create Nuget Package"
    ==>"Build Cloud Projects"
    ==>"Build Database project"
    ==>"Build WebJob Project" 
    ==>"Publish Solution"  
    ==>"Compile Views"
-   ==>"Create Nuget Package"
+   
 
 "Set Solution Name"
     ==> "Build Database project"
@@ -37,4 +38,4 @@ open Fake
     ==>"Set Solution Name"
     ==> "Zip Compiled Source"
    
-RunTargetOrDefault  "Create Nuget Package"
+RunTargetOrDefault  "Compile Views"

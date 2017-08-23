@@ -19,6 +19,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\SFA.DAS.Tasks.Api.Client.dll" target="lib\net45\SFA.DAS.Tasks.Api.Client.dll" />
+    <file src="bin\Release\SFA.DAS.Tasks.API.Client.dll" target="lib\net45\SFA.DAS.Tasks.API.Client.dll" />
   </files>
 </package>

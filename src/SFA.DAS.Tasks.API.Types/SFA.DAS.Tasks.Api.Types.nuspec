@@ -9,14 +9,13 @@
     <projectUrl>https://github.com/SkillsFundingAgency/das-tasks</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Model Types for Tasks API</description>
-    <summaryModel>Model Types for Das Tasks Api</summaryModel>
+    <summary>Model Types for Das Tasks Api</summary>
     <releaseNotes />
     <dependencies>
-      <group targetFramework=".NETFramework4.6.2">
-      </group>
+      <group targetFramework=".NETFramework4.6.2" />
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\SFA.DAS.Tasks.Api.Types.dll" target="lib\net45\SFA.DAS.Tasks.Api.Types.dll" />
+    <file src="bin\Release\SFA.DAS.Tasks.API.Types.dll" target="lib\net45\SFA.DAS.Tasks.API.Types.dll" />
   </files>
 </package>
