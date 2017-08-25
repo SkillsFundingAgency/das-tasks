@@ -10,6 +10,10 @@
     </Sites>
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="StorageConnectionString" />
+      <Setting name="EnvironmentName" />
+      <Setting name="ConfigurationStorageConnectionString" />
+      <Setting name="LogLevel" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="80" />
@@ -18,6 +22,10 @@
   <WorkerRole name="SFA.DAS.Tasks.Worker" vmsize="Small">
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="StorageConnectionString" />
+      <Setting name="EnvironmentName" />
+      <Setting name="ConfigurationStorageConnectionString" />
+      <Setting name="LogLevel" />
     </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>
