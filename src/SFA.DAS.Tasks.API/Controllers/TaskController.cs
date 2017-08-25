@@ -38,6 +38,5 @@ namespace SFA.DAS.Tasks.API.Controllers
 
             return Ok(tasks);
         }
-      
     }
 }

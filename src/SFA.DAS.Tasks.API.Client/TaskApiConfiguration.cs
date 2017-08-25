@@ -2,10 +2,10 @@
 {
     public class TaskApiConfiguration : ITaskApiConfiguration
     {
-        public string ApiBaseUrl { get; }
-        public string ClientId { get; }
-        public string ClientSecret { get; }
-        public string IdentifierUri { get; }
-        public string Tenant { get; }
+        public string ApiBaseUrl { get; set; }
+        public string ClientId { get; set; }
+        public string ClientSecret { get; set; }
+        public string IdentifierUri { get; set; }
+        public string Tenant { get; set; }
     }
 }
