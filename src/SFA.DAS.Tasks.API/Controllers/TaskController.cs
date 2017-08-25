@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using MediatR;
+using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
 using SFA.DAS.Tasks.API.Attributes;
 using SFA.DAS.Tasks.API.Types.DTOs;
@@ -12,10 +13,12 @@ namespace SFA.DAS.Tasks.API.Controllers
     public class TaskController : ApiController
     {
         private readonly IMediator _mediator;
+        private readonly ILog _logger;
 
-        public TaskController(IMediator mediator)
+        public TaskController(IMediator mediator, ILog logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [Route("")]
@@ -34,7 +37,9 @@ namespace SFA.DAS.Tasks.API.Controllers
                 OwnerId = x.OwnerId,
                 Type = x.Type.ToString(),
                 ItemsDueCount = x.ItemsDueCount
-            }).AsEnumerable();
+            }).ToArray();
+
+            _logger.Info($"Found {tasks.Length} tasks for owner Id {ownerId}");
 
             return Ok(tasks);
         }

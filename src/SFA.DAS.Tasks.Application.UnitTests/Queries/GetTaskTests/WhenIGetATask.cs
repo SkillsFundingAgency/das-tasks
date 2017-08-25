@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
+using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Queries.GetTask;
 using SFA.DAS.Tasks.Application.Validation;
 using SFA.DAS.Tasks.Domain.Enums;
@@ -27,7 +28,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTaskTests
             _task = new DasTask();
             _repository = new Mock<ITaskRepository>();
 
-            RequestHandler = new GetTaskRequestHandler(_repository.Object, RequestValidator.Object);
+            RequestHandler = new GetTaskRequestHandler(_repository.Object, RequestValidator.Object, Mock.Of<ILog>());
             Query = new GetTaskRequest
             {
                 OwnerId = "123",

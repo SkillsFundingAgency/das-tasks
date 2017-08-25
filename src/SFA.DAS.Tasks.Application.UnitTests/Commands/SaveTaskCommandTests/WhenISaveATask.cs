@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
+using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Commands.SaveTask;
 using SFA.DAS.Tasks.Application.Validation;
 using SFA.DAS.Tasks.Domain.Enums;
@@ -25,7 +26,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
 
             _repository = new Mock<ITaskRepository>();
 
-            RequestHandler = new SaveTaskCommandHandler(_repository.Object, RequestValidator.Object);
+            RequestHandler = new SaveTaskCommandHandler(_repository.Object, RequestValidator.Object, Mock.Of<ILog>());
             Query = new SaveTaskCommand
             {
                 OwnerId = "123",

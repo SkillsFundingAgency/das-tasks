@@ -5,6 +5,7 @@ using System.Web.Http.Results;
 using MediatR;
 using Moq;
 using NUnit.Framework;
+using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
 using SFA.DAS.Tasks.API.Controllers;
 using SFA.DAS.Tasks.API.Types.DTOs;
@@ -40,7 +41,7 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
             _mediator.Setup(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(a => a.OwnerId == OwnerId)))
                 .ReturnsAsync(new GetTasksByOwnerIdResponse { Tasks = _tasks });
 
-            _controller = new TaskController(_mediator.Object);
+            _controller = new TaskController(_mediator.Object, Mock.Of<ILog>());
         }
 
         [Test]
@@ -50,7 +51,7 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
             var response = await _controller.GetTasks(OwnerId);
             _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(OwnerId))), Times.Once);
 
-            var result = response as OkNegotiatedContentResult<IEnumerable<TaskDto>>;
+            var result = response as OkNegotiatedContentResult<TaskDto[]>;
 
             //Assert
             Assert.IsNotNull(result);

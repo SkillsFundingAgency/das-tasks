@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
+using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
 using SFA.DAS.Tasks.Application.Validation;
 using SFA.DAS.Tasks.Domain.Repositories;
@@ -33,7 +34,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
             _repository = new Mock<ITaskRepository>();
             _repository.Setup(x => x.GetTasks(It.IsAny<string>())).ReturnsAsync(_tasks);
             
-            RequestHandler = new GetTasksByOwnerIdHandler(_repository.Object, RequestValidator.Object);
+            RequestHandler = new GetTasksByOwnerIdHandler(_repository.Object, RequestValidator.Object, Mock.Of<ILog>());
             Query = new GetTasksByOwnerIdRequest{ OwnerId = TaskOwnerId};
         }
        
