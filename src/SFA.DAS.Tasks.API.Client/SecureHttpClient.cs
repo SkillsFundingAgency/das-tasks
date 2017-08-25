@@ -19,6 +19,14 @@ namespace SFA.DAS.Tasks.API.Client
 
         private static async Task<AuthenticationResult> GetAuthenticationResult(string clientId, string appKey, string resourceId, string tenant)
         {
+            if (string.IsNullOrEmpty(clientId) ||
+                string.IsNullOrEmpty(appKey) ||
+                string.IsNullOrEmpty(resourceId) ||
+                string.IsNullOrEmpty(tenant))
+            {
+                return null;
+            }
+
             var authority = $"https://login.microsoftonline.com/{tenant}";
             var clientCredential = new ClientCredential(clientId, appKey);
             var context = new AuthenticationContext(authority, true);
@@ -32,7 +40,8 @@ namespace SFA.DAS.Tasks.API.Client
 
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
+                if(authenticationResult != null)
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
 
                 var response = await client.GetAsync(url);
                 response.EnsureSuccessStatusCode();
