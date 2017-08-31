@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Dapper;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Sql.Client;
+using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Domain.Configurations;
-using SFA.DAS.Tasks.Domain.Enums;
 using SFA.DAS.Tasks.Domain.Models;
 using SFA.DAS.Tasks.Domain.Repositories;
 

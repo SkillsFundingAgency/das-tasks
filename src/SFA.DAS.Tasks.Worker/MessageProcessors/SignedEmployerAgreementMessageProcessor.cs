@@ -4,7 +4,7 @@ using SFA.DAS.EmployerAccounts.Events.Messages;
 using SFA.DAS.Messaging;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Commands.SaveTask;
-using SFA.DAS.Tasks.Domain.Enums;
+using SFA.DAS.Tasks.API.Types.Enums;
 
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {

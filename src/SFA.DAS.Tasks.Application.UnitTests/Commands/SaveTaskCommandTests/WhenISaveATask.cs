@@ -4,7 +4,7 @@ using Moq;
 using NUnit.Framework;
 using SFA.DAS.Tasks.Application.Commands.SaveTask;
 using SFA.DAS.Tasks.Application.Validation;
-using SFA.DAS.Tasks.Domain.Enums;
+using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Domain.Models;
 using SFA.DAS.Tasks.Domain.Repositories;
 
