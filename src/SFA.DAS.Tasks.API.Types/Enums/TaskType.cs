@@ -1,4 +1,4 @@
-﻿namespace SFA.DAS.Tasks.Domain.Enums
+﻿namespace SFA.DAS.Tasks.API.Types.Enums
 {
     public enum TaskType
     {

@@ -122,6 +122,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SFA.DAS.Tasks.API.Types\SFA.DAS.Tasks.API.Types.csproj">
+      <Project>{0FA10E00-F9B9-433A-AAC0-FEE0E4EF179A}</Project>
+      <Name>SFA.DAS.Tasks.API.Types</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SFA.DAS.Tasks.Application\SFA.DAS.Tasks.Application.csproj">
       <Project>{B96FB4DB-3DCE-4D4A-B7F1-EDE97233B177}</Project>
       <Name>SFA.DAS.Tasks.Application</Name>

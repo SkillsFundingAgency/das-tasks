@@ -8,7 +8,7 @@ using NUnit.Framework;
 using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
 using SFA.DAS.Tasks.API.Controllers;
 using SFA.DAS.Tasks.API.Types.DTOs;
-using SFA.DAS.Tasks.Domain.Enums;
+using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Domain.Models;
 
 namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
