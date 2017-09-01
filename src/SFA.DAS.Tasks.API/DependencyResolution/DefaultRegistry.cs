@@ -2,12 +2,12 @@
 using MediatR;
 using SFA.DAS.NLog.Logger;
 using StructureMap;
+using StructureMap.Graph;
 
-namespace SFA.DAS.Tasks.API.DependancyResolution
+namespace SFA.DAS.Tasks.API.DependencyResolution
 {
     public class DefaultRegistry : Registry
     {
-        //private const string ServiceName = "SFA.DAS.Tasks.API";
         private const string ServiceNamespace = "SFA.DAS.Tasks";
 
         public DefaultRegistry()

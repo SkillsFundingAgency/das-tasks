@@ -17,10 +17,10 @@
 
 using StructureMap;
 
-namespace SFA.DAS.Tasks.API.DependancyResolution
+namespace SFA.DAS.Tasks.API.DependencyResolution
 {
     public static class IoC {
-        private const string ServiceName = "SFA.DAS.EmployerApprenticeshipsService";
+        private const string ServiceName = "SFA.DAS.Tasks.API";
         public static IContainer Initialize() {
             return new Container(c =>
             {

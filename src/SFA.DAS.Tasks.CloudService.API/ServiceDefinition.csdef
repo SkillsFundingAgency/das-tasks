@@ -4,16 +4,29 @@
     <Sites>
       <Site name="Web">
         <Bindings>
-          <Binding name="Endpoint1" endpointName="Endpoint1" />
+          <Binding name="Endpoint1" endpointName="HttpsIn" />
+          <Binding name="Endpoint1" endpointName="HttpIn" />
         </Bindings>
       </Site>
     </Sites>
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="StorageConnectionString" />
+      <Setting name="EnvironmentName" />
+      <Setting name="ConfigurationStorageConnectionString" />
+      <Setting name="LogLevel" />
+      <Setting name="LoggingRedisConnectionString" />
+      <Setting name="LoggingRedisKey" />
+      <Setting name="idaAudience" />
+      <Setting name="idaTenant" />
     </ConfigurationSettings>
     <Endpoints>
-      <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+      <InputEndpoint name="HttpsIn" protocol="https" port="443" certificate="WebSslCert" />
+      <InputEndpoint name="HttpIn" protocol="http" port="80" />
     </Endpoints>
+    <Certificates>
+      <Certificate name="WebSslCert" storeLocation="LocalMachine" storeName="My" />
+    </Certificates>
   </WebRole>
   <WorkerRole name="SFA.DAS.Tasks.Worker" vmsize="Small">
     <ConfigurationSettings>
