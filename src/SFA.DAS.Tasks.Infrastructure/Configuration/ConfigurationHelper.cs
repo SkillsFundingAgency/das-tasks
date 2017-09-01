@@ -5,7 +5,7 @@ using SFA.DAS.Configuration;
 using SFA.DAS.Configuration.AzureTableStorage;
 using SFA.DAS.Configuration.FileStorage;
 
-namespace SFA.DAS.Tasks.Worker.Configuration
+namespace SFA.DAS.Tasks.DataAccess.Configuration
 {
     public static class ConfigurationHelper
     {

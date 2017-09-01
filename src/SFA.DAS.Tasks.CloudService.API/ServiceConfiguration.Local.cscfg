@@ -7,7 +7,7 @@
       <Setting name="StorageConnectionString" value="UseDevelopmentStorage=true" />
       <Setting name="EnvironmentName" value="LOCAL" />
       <Setting name="ConfigurationStorageConnectionString" value="UseDevelopmentStorage=true" />
-      <Setting name="LogLevel" value="" />
+      <Setting name="LogLevel" value="Debug" />
       <Setting name="LoggingRedisConnectionString" value="" />
       <Setting name="LoggingRedisKey" value="" />
       <Setting name="idaAudience" value="https://citizenazuresfabisgov.onmicrosoft.com/tasks-api" />

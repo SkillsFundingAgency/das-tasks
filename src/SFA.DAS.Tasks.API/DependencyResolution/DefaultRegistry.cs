@@ -1,8 +1,10 @@
 ﻿using System.Web;
 using MediatR;
 using SFA.DAS.NLog.Logger;
+using SFA.DAS.Tasks.Domain.Repositories;
 using StructureMap;
 using StructureMap.Graph;
+using SFA.DAS.Tasks.DataAccess.Repositories;
 
 namespace SFA.DAS.Tasks.API.DependencyResolution
 {
@@ -21,6 +23,8 @@ namespace SFA.DAS.Tasks.API.DependencyResolution
          
             RegisterMediator();
             RegisterLogger();
+
+            For<ITaskRepository>().Use<TaskRepository>();
         }
 
         private void RegisterLogger()

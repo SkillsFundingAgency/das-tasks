@@ -15,16 +15,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using SFA.DAS.Tasks.Domain.Configurations;
+using SFA.DAS.Tasks.DataAccess.Configuration.Policies;
 using StructureMap;
 
 namespace SFA.DAS.Tasks.API.DependencyResolution
 {
     public static class IoC {
-        private const string ServiceName = "SFA.DAS.Tasks.API";
+        private const string ServiceName = "SFA.DAS.Tasks";
         public static IContainer Initialize() {
             return new Container(c =>
             {
                 c.AddRegistry<DefaultRegistry>();
+                c.Policies.Add(new ConfigurationPolicy<TasksConfiguration>(ServiceName));
+                //c.Policies.Add(new MessagePolicy<>(ServiceName));
             });
         }
     }

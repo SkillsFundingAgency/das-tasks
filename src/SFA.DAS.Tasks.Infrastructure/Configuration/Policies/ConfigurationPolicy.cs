@@ -4,7 +4,7 @@ using SFA.DAS.Configuration;
 using StructureMap;
 using StructureMap.Pipeline;
 
-namespace SFA.DAS.Tasks.Worker.Configuration.Policies
+namespace SFA.DAS.Tasks.DataAccess.Configuration.Policies
 {
     
     public class ConfigurationPolicy<T> : ConfiguredInstancePolicy where T : IConfiguration

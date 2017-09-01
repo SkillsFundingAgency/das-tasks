@@ -13,7 +13,7 @@ using SFA.DAS.Messaging.FileSystem;
 using StructureMap;
 using StructureMap.Pipeline;
 
-namespace SFA.DAS.Tasks.Worker.Configuration.Policies
+namespace SFA.DAS.Tasks.DataAccess.Configuration.Policies
 {
     namespace SFA.DAS.EAS.Infrastructure.DependencyResolution
     {
