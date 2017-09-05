@@ -35,7 +35,7 @@
       <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.3.7\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Polly.5.1.0\lib\net45\Polly.dll</HintPath>
@@ -64,6 +64,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SFA.DAS.Tasks.API.Types\SFA.DAS.Tasks.API.Types.csproj">
+      <Project>{0FA10E00-F9B9-433A-AAC0-FEE0E4EF179A}</Project>
+      <Name>SFA.DAS.Tasks.API.Types</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SFA.DAS.Tasks.Domain\SFA.DAS.Tasks.Domain.csproj">
       <Project>{316591FF-D233-4529-BC3B-FA6B79C2DB11}</Project>
       <Name>SFA.DAS.Tasks.Domain</Name>

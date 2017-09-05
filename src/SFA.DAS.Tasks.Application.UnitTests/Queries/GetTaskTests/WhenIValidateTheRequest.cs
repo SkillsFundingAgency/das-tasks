@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using SFA.DAS.Tasks.Application.Queries.GetTask;
-using SFA.DAS.Tasks.Domain.Enums;
+using SFA.DAS.Tasks.API.Types.Enums;
 
 namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTaskTests
 {

@@ -3,7 +3,8 @@
   <Role name="SFA.DAS.Tasks.API">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="EnvironmentName" value="LOCAL" />
+      <Setting name="ConfigurationStorageConnectionString" value="UseDevelopmentStorage=true" />
       <Setting name="StorageConnectionString" value="UseDevelopmentStorage=true" />
       <Setting name="EnvironmentName" value="LOCAL" />
       <Setting name="ConfigurationStorageConnectionString" value="UseDevelopmentStorage=true" />
@@ -14,13 +15,16 @@
       <Setting name="idaTenant" value="citizenazuresfabisgov.onmicrosoft.com" />
     </ConfigurationSettings>
     <Certificates>
-      <Certificate name="WebSslCert" thumbprint="CE71D8AD4A859BD1803DBE03989801B56E5B6875" thumbprintAlgorithm="sha1" />
+      <Certificate name="WebSslCert" thumbprint="5CAEC03A02C9191059F0C18F4983F7F5A3EA7808" thumbprintAlgorithm="sha1" />
     </Certificates>
   </Role>
   <Role name="SFA.DAS.Tasks.Worker">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="EnvironmentName" value="LOCAL" />
+      <Setting name="ConfigurationStorageConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="StorageConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="LogLevel" value="Debug" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

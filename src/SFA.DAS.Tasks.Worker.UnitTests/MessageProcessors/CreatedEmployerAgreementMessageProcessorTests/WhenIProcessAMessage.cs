@@ -8,7 +8,7 @@ using SFA.DAS.Messaging;
 using SFA.DAS.Messaging.FileSystem;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Commands.SaveTask;
-using SFA.DAS.Tasks.Domain.Enums;
+using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Worker.MessageProcessors;
 
 namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.CreatedEmployerAgreementMessageProcessorTests
