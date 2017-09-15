@@ -43,14 +43,14 @@ namespace SFA.DAS.Tasks.Worker.Configuration.Policies
                         .FirstOrDefault(c => c.CustomAttributes.FirstOrDefault(
                                                  x => x.AttributeType.Name == nameof(QueueNameAttribute)) != null);
 
-                    
+
                     var configurationService = new ConfigurationService(GetConfigurationRepository(), new ConfigurationOptions(_serviceName, environment, "1.0"));
 
                     var config = configurationService.Get<T>();
                     if (string.IsNullOrEmpty(config.ServiceBusConnectionString))
                     {
-                        var queueFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                        instance.Dependencies.AddForConstructorParameter(messagePublisher, new FileSystemMessageService(Path.Combine(queueFolder, queueName?.Name ?? string.Empty)));
+                        var queueFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/EAS_Queues/";
+                        instance.Dependencies.AddForConstructorParameter(messagePublisher, new FileSystemMessageService(Path.Combine(queueFolder, string.Empty)));
                     }
                     else
                     {
