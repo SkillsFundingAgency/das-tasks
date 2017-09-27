@@ -7,15 +7,12 @@ namespace SFA.DAS.Tasks.API.DependancyResolution
 {
     public class DefaultRegistry : Registry
     {
-        //private const string ServiceName = "SFA.DAS.Tasks.API";
-        private const string ServiceNamespace = "SFA.DAS.Tasks";
-
         public DefaultRegistry()
         {
             Scan(
                 scan =>
                 {
-                    scan.AssembliesFromApplicationBaseDirectory(a => a.GetName().Name.StartsWith(ServiceNamespace));
+                    scan.AssembliesFromApplicationBaseDirectory(a => a.GetName().Name.StartsWith("SFA.DAS.Tasks"));
                     scan.RegisterConcreteTypesAgainstTheFirstInterface();
                 });
          

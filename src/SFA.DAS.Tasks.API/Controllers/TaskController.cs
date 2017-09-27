@@ -27,7 +27,8 @@ namespace SFA.DAS.Tasks.API.Controllers
                 OwnerId = ownerId
             });
 
-            if (result?.Tasks == null) return Ok(Enumerable.Empty<TaskDto>());
+            if (result?.Tasks == null)
+                return Ok(Enumerable.Empty<TaskDto>());
 
             var tasks = result.Tasks.Select(x => new TaskDto
             {
