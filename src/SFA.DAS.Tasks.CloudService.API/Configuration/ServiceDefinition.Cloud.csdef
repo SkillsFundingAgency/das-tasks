@@ -21,7 +21,7 @@
       <InputEndpoint name="HttpIn" protocol="http" port="80" />
     </Endpoints>
     <Certificates>
-      <Certificate name="WebSslCert" storeLocation="LocalMachine" storeName="My" />
+      <Certificate name="WebSslCert" storeLocation="LocalMachine" storeName="My"  />
     </Certificates>
   </WebRole>
   <WorkerRole name="SFA.DAS.Tasks.Worker" vmsize="Small">
