@@ -22,10 +22,5 @@ namespace SFA.DAS.Tasks.Application.Queries.GetTask
 
             return validationResults;
         }
-
-        public Task<ValidationResult> ValidateAsync(GetTaskRequest item)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

@@ -31,10 +31,10 @@ namespace SFA.DAS.Tasks.Worker.Configuration.Policies
                 var messagePublisher = instance?.Constructor?
                     .GetParameters().FirstOrDefault(x => x.ParameterType == typeof(IMessagePublisher) || x.ParameterType == typeof(IPollingMessageReceiver));
 
-                var environment = Environment.GetEnvironmentVariable("DASENV");
+                var environment = Environment.GetEnvironmentVariable(Constants.DasEnvKeyName);
                 if (string.IsNullOrEmpty(environment))
                 {
-                    environment = CloudConfigurationManager.GetSetting("EnvironmentName");
+                    environment = CloudConfigurationManager.GetSetting(Constants.EnvironmentNameKeyName);
                 }
 
                 if (messagePublisher != null)
@@ -44,7 +44,7 @@ namespace SFA.DAS.Tasks.Worker.Configuration.Policies
                                                  x => x.AttributeType.Name == nameof(QueueNameAttribute)) != null);
 
                     
-                    var configurationService = new ConfigurationService(GetConfigurationRepository(), new ConfigurationOptions(_serviceName, environment, "1.0"));
+                    var configurationService = new ConfigurationService(GetConfigurationRepository(), new ConfigurationOptions(_serviceName, environment, Constants.EnvironmentVersionNumber));
 
                     var config = configurationService.Get<T>();
                     if (string.IsNullOrEmpty(config.ServiceBusConnectionString))
@@ -62,13 +62,13 @@ namespace SFA.DAS.Tasks.Worker.Configuration.Policies
             private static IConfigurationRepository GetConfigurationRepository()
             {
                 IConfigurationRepository configurationRepository;
-                if (bool.Parse(ConfigurationManager.AppSettings["LocalConfig"]))
+                if (bool.Parse(ConfigurationManager.AppSettings[Constants.LocalConfigKeyName]))
                 {
                     configurationRepository = new FileStorageConfigurationRepository();
                 }
                 else
                 {
-                    configurationRepository = new AzureTableStorageConfigurationRepository(CloudConfigurationManager.GetSetting("ConfigurationStorageConnectionString"));
+                    configurationRepository = new AzureTableStorageConfigurationRepository(CloudConfigurationManager.GetSetting(Constants.ConfigurationStorageConnectionStringKeyName));
                 }
                 return configurationRepository;
             }

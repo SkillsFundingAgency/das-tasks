@@ -24,7 +24,6 @@ namespace SFA.DAS.Tasks.Application.UnitTests
             _validationCallCount = 0;
             RequestValidator = new Mock<IValidator<TRequest>>();
             RequestValidator.Setup(x => x.Validate(It.IsAny<TRequest>())).Returns(new ValidationResult()).Callback(()=>_validationCallCount++);
-            RequestValidator.Setup(x => x.ValidateAsync(It.IsAny<TRequest>())).ReturnsAsync(new ValidationResult()).Callback(()=>_validationCallCount++);
         }
 
         [Test]
@@ -57,7 +56,6 @@ namespace SFA.DAS.Tasks.Application.UnitTests
         {
             //Arrange
             RequestValidator.Setup(x => x.Validate(It.IsAny<TRequest>())).Returns(new ValidationResult {ValidationDictionary = new Dictionary<string, string> {{"", ""}}});
-            RequestValidator.Setup(x => x.ValidateAsync(It.IsAny<TRequest>())).ReturnsAsync(new ValidationResult {ValidationDictionary = new Dictionary<string, string> {{"", ""}}});
 
             //Act
             Assert.ThrowsAsync<InvalidRequestException>(async () => await RequestHandler.Handle(Query));

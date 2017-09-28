@@ -16,10 +16,5 @@ namespace SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId
 
             return validationResult;
         }
-
-        public Task<ValidationResult> ValidateAsync(GetTasksByOwnerIdRequest item)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

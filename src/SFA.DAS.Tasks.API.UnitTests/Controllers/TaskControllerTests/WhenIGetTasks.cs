@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
 using System.Web.Http.Results;
 using MediatR;
 using Moq;
@@ -36,9 +38,7 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
             };
 
             _mediator = new Mock<IMediator>();
-
-            _mediator.Setup(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(a => a.OwnerId == OwnerId)))
-                .ReturnsAsync(new GetTasksByOwnerIdResponse { Tasks = _tasks });
+            SetupMediatorSendAsyncToReturn(_tasks);
 
             _controller = new TaskController(_mediator.Object);
         }
@@ -47,8 +47,8 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
         public async Task GivenThereAreTasksThenIShouldGetOkResultWithTasks()
         {
             //Act
-            var response = await _controller.GetTasks(OwnerId);
-            _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(OwnerId))), Times.Once);
+            var response = await ResponseFromGetTaskMethodOnControllerWith(OwnerId);
+            VerifyMediatorSendAsyncWasCalledWith(OwnerId);
 
             var result = response as OkNegotiatedContentResult<IEnumerable<TaskDto>>;
 
@@ -63,12 +63,24 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
             Assert.AreEqual(_tasks[0].ItemsDueCount, taskDto.ItemsDueCount);
         }
 
+        private void VerifyMediatorSendAsyncWasCalledWith(string ownerId)
+        {
+            _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(ownerId))),
+                Times.Once);
+        }
+
+        private async Task<IHttpActionResult> ResponseFromGetTaskMethodOnControllerWith(string ownerId)
+        {
+            var response = await _controller.GetTasks(ownerId);
+            return response;
+        }
+
         [Test]
         public async Task GivenThereAreTasksButIamADifferentOwnerThenIShouldGetOkResultWithNullTasks()
         {
             //Act
-            var response = await _controller.GetTasks(DifferentOwnerId);
-            _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(DifferentOwnerId))), Times.Once);
+            var response = await ResponseFromGetTaskMethodOnControllerWith(DifferentOwnerId);
+            VerifyMediatorSendAsyncWasCalledWith(DifferentOwnerId);
 
             var result = response as OkNegotiatedContentResult<IEnumerable<TaskDto>>;
 
@@ -81,18 +93,24 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
         public async Task GivenThereAreNoTasksThenIShouldGetOkResultWithZeroTasks()
         {
             //Arrange
-            _mediator.Setup(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(a => a.OwnerId == OwnerId)))
-                .ReturnsAsync(new GetTasksByOwnerIdResponse { Tasks = null });
-
+            SetupMediatorSendAsyncToReturn();
+            
             //Act
-            var response = await _controller.GetTasks(OwnerId);
-            _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(OwnerId))), Times.Once);
-
+            //var response = await _controller.GetTasks(OwnerId);
+            var response = await ResponseFromGetTaskMethodOnControllerWith(OwnerId);
+            VerifyMediatorSendAsyncWasCalledWith(OwnerId);
+            
             var result = response as OkNegotiatedContentResult<IEnumerable<TaskDto>>;
 
             //Assert
             Assert.IsNotNull(result);
             Assert.IsEmpty(result.Content);
+        }
+
+        private void SetupMediatorSendAsyncToReturn(IEnumerable<DasTask> tasks = null)
+        {
+            _mediator.Setup(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(a => a.OwnerId == OwnerId)))
+                .ReturnsAsync(new GetTasksByOwnerIdResponse {Tasks = tasks});
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
+using SFA.DAS.Tasks.Application.Validation;
 
 namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
 {
@@ -20,10 +21,16 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
             var request = new GetTasksByOwnerIdRequest {OwnerId = "1233"};
 
             //Act
-            var result = _validator.Validate(request);
+            var result = ResultFromValidator(request);
 
             //Assert
             Assert.IsTrue(result.IsValid());
+        }
+
+        private ValidationResult ResultFromValidator(GetTasksByOwnerIdRequest request)
+        {
+            var result = _validator.Validate(request);
+            return result;
         }
 
         [Test]
@@ -33,7 +40,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
             var request = new GetTasksByOwnerIdRequest();
 
             //Act
-            var result = _validator.Validate(request);
+            var result = ResultFromValidator(request);
 
             //Assert
             Assert.IsFalse(result.IsValid());
