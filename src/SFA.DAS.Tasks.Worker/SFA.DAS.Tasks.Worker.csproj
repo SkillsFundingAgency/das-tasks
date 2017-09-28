@@ -111,7 +111,6 @@
     <Compile Include="Configuration\ConfigurationHelper.cs" />
     <Compile Include="Configuration\Policies\ConfigurationPolicy.cs" />
     <Compile Include="Configuration\Policies\MessagePolicy.cs" />
-    <Compile Include="Constants.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
     <Compile Include="MessageProcessors\SignedEmployerAgreementMessageProcessor.cs" />
     <Compile Include="MessageProcessors\CreatedEmployerAgreementMessageProcessor.cs" />

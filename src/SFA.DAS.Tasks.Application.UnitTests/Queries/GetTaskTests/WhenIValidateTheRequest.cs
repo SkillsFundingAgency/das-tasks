@@ -37,7 +37,8 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTaskTests
             var result = _validator.Validate(request);
 
             //Assert
-            result.VerifyResultIsFalse("Cannot get task when owner ID is not given.", result.ValidationDictionary[nameof(request.OwnerId)]);
+            Assert.IsFalse(result.IsValid());
+            Assert.AreEqual("Cannot get task when owner ID is not given.", result.ValidationDictionary[nameof(request.OwnerId)]);
         }
 
         [Test]
@@ -50,7 +51,8 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTaskTests
             var result = _validator.Validate(request);
 
             //Assert
-            result.VerifyResultIsFalse("Cannot get task when type is not given.", result.ValidationDictionary[nameof(request.Type)]);
+            Assert.IsFalse(result.IsValid());
+            Assert.AreEqual("Cannot get task when type is not given.", result.ValidationDictionary[nameof(request.Type)]);
         }
     }
 }

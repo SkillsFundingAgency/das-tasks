@@ -11,15 +11,15 @@ namespace SFA.DAS.Tasks.Worker.Configuration
     {
         public static T GetConfiguration<T>(string serviceName)
         {
-            var environment = Environment.GetEnvironmentVariable(Constants.DasEnvKeyName);
+            var environment = Environment.GetEnvironmentVariable("DASENV");
             if (string.IsNullOrEmpty(environment))
             {
-                environment = CloudConfigurationManager.GetSetting(Constants.EnvironmentNameKeyName);
+                environment = CloudConfigurationManager.GetSetting("EnvironmentName");
             }
 
             var configurationRepository = GetConfigurationRepository();
             var configurationService = new ConfigurationService(configurationRepository,
-                new ConfigurationOptions(serviceName, environment, Constants.EnvironmentVersionNumber));
+                new ConfigurationOptions(serviceName, environment, "1.0"));
 
             return configurationService.Get<T>();
         }
@@ -27,13 +27,13 @@ namespace SFA.DAS.Tasks.Worker.Configuration
         private static IConfigurationRepository GetConfigurationRepository()
         {
             IConfigurationRepository configurationRepository;
-            if (bool.Parse(ConfigurationManager.AppSettings[Constants.LocalConfigKeyName]))
+            if (bool.Parse(ConfigurationManager.AppSettings["LocalConfig"]))
             {
                 configurationRepository = new FileStorageConfigurationRepository();
             }
             else
             {
-                configurationRepository = new AzureTableStorageConfigurationRepository(CloudConfigurationManager.GetSetting(Constants.ConfigurationStorageConnectionStringKeyName));
+                configurationRepository = new AzureTableStorageConfigurationRepository(CloudConfigurationManager.GetSetting("ConfigurationStorageConnectionString"));
             }
             return configurationRepository;
         }

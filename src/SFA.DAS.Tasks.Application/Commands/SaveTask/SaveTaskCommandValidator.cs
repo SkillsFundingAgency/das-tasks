@@ -22,5 +22,10 @@ namespace SFA.DAS.Tasks.Application.Commands.SaveTask
 
             return validationResults;
         }
+
+        public Task<ValidationResult> ValidateAsync(SaveTaskCommand item)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

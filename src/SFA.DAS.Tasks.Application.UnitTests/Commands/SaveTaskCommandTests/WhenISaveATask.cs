@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
@@ -39,20 +38,20 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
         public override async Task ThenIfTheMessageIsValidTheRepositoryIsCalled()
         {
             //Act
-            await GetResponseFromRequestHandler();
+            await RequestHandler.Handle(Query);
 
             //Assert
-            VerifyGetTaskCalledOnce();
-            VerifySaveTaskCalledOnceWith(t => t.OwnerId.Equals(Query.OwnerId) &&
-                                               t.Type.Equals(Query.Type) &&
-                                               t.ItemsDueCount.Equals(1));
+            _repository.Verify(x => x.GetTask(Query.OwnerId, Query.Type), Times.Once);
+            _repository.Verify(x => x.SaveTask(It.Is<DasTask>(t => t.OwnerId.Equals(Query.OwnerId) &&
+                                                              t.Type.Equals(Query.Type) &&
+                                                              t.ItemsDueCount.Equals(1))), Times.Once);
         }
 
         [Test]
         public override async Task ThenIfTheMessageIsValidTheValueIsReturnedInTheResponse()
         {
             //Act
-            var response = await GetResponseFromRequestHandler();
+            var response = await RequestHandler.Handle(Query);
 
             //Assert
             Assert.IsNotNull(response);
@@ -64,21 +63,27 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
             //We represent multiple tasks of the same type and owner as a counter rather than multiple tasks entries
 
             //Arrange
-            var existingTask = CreateExistingDasTask();
+            var existingTask = new DasTask
+            {
+                Id = Guid.NewGuid(),
+                OwnerId = "123",
+                Type = TaskType.AgreementToSign,
+                ItemsDueCount = 3
+            };
 
             var expectedItemsDueCount = (ushort)(existingTask.ItemsDueCount + 1);
 
-            SetupRepositoryToReturnExistingTask(existingTask);
-
+            _repository.Setup(x => x.GetTask(Query.OwnerId, Query.Type)).ReturnsAsync(existingTask);
+            
             //Act
-            await GetResponseFromRequestHandler();
+            await RequestHandler.Handle(Query);
 
             //Assert
-            VerifyGetTaskCalledOnce();
-            VerifySaveTaskCalledOnceWith(t => t.Id.Equals(existingTask.Id) &&
-                                               t.OwnerId.Equals(existingTask.OwnerId) &&
-                                               t.Type.Equals(existingTask.Type) &&
-                                               t.ItemsDueCount.Equals(expectedItemsDueCount));
+            _repository.Verify(x => x.GetTask(Query.OwnerId, Query.Type), Times.Once);
+            _repository.Verify(x => x.SaveTask(It.Is<DasTask>(t => t.Id.Equals(existingTask.Id) &&
+                                                                   t.OwnerId.Equals(existingTask.OwnerId) &&
+                                                                   t.Type.Equals(existingTask.Type) &&
+                                                                   t.ItemsDueCount.Equals(expectedItemsDueCount))), Times.Once);
         }
 
         [Test]
@@ -89,21 +94,27 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
             //Arrange
             Query.TaskCompleted = true;
 
-            var existingTask = CreateExistingDasTask();
+            var existingTask = new DasTask
+            {
+                Id = Guid.NewGuid(),
+                OwnerId = "123",
+                Type = TaskType.AgreementToSign,
+                ItemsDueCount = 3
+            };
 
             var expectedItemsDueCount = (ushort) (existingTask.ItemsDueCount - 1);
 
-            SetupRepositoryToReturnExistingTask(existingTask);
+            _repository.Setup(x => x.GetTask(Query.OwnerId, Query.Type)).ReturnsAsync(existingTask);
 
             //Act
-            await GetResponseFromRequestHandler();
+            await RequestHandler.Handle(Query);
 
             //Assert
-            VerifyGetTaskCalledOnce();
-            VerifySaveTaskCalledOnceWith(t => t.Id.Equals(existingTask.Id) &&
-                                               t.OwnerId.Equals(existingTask.OwnerId) &&
-                                               t.Type.Equals(existingTask.Type) &&
-                                               t.ItemsDueCount.Equals(expectedItemsDueCount));
+            _repository.Verify(x => x.GetTask(Query.OwnerId, Query.Type), Times.Once);
+            _repository.Verify(x => x.SaveTask(It.Is<DasTask>(t => t.Id.Equals(existingTask.Id) &&
+                                                                   t.OwnerId.Equals(existingTask.OwnerId) &&
+                                                                   t.Type.Equals(existingTask.Type) &&
+                                                                   t.ItemsDueCount.Equals(expectedItemsDueCount))), Times.Once);
         }
 
         [Test]
@@ -115,44 +126,11 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
             Query.TaskCompleted = true;
 
             //Act
-            await GetResponseFromRequestHandler();
+            await RequestHandler.Handle(Query);
 
             //Assert
-            VerifyGetTaskCalledOnce(); 
-            _repository.Verify(x => x.SaveTask(It.IsAny<DasTask>()), Times.Never);
-        }
-
-        private static DasTask CreateExistingDasTask()
-        {
-            var existingTask = new DasTask
-            {
-                Id = Guid.NewGuid(),
-                OwnerId = "123",
-                Type = TaskType.AgreementToSign,
-                ItemsDueCount = 3
-            };
-            return existingTask;
-        }
-
-        private void SetupRepositoryToReturnExistingTask(DasTask existingTask)
-        {
-            _repository.Setup(x => x.GetTask(Query.OwnerId, Query.Type)).ReturnsAsync(existingTask);
-        }
-
-        private async Task<SaveTaskCommandResponse> GetResponseFromRequestHandler()
-        {
-            var response = await RequestHandler.Handle(Query);
-            return response;
-        }
-
-        private void VerifyGetTaskCalledOnce()
-        {
             _repository.Verify(x => x.GetTask(Query.OwnerId, Query.Type), Times.Once);
-        }
-
-        private void VerifySaveTaskCalledOnceWith(Expression<Func<DasTask, bool>> taskExpression)
-        {
-            _repository.Verify(x => x.SaveTask(It.Is<DasTask>(taskExpression)), Times.Once);
+            _repository.Verify(x => x.SaveTask(It.IsAny<DasTask>()), Times.Never);
         }
     }
 }

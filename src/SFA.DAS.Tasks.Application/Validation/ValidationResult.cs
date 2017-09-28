@@ -24,7 +24,6 @@ namespace SFA.DAS.Tasks.Application.Validation
 
         public bool IsValid()
         {
-            // redundant constructor initialises
             if (ValidationDictionary == null)
             {
                 return false;
