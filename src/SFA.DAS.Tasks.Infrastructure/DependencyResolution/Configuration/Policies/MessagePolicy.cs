@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using Microsoft.Azure;
 using SFA.DAS.Configuration;
 using SFA.DAS.Configuration.AzureTableStorage;
-using SFA.DAS.Configuration.FileStorage;
 using SFA.DAS.Messaging;
 using SFA.DAS.Messaging.Attributes;
 using SFA.DAS.Messaging.AzureServiceBus;
@@ -13,7 +11,7 @@ using SFA.DAS.Messaging.FileSystem;
 using StructureMap;
 using StructureMap.Pipeline;
 
-namespace SFA.DAS.Tasks.Worker.Configuration.Policies
+namespace SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration.Policies
 {
     namespace SFA.DAS.EAS.Infrastructure.DependencyResolution
     {
@@ -61,16 +59,7 @@ namespace SFA.DAS.Tasks.Worker.Configuration.Policies
 
             private static IConfigurationRepository GetConfigurationRepository()
             {
-                IConfigurationRepository configurationRepository;
-                if (bool.Parse(ConfigurationManager.AppSettings["LocalConfig"]))
-                {
-                    configurationRepository = new FileStorageConfigurationRepository();
-                }
-                else
-                {
-                    configurationRepository = new AzureTableStorageConfigurationRepository(CloudConfigurationManager.GetSetting("ConfigurationStorageConnectionString"));
-                }
-                return configurationRepository;
+                return new AzureTableStorageConfigurationRepository(CloudConfigurationManager.GetSetting("ConfigurationStorageConnectionString"));
             }
         }
     }

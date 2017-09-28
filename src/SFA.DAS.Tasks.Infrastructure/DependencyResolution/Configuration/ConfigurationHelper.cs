@@ -3,7 +3,7 @@ using Microsoft.Azure;
 using SFA.DAS.Configuration;
 using SFA.DAS.Configuration.AzureTableStorage;
 
-namespace SFA.DAS.Tasks.Worker.Configuration
+namespace SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration
 {
     public static class ConfigurationHelper
     {

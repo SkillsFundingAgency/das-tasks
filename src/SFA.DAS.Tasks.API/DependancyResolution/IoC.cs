@@ -16,7 +16,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using SFA.DAS.Tasks.Domain.Configurations;
-using SFA.DAS.Tasks.Worker.Configuration.Policies;
+using SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration.Policies;
 using StructureMap;
 
 namespace SFA.DAS.Tasks.API.DependancyResolution

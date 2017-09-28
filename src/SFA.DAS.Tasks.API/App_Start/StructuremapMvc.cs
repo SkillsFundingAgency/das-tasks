@@ -16,19 +16,17 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using SFA.DAS.Tasks.API.App_Start;
-
 using WebActivatorEx;
+using System.Web.Mvc;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using StructureMap;
+using SFA.DAS.Tasks.API.DependancyResolution;
 
 [assembly: PreApplicationStartMethod(typeof(StructuremapMvc), "Start")]
 [assembly: ApplicationShutdownMethod(typeof(StructuremapMvc), "End")]
 
 namespace SFA.DAS.Tasks.API.App_Start {
-	using System.Web.Mvc;
-
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-    using StructureMap;
-    using SFA.DAS.Tasks.API.DependancyResolution;
-
+	
     public static class StructuremapMvc {
         #region Public Properties
 

@@ -268,10 +268,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -295,6 +292,10 @@
     <ProjectReference Include="..\SFA.DAS.Tasks.Domain\SFA.DAS.Tasks.Domain.csproj">
       <Project>{316591ff-d233-4529-bc3b-fa6b79c2db11}</Project>
       <Name>SFA.DAS.Tasks.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SFA.DAS.Tasks.Infrastructure\SFA.DAS.Tasks.Infrastructure.csproj">
+      <Project>{45583202-8542-480A-BE71-BA3BB1D69A6C}</Project>
+      <Name>SFA.DAS.Tasks.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\SFA.DAS.Tasks.Worker\SFA.DAS.Tasks.Worker.csproj">
       <Project>{F4163AC8-357E-4C9A-A3B7-C5B0F8708E0A}</Project>
