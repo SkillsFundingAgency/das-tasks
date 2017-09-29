@@ -2,7 +2,7 @@
 
 namespace SFA.DAS.Tasks.Application.Validation
 {
-    public interface IValidator<T>
+    public interface IValidator<in T>
     {
         ValidationResult Validate(T item);
 

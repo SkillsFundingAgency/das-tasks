@@ -4,9 +4,8 @@ using SFA.DAS.Configuration;
 using StructureMap;
 using StructureMap.Pipeline;
 
-namespace SFA.DAS.Tasks.Worker.Configuration.Policies
+namespace SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration.Policies
 {
-    
     public class ConfigurationPolicy<T> : ConfiguredInstancePolicy where T : IConfiguration
     {
         private readonly string _serviceName;
@@ -29,7 +28,6 @@ namespace SFA.DAS.Tasks.Worker.Configuration.Policies
                     instance.Dependencies.AddForConstructorParameter(serviceConfigurationParamater, result);
                 }
             }
-            
         }
     }
 }

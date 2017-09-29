@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Configuration;
 using Microsoft.Azure;
 using SFA.DAS.Configuration;
 using SFA.DAS.Configuration.AzureTableStorage;
-using SFA.DAS.Configuration.FileStorage;
 
-namespace SFA.DAS.Tasks.Worker.Configuration
+namespace SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration
 {
     public static class ConfigurationHelper
     {
@@ -26,16 +24,7 @@ namespace SFA.DAS.Tasks.Worker.Configuration
 
         private static IConfigurationRepository GetConfigurationRepository()
         {
-            IConfigurationRepository configurationRepository;
-            if (bool.Parse(ConfigurationManager.AppSettings["LocalConfig"]))
-            {
-                configurationRepository = new FileStorageConfigurationRepository();
-            }
-            else
-            {
-                configurationRepository = new AzureTableStorageConfigurationRepository(CloudConfigurationManager.GetSetting("ConfigurationStorageConnectionString"));
-            }
-            return configurationRepository;
+            return new AzureTableStorageConfigurationRepository(CloudConfigurationManager.GetSetting("ConfigurationStorageConnectionString"));
         }
     }
 }

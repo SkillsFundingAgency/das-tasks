@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using SFA.DAS.Messaging;
 using SFA.DAS.Tasks.Domain.Configurations;
-using SFA.DAS.Tasks.Worker.Configuration.Policies;
-using SFA.DAS.Tasks.Worker.Configuration.Policies.SFA.DAS.EAS.Infrastructure.DependencyResolution;
+using SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration.Policies;
+using SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration.Policies.SFA.DAS.EAS.Infrastructure.DependencyResolution;
 using SFA.DAS.Tasks.Worker.DependencyResolution;
 using StructureMap;
 

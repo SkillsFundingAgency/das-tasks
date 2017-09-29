@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using SFA.DAS.Messaging;
 using SFA.DAS.NLog.Logger;
-using SFA.DAS.Tasks.Worker.MessageProcessors;
 using StructureMap;
 
 namespace SFA.DAS.Tasks.Worker.DependencyResolution
