@@ -9,7 +9,7 @@ using SFA.DAS.Tasks.Domain.Configurations;
 using SFA.DAS.Tasks.Domain.Models;
 using SFA.DAS.Tasks.Domain.Repositories;
 
-namespace SFA.DAS.Tasks.Infrastructure.Repositories
+namespace SFA.DAS.Tasks.DataAccess.Repositories
 {
     public class TaskRepository : BaseRepository, ITaskRepository
     {

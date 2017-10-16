@@ -1,6 +1,8 @@
 ﻿using MediatR;
-using SFA.DAS.Messaging;
+using SFA.DAS.Messaging.Interfaces;
 using SFA.DAS.NLog.Logger;
+using SFA.DAS.Tasks.DataAccess.Repositories;
+using SFA.DAS.Tasks.Domain.Repositories;
 using StructureMap;
 
 namespace SFA.DAS.Tasks.Worker.DependencyResolution
@@ -18,6 +20,7 @@ namespace SFA.DAS.Tasks.Worker.DependencyResolution
 
             AddMediatrRegistrations();
             RegisterLogger();
+            For<ITaskRepository>().Use<TaskRepository>();
         }
 
         private void AddMediatrRegistrations()
