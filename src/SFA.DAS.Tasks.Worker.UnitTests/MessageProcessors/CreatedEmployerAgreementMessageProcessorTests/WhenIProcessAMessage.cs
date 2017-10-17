@@ -1,11 +1,12 @@
-﻿using System.Threading;
+﻿using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Moq;
 using NUnit.Framework;
 using SFA.DAS.EmployerAccounts.Events.Messages;
-using SFA.DAS.Messaging;
 using SFA.DAS.Messaging.FileSystem;
+using SFA.DAS.Messaging.Interfaces;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Commands.SaveTask;
 using SFA.DAS.Tasks.API.Types.Enums;
@@ -16,27 +17,39 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.CreatedEmployerAgreem
     public class WhenIProcessAMessage
     {
         private CreatedEmployerAgreementMessageProcessor _processor;
-        private AgreementCreatedMessage _message;
-        private Mock<IPollingMessageReceiver> _messageReciever;
+        private Mock<IMessageSubscriberFactory> _subscriptionFactory;
+        private Mock<IMessageSubscriber<AgreementCreatedMessage>> _subscriber;
         private CancellationTokenSource _tokenSource;
         private Mock<IMediator> _mediator;
+        private Mock<IMessage<AgreementCreatedMessage>> _mockMessage;
+        private AgreementCreatedMessage _messageContent;
 
         [SetUp]
         public void Arrange()
         {
-            _messageReciever = new Mock<IPollingMessageReceiver>();
-            _mediator = new Mock<IMediator>();
-            _tokenSource = new CancellationTokenSource();
-            _message = new AgreementCreatedMessage
+            _subscriptionFactory = new Mock<IMessageSubscriberFactory>();
+            _subscriber = new Mock<IMessageSubscriber<AgreementCreatedMessage>>();
+
+            _messageContent = new AgreementCreatedMessage
             {
                 AccountId = 123,
                 LegalEntityId = 456
             };
 
-            _processor = new CreatedEmployerAgreementMessageProcessor(_messageReciever.Object, Mock.Of<ILog>(), _mediator.Object);
+            _mockMessage = new Mock<IMessage<AgreementCreatedMessage>>();
 
-            _messageReciever.Setup(x => x.ReceiveAsAsync<AgreementCreatedMessage>())
-                            .ReturnsAsync(() => new FileSystemMessage<AgreementCreatedMessage>(null, null, _message))
+            _mockMessage.Setup(x => x.Content).Returns(_messageContent);
+
+            _mediator = new Mock<IMediator>();
+            _tokenSource = new CancellationTokenSource();
+
+            _processor = new CreatedEmployerAgreementMessageProcessor(_subscriptionFactory.Object, Mock.Of<ILog>(), 
+                _mediator.Object);
+
+            _subscriptionFactory.Setup(x => x.GetSubscriber<AgreementCreatedMessage>()).Returns(_subscriber.Object);
+
+            _subscriber.Setup(x => x.ReceiveAsAsync())
+                            .ReturnsAsync(() => _mockMessage.Object)
                             .Callback(() => { _tokenSource.Cancel(); });
         }
 
@@ -47,7 +60,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.CreatedEmployerAgreem
             await _processor.RunAsync(_tokenSource.Token);
 
             //Assert
-            _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.OwnerId.Equals(_message.AccountId.ToString()) &&
+            _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.OwnerId.Equals(_messageContent.AccountId.ToString()) &&
                                                                             cmd.Type.Equals(TaskType.AgreementToSign) &&
                                                                             cmd.TaskCompleted.Equals(false))), Times.Once);
         }
