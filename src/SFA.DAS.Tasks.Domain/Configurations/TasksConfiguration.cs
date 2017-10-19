@@ -6,5 +6,6 @@ namespace SFA.DAS.Tasks.Domain.Configurations
     {
         public string DatabaseConnectionString { get; set; }
         public string ServiceBusConnectionString { get; set; }
+        public string MessageServiceBusConnectionString { get; set; }
     }
 }
