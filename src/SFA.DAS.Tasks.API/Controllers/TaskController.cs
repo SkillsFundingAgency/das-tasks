@@ -19,7 +19,7 @@ namespace SFA.DAS.Tasks.API.Controllers
         }
 
         [Route("")]
-        [ApiAuthorize(Roles = "ReadOwnerTasks")]
+        [ApiAuthorize()]///*Roles = "ReadOwnerTasks")*/]
         public async Task<IHttpActionResult> GetTasks(string ownerId)
         {
             var result = await _mediator.SendAsync(new GetTasksByOwnerIdRequest
