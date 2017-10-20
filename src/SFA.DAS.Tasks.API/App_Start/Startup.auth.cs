@@ -14,7 +14,7 @@ namespace SFA.DAS.Tasks.API
                    TokenValidationParameters = new System.IdentityModel.Tokens.TokenValidationParameters
                    {
                        ValidAudience = CloudConfigurationManager.GetSetting("idaAudience"),
-                       RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+                       RoleClaimType = "roles"
                    },
                    Tenant = CloudConfigurationManager.GetSetting("idaTenant")
                });
