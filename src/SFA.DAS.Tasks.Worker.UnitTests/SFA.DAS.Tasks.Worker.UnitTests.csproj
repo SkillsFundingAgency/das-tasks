@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MessageProcessors\CreatedEmployerAgreementMessageProcessorTests\WhenIProcessAMessage.cs" />
+    <Compile Include="MessageProcessors\LegalEntityRemovedMessageProcessorTests\WhenIRemoveALegalEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

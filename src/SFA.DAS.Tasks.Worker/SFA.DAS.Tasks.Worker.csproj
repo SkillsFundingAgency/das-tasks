@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
+    <Compile Include="MessageProcessors\LegalEntityRemovedMessageProcessor.cs" />
     <Compile Include="MessageProcessors\SignedEmployerAgreementMessageProcessor.cs" />
     <Compile Include="MessageProcessors\CreatedEmployerAgreementMessageProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
