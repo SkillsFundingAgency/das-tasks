@@ -1,10 +1,12 @@
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using SFA.DAS.Messaging.Interfaces;
+using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Domain.Configurations;
 using SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration;
 using SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration.Policies;
