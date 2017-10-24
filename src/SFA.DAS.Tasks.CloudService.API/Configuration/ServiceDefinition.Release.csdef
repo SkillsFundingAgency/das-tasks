@@ -34,6 +34,8 @@
       <Setting name="EnvironmentName" />
       <Setting name="ConfigurationStorageConnectionString" />
       <Setting name="LogLevel" />
+      <Setting name="LoggingRedisConnectionString" />
+      <Setting name="LoggingRedisKey" />
     </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>
