@@ -163,8 +163,14 @@
     <Reference Include="SFA.DAS.NLog.Logger, Version=1.0.0.37051, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.NLog.Logger.1.0.0.37051\lib\net45\SFA.DAS.NLog.Logger.dll</HintPath>
     </Reference>
+    <Reference Include="SFA.DAS.NLog.Targets.Redis, Version=1.0.0.43242, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.NLog.Targets.Redis.1.0.0.43242\lib\net45\SFA.DAS.NLog.Targets.Redis.dll</HintPath>
+    </Reference>
     <Reference Include="SFA.DAS.Sql.Client, Version=1.0.0.32930, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Sql.Client.1.0.0.32930\lib\net45\SFA.DAS.Sql.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.1.608.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.1.608\lib\net46\StackExchange.Redis.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=4.5.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\StructureMap.4.5.2\lib\net45\StructureMap.dll</HintPath>
@@ -182,6 +188,7 @@
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
