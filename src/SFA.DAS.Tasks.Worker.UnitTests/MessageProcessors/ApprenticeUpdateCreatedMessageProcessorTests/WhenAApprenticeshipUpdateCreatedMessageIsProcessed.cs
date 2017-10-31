@@ -53,7 +53,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.ApprenticeUpdateCreat
         }
 
         [Test]
-        public async Task ThenTheMessageShouldBeHandledByAHandler()
+        public async Task ThenTheTaskIsSaved()
         {
             //Act
             await _processor.RunAsync(_tokenSource.Token);
