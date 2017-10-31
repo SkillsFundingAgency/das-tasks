@@ -126,6 +126,7 @@
   <ItemGroup>
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
     <Compile Include="MessageProcessors\ApprenticeUpdateCreatedMessageProcessor.cs" />
+    <Compile Include="MessageProcessors\CohortApprovalRequestedMessageProcessor.cs" />
     <Compile Include="MessageProcessors\LegalEntityRemovedMessageProcessor.cs" />
     <Compile Include="MessageProcessors\SignedEmployerAgreementMessageProcessor.cs" />
     <Compile Include="MessageProcessors\CreatedEmployerAgreementMessageProcessor.cs" />

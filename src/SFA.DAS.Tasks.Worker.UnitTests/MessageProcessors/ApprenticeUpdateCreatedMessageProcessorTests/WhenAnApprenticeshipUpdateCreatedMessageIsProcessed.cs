@@ -17,7 +17,7 @@ using SFA.DAS.Tasks.Worker.MessageProcessors;
 
 namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.ApprenticeUpdateCreatedMessageProcessorTests
 {
-    public class WhenAApprenticeshipUpdateCreatedMessageIsProcessed
+    public class WhenAnApprenticeshipUpdateCreatedMessageIsProcessed
     {
         private Mock<IMessageSubscriberFactory> _subscriptionFactory;
         private Mock<IMessageSubscriber<ApprenticeshipUpdateCreated>> _subscriber;
