@@ -26,12 +26,12 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
         
         protected override async Task ProcessMessage(AgreementSignedMessage message)
         {
-            await RemoveSignAgreementTask(message);
+            await RemoveAgreementToSignTask(message);
 
-            await AddApprenticesTask(message);
+            await CreateAddApprenticesTask(message);
         }
 
-        private async Task AddApprenticesTask(AgreementSignedMessage message)
+        private async Task CreateAddApprenticesTask(AgreementSignedMessage message)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
             }
         }
 
-        private async Task RemoveSignAgreementTask(AgreementSignedMessage message)
+        private async Task RemoveAgreementToSignTask(AgreementSignedMessage message)
         {
             try
             {
