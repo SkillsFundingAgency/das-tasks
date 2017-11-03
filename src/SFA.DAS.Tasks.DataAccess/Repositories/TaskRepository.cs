@@ -45,6 +45,19 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
             });
         }
 
+        public async Task<IEnumerable<DasTask>> GetMonthlyReminderTasks()
+        {
+            return await WithConnection(async c =>
+            {
+                var parameters = new DynamicParameters();
+
+                return await c.QueryAsync<DasTask>(
+                    sql: "[tasks].[GetMonthlyReminderTasks]",
+                    param: parameters,
+                    commandType: CommandType.StoredProcedure);
+            });
+        }
+
         public async Task SaveTask(DasTask task)
         {
             await WithConnection(async c =>
