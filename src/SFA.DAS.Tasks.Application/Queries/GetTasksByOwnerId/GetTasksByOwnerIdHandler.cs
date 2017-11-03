@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using MediatR;
 using SFA.DAS.Tasks.Application.Exceptions;
 using SFA.DAS.Tasks.Application.Validation;
@@ -26,9 +27,11 @@ namespace SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId
                 throw new InvalidRequestException(validationResult.ValidationDictionary);
             }
 
-            var result = await _repository.GetTasks(message.OwnerId);
+            var tasks = await _repository.GetTasks(message.OwnerId);
 
-            return new GetTasksByOwnerIdResponse {Tasks = result};
+            var monthlyReminderTasks = await _repository.GetMonthlyReminderTasks(message.OwnerId); 
+
+            return new GetTasksByOwnerIdResponse {Tasks = tasks.Concat(monthlyReminderTasks)};
         }
     }
 }

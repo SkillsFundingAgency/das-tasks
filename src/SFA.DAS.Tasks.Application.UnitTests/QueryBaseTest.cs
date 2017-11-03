@@ -28,9 +28,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests
         }
 
         [Test]
-        public abstract Task ThenIfTheMessageIsValidTheRepositoryIsCalled();
-
-        public abstract Task ThenIfTheMessageIsValidTheValueIsReturnedInTheResponse();
+        public abstract Task ThenIfTheMessageIsValidTheTasksAreReturned();
 
         [Test]
         public async Task ThenTheReturnValueIsAssignableToTheResponse()

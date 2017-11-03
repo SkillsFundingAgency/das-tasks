@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using SFA.DAS.NLog.Logger;
@@ -42,6 +43,24 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
                     sql: "[tasks].[GetTaskByOwnerIdAndType]",
                     param: parameters,
                     commandType: CommandType.StoredProcedure);
+            });
+        }
+
+        public async Task<IEnumerable<DasTask>> GetMonthlyReminderTasks(string ownerId)
+        {
+            return await WithConnection(async c =>
+            {
+                var tasks = (await c.QueryAsync<DasTask>(
+                    sql: "[tasks].[GetMonthlyReminderTasks]",
+                    commandType: CommandType.StoredProcedure)).ToList();
+
+                foreach (var task in tasks)
+                {
+                    task.OwnerId = ownerId;
+                    task.ItemsDueCount = 1;
+                }
+
+                return tasks.ToList();
             });
         }
 

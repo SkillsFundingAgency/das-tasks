@@ -69,5 +69,7 @@
     <Build Include="StoredProcedures\GetTasksByOwner.sql" />
     <Build Include="StoredProcedures\GetTaskByOwnerIdAndType.sql" />
     <Build Include="StoredProcedures\UpsertTask.sql" />
+    <Build Include="Tables\MonthlyReminderTasks.sql" />
+    <Build Include="StoredProcedures\GetMonthlyReminderTasks.sql" />
   </ItemGroup>
 </Project>
