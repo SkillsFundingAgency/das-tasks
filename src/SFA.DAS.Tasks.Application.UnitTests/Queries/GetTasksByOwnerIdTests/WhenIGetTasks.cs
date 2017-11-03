@@ -46,7 +46,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
 
             _repository = new Mock<ITaskRepository>();
             _repository.Setup(x => x.GetTasks(It.IsAny<string>())).ReturnsAsync(_tasks);
-            _repository.Setup(x => x.GetMonthlyReminderTasks()).ReturnsAsync(_monthlyRemindertasks);
+            _repository.Setup(x => x.GetMonthlyReminderTasks(It.IsAny<string>())).ReturnsAsync(_monthlyRemindertasks);
 
             RequestHandler = new GetTasksByOwnerIdHandler(_repository.Object, RequestValidator.Object);
             Query = new GetTasksByOwnerIdRequest{ OwnerId = TaskOwnerId};
@@ -60,7 +60,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
 
             //Assert
             _repository.Verify(x => x.GetTasks(TaskOwnerId), Times.Once);
-            _repository.Verify(x => x.GetMonthlyReminderTasks(), Times.Once);
+            _repository.Verify(x => x.GetMonthlyReminderTasks(TaskOwnerId), Times.Once);
         }
 
         [Test]

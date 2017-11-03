@@ -29,7 +29,7 @@ namespace SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId
 
             var tasks = await _repository.GetTasks(message.OwnerId);
 
-            var monthlyReminderTasks = await _repository.GetMonthlyReminderTasks(); 
+            var monthlyReminderTasks = await _repository.GetMonthlyReminderTasks(message.OwnerId); 
 
             return new GetTasksByOwnerIdResponse {Tasks = tasks.Concat(monthlyReminderTasks)};
         }
