@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using MediatR;
 using SFA.DAS.EmployerAccounts.Events.Messages;
 using SFA.DAS.Messaging;
@@ -16,7 +17,8 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
         private readonly ILog _logger;
         private readonly IMediator _mediator;
 
-        public SignedEmployerAgreementMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog logger, IMediator mediator) : base(subscriberFactory, logger)
+        public SignedEmployerAgreementMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog logger, IMediator mediator) 
+            : base(subscriberFactory, logger)
         {
             _logger = logger;
             _mediator = mediator;
@@ -24,14 +26,51 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
         
         protected override async Task ProcessMessage(AgreementSignedMessage message)
         {
-            _logger.Debug($"Saving agreement signed task for account id {message.AccountId}, " +
-                          $"agreement id {message.AgreementId} and legal enityt id {message.LegalEntityId}");
-            await _mediator.SendAsync(new SaveTaskCommand
+            await RemoveAgreementToSignTask(message);
+
+            await CreateAddApprenticesTask(message);
+        }
+
+        private async Task CreateAddApprenticesTask(AgreementSignedMessage message)
+        {
+            try
             {
-                OwnerId = message.AccountId.ToString(),
-                Type = TaskType.AgreementToSign,
-                TaskCompleted = true
-            });
+                _logger.Debug($"Saving 'add apprentices' task for account id {message.AccountId} as the agreement " +
+                              $"(ID: {message.AgreementId}) has been signed");
+
+                await _mediator.SendAsync(new SaveTaskCommand
+                {
+                    OwnerId = message.AccountId.ToString(),
+                    Type = TaskType.AddApprentices,
+                    TaskCompleted = false
+                });
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, $"Failed to create add apprentices task [Account ID: {message.AccountId}, " +
+                                 $"Agreement ID: {message.AgreementId}, Legal Entity ID: {message.LegalEntityId}");
+            }
+        }
+
+        private async Task RemoveAgreementToSignTask(AgreementSignedMessage message)
+        {
+            try
+            {
+                _logger.Debug($"Removing 'agreement to sign' task from account (ID: {message.AccountId}) as the " +
+                              $"agreement (ID: {message.AgreementId}) has been signed");
+
+                await _mediator.SendAsync(new SaveTaskCommand
+                {
+                    OwnerId = message.AccountId.ToString(),
+                    Type = TaskType.AgreementToSign,
+                    TaskCompleted = true
+                });
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, $"Failed to complete agreement to sign task [Account ID: {message.AccountId}, " +
+                                 $"Agreement ID: {message.AgreementId}, Legal Entity ID: {message.LegalEntityId}");
+            }
         }
     }
 }
