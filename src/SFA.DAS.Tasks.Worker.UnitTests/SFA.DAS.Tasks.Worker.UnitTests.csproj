@@ -71,7 +71,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MessageProcessors\ApprenticeUpdateCreatedMessageProcessorTests\WhenAApprenticeshipUpdateCreatedMessageIsProcessed.cs" />
+    <Compile Include="MessageProcessors\ApprenticeUpdateCreatedMessageProcessorTests\WhenAnApprenticeshipUpdateCreatedMessageIsProcessed.cs" />
+    <Compile Include="MessageProcessors\CohortApprovalRequestedMessageProcessorTests\WhenACohortIsReadForApprovalMessageIsProcessed.cs" />
     <Compile Include="MessageProcessors\CreatedEmployerAgreementMessageProcessorTests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\LegalEntityRemovedMessageProcessorTests\WhenIRemoveALegalEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
