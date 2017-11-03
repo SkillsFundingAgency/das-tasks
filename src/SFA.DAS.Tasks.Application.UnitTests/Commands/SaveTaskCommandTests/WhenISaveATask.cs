@@ -35,25 +35,16 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
         }
       
         [Test]
-        public override async Task ThenIfTheMessageIsValidTheRepositoryIsCalled()
+        public override async Task ThenIfTheMessageIsValidTheTasksAreReturned()
         {
             //Act
-            await RequestHandler.Handle(Query);
+            var response = await RequestHandler.Handle(Query);
 
             //Assert
             _repository.Verify(x => x.GetTask(Query.OwnerId, Query.Type), Times.Once);
             _repository.Verify(x => x.SaveTask(It.Is<DasTask>(t => t.OwnerId.Equals(Query.OwnerId) &&
                                                               t.Type.Equals(Query.Type) &&
                                                               t.ItemsDueCount.Equals(1))), Times.Once);
-        }
-
-        [Test]
-        public override async Task ThenIfTheMessageIsValidTheValueIsReturnedInTheResponse()
-        {
-            //Act
-            var response = await RequestHandler.Handle(Query);
-
-            //Assert
             Assert.IsNotNull(response);
         }
 

@@ -53,18 +53,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
         }
        
         [Test]
-        public override async Task ThenIfTheMessageIsValidTheRepositoryIsCalled()
-        {
-            //Act
-            await RequestHandler.Handle(Query);
-
-            //Assert
-            _repository.Verify(x => x.GetTasks(TaskOwnerId), Times.Once);
-            _repository.Verify(x => x.GetMonthlyReminderTasks(TaskOwnerId), Times.Once);
-        }
-
-        [Test]
-        public override async Task ThenIfTheMessageIsValidTheValueIsReturnedInTheResponse()
+        public override async Task ThenIfTheMessageIsValidTheTasksAreReturned()
         {
             //Arrange
             var expectedTasks = _tasks.Concat(_monthlyRemindertasks).ToList();
@@ -73,6 +62,8 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
             var result = await RequestHandler.Handle(Query);
 
             //Assert
+            _repository.Verify(x => x.GetTasks(TaskOwnerId), Times.Once);
+            _repository.Verify(x => x.GetMonthlyReminderTasks(TaskOwnerId), Times.Once);
             Assert.AreEqual(expectedTasks, result.Tasks);
         }
     }

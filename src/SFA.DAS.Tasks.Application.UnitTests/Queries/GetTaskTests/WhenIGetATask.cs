@@ -39,22 +39,13 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTaskTests
         }
         
         [Test]
-        public override async Task ThenIfTheMessageIsValidTheRepositoryIsCalled()
-        {
-            //Act
-            await RequestHandler.Handle(Query);
-
-            //Assert
-            _repository.Verify(x => x.GetTask(Query.OwnerId, Query.Type), Times.Once);
-        }
-
-        [Test]
-        public override async Task ThenIfTheMessageIsValidTheValueIsReturnedInTheResponse()
+        public override async Task ThenIfTheMessageIsValidTheTasksAreReturned()
         {
             //Act
             var response = await RequestHandler.Handle(Query);
 
             //Assert
+            _repository.Verify(x => x.GetTask(Query.OwnerId, Query.Type), Times.Once);
             Assert.AreEqual(_task, response.Task);
         }
     }
