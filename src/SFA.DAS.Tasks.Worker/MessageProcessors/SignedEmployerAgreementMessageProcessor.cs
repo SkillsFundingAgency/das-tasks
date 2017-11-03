@@ -26,24 +26,13 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
         
         protected override async Task ProcessMessage(AgreementSignedMessage message)
         {
-            try
-            {
-                _logger.Debug($"Removing 'agreement to sign' task from account (ID: {message.AccountId}) as the " +
-                              $"agreement (ID: {message.AgreementId}) has been signed");
+            await RemoveSignAgreementTask(message);
 
-                await _mediator.SendAsync(new SaveTaskCommand
-                {
-                    OwnerId = message.AccountId.ToString(),
-                    Type = TaskType.AgreementToSign,
-                    TaskCompleted = true
-                });
-            }
-            catch (Exception e)
-            {
-                _logger.Error(e, $"Failed to complete agreement to sign task [Account ID: {message.AccountId}, " +
-                                 $"Agreement ID: {message.AgreementId}, Legal Entity ID: {message.LegalEntityId}");
-            }
+            await AddApprenticesTask(message);
+        }
 
+        private async Task AddApprenticesTask(AgreementSignedMessage message)
+        {
             try
             {
                 _logger.Debug($"Saving 'add apprentices' task for account id {message.AccountId} as the agreement " +
@@ -59,6 +48,27 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
             catch (Exception e)
             {
                 _logger.Error(e, $"Failed to create add apprentices task [Account ID: {message.AccountId}, " +
+                                 $"Agreement ID: {message.AgreementId}, Legal Entity ID: {message.LegalEntityId}");
+            }
+        }
+
+        private async Task RemoveSignAgreementTask(AgreementSignedMessage message)
+        {
+            try
+            {
+                _logger.Debug($"Removing 'agreement to sign' task from account (ID: {message.AccountId}) as the " +
+                              $"agreement (ID: {message.AgreementId}) has been signed");
+
+                await _mediator.SendAsync(new SaveTaskCommand
+                {
+                    OwnerId = message.AccountId.ToString(),
+                    Type = TaskType.AgreementToSign,
+                    TaskCompleted = true
+                });
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, $"Failed to complete agreement to sign task [Account ID: {message.AccountId}, " +
                                  $"Agreement ID: {message.AgreementId}, Legal Entity ID: {message.LegalEntityId}");
             }
         }
