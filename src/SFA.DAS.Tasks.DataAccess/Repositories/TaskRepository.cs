@@ -64,6 +64,11 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
             });
         }
 
+        public Task SaveMonthlyReminderDismiss(long userId, long accountId, TaskType taskType)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task SaveTask(DasTask task)
         {
             await WithConnection(async c =>
