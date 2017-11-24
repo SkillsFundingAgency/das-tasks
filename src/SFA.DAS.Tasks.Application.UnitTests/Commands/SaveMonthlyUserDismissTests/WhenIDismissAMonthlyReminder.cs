@@ -8,6 +8,7 @@ using SFA.DAS.Tasks.Application.Commands.SaveMonthlyUserDismiss;
 using SFA.DAS.Tasks.Application.Exceptions;
 using SFA.DAS.Tasks.Application.Validation;
 using SFA.DAS.Tasks.API.Types.Enums;
+using SFA.DAS.Tasks.Domain.Models;
 using SFA.DAS.Tasks.Domain.Repositories;
 
 namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveMonthlyUserDismissTests
@@ -50,7 +51,10 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveMonthlyUserDismissTes
 
             //Assert
             _validator.Verify(x => x.Validate(_command), Times.Once);
-            _repository.Verify(x => x.SaveMonthlyReminderDismiss(_command.UserId, _command.AccountId, _taskType), Times.Once);
+            _repository.Verify(x => x.SaveMonthlyReminderDismiss(It.Is<UserReminderSupressionFlag>
+            (flag => flag.UserId == _command.UserId &&
+                     flag.AccountId == _command.AccountId &&
+                     flag.ReminderType == _taskType)), Times.Once);
         }
 
         [Test]
@@ -71,7 +75,10 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveMonthlyUserDismissTes
 
             //Assert
             _validator.Verify(x => x.Validate(_command), Times.Once);
-            _repository.Verify(x => x.SaveMonthlyReminderDismiss(_command.UserId, _command.AccountId, _taskType), Times.Never);
+            _repository.Verify(x => x.SaveMonthlyReminderDismiss(It.Is<UserReminderSupressionFlag>
+                (flag => flag.UserId == _command.UserId &&
+                         flag.AccountId == _command.AccountId &&
+                         flag.ReminderType == _taskType)), Times.Never);
         }
 
         [Test]
@@ -79,7 +86,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveMonthlyUserDismissTes
         {
             //Arrange
             _repository.Setup(x =>
-                    x.SaveMonthlyReminderDismiss(It.IsAny<long>(), It.IsAny<long>(), It.IsAny<TaskType>()))
+                    x.SaveMonthlyReminderDismiss(It.IsAny<UserReminderSupressionFlag>()))
                 .Throws<Exception>();
 
             //Act

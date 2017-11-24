@@ -64,14 +64,14 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
             });
         }
 
-        public async Task SaveMonthlyReminderDismiss(long userId, long accountId, TaskType taskType)
+        public async Task SaveMonthlyReminderDismiss(UserReminderSupressionFlag flag)
         {
             await WithConnection(async c =>
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("@userId", userId, DbType.Int64);
-                parameters.Add("@accountId", accountId, DbType.Int64);
-                parameters.Add("@reminderTaskType", taskType, DbType.String);
+                parameters.Add("@userId", flag.UserId, DbType.Int64);
+                parameters.Add("@accountId", flag.AccountId, DbType.Int64);
+                parameters.Add("@reminderTaskType", flag.ReminderType, DbType.String);
 
                 return await c.ExecuteAsync(
                     sql: "[tasks].[[AddUserMonthlyReminderDismiss]]",

@@ -5,6 +5,7 @@ using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Exceptions;
 using SFA.DAS.Tasks.Application.Validation;
 using SFA.DAS.Tasks.API.Types.Enums;
+using SFA.DAS.Tasks.Domain.Models;
 using SFA.DAS.Tasks.Domain.Repositories;
 
 namespace SFA.DAS.Tasks.Application.Commands.SaveMonthlyUserDismiss
@@ -33,7 +34,12 @@ namespace SFA.DAS.Tasks.Application.Commands.SaveMonthlyUserDismiss
 
             Enum.TryParse(command.TaskType, out TaskType type);
 
-            await _repository.SaveMonthlyReminderDismiss(command.UserId, command.AccountId, type);
+            await _repository.SaveMonthlyReminderDismiss(new UserReminderSupressionFlag
+            {
+                UserId = command.UserId,
+                AccountId = command.AccountId,
+                ReminderType = type
+            });
 
             return new SaveMonthlyReminderDismissCommandResponse();
         }
