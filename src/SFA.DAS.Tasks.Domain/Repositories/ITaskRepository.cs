@@ -16,5 +16,7 @@ namespace SFA.DAS.Tasks.Domain.Repositories
         Task SaveUserReminderSupression(UserReminderSupressionFlag flag);
 
         Task SaveTask(DasTask task);
+
+        Task<IEnumerable<TaskType>> GetUserTaskSupressions(string userId, string accountId);
     }
 }
