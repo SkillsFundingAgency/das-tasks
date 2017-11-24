@@ -29,13 +29,13 @@ namespace SFA.DAS.Tasks.API.Controllers
         public async Task<IHttpActionResult> GetTasks(string ownerId)
         {
             //This method is here to support clients that are older than the current breaking change
-            return await GetTasks(ownerId, string.Empty);
+            return await GetUserTasks(ownerId, string.Empty);
         }
 
-        [Route("{userId", Name = "GetTasks")]
+        [Route("{userId}", Name = "GetUserTasks")]
         [ApiAuthorize(Roles = "ReadOwnerTasks")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetTasks(string ownerId, string userId)
+        public async Task<IHttpActionResult> GetUserTasks(string ownerId, string userId)
         {
             _logger.Debug($"Getting tasks for owner {ownerId}");
 

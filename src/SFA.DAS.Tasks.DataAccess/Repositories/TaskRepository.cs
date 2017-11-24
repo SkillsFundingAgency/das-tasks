@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -99,17 +100,36 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
 
         public async Task<IEnumerable<TaskType>> GetUserTaskSuppressions(string userId, string accountId)
         {
-            return await WithConnection(async c =>
+            var result = await WithConnection(async c =>
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@accountId", accountId, DbType.String);
                 parameters.Add("@userId", userId, DbType.String);
 
-                return await c.QueryAsync<TaskType>(
+                return await c.QueryAsync<string>(
                     sql: "[Tasks].[GetUserTaskSuppressions]",
                     param: parameters,
                     commandType: CommandType.StoredProcedure);
             });
+
+            var taskTypes = GetTaskTypesFromStringResult(result);
+
+            return taskTypes;
+        }
+
+        private static IEnumerable<TaskType> GetTaskTypesFromStringResult(IEnumerable<string> result)
+        {
+            var taskTypes = new List<TaskType>();
+
+            foreach (var typeString in result)
+            {
+                //Ignore and entries that do not have a valid task type
+                if (Enum.TryParse(typeString, out TaskType type))
+                {
+                    taskTypes.Add(type);
+                }
+            }
+            return taskTypes;
         }
     }
 }
