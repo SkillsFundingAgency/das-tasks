@@ -47,9 +47,10 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
             _repository = new Mock<ITaskRepository>();
             _repository.Setup(x => x.GetTasks(It.IsAny<string>())).ReturnsAsync(_tasks);
             _repository.Setup(x => x.GetMonthlyReminderTasks(It.IsAny<string>())).ReturnsAsync(_monthlyRemindertasks);
+            _repository.Setup(x => x.GetUserTaskSupressions(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(new List<TaskType>());
 
             RequestHandler = new GetTasksByOwnerIdHandler(_repository.Object, RequestValidator.Object);
-            Query = new GetTasksByOwnerIdRequest{ OwnerId = TaskOwnerId};
+            Query = new GetTasksByOwnerIdRequest{ OwnerId = TaskOwnerId, UserId = "DEF123"};
         }
        
         [Test]
@@ -65,6 +66,39 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
             _repository.Verify(x => x.GetTasks(TaskOwnerId), Times.Once);
             _repository.Verify(x => x.GetMonthlyReminderTasks(TaskOwnerId), Times.Once);
             Assert.AreEqual(expectedTasks, result.Tasks);
+        }
+
+        [Test]
+        public async Task ThenIShouldNotSeeTasksRemindersThatIHaveDimissed()
+        {
+            //Arrange
+            var dismissedTaskType = _monthlyRemindertasks.First().Type;
+
+            _repository.Setup(x => x.GetUserTaskSupressions(It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync(new List<TaskType>
+            {
+                dismissedTaskType
+            });
+           
+
+            //Act
+            var result = await RequestHandler.Handle(Query);
+
+            //Assert
+            _repository.Verify(x => x.GetUserTaskSupressions(Query.UserId, Query.OwnerId), Times.Once);
+            Assert.IsFalse(result.Tasks.Any(t => t.Type == dismissedTaskType));
+        }
+
+        [Test] public async Task ThenIShouldBeAbleToGetTasksUsingOlderClients()
+        {
+            //Arrange
+            Query.UserId = null;
+
+            //Act
+            await RequestHandler.Handle(Query);
+
+            //Assert
+            _repository.Verify(x => x.GetUserTaskSupressions(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
         }
     }
 }
