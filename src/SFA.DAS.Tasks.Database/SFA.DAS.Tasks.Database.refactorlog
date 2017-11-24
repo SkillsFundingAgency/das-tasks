@@ -14,4 +14,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="MessageType" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="862a27e7-9906-43fe-a905-f8356374ca53" ChangeDateTime="11/24/2017 08:59:04">
+    <Property Name="ElementName" Value="[Tasks].[MonthlyReminderUserDismisses].[MessageType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Tasks].[MonthlyReminderUserDismisses]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReminderTaskType" />
+  </Operation>
 </Operations>
