@@ -37,8 +37,8 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSupressio
             _handler = new SaveUserReminderSupressionFlagCommandHandler(_repository.Object, _logger.Object, _validator.Object);
             _command = new SaveUserReminderSupressionFlagCommand
             {
-                AccountId = 10,
-                UserId = 15,
+                AccountId = "ABC123",
+                UserId = "DEF123",
                 TaskType = _taskType.ToString()
             };
         }

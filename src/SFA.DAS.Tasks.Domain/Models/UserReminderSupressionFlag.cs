@@ -5,8 +5,8 @@ namespace SFA.DAS.Tasks.Domain.Models
 {
     public class UserReminderSupressionFlag
     {
-        public long UserId { get; set; }
-        public long AccountId { get; set; }
+        public string UserId { get; set; }
+        public string AccountId { get; set; }
         public TaskType ReminderType { get; set; }
         public DateTime DateCreated { get; set; }
     }

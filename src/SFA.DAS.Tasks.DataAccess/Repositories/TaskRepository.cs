@@ -69,8 +69,8 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
             await WithConnection(async c =>
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("@userId", flag.UserId, DbType.Int64);
-                parameters.Add("@accountId", flag.AccountId, DbType.Int64);
+                parameters.Add("@userId", flag.UserId, DbType.String);
+                parameters.Add("@accountId", flag.AccountId, DbType.String);
                 parameters.Add("@reminderTaskType", flag.ReminderType, DbType.String);
 
                 return await c.ExecuteAsync(

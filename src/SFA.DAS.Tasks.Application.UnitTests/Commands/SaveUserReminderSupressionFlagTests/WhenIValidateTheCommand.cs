@@ -20,8 +20,8 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSupressio
             //Arrange
             var command = new SaveUserReminderSupressionFlagCommand
             {
-                AccountId = 10,
-                UserId = 2,
+                AccountId = "ABC123",
+                UserId = "DEF123",
                 TaskType = TaskType.AgreementToSign.ToString()
             };
 
@@ -38,8 +38,8 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSupressio
             //Arrange
             var command = new SaveUserReminderSupressionFlagCommand
             {
-                AccountId = -10,
-                UserId = -2,
+                AccountId = string.Empty,
+                UserId = string.Empty,
                 TaskType = "Not Supported"
             };
 

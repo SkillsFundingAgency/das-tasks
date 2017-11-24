@@ -16,14 +16,14 @@ namespace SFA.DAS.Tasks.Application.Commands.SaveMonthlyUserDismiss
                 validationResult.AddError(nameof(command.TaskType), "Task type value is not supported");
             }
 
-            if (command.AccountId <= 0)
+            if (string.IsNullOrEmpty(command.AccountId))
             {
-                validationResult.AddError(nameof(command.AccountId), "Account ID cannot be zero or less.");
+                validationResult.AddError(nameof(command.AccountId), "Account ID cannot be null or empty.");
             }
 
-            if (command.UserId <= 0)
+            if (string.IsNullOrEmpty(command.UserId))
             {
-                validationResult.AddError(nameof(command.UserId), "User ID cannot be zero or less.");
+                validationResult.AddError(nameof(command.UserId), "User ID cannot be null or empty.");
             }
 
             return validationResult;
