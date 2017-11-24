@@ -50,10 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\SaveMonthlyUserDismiss\SaveMonthlyReminderDismissCommand..cs" />
-    <Compile Include="Commands\SaveMonthlyUserDismiss\SaveMonthlyReminderDismissCommandHandler.cs" />
-    <Compile Include="Commands\SaveMonthlyUserDismiss\SaveMonthlyReminderDismissCommadValidator.cs" />
-    <Compile Include="Commands\SaveMonthlyUserDismiss\SaveMonthlyReminderDismissCommandResponse.cs" />
+    <Compile Include="Commands\SaveMonthlyUserDismiss\SaveUserReminderSupressionFlagCommand.cs" />
+    <Compile Include="Commands\SaveMonthlyUserDismiss\SaveUserReminderSupressionFlagCommandHandler.cs" />
+    <Compile Include="Commands\SaveMonthlyUserDismiss\SaveUserReminderSupressionFlagCommandValidator.cs" />
+    <Compile Include="Commands\SaveMonthlyUserDismiss\SaveUserReminderSupressionFlagCommandResponse.cs" />
     <Compile Include="Commands\SaveTask\SaveTaskCommand.cs" />
     <Compile Include="Commands\SaveTask\SaveTaskCommandHandler.cs" />
     <Compile Include="Commands\SaveTask\SaveTaskCommandResponse.cs" />

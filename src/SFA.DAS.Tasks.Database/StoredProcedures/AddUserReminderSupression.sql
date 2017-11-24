@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [Tasks].[AddUserMonthlyReminderDismiss]
+﻿CREATE PROCEDURE [Tasks].[AddUserReminderSupression]
 	
 	@userId bigint NOT NULL,
 	@accountId bigint NOT NULL,
 	@reminderTaskType VARCHAR(100) NOT NULL
 AS
-	INSERT INTO MonthlyReminderUserDismisses (UserId, AccountId, ReminderTaskType, CreatedDate) 
+	INSERT INTO UserReminderSupressions (UserId, AccountId, ReminderTaskType, CreatedDate) 
 	VALUES (@userId, @accountId, @reminderTaskType, GETDATE())

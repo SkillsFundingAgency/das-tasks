@@ -2,7 +2,7 @@
 
 namespace SFA.DAS.Tasks.Application.Commands.SaveMonthlyUserDismiss
 {
-    public class SaveMonthlyReminderDismissCommand : IAsyncRequest<SaveMonthlyReminderDismissCommandResponse>
+    public class SaveUserReminderSupressionFlagCommand : IAsyncRequest<SaveUserReminderSupressionFlagCommandResponse>
     {
         public long UserId { get; set; }
         public long AccountId { get; set; }

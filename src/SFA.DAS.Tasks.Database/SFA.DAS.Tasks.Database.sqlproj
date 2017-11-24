@@ -73,8 +73,8 @@
     <Build Include="Tables\MonthlyReminderTasks.sql" />
     <Build Include="StoredProcedures\GetMonthlyReminderTasks.sql" />
     <PostDeploy Include="Post-Deployment\Script.PostDeployment1.sql" />
-    <Build Include="Tables\MonthlyReminderUserDismisses.sql" />
-    <Build Include="StoredProcedures\AddUserMonthlyReminderDismiss.sql" />
+    <Build Include="Tables\UserReminderSupressions.sql" />
+    <Build Include="StoredProcedures\AddUserReminderSupression.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SFA.DAS.Tasks.Database.refactorlog" />

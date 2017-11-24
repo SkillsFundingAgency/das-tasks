@@ -1,4 +1,4 @@
-﻿CREATE TABLE [Tasks].[MonthlyReminderUserDismisses]
+﻿CREATE TABLE [Tasks].[UserReminderSupressions]
 (
 	[Id] INT NOT NULL PRIMARY KEY, 
     [UserId] BIGINT NULL, 

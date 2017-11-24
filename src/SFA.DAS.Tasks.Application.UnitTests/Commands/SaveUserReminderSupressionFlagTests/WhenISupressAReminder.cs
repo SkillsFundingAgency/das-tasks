@@ -13,14 +13,14 @@ using SFA.DAS.Tasks.Domain.Repositories;
 
 namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveMonthlyUserDismissTests
 {
-    public class WhenIDismissAMonthlyReminder
+    public class WhenISupressAReminder
     {
-        private SaveMonthlyReminderDismissCommandHandler _handler;
+        private SaveUserReminderSupressionFlagCommandHandler _handler;
         private Mock<ITaskRepository> _repository;
-        private SaveMonthlyReminderDismissCommand _command;
+        private SaveUserReminderSupressionFlagCommand _command;
         private TaskType _taskType;
         private Mock<ILog> _logger;
-        private Mock<IValidator<SaveMonthlyReminderDismissCommand>> _validator;
+        private Mock<IValidator<SaveUserReminderSupressionFlagCommand>> _validator;
 
         [SetUp]
         public void Arrange()
@@ -29,13 +29,13 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveMonthlyUserDismissTes
 
             _repository = new Mock<ITaskRepository>();
             _logger = new Mock<ILog>();
-            _validator = new Mock<IValidator<SaveMonthlyReminderDismissCommand>>();
+            _validator = new Mock<IValidator<SaveUserReminderSupressionFlagCommand>>();
 
-            _validator.Setup(x => x.Validate(It.IsAny<SaveMonthlyReminderDismissCommand>()))
+            _validator.Setup(x => x.Validate(It.IsAny<SaveUserReminderSupressionFlagCommand>()))
                 .Returns(new ValidationResult());
 
-            _handler = new SaveMonthlyReminderDismissCommandHandler(_repository.Object, _logger.Object, _validator.Object);
-            _command = new SaveMonthlyReminderDismissCommand
+            _handler = new SaveUserReminderSupressionFlagCommandHandler(_repository.Object, _logger.Object, _validator.Object);
+            _command = new SaveUserReminderSupressionFlagCommand
             {
                 AccountId = 10,
                 UserId = 15,
@@ -44,14 +44,14 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveMonthlyUserDismissTes
         }
 
         [Test]
-        public async Task ThenIShouldHaveMyDismissSaved()
+        public async Task ThenThatSupressionShouldBeSaved()
         {
             //Act
             await _handler.Handle(_command);
 
             //Assert
             _validator.Verify(x => x.Validate(_command), Times.Once);
-            _repository.Verify(x => x.SaveMonthlyReminderDismiss(It.Is<UserReminderSupressionFlag>
+            _repository.Verify(x => x.SaveUserReminderSupression(It.Is<UserReminderSupressionFlag>
             (flag => flag.UserId == _command.UserId &&
                      flag.AccountId == _command.AccountId &&
                      flag.ReminderType == _taskType)), Times.Once);
@@ -61,7 +61,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveMonthlyUserDismissTes
         public void ThenIfMyRequestIsInvalidIShouldBeNotified()
         {
             //Arrange 
-            _validator.Setup(x => x.Validate(It.IsAny<SaveMonthlyReminderDismissCommand>()))
+            _validator.Setup(x => x.Validate(It.IsAny<SaveUserReminderSupressionFlagCommand>()))
                 .Returns(new ValidationResult
                 {
                     ValidationDictionary = new Dictionary<string, string>
@@ -75,18 +75,18 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveMonthlyUserDismissTes
 
             //Assert
             _validator.Verify(x => x.Validate(_command), Times.Once);
-            _repository.Verify(x => x.SaveMonthlyReminderDismiss(It.Is<UserReminderSupressionFlag>
+            _repository.Verify(x => x.SaveUserReminderSupression(It.Is<UserReminderSupressionFlag>
                 (flag => flag.UserId == _command.UserId &&
                          flag.AccountId == _command.AccountId &&
                          flag.ReminderType == _taskType)), Times.Never);
         }
 
         [Test]
-        public void ThenIShouldBeInformedIfTheDismissedCouldNotBeSaved()
+        public void ThenIShouldBeInformedIfTheSupressionCouldNotBeSaved()
         {
             //Arrange
             _repository.Setup(x =>
-                    x.SaveMonthlyReminderDismiss(It.IsAny<UserReminderSupressionFlag>()))
+                    x.SaveUserReminderSupression(It.IsAny<UserReminderSupressionFlag>()))
                 .Throws<Exception>();
 
             //Act

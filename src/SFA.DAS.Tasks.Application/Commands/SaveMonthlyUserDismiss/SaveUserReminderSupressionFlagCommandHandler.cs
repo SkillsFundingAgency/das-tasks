@@ -10,20 +10,20 @@ using SFA.DAS.Tasks.Domain.Repositories;
 
 namespace SFA.DAS.Tasks.Application.Commands.SaveMonthlyUserDismiss
 {
-    public class SaveMonthlyReminderDismissCommandHandler : IAsyncRequestHandler<SaveMonthlyReminderDismissCommand, SaveMonthlyReminderDismissCommandResponse>
+    public class SaveUserReminderSupressionFlagCommandHandler : IAsyncRequestHandler<SaveUserReminderSupressionFlagCommand, SaveUserReminderSupressionFlagCommandResponse>
     {
         private readonly ITaskRepository _repository;
         private readonly ILog _logger;
-        private readonly IValidator<SaveMonthlyReminderDismissCommand> _validator;
+        private readonly IValidator<SaveUserReminderSupressionFlagCommand> _validator;
 
-        public SaveMonthlyReminderDismissCommandHandler(ITaskRepository repository, ILog logger, IValidator<SaveMonthlyReminderDismissCommand> validator)
+        public SaveUserReminderSupressionFlagCommandHandler(ITaskRepository repository, ILog logger, IValidator<SaveUserReminderSupressionFlagCommand> validator)
         {
             _repository = repository;
             _logger = logger;
             _validator = validator;
         }
 
-        public async Task<SaveMonthlyReminderDismissCommandResponse> Handle(SaveMonthlyReminderDismissCommand command)
+        public async Task<SaveUserReminderSupressionFlagCommandResponse> Handle(SaveUserReminderSupressionFlagCommand command)
         {
             var validationResults = _validator.Validate(command);
 
@@ -34,14 +34,14 @@ namespace SFA.DAS.Tasks.Application.Commands.SaveMonthlyUserDismiss
 
             Enum.TryParse(command.TaskType, out TaskType type);
 
-            await _repository.SaveMonthlyReminderDismiss(new UserReminderSupressionFlag
+            await _repository.SaveUserReminderSupression(new UserReminderSupressionFlag
             {
                 UserId = command.UserId,
                 AccountId = command.AccountId,
                 ReminderType = type
             });
 
-            return new SaveMonthlyReminderDismissCommandResponse();
+            return new SaveUserReminderSupressionFlagCommandResponse();
         }
     }
 }
