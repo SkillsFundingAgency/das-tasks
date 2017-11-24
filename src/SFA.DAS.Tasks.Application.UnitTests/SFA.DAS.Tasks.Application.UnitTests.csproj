@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\SaveUserReminderSupressionFlagTests\WhenIValidateTheCommand.cs" />
     <Compile Include="Commands\SaveUserReminderSupressionFlagTests\WhenISupressAReminder.cs" />
     <Compile Include="Commands\SaveTaskCommandTests\WhenISaveATask.cs" />
     <Compile Include="Commands\SaveTaskCommandTests\WhenIValidateTheRequest.cs" />

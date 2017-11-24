@@ -11,7 +11,7 @@ using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Domain.Models;
 using SFA.DAS.Tasks.Domain.Repositories;
 
-namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveMonthlyUserDismissTests
+namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSupressionFlagTests
 {
     public class WhenISupressAReminder
     {
