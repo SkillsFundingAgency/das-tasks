@@ -47,7 +47,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
             _repository = new Mock<ITaskRepository>();
             _repository.Setup(x => x.GetTasks(It.IsAny<string>())).ReturnsAsync(_tasks);
             _repository.Setup(x => x.GetMonthlyReminderTasks(It.IsAny<string>())).ReturnsAsync(_monthlyRemindertasks);
-            _repository.Setup(x => x.GetUserTaskSupressions(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(new List<TaskType>());
+            _repository.Setup(x => x.GetUserTaskSuppressions(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(new List<TaskType>());
 
             RequestHandler = new GetTasksByOwnerIdHandler(_repository.Object, RequestValidator.Object);
             Query = new GetTasksByOwnerIdRequest{ OwnerId = TaskOwnerId, UserId = "DEF123"};
@@ -74,7 +74,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
             //Arrange
             var dismissedTaskType = _monthlyRemindertasks.First().Type;
 
-            _repository.Setup(x => x.GetUserTaskSupressions(It.IsAny<string>(), It.IsAny<string>()))
+            _repository.Setup(x => x.GetUserTaskSuppressions(It.IsAny<string>(), It.IsAny<string>()))
                 .ReturnsAsync(new List<TaskType>
             {
                 dismissedTaskType
@@ -85,7 +85,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
             var result = await RequestHandler.Handle(Query);
 
             //Assert
-            _repository.Verify(x => x.GetUserTaskSupressions(Query.UserId, Query.OwnerId), Times.Once);
+            _repository.Verify(x => x.GetUserTaskSuppressions(Query.UserId, Query.OwnerId), Times.Once);
             Assert.IsFalse(result.Tasks.Any(t => t.Type == dismissedTaskType));
         }
 
@@ -98,7 +98,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
             await RequestHandler.Handle(Query);
 
             //Assert
-            _repository.Verify(x => x.GetUserTaskSupressions(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+            _repository.Verify(x => x.GetUserTaskSuppressions(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
         }
     }
 }

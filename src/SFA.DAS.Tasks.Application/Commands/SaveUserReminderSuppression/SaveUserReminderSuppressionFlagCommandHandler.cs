@@ -8,22 +8,22 @@ using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Domain.Models;
 using SFA.DAS.Tasks.Domain.Repositories;
 
-namespace SFA.DAS.Tasks.Application.Commands.SaveMonthlyUserDismiss
+namespace SFA.DAS.Tasks.Application.Commands.SaveUserReminderSuppression
 {
-    public class SaveUserReminderSupressionFlagCommandHandler : IAsyncRequestHandler<SaveUserReminderSupressionFlagCommand, SaveUserReminderSupressionFlagCommandResponse>
+    public class SaveUserReminderSuppressionFlagCommandHandler : IAsyncRequestHandler<SaveUserReminderSuppressionFlagCommand, SaveUserReminderSuppressionFlagCommandResponse>
     {
         private readonly ITaskRepository _repository;
         private readonly ILog _logger;
-        private readonly IValidator<SaveUserReminderSupressionFlagCommand> _validator;
+        private readonly IValidator<SaveUserReminderSuppressionFlagCommand> _validator;
 
-        public SaveUserReminderSupressionFlagCommandHandler(ITaskRepository repository, ILog logger, IValidator<SaveUserReminderSupressionFlagCommand> validator)
+        public SaveUserReminderSuppressionFlagCommandHandler(ITaskRepository repository, ILog logger, IValidator<SaveUserReminderSuppressionFlagCommand> validator)
         {
             _repository = repository;
             _logger = logger;
             _validator = validator;
         }
 
-        public async Task<SaveUserReminderSupressionFlagCommandResponse> Handle(SaveUserReminderSupressionFlagCommand command)
+        public async Task<SaveUserReminderSuppressionFlagCommandResponse> Handle(SaveUserReminderSuppressionFlagCommand command)
         {
             var validationResults = _validator.Validate(command);
 
@@ -34,14 +34,14 @@ namespace SFA.DAS.Tasks.Application.Commands.SaveMonthlyUserDismiss
 
             Enum.TryParse(command.TaskType, out TaskType type);
 
-            await _repository.SaveUserReminderSupression(new UserReminderSupressionFlag
+            await _repository.SaveUserReminderSuppression(new UserReminderSuppressionFlag
             {
                 UserId = command.UserId,
                 AccountId = command.AccountId,
                 ReminderType = type
             });
 
-            return new SaveUserReminderSupressionFlagCommandResponse();
+            return new SaveUserReminderSuppressionFlagCommandResponse();
         }
     }
 }

@@ -4,23 +4,23 @@ using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
 using SFA.DAS.NLog.Logger;
-using SFA.DAS.Tasks.Application.Commands.SaveMonthlyUserDismiss;
+using SFA.DAS.Tasks.Application.Commands.SaveUserReminderSuppression;
 using SFA.DAS.Tasks.Application.Exceptions;
 using SFA.DAS.Tasks.Application.Validation;
 using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Domain.Models;
 using SFA.DAS.Tasks.Domain.Repositories;
 
-namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSupressionFlagTests
+namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSuppressionFlagTests
 {
     public class WhenISupressAReminder
     {
-        private SaveUserReminderSupressionFlagCommandHandler _handler;
+        private SaveUserReminderSuppressionFlagCommandHandler _handler;
         private Mock<ITaskRepository> _repository;
-        private SaveUserReminderSupressionFlagCommand _command;
+        private SaveUserReminderSuppressionFlagCommand _command;
         private TaskType _taskType;
         private Mock<ILog> _logger;
-        private Mock<IValidator<SaveUserReminderSupressionFlagCommand>> _validator;
+        private Mock<IValidator<SaveUserReminderSuppressionFlagCommand>> _validator;
 
         [SetUp]
         public void Arrange()
@@ -29,13 +29,13 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSupressio
 
             _repository = new Mock<ITaskRepository>();
             _logger = new Mock<ILog>();
-            _validator = new Mock<IValidator<SaveUserReminderSupressionFlagCommand>>();
+            _validator = new Mock<IValidator<SaveUserReminderSuppressionFlagCommand>>();
 
-            _validator.Setup(x => x.Validate(It.IsAny<SaveUserReminderSupressionFlagCommand>()))
+            _validator.Setup(x => x.Validate(It.IsAny<SaveUserReminderSuppressionFlagCommand>()))
                 .Returns(new ValidationResult());
 
-            _handler = new SaveUserReminderSupressionFlagCommandHandler(_repository.Object, _logger.Object, _validator.Object);
-            _command = new SaveUserReminderSupressionFlagCommand
+            _handler = new SaveUserReminderSuppressionFlagCommandHandler(_repository.Object, _logger.Object, _validator.Object);
+            _command = new SaveUserReminderSuppressionFlagCommand
             {
                 AccountId = "ABC123",
                 UserId = "DEF123",
@@ -51,7 +51,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSupressio
 
             //Assert
             _validator.Verify(x => x.Validate(_command), Times.Once);
-            _repository.Verify(x => x.SaveUserReminderSupression(It.Is<UserReminderSupressionFlag>
+            _repository.Verify(x => x.SaveUserReminderSuppression(It.Is<UserReminderSuppressionFlag>
             (flag => flag.UserId == _command.UserId &&
                      flag.AccountId == _command.AccountId &&
                      flag.ReminderType == _taskType)), Times.Once);
@@ -61,7 +61,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSupressio
         public void ThenIfMyRequestIsInvalidIShouldBeNotified()
         {
             //Arrange 
-            _validator.Setup(x => x.Validate(It.IsAny<SaveUserReminderSupressionFlagCommand>()))
+            _validator.Setup(x => x.Validate(It.IsAny<SaveUserReminderSuppressionFlagCommand>()))
                 .Returns(new ValidationResult
                 {
                     ValidationDictionary = new Dictionary<string, string>
@@ -75,7 +75,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSupressio
 
             //Assert
             _validator.Verify(x => x.Validate(_command), Times.Once);
-            _repository.Verify(x => x.SaveUserReminderSupression(It.Is<UserReminderSupressionFlag>
+            _repository.Verify(x => x.SaveUserReminderSuppression(It.Is<UserReminderSuppressionFlag>
                 (flag => flag.UserId == _command.UserId &&
                          flag.AccountId == _command.AccountId &&
                          flag.ReminderType == _taskType)), Times.Never);
@@ -86,7 +86,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSupressio
         {
             //Arrange
             _repository.Setup(x =>
-                    x.SaveUserReminderSupression(It.IsAny<UserReminderSupressionFlag>()))
+                    x.SaveUserReminderSuppression(It.IsAny<UserReminderSuppressionFlag>()))
                 .Throws<Exception>();
 
             //Act

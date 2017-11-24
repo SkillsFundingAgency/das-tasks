@@ -1,4 +1,4 @@
-﻿CREATE TABLE [Tasks].[UserReminderSupressions]
+﻿CREATE TABLE [Tasks].[UserReminderSuppressions]
 (
 	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
     [UserId] VARCHAR(50) NOT NULL, 

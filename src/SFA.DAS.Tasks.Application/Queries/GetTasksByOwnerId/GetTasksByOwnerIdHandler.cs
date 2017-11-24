@@ -33,7 +33,7 @@ namespace SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId
 
             if (!string.IsNullOrEmpty(message.UserId))
             {
-                var supressedTaskTypes = await _repository.GetUserTaskSupressions(message.UserId, message.OwnerId);
+                var supressedTaskTypes = await _repository.GetUserTaskSuppressions(message.UserId, message.OwnerId);
 
                 monthlyReminderTasks = monthlyReminderTasks.Where(t => !supressedTaskTypes.Contains(t.Type));
             }

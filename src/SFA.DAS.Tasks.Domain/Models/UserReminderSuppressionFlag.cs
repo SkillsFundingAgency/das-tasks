@@ -3,7 +3,7 @@ using SFA.DAS.Tasks.API.Types.Enums;
 
 namespace SFA.DAS.Tasks.Domain.Models
 {
-    public class UserReminderSupressionFlag
+    public class UserReminderSuppressionFlag
     {
         public string UserId { get; set; }
         public string AccountId { get; set; }

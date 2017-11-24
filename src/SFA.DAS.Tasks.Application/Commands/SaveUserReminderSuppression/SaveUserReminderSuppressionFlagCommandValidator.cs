@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using SFA.DAS.Tasks.Application.Validation;
 using SFA.DAS.Tasks.API.Types.Enums;
 
-namespace SFA.DAS.Tasks.Application.Commands.SaveMonthlyUserDismiss
+namespace SFA.DAS.Tasks.Application.Commands.SaveUserReminderSuppression
 {
-    public class SaveUserReminderSupressionFlagCommandValidator : IValidator<SaveUserReminderSupressionFlagCommand>
+    public class SaveUserReminderSuppressionFlagCommandValidator : IValidator<SaveUserReminderSuppressionFlagCommand>
     {
-        public ValidationResult Validate(SaveUserReminderSupressionFlagCommand command)
+        public ValidationResult Validate(SaveUserReminderSuppressionFlagCommand command)
         {
             var validationResult = new ValidationResult();
 
@@ -29,7 +29,7 @@ namespace SFA.DAS.Tasks.Application.Commands.SaveMonthlyUserDismiss
             return validationResult;
         }
 
-        public Task<ValidationResult> ValidateAsync(SaveUserReminderSupressionFlagCommand command)
+        public Task<ValidationResult> ValidateAsync(SaveUserReminderSuppressionFlagCommand command)
         {
             throw new NotImplementedException();
         }

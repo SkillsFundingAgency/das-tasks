@@ -13,10 +13,10 @@ namespace SFA.DAS.Tasks.Domain.Repositories
 
         Task<IEnumerable<DasTask>> GetMonthlyReminderTasks(string ownerId);
 
-        Task SaveUserReminderSupression(UserReminderSupressionFlag flag);
+        Task SaveUserReminderSuppression(UserReminderSuppressionFlag flag);
 
         Task SaveTask(DasTask task);
 
-        Task<IEnumerable<TaskType>> GetUserTaskSupressions(string userId, string accountId);
+        Task<IEnumerable<TaskType>> GetUserTaskSuppressions(string userId, string accountId);
     }
 }

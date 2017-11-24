@@ -1,24 +1,24 @@
 ﻿using NUnit.Framework;
-using SFA.DAS.Tasks.Application.Commands.SaveMonthlyUserDismiss;
+using SFA.DAS.Tasks.Application.Commands.SaveUserReminderSuppression;
 using SFA.DAS.Tasks.API.Types.Enums;
 
-namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSupressionFlagTests
+namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSuppressionFlagTests
 {
     public class WhenIValidateTheCommand
     {
-        private SaveUserReminderSupressionFlagCommandValidator _validator;
+        private SaveUserReminderSuppressionFlagCommandValidator _validator;
 
         [SetUp]
         public void Arrange()
         {
-            _validator = new SaveUserReminderSupressionFlagCommandValidator();
+            _validator = new SaveUserReminderSuppressionFlagCommandValidator();
         }
 
         [Test]
         public void ThenItShouldPassValidation()
         {
             //Arrange
-            var command = new SaveUserReminderSupressionFlagCommand
+            var command = new SaveUserReminderSuppressionFlagCommand
             {
                 AccountId = "ABC123",
                 UserId = "DEF123",
@@ -36,7 +36,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSupressio
         public void ThenItShouldFailValidationIfTheCommandIsInvalid()
         {
             //Arrange
-            var command = new SaveUserReminderSupressionFlagCommand
+            var command = new SaveUserReminderSuppressionFlagCommand
             {
                 AccountId = string.Empty,
                 UserId = string.Empty,

@@ -64,7 +64,7 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
             });
         }
 
-        public async Task SaveUserReminderSupression(UserReminderSupressionFlag flag)
+        public async Task SaveUserReminderSuppression(UserReminderSuppressionFlag flag)
         {
             await WithConnection(async c =>
             {
@@ -74,7 +74,7 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
                 parameters.Add("@reminderTaskType", flag.ReminderType, DbType.String);
 
                 return await c.ExecuteAsync(
-                    sql: "[tasks].[AddUserReminderSupression]",
+                    sql: "[tasks].[AddUserReminderSuppression]",
                     param: parameters,
                     commandType: CommandType.StoredProcedure);
             });
@@ -97,7 +97,7 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
             });
         }
 
-        public async Task<IEnumerable<TaskType>> GetUserTaskSupressions(string userId, string accountId)
+        public async Task<IEnumerable<TaskType>> GetUserTaskSuppressions(string userId, string accountId)
         {
             return await WithConnection(async c =>
             {
@@ -106,7 +106,7 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
                 parameters.Add("@userId", userId, DbType.String);
 
                 return await c.QueryAsync<TaskType>(
-                    sql: "[Tasks].[GetUserTaskSupressions]",
+                    sql: "[Tasks].[GetUserTaskSuppressions]",
                     param: parameters,
                     commandType: CommandType.StoredProcedure);
             });

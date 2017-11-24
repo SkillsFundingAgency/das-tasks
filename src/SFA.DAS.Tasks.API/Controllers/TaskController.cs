@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using MediatR;
 using SFA.DAS.NLog.Logger;
-using SFA.DAS.Tasks.Application.Commands.SaveMonthlyUserDismiss;
+using SFA.DAS.Tasks.Application.Commands.SaveUserReminderSuppression;
 using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
 using SFA.DAS.Tasks.API.Attributes;
 using SFA.DAS.Tasks.API.Types.DTOs;
@@ -55,7 +55,7 @@ namespace SFA.DAS.Tasks.API.Controllers
         {
             _logger.Debug($"Adding task reminder supression for ownerId {ownerId}, user Id {userId} and task type {taskType}");
 
-            await _mediator.SendAsync(new SaveUserReminderSupressionFlagCommand
+            await _mediator.SendAsync(new SaveUserReminderSuppressionFlagCommand
             {
                 AccountId = ownerId,
                 UserId = userId,
