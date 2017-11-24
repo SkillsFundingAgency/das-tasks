@@ -6,6 +6,6 @@ namespace SFA.DAS.Tasks.API.Client
 {
     public interface ITaskApiClient
     {
-        Task<IEnumerable<TaskDto>> GetTasks(string ownerId);
+        Task<IEnumerable<TaskDto>> GetTasks(string ownerId, string userid);
     }
 }

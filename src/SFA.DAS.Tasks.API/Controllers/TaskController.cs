@@ -28,11 +28,21 @@ namespace SFA.DAS.Tasks.API.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> GetTasks(string ownerId)
         {
+            //This method is here to support clients that are older than the current breaking change
+            return await GetTasks(ownerId, string.Empty);
+        }
+
+        [Route("{userId", Name = "GetTasks")]
+        [ApiAuthorize(Roles = "ReadOwnerTasks")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetTasks(string ownerId, string userId)
+        {
             _logger.Debug($"Getting tasks for owner {ownerId}");
 
             var result = await _mediator.SendAsync(new GetTasksByOwnerIdRequest
             {
-                OwnerId = ownerId
+                OwnerId = ownerId,
+                UserId = userId
             });
 
             if (result?.Tasks == null)
@@ -48,7 +58,7 @@ namespace SFA.DAS.Tasks.API.Controllers
             return Ok(tasks);
         }
 
-        [Route("supressions/{UserId}/add/{taskType}", Name = "AddSupression")]
+        [Route("supressions/{userId}/add/{taskType}", Name = "AddSupression")]
         [ApiAuthorize(Roles = "AddUserReminderSupressions")]
         [HttpPost]
         public async Task<IHttpActionResult> AddUserReminderSupression(string ownerId, string userId, string taskType)
