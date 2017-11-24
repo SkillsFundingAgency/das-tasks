@@ -96,5 +96,20 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
                     commandType: CommandType.StoredProcedure);
             });
         }
+
+        public async Task<IEnumerable<TaskType>> GetUserTaskSupressions(string userId, string accountId)
+        {
+            return await WithConnection(async c =>
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@accountId", accountId, DbType.String);
+                parameters.Add("@userId", userId, DbType.String);
+
+                return await c.QueryAsync<TaskType>(
+                    sql: "[Tasks].[GetUserTaskSupressions]",
+                    param: parameters,
+                    commandType: CommandType.StoredProcedure);
+            });
+        }
     }
 }
