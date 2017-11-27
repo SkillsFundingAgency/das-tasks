@@ -58,7 +58,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.LegalEntityRemovedMes
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(t => t.TaskCompleted && 
                                                                           t.Type == TaskType.AgreementToSign &&
-                                                                          t.OwnerId.Equals(accountId.ToString()))), Times.Once);
+                                                                          t.EmployerAccountId.Equals(accountId.ToString()))), Times.Once);
         }
 
         [Test]

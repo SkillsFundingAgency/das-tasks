@@ -18,36 +18,36 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
         public TaskRepository(TasksConfiguration configuration, ILog logger) : base(configuration.DatabaseConnectionString, logger)
         {  }
 
-        public async Task<IEnumerable<DasTask>> GetTasks(string ownerId)
+        public async Task<IEnumerable<DasTask>> GetTasks(string employerAccountId)
         {
             return await WithConnection(async c =>
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("@ownerId", ownerId, DbType.String);
+                parameters.Add("@employerAccountId", employerAccountId, DbType.String);
                 
                 return await c.QueryAsync<DasTask>(
-                    sql: "[tasks].[GetTasksByOwnerId]",
+                    sql: "[tasks].[GetTasksByEmployerAccountId]",
                     param: parameters,
                     commandType: CommandType.StoredProcedure);
             });
         }
 
-        public async Task<DasTask> GetTask(string ownerId, TaskType type)
+        public async Task<DasTask> GetTask(string employerAccountId, TaskType type)
         {
             return await WithConnection(async c =>
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("@ownerId", ownerId, DbType.String);
+                parameters.Add("@employerAccountId", employerAccountId, DbType.String);
                 parameters.Add("@type", type, DbType.String);
 
                 return await c.QuerySingleOrDefaultAsync<DasTask>(
-                    sql: "[tasks].[GetTaskByOwnerIdAndType]",
+                    sql: "[tasks].[GetTaskByEmployerAccountIdAndType]",
                     param: parameters,
                     commandType: CommandType.StoredProcedure);
             });
         }
 
-        public async Task<IEnumerable<DasTask>> GetMonthlyReminderTasks(string ownerId)
+        public async Task<IEnumerable<DasTask>> GetMonthlyReminderTasks(string employerAccountId)
         {
             return await WithConnection(async c =>
             {
@@ -57,7 +57,7 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
 
                 foreach (var task in tasks)
                 {
-                    task.OwnerId = ownerId;
+                    task.EmployerAccountId = employerAccountId;
                     task.ItemsDueCount = 1;
                 }
 
@@ -71,7 +71,7 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@userId", flag.UserId, DbType.String);
-                parameters.Add("@accountId", flag.AccountId, DbType.String);
+                parameters.Add("@employerAccountId", flag.EmployerAccountId, DbType.String);
                 parameters.Add("@reminderTaskType", flag.ReminderType, DbType.String);
 
                 return await c.ExecuteAsync(
@@ -87,7 +87,7 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@Id", task.Id, DbType.Guid);
-                parameters.Add("@ownerId", task.OwnerId, DbType.String);
+                parameters.Add("@employerAccountId", task.EmployerAccountId, DbType.String);
                 parameters.Add("@type", task.Type, DbType.String);
                 parameters.Add("@itemsDueCount", (int)task.ItemsDueCount, DbType.Int32);
 
@@ -98,12 +98,12 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
             });
         }
 
-        public async Task<IEnumerable<TaskType>> GetUserTaskSuppressions(string userId, string accountId)
+        public async Task<IEnumerable<TaskType>> GetUserTaskSuppressions(string userId, string employerAccountId)
         {
             var result = await WithConnection(async c =>
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("@accountId", accountId, DbType.String);
+                parameters.Add("@employerAccountId", employerAccountId, DbType.String);
                 parameters.Add("@userId", userId, DbType.String);
 
                 return await c.QueryAsync<string>(

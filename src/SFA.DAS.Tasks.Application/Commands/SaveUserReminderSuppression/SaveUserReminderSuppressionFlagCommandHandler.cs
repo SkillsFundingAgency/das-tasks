@@ -37,7 +37,7 @@ namespace SFA.DAS.Tasks.Application.Commands.SaveUserReminderSuppression
             await _repository.SaveUserReminderSuppression(new UserReminderSuppressionFlag
             {
                 UserId = command.UserId,
-                AccountId = command.AccountId,
+                EmployerAccountId = command.EmployerAccountId,
                 ReminderType = type
             });
 

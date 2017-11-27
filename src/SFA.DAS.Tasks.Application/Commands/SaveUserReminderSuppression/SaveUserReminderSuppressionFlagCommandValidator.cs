@@ -7,23 +7,23 @@ namespace SFA.DAS.Tasks.Application.Commands.SaveUserReminderSuppression
 {
     public class SaveUserReminderSuppressionFlagCommandValidator : IValidator<SaveUserReminderSuppressionFlagCommand>
     {
-        public ValidationResult Validate(SaveUserReminderSuppressionFlagCommand command)
+        public ValidationResult Validate(SaveUserReminderSuppressionFlagCommand request)
         {
             var validationResult = new ValidationResult();
 
-            if(!Enum.TryParse(command.TaskType, out TaskType type))
+            if(!Enum.TryParse(request.TaskType, out TaskType type))
             {
-                validationResult.AddError(nameof(command.TaskType), "Task type value is not supported");
+                validationResult.AddError(nameof(request.TaskType), "Task type value is not supported");
             }
 
-            if (string.IsNullOrEmpty(command.AccountId))
+            if (string.IsNullOrEmpty(request.EmployerAccountId))
             {
-                validationResult.AddError(nameof(command.AccountId), "Account ID cannot be null or empty.");
+                validationResult.AddError(nameof(request.EmployerAccountId), "Account ID cannot be null or empty.");
             }
 
-            if (string.IsNullOrEmpty(command.UserId))
+            if (string.IsNullOrEmpty(request.UserId))
             {
-                validationResult.AddError(nameof(command.UserId), "User ID cannot be null or empty.");
+                validationResult.AddError(nameof(request.UserId), "User ID cannot be null or empty.");
             }
 
             return validationResult;

@@ -31,7 +31,7 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
                 _logger.Debug("Legal entity's agreement task is also being removed as it is incomplete");
                 await _mediator.SendAsync(new SaveTaskCommand
                 {
-                    OwnerId = message.AccountId.ToString(),
+                    EmployerAccountId = message.AccountId.ToString(),
                     Type = TaskType.AgreementToSign,
                     TaskCompleted = true
                 });

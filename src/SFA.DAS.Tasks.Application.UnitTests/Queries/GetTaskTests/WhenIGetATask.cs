@@ -30,7 +30,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTaskTests
             RequestHandler = new GetTaskRequestHandler(_repository.Object, RequestValidator.Object);
             Query = new GetTaskRequest
             {
-                OwnerId = "123",
+                EmployerAccountId = "123",
                 Type = TaskType.AgreementToSign
             };
 
@@ -45,7 +45,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTaskTests
             var response = await RequestHandler.Handle(Query);
 
             //Assert
-            _repository.Verify(x => x.GetTask(Query.OwnerId, Query.Type), Times.Once);
+            _repository.Verify(x => x.GetTask(Query.EmployerAccountId, Query.Type), Times.Once);
             Assert.AreEqual(_task, response.Task);
         }
     }

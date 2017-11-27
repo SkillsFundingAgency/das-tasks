@@ -37,7 +37,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSuppressi
             _handler = new SaveUserReminderSuppressionFlagCommandHandler(_repository.Object, _logger.Object, _validator.Object);
             _command = new SaveUserReminderSuppressionFlagCommand
             {
-                AccountId = "ABC123",
+                EmployerAccountId = "ABC123",
                 UserId = "DEF123",
                 TaskType = _taskType.ToString()
             };
@@ -53,7 +53,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSuppressi
             _validator.Verify(x => x.Validate(_command), Times.Once);
             _repository.Verify(x => x.SaveUserReminderSuppression(It.Is<UserReminderSuppressionFlag>
             (flag => flag.UserId == _command.UserId &&
-                     flag.AccountId == _command.AccountId &&
+                     flag.EmployerAccountId == _command.EmployerAccountId &&
                      flag.ReminderType == _taskType)), Times.Once);
         }
 
@@ -77,7 +77,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSuppressi
             _validator.Verify(x => x.Validate(_command), Times.Once);
             _repository.Verify(x => x.SaveUserReminderSuppression(It.Is<UserReminderSuppressionFlag>
                 (flag => flag.UserId == _command.UserId &&
-                         flag.AccountId == _command.AccountId &&
+                         flag.EmployerAccountId == _command.EmployerAccountId &&
                          flag.ReminderType == _taskType)), Times.Never);
         }
 

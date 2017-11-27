@@ -18,7 +18,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
         public void ThenIShouldPassValidationWithAValidCompletedTaskRequest()
         {
             //Arrange
-            var request = new SaveTaskCommand { OwnerId = "1234", Type = TaskType.AddApprentices, TaskCompleted = true};
+            var request = new SaveTaskCommand { EmployerAccountId = "1234", Type = TaskType.AddApprentices, TaskCompleted = true};
 
             //Act
             var result = _validator.Validate(request);
@@ -31,7 +31,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
         public void ThenIShouldPassValidationWithAValidRequest()
         {
             //Arrange
-            var request = new SaveTaskCommand { OwnerId = "1234", Type = TaskType.AddApprentices };
+            var request = new SaveTaskCommand { EmployerAccountId = "1234", Type = TaskType.AddApprentices };
 
             //Act
             var result = _validator.Validate(request);
@@ -41,7 +41,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
         }
 
         [Test]
-        public void ThenIShouldFailValidationIfOwnerIdIsNotPresent()
+        public void ThenIShouldFailValidationIfEmployerAccountIdIsNotPresent()
         {
             //Arrange
             
@@ -52,14 +52,14 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
 
             //Assert
             Assert.IsFalse(result.IsValid());
-            Assert.AreEqual("Cannot save task when owner ID is not given.", result.ValidationDictionary[nameof(request.OwnerId)]);
+            Assert.AreEqual("Cannot save task when employer account ID is not given.", result.ValidationDictionary[nameof(request.EmployerAccountId)]);
         }
 
         [Test]
         public void ThenIShouldFailValidationIfTaskTypeIsNotPresent()
         {
             //Arrange
-            var request = new SaveTaskCommand { OwnerId = "1234", TaskCompleted = true };
+            var request = new SaveTaskCommand { EmployerAccountId = "1234", TaskCompleted = true };
 
             //Act
             var result = _validator.Validate(request);

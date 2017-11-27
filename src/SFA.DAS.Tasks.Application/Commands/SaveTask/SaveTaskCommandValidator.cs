@@ -6,18 +6,18 @@ namespace SFA.DAS.Tasks.Application.Commands.SaveTask
 {
     public class SaveTaskCommandValidator : IValidator<SaveTaskCommand>
     {
-        public ValidationResult Validate(SaveTaskCommand item)
+        public ValidationResult Validate(SaveTaskCommand request)
         {
             var validationResults = new ValidationResult();
 
-            if (string.IsNullOrEmpty(item.OwnerId))
+            if (string.IsNullOrEmpty(request.EmployerAccountId))
             {
-                validationResults.AddError(nameof(item.OwnerId), "Cannot save task when owner ID is not given.");
+                validationResults.AddError(nameof(request.EmployerAccountId), "Cannot save task when employer account ID is not given.");
             }
 
-            if (item.Type == TaskType.None)
+            if (request.Type == TaskType.None)
             {
-                validationResults.AddError(nameof(item.Type), "Cannot save task when task type is not given.");
+                validationResults.AddError(nameof(request.Type), "Cannot save task when task type is not given.");
             }
 
             return validationResults;

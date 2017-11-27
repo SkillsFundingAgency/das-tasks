@@ -6,18 +6,18 @@ namespace SFA.DAS.Tasks.Application.Queries.GetTask
 {
     public class GetTaskRequestValidator : IValidator<GetTaskRequest>
     {
-        public ValidationResult Validate(GetTaskRequest item)
+        public ValidationResult Validate(GetTaskRequest request)
         {
             var validationResults = new ValidationResult();
 
-            if (string.IsNullOrEmpty(item.OwnerId))
+            if (string.IsNullOrEmpty(request.EmployerAccountId))
             {
-                validationResults.AddError(nameof(item.OwnerId), "Cannot get task when owner ID is not given.");
+                validationResults.AddError(nameof(request.EmployerAccountId), "Cannot get task when employer account ID is not given.");
             }
 
-            if(item.Type == TaskType.None)
+            if(request.Type == TaskType.None)
             {
-                validationResults.AddError(nameof(item.Type), "Cannot get task when type is not given.");
+                validationResults.AddError(nameof(request.Type), "Cannot get task when type is not given.");
             }
 
             return validationResults;

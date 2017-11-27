@@ -20,7 +20,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSuppressi
             //Arrange
             var command = new SaveUserReminderSuppressionFlagCommand
             {
-                AccountId = "ABC123",
+                EmployerAccountId = "ABC123",
                 UserId = "DEF123",
                 TaskType = TaskType.AgreementToSign.ToString()
             };
@@ -38,7 +38,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSuppressi
             //Arrange
             var command = new SaveUserReminderSuppressionFlagCommand
             {
-                AccountId = string.Empty,
+                EmployerAccountId = string.Empty,
                 UserId = string.Empty,
                 TaskType = "Not Supported"
             };
@@ -48,7 +48,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSuppressi
 
             //Assert
             Assert.IsFalse(result.IsValid());
-            Assert.IsTrue(result.ValidationDictionary.ContainsKey(nameof(command.AccountId)));
+            Assert.IsTrue(result.ValidationDictionary.ContainsKey(nameof(command.EmployerAccountId)));
             Assert.IsTrue(result.ValidationDictionary.ContainsKey(nameof(command.UserId)));
             Assert.IsTrue(result.ValidationDictionary.ContainsKey(nameof(command.TaskType)));
         }

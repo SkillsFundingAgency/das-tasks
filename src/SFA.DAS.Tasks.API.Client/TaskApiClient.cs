@@ -16,10 +16,10 @@ namespace SFA.DAS.Tasks.API.Client
             _httpClient = new SecureHttpClient(configuration);
         }
 
-        public async Task<IEnumerable<TaskDto>> GetTasks(string ownerId, string userId)
+        public async Task<IEnumerable<TaskDto>> GetTasks(string employerAccountId, string userId)
         {
             var baseUrl = GetBaseUrl();
-            var url = $"{baseUrl}api/tasks/{ownerId}/{userId}";
+            var url = $"{baseUrl}api/tasks/{employerAccountId}/{userId}";
 
             var json = await _httpClient.GetAsync(url);
             return JsonConvert.DeserializeObject<IEnumerable<TaskDto>>(json);

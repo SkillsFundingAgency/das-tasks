@@ -28,7 +28,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
             RequestHandler = new SaveTaskCommandHandler(_repository.Object, RequestValidator.Object);
             Query = new SaveTaskCommand
             {
-                OwnerId = "123",
+                EmployerAccountId = "123",
                 TaskCompleted = false,
                 Type = TaskType.AddApprentices
             };
@@ -41,8 +41,8 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
             var response = await RequestHandler.Handle(Query);
 
             //Assert
-            _repository.Verify(x => x.GetTask(Query.OwnerId, Query.Type), Times.Once);
-            _repository.Verify(x => x.SaveTask(It.Is<DasTask>(t => t.OwnerId.Equals(Query.OwnerId) &&
+            _repository.Verify(x => x.GetTask(Query.EmployerAccountId, Query.Type), Times.Once);
+            _repository.Verify(x => x.SaveTask(It.Is<DasTask>(t => t.EmployerAccountId.Equals(Query.EmployerAccountId) &&
                                                               t.Type.Equals(Query.Type) &&
                                                               t.ItemsDueCount.Equals(1))), Times.Once);
             Assert.IsNotNull(response);
@@ -57,22 +57,22 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
             var existingTask = new DasTask
             {
                 Id = Guid.NewGuid(),
-                OwnerId = "123",
+                EmployerAccountId = "123",
                 Type = TaskType.AgreementToSign,
                 ItemsDueCount = 3
             };
 
             var expectedItemsDueCount = (ushort)(existingTask.ItemsDueCount + 1);
 
-            _repository.Setup(x => x.GetTask(Query.OwnerId, Query.Type)).ReturnsAsync(existingTask);
+            _repository.Setup(x => x.GetTask(Query.EmployerAccountId, Query.Type)).ReturnsAsync(existingTask);
             
             //Act
             await RequestHandler.Handle(Query);
 
             //Assert
-            _repository.Verify(x => x.GetTask(Query.OwnerId, Query.Type), Times.Once);
+            _repository.Verify(x => x.GetTask(Query.EmployerAccountId, Query.Type), Times.Once);
             _repository.Verify(x => x.SaveTask(It.Is<DasTask>(t => t.Id.Equals(existingTask.Id) &&
-                                                                   t.OwnerId.Equals(existingTask.OwnerId) &&
+                                                                   t.EmployerAccountId.Equals(existingTask.EmployerAccountId) &&
                                                                    t.Type.Equals(existingTask.Type) &&
                                                                    t.ItemsDueCount.Equals(expectedItemsDueCount))), Times.Once);
         }
@@ -88,22 +88,22 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
             var existingTask = new DasTask
             {
                 Id = Guid.NewGuid(),
-                OwnerId = "123",
+                EmployerAccountId = "123",
                 Type = TaskType.AgreementToSign,
                 ItemsDueCount = 3
             };
 
             var expectedItemsDueCount = (ushort) (existingTask.ItemsDueCount - 1);
 
-            _repository.Setup(x => x.GetTask(Query.OwnerId, Query.Type)).ReturnsAsync(existingTask);
+            _repository.Setup(x => x.GetTask(Query.EmployerAccountId, Query.Type)).ReturnsAsync(existingTask);
 
             //Act
             await RequestHandler.Handle(Query);
 
             //Assert
-            _repository.Verify(x => x.GetTask(Query.OwnerId, Query.Type), Times.Once);
+            _repository.Verify(x => x.GetTask(Query.EmployerAccountId, Query.Type), Times.Once);
             _repository.Verify(x => x.SaveTask(It.Is<DasTask>(t => t.Id.Equals(existingTask.Id) &&
-                                                                   t.OwnerId.Equals(existingTask.OwnerId) &&
+                                                                   t.EmployerAccountId.Equals(existingTask.EmployerAccountId) &&
                                                                    t.Type.Equals(existingTask.Type) &&
                                                                    t.ItemsDueCount.Equals(expectedItemsDueCount))), Times.Once);
         }
@@ -120,7 +120,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
             await RequestHandler.Handle(Query);
 
             //Assert
-            _repository.Verify(x => x.GetTask(Query.OwnerId, Query.Type), Times.Once);
+            _repository.Verify(x => x.GetTask(Query.EmployerAccountId, Query.Type), Times.Once);
             _repository.Verify(x => x.SaveTask(It.IsAny<DasTask>()), Times.Never);
         }
     }

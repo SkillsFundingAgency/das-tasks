@@ -21,4 +21,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ReminderTaskType" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="af98c0d3-92c9-47f7-9610-25ea6b544f68" ChangeDateTime="11/27/2017 10:47:59">
+    <Property Name="ElementName" Value="[Tasks].[Tasks].[OwnerId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Tasks].[Tasks]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EmployerAccountId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="96634cad-5de1-487b-979b-6d841b64f6cc" ChangeDateTime="11/27/2017 10:48:48">
+    <Property Name="ElementName" Value="[Tasks].[UserReminderSuppressions].[AccountId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Tasks].[UserReminderSuppressions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EmployerAccountId" />
+  </Operation>
 </Operations>

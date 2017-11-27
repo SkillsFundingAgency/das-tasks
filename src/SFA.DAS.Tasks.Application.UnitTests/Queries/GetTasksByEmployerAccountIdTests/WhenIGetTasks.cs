@@ -3,25 +3,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
-using SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId;
+using SFA.DAS.Tasks.Application.Queries.GetTasksByEmployerAccountId;
 using SFA.DAS.Tasks.Application.Validation;
 using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Domain.Models;
 using SFA.DAS.Tasks.Domain.Repositories;
 
-namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
+namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByEmployerAccountIdTests
 {
-    public class WhenIGetTasks : QueryBaseTest<GetTasksByOwnerIdHandler, GetTasksByOwnerIdRequest, GetTasksByOwnerIdResponse>
+    public class WhenIGetTasks : QueryBaseTest<GetTasksByEmployerAccountIdHandler, GetTasksByEmployerAccountIdRequest, GetTasksByEmployerAccountIdResponse>
     {
-        private const string TaskOwnerId = "123ACX";
+        private const string TaskEmployerAccountId = "123ACX";
 
         private Mock<ITaskRepository> _repository;
         private List<DasTask> _tasks;
         private List<DasTask> _monthlyRemindertasks;
 
-        public override GetTasksByOwnerIdRequest Query { get; set; }
-        public override GetTasksByOwnerIdHandler RequestHandler { get; set; }
-        public override Mock<IValidator<GetTasksByOwnerIdRequest>> RequestValidator { get; set; }
+        public override GetTasksByEmployerAccountIdRequest Query { get; set; }
+        public override GetTasksByEmployerAccountIdHandler RequestHandler { get; set; }
+        public override Mock<IValidator<GetTasksByEmployerAccountIdRequest>> RequestValidator { get; set; }
 
         [SetUp]
         public void Arrange()
@@ -49,8 +49,8 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
             _repository.Setup(x => x.GetMonthlyReminderTasks(It.IsAny<string>())).ReturnsAsync(_monthlyRemindertasks);
             _repository.Setup(x => x.GetUserTaskSuppressions(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(new List<TaskType>());
 
-            RequestHandler = new GetTasksByOwnerIdHandler(_repository.Object, RequestValidator.Object);
-            Query = new GetTasksByOwnerIdRequest{ OwnerId = TaskOwnerId, UserId = "DEF123"};
+            RequestHandler = new GetTasksByEmployerAccountIdHandler(_repository.Object, RequestValidator.Object);
+            Query = new GetTasksByEmployerAccountIdRequest{ EmployerAccountId = TaskEmployerAccountId, UserId = "DEF123"};
         }
        
         [Test]
@@ -63,8 +63,8 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
             var result = await RequestHandler.Handle(Query);
 
             //Assert
-            _repository.Verify(x => x.GetTasks(TaskOwnerId), Times.Once);
-            _repository.Verify(x => x.GetMonthlyReminderTasks(TaskOwnerId), Times.Once);
+            _repository.Verify(x => x.GetTasks(TaskEmployerAccountId), Times.Once);
+            _repository.Verify(x => x.GetMonthlyReminderTasks(TaskEmployerAccountId), Times.Once);
             Assert.AreEqual(expectedTasks, result.Tasks);
         }
 
@@ -85,7 +85,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByOwnerIdTests
             var result = await RequestHandler.Handle(Query);
 
             //Assert
-            _repository.Verify(x => x.GetUserTaskSuppressions(Query.UserId, Query.OwnerId), Times.Once);
+            _repository.Verify(x => x.GetUserTaskSuppressions(Query.UserId, Query.EmployerAccountId), Times.Once);
             Assert.IsFalse(result.Tasks.Any(t => t.Type == dismissedTaskType));
         }
 
