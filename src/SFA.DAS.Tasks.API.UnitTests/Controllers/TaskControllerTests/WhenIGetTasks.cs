@@ -49,11 +49,10 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
         {
             //Act
             var response = await _controller.GetTasks(OwnerId);
-            _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(OwnerId))), Times.Once);
-
             var result = response as OkNegotiatedContentResult<IEnumerable<TaskDto>>;
 
             //Assert
+            _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(OwnerId))), Times.Once);
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Content.Count());
 
@@ -69,11 +68,10 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
         {
             //Act
             var response = await _controller.GetTasks(DifferentOwnerId);
-            _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(DifferentOwnerId))), Times.Once);
-
             var result = response as OkNegotiatedContentResult<IEnumerable<TaskDto>>;
 
             //Assert
+            _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(DifferentOwnerId))), Times.Once);
             Assert.IsNotNull(result);
             Assert.False(result.Content.Any());
         }
@@ -87,11 +85,10 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
 
             //Act
             var response = await _controller.GetTasks(OwnerId);
-            _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(OwnerId))), Times.Once);
-
             var result = response as OkNegotiatedContentResult<IEnumerable<TaskDto>>;
 
             //Assert
+            _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByOwnerIdRequest>(request => request.OwnerId.Equals(OwnerId))), Times.Once);
             Assert.IsNotNull(result);
             Assert.IsEmpty(result.Content);
         }
