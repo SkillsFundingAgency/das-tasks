@@ -49,8 +49,8 @@
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="SFA.DAS.Commitments.Events, Version=2.0.0.44481, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Commitments.Events.2.0.0.44481\lib\net45\SFA.DAS.Commitments.Events.dll</HintPath>
+    <Reference Include="SFA.DAS.Commitments.Events, Version=2.0.0.44695, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Commitments.Events.2.0.0.44695\lib\net45\SFA.DAS.Commitments.Events.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.EmployerAccounts.Events, Version=1.0.0.43269, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.EmployerAccounts.Events.1.0.0.43269\lib\net45\SFA.DAS.EmployerAccounts.Events.dll</HintPath>
@@ -72,8 +72,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MessageProcessors\AgreementSignedMessageProcessorTests\WhenAnAgreementSignedMessageISProcessed.cs" />
+    <Compile Include="MessageProcessors\ApprenticeshipUpdateCancelledMessageProcessorTests\WhenIProcessAMessage.cs" />
+    <Compile Include="MessageProcessors\ApprenticeshipUpdatedAcceptedMessageProcessorTests\WhenIProcessAMessage.cs" />
+    <Compile Include="MessageProcessors\ApprenticeshipUpdatedRejectedMessageProcessorTests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\ApprenticeUpdateCreatedMessageProcessorTests\WhenAnApprenticeshipUpdateCreatedMessageIsProcessed.cs" />
     <Compile Include="MessageProcessors\CohortApprovalRequestedMessageProcessorTests\WhenACohortIsReadForApprovalMessageIsProcessed.cs" />
+    <Compile Include="MessageProcessors\CohortCreatedMessageProcessorTests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\CreatedEmployerAgreementMessageProcessorTests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\LegalEntityRemovedMessageProcessorTests\WhenIRemoveALegalEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
