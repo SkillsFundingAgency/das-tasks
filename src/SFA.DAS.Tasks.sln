@@ -47,6 +47,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PreReqs", "PreReqs", "{9241
 		localhost.pfx = localhost.pfx
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.AcceptenceTests", "SFA.DAS.Tasks.AcceptenceTests\SFA.DAS.Tasks.AcceptenceTests.csproj", "{76F2367E-F47B-4392-A01B-1838FFB7B29D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{45583202-8542-480A-BE71-BA3BB1D69A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45583202-8542-480A-BE71-BA3BB1D69A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45583202-8542-480A-BE71-BA3BB1D69A6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76F2367E-F47B-4392-A01B-1838FFB7B29D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76F2367E-F47B-4392-A01B-1838FFB7B29D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76F2367E-F47B-4392-A01B-1838FFB7B29D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76F2367E-F47B-4392-A01B-1838FFB7B29D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -120,6 +126,7 @@ Global
 		{BBF03398-57DA-4FFE-AEE1-567E5E4D2461} = {D56B9FC1-9B4E-4695-9951-737094E2729F}
 		{4249EB17-1CB7-43D7-AA52-6A5B1F4939D3} = {D56B9FC1-9B4E-4695-9951-737094E2729F}
 		{09F60916-ACFE-403A-8822-FF5EF4EC3D1E} = {D56B9FC1-9B4E-4695-9951-737094E2729F}
+		{76F2367E-F47B-4392-A01B-1838FFB7B29D} = {D56B9FC1-9B4E-4695-9951-737094E2729F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B4B3638-6D12-44E6-819B-95DCF4E31ADE}
