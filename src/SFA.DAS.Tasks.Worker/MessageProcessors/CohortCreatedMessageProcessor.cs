@@ -31,7 +31,8 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
             {
                 OwnerId = message.AccountId.ToString(),
                 Type = TaskType.AddApprentices,
-                TaskCompleted = true
+                TaskCompleted = true,
+                CompleteAllTasks = true
             });
         }
     }

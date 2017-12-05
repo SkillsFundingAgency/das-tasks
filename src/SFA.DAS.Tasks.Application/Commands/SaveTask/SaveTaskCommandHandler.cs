@@ -39,7 +39,14 @@ namespace SFA.DAS.Tasks.Application.Commands.SaveTask
                 return new SaveTaskCommandResponse();
             }
 
-            task.ItemsDueCount += (ushort)(message.TaskCompleted ? -1 : 1);
+            if (message.CompleteAllTasks)
+            {
+                task.ItemsDueCount = 0;
+            }
+            else
+            {
+                task.ItemsDueCount += (ushort)(message.TaskCompleted ? -1 : 1);
+            }
 
             await _repository.SaveTask(task);
 

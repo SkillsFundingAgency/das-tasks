@@ -123,5 +123,30 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
             _repository.Verify(x => x.GetTask(Query.OwnerId, Query.Type), Times.Once);
             _repository.Verify(x => x.SaveTask(It.IsAny<DasTask>()), Times.Never);
         }
+
+        [Test]
+        public async Task ThenIShouldBeAbleToCompleteAllTasks()
+        {
+            //Arrange
+            var existingTask = new DasTask
+            {
+                Id = Guid.NewGuid(),
+                OwnerId = "123",
+                Type = TaskType.AgreementToSign,
+                ItemsDueCount = 3
+            };
+
+            Query.CompleteAllTasks = true;
+
+            _repository.Setup(x => x.GetTask(Query.OwnerId, Query.Type)).ReturnsAsync(existingTask);
+
+            //Act
+            await RequestHandler.Handle(Query);
+
+            //Assert
+            _repository.Verify(x => x.GetTask(Query.OwnerId, Query.Type), Times.Once);
+            _repository.Verify(x => x.SaveTask(It.Is<DasTask>(t => t.ItemsDueCount.Equals(0))), Times.Once);
+        }
+
     }
 }
