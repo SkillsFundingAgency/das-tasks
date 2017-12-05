@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
+using SFA.DAS.Commitments.Events;
 using SFA.DAS.Messaging;
 using SFA.DAS.Messaging.AzureServiceBus.Attributes;
 using SFA.DAS.Messaging.Interfaces;
@@ -33,26 +34,5 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
                 TaskCompleted = true
             });
         }
-    }
-
-
-    public class CohortCreated
-    {
-        //Needs a parameterless constructor to work with the message processing
-        public CohortCreated()
-        {
-
-        }
-
-        public CohortCreated(long accountId, long? providerId, long commitmentId)
-        {
-            AccountId = accountId;
-            ProviderId = providerId;
-            CommitmentId = commitmentId;
-        }
-
-        public long AccountId { get; private set; }
-        public long? ProviderId { get; private set; }
-        public long CommitmentId { get; private set; }
     }
 }
