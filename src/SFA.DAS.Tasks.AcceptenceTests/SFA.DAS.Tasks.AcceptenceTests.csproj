@@ -139,26 +139,37 @@
   <ItemGroup>
     <Compile Include="Configuration\TasksDbConfiguration.cs" />
     <Compile Include="DependencyResolution\TestRegistry.cs" />
-    <Compile Include="Repository\TaskRepository.cs" />
-    <Compile Include="Steps\AddOrganisationSteps.cs" />
-    <Compile Include="Features\AddOrganisation.feature.cs">
+    <Compile Include="Features\SignAnAgreement.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AddOrganisation.feature</DependentUpon>
+      <DependentUpon>SignAnAgreement.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\TaskRepository.cs" />
+    <Compile Include="Steps\Act.cs" />
+    <Compile Include="Features\CreateOrRemoveAgreement.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateOrRemoveAgreement.feature</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DependencyResolution\AzureTopicMessageBus.cs" />
+    <Compile Include="Steps\Arrange.cs" />
     <Compile Include="Steps\Hooks.cs" />
     <Compile Include="DependencyResolution\IAzureTopicMessageBus.cs" />
     <Compile Include="Repository\ITaskRepository.cs" />
     <Compile Include="Configuration\TasksMessagePublishConfiguration.cs" />
+    <Compile Include="Steps\Assert.cs" />
     <Compile Include="Steps\TestMessages.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\AddOrganisation.feature">
+    <None Include="Features\CreateOrRemoveAgreement.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>AddOrganisation.feature.cs</LastGenOutput>
+      <LastGenOutput>CreateOrRemoveAgreement.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\SignAnAgreement.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SignAnAgreement.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

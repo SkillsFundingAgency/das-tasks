@@ -18,21 +18,20 @@ namespace SFA.DAS.Tasks.AcceptenceTests.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.2.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("AddOrganisation")]
-    public partial class AddOrganisationFeature
+    [NUnit.Framework.DescriptionAttribute("SignAnAgreement")]
+    public partial class SignAnAgreementFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "AddOrganisation.feature"
+#line 1 "SignAnAgreement.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "AddOrganisation", "AS AN employer \r\nI WANT a task to direct me \r\nSO THAT I can do my admin work effi" +
-                    "ciently ", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SignAnAgreement", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -66,17 +65,21 @@ namespace SFA.DAS.Tasks.AcceptenceTests.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Sign an Agreement")]
+        [NUnit.Framework.CategoryAttribute("mytag")]
         public virtual void SignAnAgreement()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sign an Agreement", ((string[])(null)));
-#line 7
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sign an Agreement", new string[] {
+                        "mytag"});
+#line 4
 this.ScenarioSetup(scenarioInfo);
+#line 5
+testRunner.Given("I Sign an agreement", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 6
+testRunner.When("agreement_signed message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 7
+testRunner.Then("I should have a AddApprentices Task", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 8
-testRunner.Given("I Create an Account or add an Organisation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 9
-testRunner.When("agreement_created message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 10
-testRunner.Then("I should have a AgreementToSign Task", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("AgreementToSign Task should be removed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
