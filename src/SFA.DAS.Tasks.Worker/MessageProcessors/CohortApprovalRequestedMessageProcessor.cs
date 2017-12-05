@@ -10,7 +10,7 @@ using SFA.DAS.Tasks.API.Types.Enums;
 
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
-    [TopicSubscription("Task_CohortApprovedMessageProcessor")]
+    [TopicSubscription("Task_CohortApprovalRequestedMessageProcessor")]
     public class CohortApprovalRequestedMessageProcessor: MessageProcessor<CohortApprovalRequestedByProvider>
     {
         private readonly ILog _log;
@@ -25,7 +25,7 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
 
         protected override async Task ProcessMessage(CohortApprovalRequestedByProvider message)
         {
-            _log.Debug($"Saving 'apprentice changes to review' task for account id {message.AccountId}, " +
+            _log.Debug($"Saving 'cohort approval requested' task for account id {message.AccountId}, " +
                        $"commitment id {message.CommitmentId} and provider id {message.ProviderId}");
 
             await _mediator.SendAsync(new SaveTaskCommand
