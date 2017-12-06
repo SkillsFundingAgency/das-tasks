@@ -27,7 +27,7 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
         
         protected override async Task ProcessMessage(AgreementCreatedMessage message)
         {
-            _logger.Debug($"Saving agreement to sign task for account id {message.AccountId}, " +
+            _logger.Debug($"Agreement created. Saving agreement to sign task for account id {message.AccountId}, " +
                             $"agreement id {message.AgreementId} and legal enityt id {message.LegalEntityId}");
                 
             await _mediator.SendAsync(new SaveTaskCommand

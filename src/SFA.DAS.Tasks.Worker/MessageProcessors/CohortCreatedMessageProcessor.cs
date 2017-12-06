@@ -25,7 +25,7 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
 
         protected override async Task ProcessMessage(CohortCreated message)
         {
-            _logger.Debug($"Completing add aprrentices task for account id {message.AccountId}");
+            _logger.Debug($"Cohort created. Completing 'add aprrentices' task for account id {message.AccountId}");
 
             await _mediator.SendAsync(new SaveTaskCommand
             {

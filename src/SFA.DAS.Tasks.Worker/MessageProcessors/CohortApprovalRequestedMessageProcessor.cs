@@ -25,7 +25,7 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
 
         protected override async Task ProcessMessage(CohortApprovalRequestedByProvider message)
         {
-            _log.Debug($"Saving 'cohort approval requested' task for account id {message.AccountId}, " +
+            _log.Debug($"Cohort approval requested by provider. Saving 'cohort approval requested' task for account id {message.AccountId}, " +
                        $"commitment id {message.CommitmentId} and provider id {message.ProviderId}");
 
             await _mediator.SendAsync(new SaveTaskCommand
