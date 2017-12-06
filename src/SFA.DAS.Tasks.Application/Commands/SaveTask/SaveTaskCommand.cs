@@ -8,5 +8,6 @@ namespace SFA.DAS.Tasks.Application.Commands.SaveTask
         public TaskType Type { get; set; }
         public string OwnerId { get; set; }
         public bool TaskCompleted { get; set; }
+        public bool CompleteAllTasks { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using MediatR;
 using SFA.DAS.Commitments.Events;
 using SFA.DAS.Messaging;
@@ -10,29 +11,29 @@ using SFA.DAS.Tasks.API.Types.Enums;
 
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
-    [TopicSubscription("Task_ApprenticeUpdateCreatedMessageProcessor")]
-    public class ApprenticeUpdateCreatedMessageProcessor : MessageProcessor<ApprenticeshipUpdateCreated>
+    [TopicSubscription("Task_ApprenticeshipUpdateCancelledMessageProcessor")]
+    public class ApprenticeshipUpdateCancelledMessageProcessor : MessageProcessor<ApprenticeshipUpdateCancelled>
     {
-        private readonly ILog _log;
+        private readonly ILog _logger;
         private readonly IMediator _mediator;
 
-        public ApprenticeUpdateCreatedMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog log, IMediator mediator) 
-            : base(subscriberFactory, log)
+        public ApprenticeshipUpdateCancelledMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog logger, IMediator mediator) 
+            : base(subscriberFactory, logger)
         {
-            _log = log;
+            _logger = logger;
             _mediator = mediator;
         }
 
-        protected override async Task ProcessMessage(ApprenticeshipUpdateCreated message)
+        protected override async Task ProcessMessage(ApprenticeshipUpdateCancelled message)
         {
-            _log.Debug($"Saving 'apprentice changes to review' task for account id {message.AccountId}, " +
+            _logger.Debug($"Apprenticeship updated cancelled. Completing 'apprentice changes to review' task for account id {message.AccountId}, " +
                           $"apprentice id {message.ApprenticeshipId} and provider id {message.ProviderId}");
 
             await _mediator.SendAsync(new SaveTaskCommand
             {
                 OwnerId = message.AccountId.ToString(),
                 Type = TaskType.ApprenticeChangesToReview,
-                TaskCompleted = false
+                TaskCompleted = true
             });
         }
     }

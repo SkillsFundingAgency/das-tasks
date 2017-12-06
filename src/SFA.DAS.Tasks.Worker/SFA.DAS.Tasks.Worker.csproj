@@ -72,8 +72,8 @@
     <Reference Include="Polly, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Polly.5.1.0\lib\net45\Polly.dll</HintPath>
     </Reference>
-    <Reference Include="SFA.DAS.Commitments.Events, Version=2.0.0.44481, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Commitments.Events.2.0.0.44481\lib\net45\SFA.DAS.Commitments.Events.dll</HintPath>
+    <Reference Include="SFA.DAS.Commitments.Events, Version=2.0.0.48374, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Commitments.Events.2.0.0.48374\lib\net45\SFA.DAS.Commitments.Events.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.Configuration, Version=1.0.0.43116, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Configuration.1.0.0.43116\lib\net45\SFA.DAS.Configuration.dll</HintPath>
@@ -84,8 +84,8 @@
     <Reference Include="SFA.DAS.Configuration.FileStorage, Version=1.0.0.43116, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Configuration.FileStorage.1.0.0.43116\lib\net45\SFA.DAS.Configuration.FileStorage.dll</HintPath>
     </Reference>
-    <Reference Include="SFA.DAS.EmployerAccounts.Events, Version=1.0.0.43269, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.EmployerAccounts.Events.1.0.0.43269\lib\net45\SFA.DAS.EmployerAccounts.Events.dll</HintPath>
+    <Reference Include="SFA.DAS.EmployerAccounts.Events, Version=1.0.0.48607, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.EmployerAccounts.Events.1.0.0.48607\lib\net45\SFA.DAS.EmployerAccounts.Events.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.Messaging, Version=3.0.0.43076, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Messaging.3.0.0.43076\lib\net45\SFA.DAS.Messaging.dll</HintPath>
@@ -125,8 +125,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
-    <Compile Include="MessageProcessors\ApprenticeUpdateCreatedMessageProcessor.cs" />
+    <Compile Include="MessageProcessors\ApprenticeshipUpdateAcceptedMessageProcessor.cs" />
+    <Compile Include="MessageProcessors\ApprenticeshipUpdateCancelledMessageProcessor.cs" />
+    <Compile Include="MessageProcessors\ApprenticeshipUpdateRejectedMessageProcessor.cs" />
+    <Compile Include="MessageProcessors\ApprenticeshipUpdateCreatedMessageProcessor.cs" />
+    <Compile Include="MessageProcessors\ApprovedCohortReturnedToProviderMessageProcessor.cs" />
     <Compile Include="MessageProcessors\CohortApprovalRequestedMessageProcessor.cs" />
+    <Compile Include="MessageProcessors\CohortApprovedMessageProcessor.cs" />
+    <Compile Include="MessageProcessors\CohortCreatedMessageProcessor.cs" />
     <Compile Include="MessageProcessors\LegalEntityRemovedMessageProcessor.cs" />
     <Compile Include="MessageProcessors\SignedEmployerAgreementMessageProcessor.cs" />
     <Compile Include="MessageProcessors\CreatedEmployerAgreementMessageProcessor.cs" />

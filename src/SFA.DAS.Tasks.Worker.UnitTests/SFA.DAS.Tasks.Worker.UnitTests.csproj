@@ -49,11 +49,11 @@
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="SFA.DAS.Commitments.Events, Version=2.0.0.44481, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Commitments.Events.2.0.0.44481\lib\net45\SFA.DAS.Commitments.Events.dll</HintPath>
+    <Reference Include="SFA.DAS.Commitments.Events, Version=2.0.0.48374, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Commitments.Events.2.0.0.48374\lib\net45\SFA.DAS.Commitments.Events.dll</HintPath>
     </Reference>
-    <Reference Include="SFA.DAS.EmployerAccounts.Events, Version=1.0.0.43269, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.EmployerAccounts.Events.1.0.0.43269\lib\net45\SFA.DAS.EmployerAccounts.Events.dll</HintPath>
+    <Reference Include="SFA.DAS.EmployerAccounts.Events, Version=1.0.0.48607, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.EmployerAccounts.Events.1.0.0.48607\lib\net45\SFA.DAS.EmployerAccounts.Events.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.Messaging, Version=3.0.0.43076, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Messaging.3.0.0.43076\lib\net45\SFA.DAS.Messaging.dll</HintPath>
@@ -72,8 +72,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MessageProcessors\AgreementSignedMessageProcessorTests\WhenAnAgreementSignedMessageISProcessed.cs" />
+    <Compile Include="MessageProcessors\ApprenticeshipUpdateCancelledMessageProcessorTests\WhenIProcessAMessage.cs" />
+    <Compile Include="MessageProcessors\ApprenticeshipUpdatedAcceptedMessageProcessorTests\WhenIProcessAMessage.cs" />
+    <Compile Include="MessageProcessors\ApprenticeshipUpdatedRejectedMessageProcessorTests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\ApprenticeUpdateCreatedMessageProcessorTests\WhenAnApprenticeshipUpdateCreatedMessageIsProcessed.cs" />
+    <Compile Include="MessageProcessors\ApprovedCohortReturnedToProviderMessageProcessorTests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\CohortApprovalRequestedMessageProcessorTests\WhenACohortIsReadForApprovalMessageIsProcessed.cs" />
+    <Compile Include="MessageProcessors\CohortApprovedMessageProcessortests\WhenIProcessAMessage.cs" />
+    <Compile Include="MessageProcessors\CohortCreatedMessageProcessorTests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\CreatedEmployerAgreementMessageProcessorTests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\LegalEntityRemovedMessageProcessorTests\WhenIRemoveALegalEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +106,8 @@
       <Name>SFA.DAS.Tasks.Worker</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
