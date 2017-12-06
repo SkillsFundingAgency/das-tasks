@@ -76,6 +76,7 @@
     <Compile Include="MessageProcessors\ApprenticeshipUpdatedAcceptedMessageProcessorTests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\ApprenticeshipUpdatedRejectedMessageProcessorTests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\ApprenticeUpdateCreatedMessageProcessorTests\WhenAnApprenticeshipUpdateCreatedMessageIsProcessed.cs" />
+    <Compile Include="MessageProcessors\ApprovedCohortReturnedToProviderMessageProcessorTests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\CohortApprovalRequestedMessageProcessorTests\WhenACohortIsReadForApprovalMessageIsProcessed.cs" />
     <Compile Include="MessageProcessors\CohortApprovedMessageProcessortests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\CohortCreatedMessageProcessorTests\WhenIProcessAMessage.cs" />
