@@ -28,6 +28,8 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
         {
             await RemoveAgreementToSignTask(message);
 
+            if (message.CohortCreated) return;
+
             await CreateAddApprenticesTask(message);
         }
 
