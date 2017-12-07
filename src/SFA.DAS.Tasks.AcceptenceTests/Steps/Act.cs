@@ -43,9 +43,9 @@ namespace SFA.DAS.Tasks.AcceptenceTests.Steps
             int count = 0;
             while (true)
             {
-                Thread.Sleep(5000);
+                await Task.Delay(100);
                 var messageProcessed = await _azureTopicMessageBus.PeekAsync(agreement);
-                if (messageProcessed == null || count >= 4)
+                if (messageProcessed == null || count >= 15)
                 {
                     break;
                 }
