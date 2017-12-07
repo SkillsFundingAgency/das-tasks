@@ -3,9 +3,9 @@ using TechTalk.SpecFlow;
 using BoDi;
 using System.Threading.Tasks;
 using SFA.DAS.EmployerAccounts.Events.Messages;
-using SFA.DAS.Tasks.AcceptenceTests.DependencyResolution;
+using SFA.DAS.Tasks.AcceptanceTests.DependencyResolution;
 
-namespace SFA.DAS.Tasks.AcceptenceTests.Steps
+namespace SFA.DAS.Tasks.AcceptanceTests.Steps
 {
     [Binding]
     public class Act

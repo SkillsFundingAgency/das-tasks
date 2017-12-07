@@ -5,10 +5,10 @@ using SFA.DAS.EmployerAccounts.Events.Messages;
 using System.Linq;
 using SFA.DAS.Tasks.API.Types.DTOs;
 
-namespace SFA.DAS.Tasks.AcceptenceTests.Steps
+namespace SFA.DAS.Tasks.AcceptanceTests.Steps
 {
     [Binding]
-    public class Assert 
+    public class Assert
     {
         private ITaskApiClient _taskApiClient;
         private IObjectContainer _objectContainer;

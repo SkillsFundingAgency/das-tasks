@@ -1,5 +1,5 @@
 ﻿
-namespace SFA.DAS.Tasks.AcceptenceTests.Configuration
+namespace SFA.DAS.Tasks.AcceptanceTests.Configuration
 {
     public class TasksDbConfiguration
     {

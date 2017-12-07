@@ -5,12 +5,12 @@ using SFA.DAS.Tasks.API.Client;
 using System.Threading.Tasks;
 using Dapper;
 using System.Data;
-using SFA.DAS.Tasks.AcceptenceTests.DependencyResolution;
-using SFA.DAS.Tasks.AcceptenceTests.Repository;
+using SFA.DAS.Tasks.AcceptanceTests.DependencyResolution;
+using SFA.DAS.Tasks.AcceptanceTests.Repository;
 using System.Linq;
 using System;
 
-namespace SFA.DAS.Tasks.AcceptenceTests.Steps
+namespace SFA.DAS.Tasks.AcceptanceTests.Steps
 {
     [Binding]
     public class Hooks
@@ -43,7 +43,7 @@ namespace SFA.DAS.Tasks.AcceptenceTests.Steps
             var testMessages = _objectContainer.Resolve<TestMessages>();
             var taskApiClient = _objectContainer.Resolve<ITaskApiClient>();
             CleanData(testMessages.AccountId).Wait();
-            
+
             // Query to get the state of the Tasks
             var tasks = taskApiClient.GetTasks(testMessages.AccountId.ToString()).Result.ToList();
             noofAgreementCreated = tasks.SingleOrDefault(x => x.Type == "AgreementToSign")?.ItemsDueCount ?? 0;

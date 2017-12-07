@@ -1,7 +1,7 @@
 ﻿
 using SFA.DAS.Messaging.AzureServiceBus.StructureMap;
 
-namespace SFA.DAS.Tasks.AcceptenceTests.Configuration
+namespace SFA.DAS.Tasks.AcceptanceTests.Configuration
 {
     public class TasksMessagePublishConfiguration : ITopicMessagePublisherConfiguration
     {

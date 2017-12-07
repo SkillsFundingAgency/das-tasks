@@ -2,7 +2,7 @@
 using BoDi;
 using SFA.DAS.EmployerAccounts.Events.Messages;
 
-namespace SFA.DAS.Tasks.AcceptenceTests.Steps
+namespace SFA.DAS.Tasks.AcceptanceTests.Steps
 {
     [Binding]
     public class Arrange : TechTalk.SpecFlow.Steps

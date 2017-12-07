@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-namespace SFA.DAS.Tasks.AcceptenceTests.Repository
+namespace SFA.DAS.Tasks.AcceptanceTests.Repository
 {
     public class TaskRepository : ITaskRepository
     {

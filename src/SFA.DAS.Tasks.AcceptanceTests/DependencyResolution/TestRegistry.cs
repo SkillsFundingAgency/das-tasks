@@ -1,10 +1,10 @@
-﻿using SFA.DAS.Tasks.AcceptenceTests.Configuration;
-using SFA.DAS.Tasks.AcceptenceTests.Repository;
+﻿using SFA.DAS.Tasks.AcceptanceTests.Configuration;
+using SFA.DAS.Tasks.AcceptanceTests.Repository;
 using SFA.DAS.Tasks.API.Client;
 using SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration;
 using StructureMap;
 
-namespace SFA.DAS.Tasks.AcceptenceTests.DependencyResolution
+namespace SFA.DAS.Tasks.AcceptanceTests.DependencyResolution
 {
     public class TestRegistry : Registry
     {
