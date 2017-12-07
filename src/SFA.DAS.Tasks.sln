@@ -47,7 +47,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PreReqs", "PreReqs", "{9241
 		localhost.pfx = localhost.pfx
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.AcceptenceTests", "SFA.DAS.Tasks.AcceptenceTests\SFA.DAS.Tasks.AcceptenceTests.csproj", "{76F2367E-F47B-4392-A01B-1838FFB7B29D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.AcceptanceTests", "SFA.DAS.Tasks.AcceptenceTests\SFA.DAS.Tasks.AcceptanceTests.csproj", "{76F2367E-F47B-4392-A01B-1838FFB7B29D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
