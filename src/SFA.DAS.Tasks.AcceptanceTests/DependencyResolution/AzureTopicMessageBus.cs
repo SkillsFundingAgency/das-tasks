@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using SFA.DAS.Messaging.Helpers;
 
-namespace SFA.DAS.Tasks.AcceptenceTests.DependencyResolution
+namespace SFA.DAS.Tasks.AcceptanceTests.DependencyResolution
 {
     public class AzureTopicMessageBus : IAzureTopicMessageBus
     {

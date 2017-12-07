@@ -2,7 +2,7 @@
 using System.Data;
 using System.Threading.Tasks;
 
-namespace SFA.DAS.Tasks.AcceptenceTests.Repository
+namespace SFA.DAS.Tasks.AcceptanceTests.Repository
 {
     public interface ITaskRepository
     {

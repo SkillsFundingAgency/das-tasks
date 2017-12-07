@@ -1,7 +1,7 @@
 ﻿using Microsoft.ServiceBus.Messaging;
 using System.Threading.Tasks;
 
-namespace SFA.DAS.Tasks.AcceptenceTests.DependencyResolution
+namespace SFA.DAS.Tasks.AcceptanceTests.DependencyResolution
 {
     public interface IAzureTopicMessageBus
     {

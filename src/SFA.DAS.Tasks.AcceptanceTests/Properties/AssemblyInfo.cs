@@ -1,12 +1,12 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("SFA.DAS.Tasks.AcceptenceTests")]
+[assembly: AssemblyTitle("SFA.DAS.Tasks.AcceptanceTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SFA.DAS.Tasks.AcceptenceTests")]
+[assembly: AssemblyProduct("SFA.DAS.Tasks.AcceptanceTests")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
