@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using MediatR;
@@ -22,6 +23,7 @@ namespace SFA.DAS.Tasks.API.Controllers
             _logger = logger;
         }
 
+        [Obsolete("This method is being phased out and replaced by GetUserTasks")]
         [Route("", Name = "GetTasks")]
         [ApiAuthorize(Roles = "ReadOwnerTasks")]
         [HttpGet]

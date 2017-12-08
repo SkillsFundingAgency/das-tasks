@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SFA.DAS.Tasks.API.Types.DTOs;
@@ -23,6 +24,14 @@ namespace SFA.DAS.Tasks.API.Client
 
             var json = await _httpClient.GetAsync(url);
             return JsonConvert.DeserializeObject<IEnumerable<TaskDto>>(json);
+        }
+
+        public async Task AddUserReminderSupression(string employerAccountId, string userId, string taskType)
+        {
+            var baseUrl = GetBaseUrl();
+            var url = $"{baseUrl}api/tasks/{employerAccountId}/supressions/{userId}/add/{taskType}";
+
+            await _httpClient.PostAsync(url, new StringContent(string.Empty));
         }
 
         private string GetBaseUrl()
