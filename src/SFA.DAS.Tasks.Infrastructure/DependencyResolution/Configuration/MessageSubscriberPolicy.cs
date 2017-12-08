@@ -10,18 +10,17 @@ using SFA.DAS.Messaging.AzureServiceBus;
 using SFA.DAS.Messaging.AzureServiceBus.Helpers;
 using SFA.DAS.Messaging.FileSystem;
 using SFA.DAS.Messaging.Interfaces;
+using SFA.DAS.Tasks.Domain.Configurations;
 using StructureMap;
 using StructureMap.Pipeline;
 
 namespace SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration 
 {
-    public class MessageSubscriberPolicy<T> : ConfiguredInstancePolicy where T : IConfiguration
+    public class MessageSubscriberPolicy<T> : MessageServiceBusPolicyBase<T> where T : ITaskConfiguration
     {
-        private readonly string _serviceName;
-
-        public MessageSubscriberPolicy(string serviceName)
+        public MessageSubscriberPolicy(string serviceName) : base(serviceName)
         {
-            _serviceName = serviceName;
+           
         }
 
         protected override void apply(Type pluginType, IConfiguredInstance instance)
@@ -31,8 +30,9 @@ namespace SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration
             if (subscriberFactory == null) return;
 
             var environment = GetEnvironmentName();
-            
-            var messageQueueConnectionString = GetMessageQueueConnectionString(environment);
+            var connectionStringName = GetConnectionStringName(instance);
+
+            var messageQueueConnectionString = GetMessageQueueConnectionString(environment, connectionStringName);
 
             if (string.IsNullOrEmpty(messageQueueConnectionString))
             {
@@ -57,41 +57,6 @@ namespace SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration
                 .GetParameters().FirstOrDefault(x => x.ParameterType == typeof(IMessageSubscriberFactory));
 
             return factory;
-        }
-
-        private static string GetEnvironmentName()
-        {
-            var environment = Environment.GetEnvironmentVariable("DASENV");
-            if (string.IsNullOrEmpty(environment))
-            {
-                environment = CloudConfigurationManager.GetSetting("EnvironmentName");
-            }
-            return environment;
-        }
-
-        private string GetMessageQueueConnectionString(string environment)
-        {
-            var configurationService = new ConfigurationService(GetConfigurationRepository(),
-                new ConfigurationOptions(_serviceName, environment, "1.0"));
-
-            var config = configurationService.Get<T>();
-
-            var messageQueueConnectionString = config.MessageServiceBusConnectionString;
-            return messageQueueConnectionString;
-        }
-
-        private static IConfigurationRepository GetConfigurationRepository()
-        {
-            IConfigurationRepository configurationRepository;
-            if (bool.Parse(ConfigurationManager.AppSettings["LocalConfig"]))
-            {
-                configurationRepository = new FileStorageConfigurationRepository();
-            }
-            else
-            {
-                configurationRepository = new AzureTableStorageConfigurationRepository(CloudConfigurationManager.GetSetting("ConfigurationStorageConnectionString"));
-            }
-            return configurationRepository;
         }
     }
 }
