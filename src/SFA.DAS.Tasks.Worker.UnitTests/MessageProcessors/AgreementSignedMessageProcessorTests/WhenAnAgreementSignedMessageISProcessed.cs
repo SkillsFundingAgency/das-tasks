@@ -30,9 +30,9 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.AgreementSignedMessag
             _subscriber = new Mock<IMessageSubscriber<AgreementSignedMessage>>();
 
             _messageContent = new AgreementSignedMessage();
+         
 
             _mockMessage = new Mock<IMessage<AgreementSignedMessage>>();
-
             _mockMessage.Setup(x => x.Content).Returns(_messageContent);
 
             _mediator = new Mock<IMediator>();
@@ -63,6 +63,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.AgreementSignedMessag
         [Test]
         public async Task ThenTheAddAppreticesTaskIsSaved()
         {
+
             //Act
             await _processor.RunAsync(_tokenSource.Token);
 
@@ -70,6 +71,19 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.AgreementSignedMessag
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.EmployerAccountId.Equals(_messageContent.AccountId.ToString()) &&
                                                                             cmd.Type.Equals(TaskType.AddApprentices) &&
                                                                             cmd.TaskCompleted.Equals(false))), Times.Once);
+        }
+
+        [Test]
+        public async Task ThenTheAddAppreticesTaskIsNotSavedIfCohortsHaveAlreadyBeenAdded()
+        {
+            //Arrange
+            _messageContent.CohortCreated = true;
+
+            //Act
+            await _processor.RunAsync(_tokenSource.Token);
+
+            //Assert
+            _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.Type.Equals(TaskType.AddApprentices))), Times.Never());
         }
 
         [Test]

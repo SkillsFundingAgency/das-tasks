@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Moq;
 using NUnit.Framework;
 using SFA.DAS.Commitments.Events;
-using SFA.DAS.EmployerAccounts.Events.Messages;
 using SFA.DAS.Messaging.Interfaces;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Commands.SaveTask;
@@ -25,7 +20,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.ApprenticeUpdateCreat
         private Mock<IMessage<ApprenticeshipUpdateCreated>> _mockMessage;
         private Mock<IMediator> _mediator;
         private CancellationTokenSource _tokenSource;
-        private ApprenticeUpdateCreatedMessageProcessor _processor;
+        private ApprenticeshipUpdateCreatedMessageProcessor _processor;
 
         [SetUp]
         public void Arrange()
@@ -42,7 +37,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.ApprenticeUpdateCreat
             _mediator = new Mock<IMediator>();
             _tokenSource = new CancellationTokenSource();
 
-            _processor = new ApprenticeUpdateCreatedMessageProcessor(_subscriptionFactory.Object, Mock.Of<ILog>(),
+            _processor = new ApprenticeshipUpdateCreatedMessageProcessor(_subscriptionFactory.Object, Mock.Of<ILog>(),
                 _mediator.Object);
 
             _subscriptionFactory.Setup(x => x.GetSubscriber<ApprenticeshipUpdateCreated>()).Returns(_subscriber.Object);
