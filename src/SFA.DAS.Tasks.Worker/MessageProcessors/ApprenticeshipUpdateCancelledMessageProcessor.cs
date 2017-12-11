@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MediatR;
 using SFA.DAS.Commitments.Events;
 using SFA.DAS.Messaging;
@@ -13,7 +12,7 @@ using SFA.DAS.Tasks.Infrastructure.Attributes;
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("Commitments")]
-    [TopicSubscription("Task_ApprenticeshipUpdateCancelledMessageProcessor")]
+    [TopicSubscription("Task_ApprenticeshipUpdateCancelled")]
     public class ApprenticeshipUpdateCancelledMessageProcessor : MessageProcessor<ApprenticeshipUpdateCancelled>
     {
         private readonly ILog _logger;

@@ -12,7 +12,7 @@ using SFA.DAS.Tasks.Infrastructure.Attributes;
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("Commitments")]
-    [TopicSubscription("Task_ApprenticeshipUpdateRejectedMessageProcessor")]
+    [TopicSubscription("Task_ApprenticeshipUpdateRejected")]
     public class ApprenticeshipUpdateRejectedMessageProcessor : MessageProcessor<ApprenticeshipUpdateRejected>
     {
         private readonly ILog _logger;

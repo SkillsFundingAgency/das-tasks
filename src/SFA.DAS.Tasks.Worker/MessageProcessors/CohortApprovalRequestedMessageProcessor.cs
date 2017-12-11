@@ -12,7 +12,7 @@ using SFA.DAS.Tasks.Infrastructure.Attributes;
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("Commitments")]
-    [TopicSubscription("Task_CohortApprovalRequestedMessageProcessor")]
+    [TopicSubscription("Task_CohortApprovalRequested")]
     public class CohortApprovalRequestedMessageProcessor: MessageProcessor<CohortApprovalRequestedByProvider>
     {
         private readonly ILog _log;

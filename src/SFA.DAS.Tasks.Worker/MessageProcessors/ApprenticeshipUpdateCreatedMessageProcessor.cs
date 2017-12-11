@@ -12,7 +12,7 @@ using SFA.DAS.Tasks.Infrastructure.Attributes;
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("Commitments")]
-    [TopicSubscription("Task_ApprenticeUpdateCreatedMessageProcessor")]
+    [TopicSubscription("Task_ApprenticeUpdateCreated")]
     public class ApprenticeshipUpdateCreatedMessageProcessor : MessageProcessor<ApprenticeshipUpdateCreated>
     {
         private readonly ILog _log;
