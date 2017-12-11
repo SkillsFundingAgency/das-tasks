@@ -54,7 +54,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.ApprenticeshipUpdateC
             await _processor.RunAsync(_tokenSource.Token);
 
             //Assert
-            _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.OwnerId.Equals(_messageContent.AccountId.ToString()) &&
+            _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.EmployerAccountId.Equals(_messageContent.AccountId.ToString()) &&
                                                                             cmd.Type.Equals(TaskType.ApprenticeChangesToReview) &&
                                                                             cmd.TaskCompleted.Equals(true))), Times.Once);
         }

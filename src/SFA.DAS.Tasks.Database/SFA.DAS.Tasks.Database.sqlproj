@@ -67,11 +67,17 @@
   <ItemGroup>
     <Build Include="Schemas\Tasks.sql" />
     <Build Include="Tables\Tasks.sql" />
-    <Build Include="StoredProcedures\GetTasksByOwner.sql" />
-    <Build Include="StoredProcedures\GetTaskByOwnerIdAndType.sql" />
+    <Build Include="StoredProcedures\GetTasksByEmployerAccountId.sql" />
+    <Build Include="StoredProcedures\GetTaskByEmployerAccountIdAndType.sql" />
     <Build Include="StoredProcedures\UpsertTask.sql" />
     <Build Include="Tables\MonthlyReminderTasks.sql" />
     <Build Include="StoredProcedures\GetMonthlyReminderTasks.sql" />
     <PostDeploy Include="Post-Deployment\Script.PostDeployment1.sql" />
+    <Build Include="Tables\UserReminderSuppressions.sql" />
+    <Build Include="StoredProcedures\AddUserReminderSuppression.sql" />
+    <Build Include="StoredProcedures\GetUserTaskSuppressions.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="SFA.DAS.Tasks.Database.refactorlog" />
   </ItemGroup>
 </Project>

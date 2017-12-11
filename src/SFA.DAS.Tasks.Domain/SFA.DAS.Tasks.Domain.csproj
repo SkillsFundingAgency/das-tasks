@@ -50,6 +50,7 @@
     <Compile Include="Configurations\ITaskConfiguration.cs" />
     <Compile Include="Configurations\TasksConfiguration.cs" />
     <Compile Include="Models\DasTask.cs" />
+    <Compile Include="Models\UserReminderSuppressionFlag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ITaskRepository.cs" />
   </ItemGroup>

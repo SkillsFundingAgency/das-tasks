@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using SFA.DAS.Tasks.Domain.Models;
 
-namespace SFA.DAS.Tasks.Application.Queries.GetTasksByOwnerId
+namespace SFA.DAS.Tasks.Application.Queries.GetTasksByEmployerAccountId
 {
-    public class GetTasksByOwnerIdResponse
+    public class GetTasksByEmployerAccountIdResponse
     {
         public IEnumerable<DasTask> Tasks { get; set; }
     }

@@ -44,6 +44,24 @@ namespace SFA.DAS.Tasks.API.Client
                     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
 
                 var response = await client.GetAsync(url);
+               
+                response.EnsureSuccessStatusCode();
+
+                return await response.Content.ReadAsStringAsync();
+            }
+        }
+
+        public virtual async Task<string> PostAsync(string url, HttpContent content)
+        {
+            var authenticationResult = await GetAuthenticationResult(_configuration.ClientId, _configuration.ClientSecret, _configuration.IdentifierUri, _configuration.Tenant);
+
+            using (var client = new HttpClient())
+            {
+                if (authenticationResult != null)
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
+
+                var response = await client.PostAsync(url, content);
+
                 response.EnsureSuccessStatusCode();
 
                 return await response.Content.ReadAsStringAsync();

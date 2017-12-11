@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\TaskControllerTests\WhenIDismissATaskReminder.cs" />
     <Compile Include="Controllers\TaskControllerTests\WhenIGetTasks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

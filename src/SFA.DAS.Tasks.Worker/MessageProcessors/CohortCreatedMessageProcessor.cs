@@ -31,7 +31,7 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
 
             await _mediator.SendAsync(new SaveTaskCommand
             {
-                OwnerId = message.AccountId.ToString(),
+                EmployerAccountId = message.AccountId.ToString(),
                 Type = TaskType.AddApprentices,
                 TaskCompleted = true,
                 CompleteAllTasks = true

@@ -27,9 +27,9 @@ namespace SFA.DAS.Tasks.Application.Commands.SaveTask
                 throw new InvalidRequestException(validationResult.ValidationDictionary);
             }
 
-            var task = await _repository.GetTask(message.OwnerId, message.Type) ?? new DasTask
+            var task = await _repository.GetTask(message.EmployerAccountId, message.Type) ?? new DasTask
             {
-                OwnerId = message.OwnerId,
+                EmployerAccountId = message.EmployerAccountId,
                 Type = message.Type
             };
 

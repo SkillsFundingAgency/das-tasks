@@ -18,7 +18,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTaskTests
         public void ThenIShouldPassValidationWithAValidRequest()
         {
             //Arrange
-            var request = new GetTaskRequest {OwnerId = "1233", Type = TaskType.AddApprentices };
+            var request = new GetTaskRequest {EmployerAccountId = "1233", Type = TaskType.AddApprentices };
 
             //Act
             var result = _validator.Validate(request);
@@ -28,7 +28,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTaskTests
         }
 
         [Test]
-        public void ThenIShouldFailValidationIfOwnerIdIsNotPresent()
+        public void ThenIShouldFailValidationIfEmployerAccountIdIsNotPresent()
         {
             //Arrange
             var request = new GetTaskRequest { Type = TaskType.AddApprentices };
@@ -38,14 +38,14 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTaskTests
 
             //Assert
             Assert.IsFalse(result.IsValid());
-            Assert.AreEqual("Cannot get task when owner ID is not given.", result.ValidationDictionary[nameof(request.OwnerId)]);
+            Assert.AreEqual("Cannot get task when employer account ID is not given.", result.ValidationDictionary[nameof(request.EmployerAccountId)]);
         }
 
         [Test]
         public void ThenIShouldFailValidationIfTaskTypeIsNotPresent()
         {
             //Arrange
-            var request = new GetTaskRequest { OwnerId = "1233" }; 
+            var request = new GetTaskRequest { EmployerAccountId = "1233" }; 
 
             //Act
             var result = _validator.Validate(request);

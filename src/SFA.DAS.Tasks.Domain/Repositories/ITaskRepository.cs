@@ -7,12 +7,16 @@ namespace SFA.DAS.Tasks.Domain.Repositories
 {
     public interface ITaskRepository
     {
-        Task<IEnumerable<DasTask>> GetTasks(string ownerId);
+        Task<IEnumerable<DasTask>> GetTasks(string employerAccountId);
 
-        Task<DasTask> GetTask(string ownerId, TaskType type);
+        Task<DasTask> GetTask(string employerAccountId, TaskType type);
 
-        Task<IEnumerable<DasTask>> GetMonthlyReminderTasks(string ownerId);
+        Task<IEnumerable<DasTask>> GetMonthlyReminderTasks(string employerAccountId);
+
+        Task SaveUserReminderSuppression(UserReminderSuppressionFlag flag);
 
         Task SaveTask(DasTask task);
+
+        Task<IEnumerable<TaskType>> GetUserTaskSuppressions(string userId, string employerAccountId);
     }
 }
