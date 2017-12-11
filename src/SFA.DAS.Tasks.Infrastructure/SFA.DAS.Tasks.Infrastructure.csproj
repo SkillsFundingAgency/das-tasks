@@ -95,8 +95,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ServiceBusConnectionStringAttribute.cs" />
     <Compile Include="DependencyResolution\Configuration\ConfigurationHelper.cs" />
     <Compile Include="DependencyResolution\Configuration\MessagePublisherPolicy.cs" />
+    <Compile Include="DependencyResolution\Configuration\MessageServiceBusPolicy.cs" />
     <Compile Include="DependencyResolution\Configuration\MessageSubscriberPolicy.cs" />
     <Compile Include="DependencyResolution\Configuration\Policies\ConfigurationPolicy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,6 +108,12 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SFA.DAS.Tasks.Domain\SFA.DAS.Tasks.Domain.csproj">
+      <Project>{316591FF-D233-4529-BC3B-FA6B79C2DB11}</Project>
+      <Name>SFA.DAS.Tasks.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
