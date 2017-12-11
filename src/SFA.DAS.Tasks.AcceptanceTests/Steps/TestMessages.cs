@@ -1,21 +1,31 @@
 ﻿using SFA.DAS.EmployerAccounts.Events.Messages;
+using System;
 
 namespace SFA.DAS.Tasks.AcceptanceTests.Steps
 {
     public class TestMessages
     {
-        public long AccountId => 547851;
+        public long EmployerAccountId => GenerateRandomid();
 
         public int NoofAgreementCreated { get; set; }
 
         public int NoofAgreementSigned { get; set; }
 
-        public AgreementCreatedMessage AgreementCreated => new AgreementCreatedMessage
+        private long GenerateRandomid()
         {
-            AccountId = AccountId,
-            LegalEntityId = 8547,
-            AgreementId = 9856
-        };
+            Random rnd = new Random();
+            return rnd.Next(10000, 99999);
+        }
+        public AgreementCreatedMessage AgreementCreated(long accountId)
+        {
+            return new AgreementCreatedMessage
+            {
+                AccountId = accountId,
+                LegalEntityId = 8547,
+                AgreementId = 9856
+            };
+        }
+
         public AgreementSignedMessage AgreementSigned(long accountId, long legalEntityId, long agreementId)
         {
             return new AgreementSignedMessage

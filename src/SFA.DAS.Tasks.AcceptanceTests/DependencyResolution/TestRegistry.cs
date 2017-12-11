@@ -13,7 +13,8 @@ namespace SFA.DAS.Tasks.AcceptanceTests.DependencyResolution
             var taskapiconfig = ConfigurationHelper.GetConfiguration<TaskApiConfiguration>($"SFA.DAS.Tasks.Api");
             For<ITaskApiClient>().Use(new TaskApiClient(taskapiconfig));
             var messagePublisher = ConfigurationHelper.GetConfiguration<TasksMessagePublishConfiguration>($"SFA.DAS.Tasks");
-            For<IAzureTopicMessageBus>().Use(new AzureTopicMessageBus(messagePublisher.MessageServiceBusConnectionString));
+            var serviceBusConnectionString = messagePublisher.MessageServiceBusConnectionStringLookup;
+            For<IAzureTopicMessageBus>().Use(new AzureTopicMessageBus(serviceBusConnectionString["ManageApprenticeships"], serviceBusConnectionString["Commitments"]));
             var tasksDbConfiguration = ConfigurationHelper.GetConfiguration<TasksDbConfiguration>($"SFA.DAS.Tasks");
             For<ITaskRepository>().Use<TaskRepository>().Ctor<string>().Is(tasksDbConfiguration.DatabaseConnectionString);
         }

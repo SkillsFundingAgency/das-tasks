@@ -1,6 +1,7 @@
 ﻿using TechTalk.SpecFlow;
 using BoDi;
 using SFA.DAS.EmployerAccounts.Events.Messages;
+using System.Collections.Generic;
 
 namespace SFA.DAS.Tasks.AcceptanceTests.Steps
 {
@@ -19,8 +20,8 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
         [Given(@"I Create an Account or add an Organisation")]
         public void GivenICreateAnAccountOrAddAnOrganisation()
         {
-            _objectContainer.RegisterInstanceAs(_testMessages.AgreementCreated);
-            _testMessages.NoofAgreementCreated++;
+            var id = _objectContainer.Resolve<Dictionary<string, object>>("dictionary");
+            _objectContainer.RegisterInstanceAs(_testMessages.AgreementCreated((long)id["employerAccountId"]));
         }
 
         [Given(@"I Sign an agreement")]
@@ -31,7 +32,6 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             var agreementcreated = _objectContainer.Resolve<AgreementCreatedMessage>();
             var agreementsigned = _testMessages.AgreementSigned(agreementcreated.AccountId, agreementcreated.LegalEntityId, agreementcreated.AgreementId);
             _objectContainer.RegisterInstanceAs(agreementsigned);
-            _testMessages.NoofAgreementSigned++;
         }
 
         [Given(@"I add another Organisation and Remove an Organisation")]
@@ -39,7 +39,6 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
         {
             Given(@"I Create an Account or add an Organisation");
             When(@"agreement_created message get publish");
-            _testMessages.NoofAgreementCreated++;
             When(@"agreement_created message get publish");
             var agreementcreated = _objectContainer.Resolve<AgreementCreatedMessage>();
             var legalEntityRemoved = _testMessages.LegalEntityRemovedMessage(agreementcreated.AccountId, agreementcreated.LegalEntityId, agreementcreated.AgreementId, false);

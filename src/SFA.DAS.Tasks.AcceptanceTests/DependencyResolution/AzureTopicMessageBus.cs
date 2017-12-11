@@ -6,23 +6,30 @@ namespace SFA.DAS.Tasks.AcceptanceTests.DependencyResolution
 {
     public class AzureTopicMessageBus : IAzureTopicMessageBus
     {
-        private readonly string _connectionString;
+        private readonly string _manageApprenticeshipsServiceBus;
+        private readonly string _commitmentsServiceBus;        
 
-        public AzureTopicMessageBus(string connectionString)
+        public AzureTopicMessageBus(string manageApprenticeshipsServiceBus, string commitmentsServiceBus)
         {
-            _connectionString = connectionString;
+            _manageApprenticeshipsServiceBus = manageApprenticeshipsServiceBus;
+            _commitmentsServiceBus = commitmentsServiceBus;
         }
 
         public async Task<BrokeredMessage> PeekAsync(object message)
         {
             var messageGroupName = MessageGroupHelper.GetMessageGroupName(message);
+            var connectionString = GetConnectionString(message);
 
             TopicClient client = null;
 
             try
             {
-                client = TopicClient.CreateFromConnectionString(_connectionString, messageGroupName);
+                client = TopicClient.CreateFromConnectionString(connectionString, messageGroupName);
                 return await client.PeekAsync();
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
             }
             finally
             {
@@ -36,13 +43,18 @@ namespace SFA.DAS.Tasks.AcceptanceTests.DependencyResolution
         public async Task PublishAsync(object message)
         {
             var messageGroupName = MessageGroupHelper.GetMessageGroupName(message);
+            var connectionString = GetConnectionString(message);
 
             TopicClient client = null;
 
             try
             {
-                client = TopicClient.CreateFromConnectionString(_connectionString, messageGroupName);
+                client = TopicClient.CreateFromConnectionString(connectionString, messageGroupName);
                 await client.SendAsync(new BrokeredMessage(message));
+            }
+            catch(System.Exception ex)
+            {
+                throw ex;
             }
             finally
             {
@@ -51,6 +63,11 @@ namespace SFA.DAS.Tasks.AcceptanceTests.DependencyResolution
                     await client.CloseAsync();
                 }
             }
+        }
+
+        private string GetConnectionString(object message)
+        {
+            return message.GetType().FullName.Contains("EmployerAccounts") ? _manageApprenticeshipsServiceBus : _commitmentsServiceBus;
         }
     }
 }
