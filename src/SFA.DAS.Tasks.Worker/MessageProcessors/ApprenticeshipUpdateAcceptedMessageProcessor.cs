@@ -8,10 +8,12 @@ using SFA.DAS.Messaging.Interfaces;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Commands.SaveTask;
 using SFA.DAS.Tasks.API.Types.Enums;
+using SFA.DAS.Tasks.Infrastructure.Attributes;
 
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
-    [TopicSubscription("Task_ApprenticeshipUpdateAcceptedMessageProcessor")]
+    [ServiceBusConnectionString("Commitments")]
+    [TopicSubscription("Task_ApprenticeshipUpdateAccepted")]
     public class ApprenticeshipUpdateAcceptedMessageProcessor : MessageProcessor<ApprenticeshipUpdateAccepted>
     {
         private readonly ILog _logger;

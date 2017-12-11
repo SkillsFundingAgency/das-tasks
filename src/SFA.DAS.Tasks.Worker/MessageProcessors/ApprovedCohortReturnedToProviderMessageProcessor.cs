@@ -7,10 +7,12 @@ using SFA.DAS.Messaging.Interfaces;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Commands.SaveTask;
 using SFA.DAS.Tasks.API.Types.Enums;
+using SFA.DAS.Tasks.Infrastructure.Attributes;
 
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
-    [TopicSubscription("Task_ApprovedCohortReturnedToProviderMessageProcessor")]
+    [ServiceBusConnectionString("Commitments")]
+    [TopicSubscription("Task_ApprovedCohortReturnedToProvider")]
     public class ApprovedCohortReturnedToProviderMessageProcessor : MessageProcessor<ApprovedCohortReturnedToProvider>
     {
         private readonly ILog _logger;
