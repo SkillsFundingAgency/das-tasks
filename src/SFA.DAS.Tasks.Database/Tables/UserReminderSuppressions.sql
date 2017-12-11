@@ -6,3 +6,9 @@
     [ReminderTaskType] VARCHAR(100) NOT NULL, 
     [CreatedDate] DATETIME NOT NULL
 )
+GO
+
+CREATE INDEX [IX_UserReminderSuppressions_EmployerAccountId] ON [Tasks].[UserReminderSuppressions]([EmployerAccountId])
+GO
+
+CREATE INDEX [IX_UserReminderSuppressions_UserId] ON [Tasks].[UserReminderSuppressions] ([UserId])
