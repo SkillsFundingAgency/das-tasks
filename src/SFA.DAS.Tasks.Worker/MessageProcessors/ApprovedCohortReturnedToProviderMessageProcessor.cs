@@ -10,7 +10,7 @@ using SFA.DAS.Tasks.API.Types.Enums;
 
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
-    [TopicSubscription("Task_ApprovedCohortReturnedToProviderMessageProcessor")]
+    [TopicSubscription("Task_ApprovedCohortReturnedToProvider")]
     public class ApprovedCohortReturnedToProviderMessageProcessor : MessageProcessor<ApprovedCohortReturnedToProvider>
     {
         private readonly ILog _logger;

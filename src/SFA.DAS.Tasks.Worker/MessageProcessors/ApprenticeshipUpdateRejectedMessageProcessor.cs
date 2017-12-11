@@ -10,7 +10,7 @@ using SFA.DAS.Tasks.API.Types.Enums;
 
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
-    [TopicSubscription("Task_ApprenticeshipUpdateRejectedMessageProcessor")]
+    [TopicSubscription("Task_ApprenticeshipUpdateRejected")]
     public class ApprenticeshipUpdateRejectedMessageProcessor : MessageProcessor<ApprenticeshipUpdateRejected>
     {
         private readonly ILog _logger;
