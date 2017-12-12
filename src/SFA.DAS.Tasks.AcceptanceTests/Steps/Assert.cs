@@ -48,6 +48,13 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             NUnit.Framework.Assert.AreEqual(noofAgreementCreated - 1, tasksbytaskstype?.ItemsDueCount, "AgreementToSign Task is not removed");
         }
 
+        [Then(@"(AddApprentices) Task should be removed")]
+        public void ThenAddApprenticesTaskShouldBeRemoved(string tasktype)
+        {
+            var tasksbytaskstype = TaskDto(tasktype);
+            NUnit.Framework.Assert.AreEqual(0, tasksbytaskstype?.ItemsDueCount, "AddApprentices Task is not removed");
+        }
+
         private TaskDto TaskDto(string tasktype)
         {
             var tasksbyAccountid = _taskApiClient.GetTasks(_employerAccountId, string.Empty).Result.ToList();

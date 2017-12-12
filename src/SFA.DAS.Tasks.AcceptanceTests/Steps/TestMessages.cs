@@ -1,4 +1,5 @@
 ﻿using SFA.DAS.EmployerAccounts.Events.Messages;
+using SFA.DAS.Commitments.Events;
 using System;
 
 namespace SFA.DAS.Tasks.AcceptanceTests.Steps
@@ -45,6 +46,13 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
                 AgreementId = agreementId,
                 AgreementSigned = agreementSigned
             };
+        }
+
+        public CohortCreated CohortCreated(long accountId)
+        {
+            long providerid = 100223547;
+            long commitmentid = 65457812;
+            return new CohortCreated(accountId, providerid, commitmentid);
         }
     }
 }

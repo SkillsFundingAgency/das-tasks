@@ -44,5 +44,15 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             var legalEntityRemoved = _testMessages.LegalEntityRemovedMessage(agreementcreated.AccountId, agreementcreated.LegalEntityId, agreementcreated.AgreementId, false);
             _objectContainer.RegisterInstanceAs(legalEntityRemoved);
         }
+
+        [Given(@"I Create Draft Cohort")]
+        public void GivenICreateDraftCohort()
+        {
+            Given(@"I Sign an agreement");
+            When(@"agreement_signed message get publish");
+            var agreementsigned = _objectContainer.Resolve<AgreementSignedMessage>();
+            var cohortCreated = _testMessages.CohortCreated(agreementsigned.AccountId);
+            _objectContainer.RegisterInstanceAs(cohortCreated);
+        }
     }
 }
