@@ -2,6 +2,7 @@
 using BoDi;
 using System.Threading.Tasks;
 using SFA.DAS.EmployerAccounts.Events.Messages;
+using SFA.DAS.Commitments.Events;
 using SFA.DAS.Tasks.AcceptanceTests.DependencyResolution;
 
 namespace SFA.DAS.Tasks.AcceptanceTests.Steps
@@ -20,7 +21,7 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             _azureTopicMessageBus = _objectContainer.Resolve<IAzureTopicMessageBus>();
         }
 
-        [When(@"(agreement_created|agreement_signed|legal_entity_removed) message get publish")]
+        [When(@"(agreement_created|agreement_signed|legal_entity_removed|cohort_created) message get publish")]
         public async Task WhenAgreement_CreatedMessageGetPublish(string message)
         {
             switch (message)
@@ -35,6 +36,9 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
                     break;
                 case "legal_entity_removed":
                     await PublishAndPeak<LegalEntityRemovedMessage>();
+                    break;
+                case "cohort_created":
+                    await PublishAndPeak<CohortCreated>();
                     break;
             }
         }
