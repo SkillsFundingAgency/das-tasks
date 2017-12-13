@@ -54,5 +54,16 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             var cohortCreated = _testMessages.CohortCreated(agreementsigned.AccountId);
             _objectContainer.RegisterInstanceAs(cohortCreated);
         }
+
+        [Given(@"I have Draft Cohort")]
+        public void GivenIHaveDraftCohort()
+        {
+            Given(@"I Create Draft Cohort");
+            When(@"cohort_created message get publish");
+            When(@"agreement_created message get publish");
+            var agreementcreated = _objectContainer.Resolve<AgreementCreatedMessage>();
+            var agreementsigned = _testMessages.AgreementSigned(agreementcreated.AccountId, agreementcreated.LegalEntityId, agreementcreated.AgreementId, true);
+            _objectContainer.RegisterInstanceAs(agreementsigned, "cohortcreated=true");
+        }
     }
 }

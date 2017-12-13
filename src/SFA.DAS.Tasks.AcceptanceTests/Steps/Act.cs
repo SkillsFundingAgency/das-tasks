@@ -21,7 +21,7 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             _azureTopicMessageBus = _objectContainer.Resolve<IAzureTopicMessageBus>();
         }
 
-        [When(@"(agreement_created|agreement_signed|legal_entity_removed|cohort_created) message get publish")]
+        [When(@"(agreement_created|agreement_signed|agreement_signed_cohort_created|legal_entity_removed|cohort_created) message get publish")]
         public async Task WhenAgreement_CreatedMessageGetPublish(string message)
         {
             switch (message)
@@ -34,6 +34,10 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
                     await PublishAndPeak<AgreementSignedMessage>();
                     _testMessages.NoofAgreementSigned++;
                     break;
+                case "agreement_signed_cohort_created":
+                    await PublishAndPeak<AgreementSignedMessage>("cohortcreated=true");
+                    _testMessages.NoofAgreementSigned++;
+                    break;
                 case "legal_entity_removed":
                     await PublishAndPeak<LegalEntityRemovedMessage>();
                     break;
@@ -43,9 +47,9 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             }
         }
 
-        private async Task PublishAndPeak<T>()
+        private async Task PublishAndPeak<T>(string name = null)
         {
-            var agreement = _objectContainer.Resolve<T>();
+            var agreement = _objectContainer.Resolve<T>(name);
             await _azureTopicMessageBus.PublishAsync(agreement);
             await Task.Delay(10000);
             //int count = 0;

@@ -11,3 +11,8 @@ Scenario: Create Draft Cohort
 Given I Create Draft Cohort
 When cohort_created message get publish
 Then AddApprentices Task should be removed
+
+Scenario: Create Draft Cohort And Sign An Agreement
+Given I have Draft Cohort
+When agreement_signed_cohort_created message get publish
+Then AddApprentices Task should not be added
