@@ -63,6 +63,19 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
         }
 
 
+        [Then(@"I should have a (ApprenticeChangesToReview) Task")]
+        public void ThenIShouldHaveAApprenticeChangesToReviewTask(string tasktype)
+        {
+            var tasksbytaskstype = TaskDto(tasktype);
+            NUnit.Framework.Assert.AreEqual(1, tasksbytaskstype?.ItemsDueCount, "ApprenticeChangesToReview Task is not created");
+        }
+        [Then(@"(ApprenticeChangesToReview) Task should be removed")]
+        public void ThenApprenticeChangesToReviewTaskShouldBeRemoved(string tasktype)
+        {
+            var tasksbytaskstype = TaskDto(tasktype);
+            NUnit.Framework.Assert.AreEqual(0, tasksbytaskstype?.ItemsDueCount, "ApprenticeChangesToReview Task is not removed");
+        }
+
         private TaskDto TaskDto(string tasktype)
         {
             var tasksbyAccountid = _taskApiClient.GetTasks(_employerAccountId, string.Empty).Result.ToList();
