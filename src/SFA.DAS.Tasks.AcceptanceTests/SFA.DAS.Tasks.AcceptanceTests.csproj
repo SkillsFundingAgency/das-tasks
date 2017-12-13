@@ -138,6 +138,11 @@
   <ItemGroup>
     <Compile Include="Configuration\TasksDbConfiguration.cs" />
     <Compile Include="DependencyResolution\TestRegistry.cs" />
+    <Compile Include="Features\ApprenticeshipUpdate.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApprenticeshipUpdate.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\CreateOrRemoveAgreement.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,6 +178,10 @@
       <DependentUpon>App.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Features\ApprenticeshipUpdate.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ApprenticeshipUpdate.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\CreateOrRemoveAgreement.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

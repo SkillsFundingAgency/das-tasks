@@ -47,6 +47,27 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             }
         }
 
+        [When(@"(apprenticeship_update_created|apprenticeship_update_accepted|apprenticeship_update_rejected|apprenticeship_update_cancelled) message get publish")]
+        public async Task WhenApprenticeship_CreatedMessageGetPublish(string message)
+        {
+            switch (message)
+            {
+                case "apprenticeship_update_created":
+                    await PublishAndPeak<ApprenticeshipUpdateCreated>();
+                    break;
+                case "apprenticeship_update_accepted":
+                    await PublishAndPeak<ApprenticeshipUpdateAccepted>();
+                    break;
+                case "apprenticeship_update_rejected":
+                    await PublishAndPeak<ApprenticeshipUpdateRejected>();
+                    break;
+                case "apprenticeship_update_cancelled":
+                    await PublishAndPeak<ApprenticeshipUpdateCancelled>();
+                    break;
+            }
+        }
+
+
         private async Task PublishAndPeak<T>(string name = null)
         {
             var agreement = _objectContainer.Resolve<T>(name);

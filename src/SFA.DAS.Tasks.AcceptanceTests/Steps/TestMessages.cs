@@ -55,5 +55,42 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             long commitmentid = 65457812;
             return new CohortCreated(accountId, providerid, commitmentid);
         }
+
+        public ApprenticeshipUpdateCreated ApprenticeshipUpdateCreated(long accountId, long providerid)
+        {
+            return new ApprenticeshipUpdateCreated
+            {
+                AccountId = accountId,
+                ApprenticeshipId = 65457812,
+                ProviderId = providerid
+            };
+        }
+        public ApprenticeshipUpdateAccepted ApprenticeshipUpdateAccepted(long accountId, long providerid, long apprenticeshipId)
+        {
+            return new ApprenticeshipUpdateAccepted
+            {
+                AccountId = accountId,
+                ApprenticeshipId = apprenticeshipId,
+                ProviderId = providerid
+            };
+        }
+        public ApprenticeshipUpdateRejected ApprenticeshipUpdateRejected(long accountId, long providerid, long apprenticeshipId)
+        {
+            return new ApprenticeshipUpdateRejected
+            {
+                AccountId = accountId,
+                ApprenticeshipId = apprenticeshipId,
+                ProviderId = providerid
+            };
+        }
+        public ApprenticeshipUpdateCancelled ApprenticeshipUpdateCancelled(long accountId, long providerid, long apprenticeshipId)
+        {
+            return new ApprenticeshipUpdateCancelled
+            {
+                AccountId = accountId,
+                ApprenticeshipId = apprenticeshipId,
+                ProviderId = providerid
+            };
+        }
     }
 }

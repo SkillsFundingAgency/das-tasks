@@ -1,6 +1,7 @@
 ﻿using TechTalk.SpecFlow;
 using BoDi;
 using SFA.DAS.EmployerAccounts.Events.Messages;
+using SFA.DAS.Commitments.Events;
 using System.Collections.Generic;
 
 namespace SFA.DAS.Tasks.AcceptanceTests.Steps
@@ -64,6 +65,46 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             var agreementcreated = _objectContainer.Resolve<AgreementCreatedMessage>();
             var agreementsigned = _testMessages.AgreementSigned(agreementcreated.AccountId, agreementcreated.LegalEntityId, agreementcreated.AgreementId, true);
             _objectContainer.RegisterInstanceAs(agreementsigned, "cohortcreated=true");
+        }
+
+        [Given(@"I have an Apprenticeship Changes To Review")]
+        public void GivenIHaveAnApprenticeshipChangesToReview()
+        {
+            Given(@"I Create Draft Cohort");
+            When(@"cohort_created message get publish");
+            var cohortCreated = _objectContainer.Resolve<CohortCreated>();
+            var apprenticeshipchange = _testMessages.ApprenticeshipUpdateCreated(cohortCreated.AccountId, cohortCreated.ProviderId ?? 10000254);
+            _objectContainer.RegisterInstanceAs(apprenticeshipchange);
+        }
+
+        [Given(@"I have an Apprenticeship Accepted")]
+        public void GivenIHaveAnApprenticeshipAccepted()
+        {
+            Given(@"I have an Apprenticeship Changes To Review");
+            When(@"apprenticeship_update_created message get publish");
+            var apprenticeshipchange = _objectContainer.Resolve<ApprenticeshipUpdateCreated>();
+            var apprenticeshipaccepted = _testMessages.ApprenticeshipUpdateAccepted(apprenticeshipchange.AccountId, apprenticeshipchange.ProviderId, apprenticeshipchange.ApprenticeshipId);
+            _objectContainer.RegisterInstanceAs(apprenticeshipaccepted);
+        }
+
+        [Given(@"I have an Apprenticeship Rejected")]
+        public void GivenIHaveAnApprenticeshipRejected()
+        {
+            Given(@"I have an Apprenticeship Changes To Review");
+            When(@"apprenticeship_update_created message get publish");
+            var apprenticeshipchange = _objectContainer.Resolve<ApprenticeshipUpdateCreated>();
+            var apprenticeshiprejected = _testMessages.ApprenticeshipUpdateRejected(apprenticeshipchange.AccountId, apprenticeshipchange.ProviderId, apprenticeshipchange.ApprenticeshipId);
+            _objectContainer.RegisterInstanceAs(apprenticeshiprejected);
+        }
+
+        [Given(@"I have an Apprenticeship Cancelled")]
+        public void GivenIHaveAnApprenticeshipCancelled()
+        {
+            Given(@"I have an Apprenticeship Changes To Review");
+            When(@"apprenticeship_update_created message get publish");
+            var apprenticeshipchange = _objectContainer.Resolve<ApprenticeshipUpdateCreated>();
+            var apprenticeshipCancelled = _testMessages.ApprenticeshipUpdateCancelled(apprenticeshipchange.AccountId, apprenticeshipchange.ProviderId, apprenticeshipchange.ApprenticeshipId);
+            _objectContainer.RegisterInstanceAs(apprenticeshipCancelled);
         }
     }
 }
