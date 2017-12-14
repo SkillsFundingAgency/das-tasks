@@ -56,6 +56,25 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             return new CohortCreated(accountId, providerid, commitmentid);
         }
 
+        public CohortApprovalRequestedByProvider CohortApprovalRequestedByProvider(long accountId, long commitmentid, long providerid)
+        {
+            return new CohortApprovalRequestedByProvider
+            {
+                AccountId = accountId,
+                CommitmentId = commitmentid,
+                ProviderId = providerid
+            };
+        }
+        public CohortApprovedByEmployer CohortApprovedByEmployer(long accountId, long commitmentid, long providerid)
+        {
+            return new CohortApprovedByEmployer
+            {
+                AccountId = accountId,
+                CommitmentId = commitmentid,
+                ProviderId = providerid
+            };
+        }
+
         public ApprenticeshipUpdateCreated ApprenticeshipUpdateCreated(long accountId, long providerid)
         {
             return new ApprenticeshipUpdateCreated

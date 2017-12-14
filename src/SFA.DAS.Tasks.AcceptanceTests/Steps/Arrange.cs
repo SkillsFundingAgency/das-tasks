@@ -106,5 +106,24 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             var apprenticeshipCancelled = _testMessages.ApprenticeshipUpdateCancelled(apprenticeshipchange.AccountId, apprenticeshipchange.ProviderId, apprenticeshipchange.ApprenticeshipId);
             _objectContainer.RegisterInstanceAs(apprenticeshipCancelled);
         }
+
+        [Given(@"I have Cohort Ready For Approval")]
+        public void GivenIHaveCohortReadyForApproval()
+        {
+            Given(@"I Create Draft Cohort");
+            var cohortcreated = _objectContainer.Resolve<CohortCreated>();
+            var cohortApprovalRequestedByProvider = _testMessages.CohortApprovalRequestedByProvider(cohortcreated.AccountId, cohortcreated.CommitmentId, cohortcreated.ProviderId ?? 10000254);
+            _objectContainer.RegisterInstanceAs(cohortApprovalRequestedByProvider);
+        }
+
+        [Given(@"I have Approved A Cohort")]
+        public void GivenIHaveApprovedACohort()
+        {
+            Given(@"I have Cohort Ready For Approval");
+            When(@"cohort_approval_requested_by_provider message get publish");
+            var cohortApprovalRequestedByProvider = _objectContainer.Resolve<CohortApprovalRequestedByProvider>();
+            var cohortApprovedByEmployer = _testMessages.CohortApprovedByEmployer(cohortApprovalRequestedByProvider.AccountId, cohortApprovalRequestedByProvider.CommitmentId, cohortApprovalRequestedByProvider.ProviderId);
+            _objectContainer.RegisterInstanceAs(cohortApprovedByEmployer);
+        }
     }
 }

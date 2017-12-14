@@ -143,6 +143,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApprenticeshipUpdate.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\CohortApproved.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CohortApproved.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\CreateOrRemoveAgreement.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -182,6 +187,10 @@
     <None Include="Features\ApprenticeshipUpdate.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ApprenticeshipUpdate.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CohortApproved.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CohortApproved.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\CreateOrRemoveAgreement.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
