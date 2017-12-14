@@ -67,6 +67,20 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             }
         }
 
+        [When(@"(cohort_approval_requested_by_provider|cohort_approved_by_employer) message get publish")]
+        public async Task WhenCohort_Approval_Requested_By_ProviderMessageGetPublish(string message)
+        {
+            switch (message)
+            {
+                case "cohort_approval_requested_by_provider":
+                    await PublishAndPeak<CohortApprovalRequestedByProvider>();
+                    break;
+                case "cohort_approved_by_employer":
+                    await PublishAndPeak<CohortApprovedByEmployer>();
+                    break;
+            }
+        }
+
 
         private async Task PublishAndPeak<T>(string name = null)
         {
