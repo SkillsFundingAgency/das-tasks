@@ -22,10 +22,10 @@ namespace SFA.DAS.Tasks.API.DependancyResolution
 
         private void RegisterLogger()
         {
-            For<IRequestContext>().Use(x => new RequestContext(new HttpContextWrapper(HttpContext.Current)));
+            For<ILoggingContext>().Use(x => new RequestContext(new HttpContextWrapper(HttpContext.Current)));
             For<ILog>().Use(x => new NLogLogger(
                 x.ParentType,
-                x.GetInstance<IRequestContext>(),
+                x.GetInstance<ILoggingContext>(),
                 null)).AlwaysUnique();
         }
 

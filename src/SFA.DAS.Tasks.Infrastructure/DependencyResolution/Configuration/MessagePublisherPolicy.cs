@@ -4,6 +4,7 @@ using System.Reflection;
 using SFA.DAS.Messaging.AzureServiceBus;
 using SFA.DAS.Messaging.FileSystem;
 using SFA.DAS.Messaging.Interfaces;
+using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Domain.Configurations;
 using StructureMap.Pipeline;
 
@@ -36,7 +37,7 @@ namespace SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration
             }
             else
             {
-                var publisher = new TopicMessagePublisher(messageQueueConnectionString);
+                var publisher = new TopicMessagePublisher(messageQueueConnectionString, new NLogLogger(typeof(TopicMessagePublisher)));
                 instance.Dependencies.AddForConstructorParameter(messagePublisher, publisher);
             }   
         }

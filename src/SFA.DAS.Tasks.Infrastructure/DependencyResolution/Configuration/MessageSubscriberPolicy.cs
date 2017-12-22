@@ -10,6 +10,7 @@ using SFA.DAS.Messaging.AzureServiceBus;
 using SFA.DAS.Messaging.AzureServiceBus.Helpers;
 using SFA.DAS.Messaging.FileSystem;
 using SFA.DAS.Messaging.Interfaces;
+using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Domain.Configurations;
 using StructureMap;
 using StructureMap.Pipeline;
@@ -45,7 +46,7 @@ namespace SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration
             {
                 var subscriptionName = TopicSubscriptionHelper.GetMessageGroupName(instance.Constructor.DeclaringType);
 
-                var factory = new TopicSubscriberFactory(messageQueueConnectionString, subscriptionName);
+                var factory = new TopicSubscriberFactory(messageQueueConnectionString, subscriptionName, new NLogLogger(typeof(TopicSubscriberFactory)));
 
                 instance.Dependencies.AddForConstructorParameter(subscriberFactory, factory);
             }   

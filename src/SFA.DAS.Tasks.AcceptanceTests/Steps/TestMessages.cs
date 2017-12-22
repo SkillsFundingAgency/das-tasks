@@ -12,6 +12,12 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
 
         public int NoofAgreementSigned { get; set; }
 
+        public string TestUserName => "Test User";
+
+        public string TestUserRef => "ABC123";
+
+        public string TestOrgainsationName => "Test Corp";
+
         private long GenerateRandomid()
         {
             Random rnd = new Random();
@@ -19,34 +25,19 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
         }
         public AgreementCreatedMessage AgreementCreated(long accountId)
         {
-            return new AgreementCreatedMessage
-            {
-                AccountId = accountId,
-                LegalEntityId = 8547,
-                AgreementId = 9856
-            };
+            return new AgreementCreatedMessage(accountId, 9856, TestOrgainsationName, 8547, TestUserName, TestUserRef);
         }
 
         public AgreementSignedMessage AgreementSigned(long accountId, long legalEntityId, long agreementId, bool cohortCreated = false)
         {
-            return new AgreementSignedMessage
-            {
-                AccountId = accountId,
-                LegalEntityId = legalEntityId,
-                AgreementId = agreementId,
-                CohortCreated = cohortCreated
-            };
+            return new AgreementSignedMessage(accountId, agreementId, legalEntityId, cohortCreated, TestUserName,
+                TestUserRef);
         }
 
         public LegalEntityRemovedMessage LegalEntityRemovedMessage(long accountId, long legalEntityId, long agreementId,bool agreementSigned)
         {
-            return new LegalEntityRemovedMessage
-            {
-                AccountId = accountId,
-                LegalEntityId = legalEntityId,
-                AgreementId = agreementId,
-                AgreementSigned = agreementSigned
-            };
+            return new LegalEntityRemovedMessage(accountId, agreementId, agreementSigned, legalEntityId, TestUserName,
+                TestUserRef);
         }
 
         public CohortCreated CohortCreated(long accountId)
