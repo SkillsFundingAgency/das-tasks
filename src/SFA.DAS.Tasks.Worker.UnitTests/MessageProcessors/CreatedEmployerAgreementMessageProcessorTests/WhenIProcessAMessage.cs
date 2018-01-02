@@ -30,11 +30,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.CreatedEmployerAgreem
             _subscriptionFactory = new Mock<IMessageSubscriberFactory>();
             _subscriber = new Mock<IMessageSubscriber<AgreementCreatedMessage>>();
 
-            _messageContent = new AgreementCreatedMessage
-            {
-                AccountId = 123,
-                LegalEntityId = 456
-            };
+            _messageContent = new AgreementCreatedMessage(123, 2, "Test Corp", 456, "Test User", "ABC123");
 
             _mockMessage = new Mock<IMessage<AgreementCreatedMessage>>();
 
