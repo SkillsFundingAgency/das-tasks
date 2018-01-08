@@ -4,6 +4,10 @@ using BoDi;
 using System.Linq;
 using SFA.DAS.Tasks.API.Types.DTOs;
 using System.Collections.Generic;
+using Polly;
+using System;
+using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace SFA.DAS.Tasks.AcceptanceTests.Steps
 {
@@ -15,6 +19,10 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
         private TestMessages _testMessages;
         private string _employerAccountId;
 
+        public Assert()
+        {
+        }
+
         public Assert(IObjectContainer objectContainer)
         {
             _objectContainer = objectContainer;
@@ -25,69 +33,170 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
         }
 
         [Then(@"I should have a (AgreementToSign) Task")]
-        public void ThenIShouldHaveAAgreementToSignTask(string tasktype)
+        public async Task ThenIShouldHaveAAgreementToSignTask(string tasktype)
         {
-            var tasksbytaskstype = TaskDto(tasktype);
             int noofAgreementCreated = _testMessages.NoofAgreementCreated;
-            NUnit.Framework.Assert.AreEqual(noofAgreementCreated, tasksbytaskstype?.ItemsDueCount, "AgreementToSign Task is not created");
+            int count = 0;
+            await PollyRetryAsync(async () =>
+             {
+                 var tasksbytaskstype = await TaskDto(tasktype);
+                 count++;
+                 NUnit.Framework.Assert.AreEqual(noofAgreementCreated, tasksbytaskstype?.ItemsDueCount, $"AgreementToSign Task is not created, after {count} retry");
+             });
         }
 
         [Then(@"I should have a (AddApprentices) Task")]
-        public void ThenIShouldHaveAAddApprenticesTask(string tasktype)
+        public async Task ThenIShouldHaveAAddApprenticesTask(string tasktype)
         {
-            var tasksbytaskstype = TaskDto(tasktype);
             int noofAgreementSigned = _testMessages.NoofAgreementSigned;
-            NUnit.Framework.Assert.AreEqual(noofAgreementSigned, tasksbytaskstype?.ItemsDueCount , "AddApprentices Task is not created");
+            int count = 0;
+            await PollyRetryAsync(async () => 
+            {
+                var tasksbytaskstype = await TaskDto(tasktype);
+                count++;
+                NUnit.Framework.Assert.AreEqual(noofAgreementSigned, tasksbytaskstype?.ItemsDueCount, $"AddApprentices Task is not created, after {count} retry");
+            });
         }
 
         [Then(@"(AgreementToSign) Task should be removed")]
-        public void ThenAgreementToSignTaskShouldBeRemoved(string tasktype)
+        public async Task ThenAgreementToSignTaskShouldBeRemoved(string tasktype)
         {
-            var tasksbytaskstype = TaskDto(tasktype);
             int noofAgreementCreated = _testMessages.NoofAgreementCreated;
-            NUnit.Framework.Assert.AreEqual(noofAgreementCreated - 1, tasksbytaskstype?.ItemsDueCount, "AgreementToSign Task is not removed");
+            int count = 0;
+            await PollyRetryAsync(async () =>
+            {
+                var tasksbytaskstype = await TaskDto(tasktype);
+                count++;
+                NUnit.Framework.Assert.AreEqual(noofAgreementCreated - 1, tasksbytaskstype?.ItemsDueCount, $"AgreementToSign Task is not removed, after {count} retry");
+            });      
         }
 
         [Then(@"(AddApprentices) Task should be removed")]
-        public void ThenAddApprenticesTaskShouldBeRemoved(string tasktype)
+        public async Task ThenAddApprenticesTaskShouldBeRemoved(string tasktype)
         {
-            var tasksbytaskstype = TaskDto(tasktype);
-            NUnit.Framework.Assert.AreEqual(0, tasksbytaskstype?.ItemsDueCount, "AddApprentices Task is not removed");
+            int count = 0;
+            await PollyRetryAsync(async () => 
+            {
+                var tasksbytaskstype = await TaskDto(tasktype);
+                count++;
+                NUnit.Framework.Assert.AreEqual(0, tasksbytaskstype?.ItemsDueCount, $"AddApprentices Task is not removed, after {count} retry");
+            });            
         }
 
         [Then(@"(AddApprentices) Task should not be added")]
-        public void ThenAddApprenticesTaskShouldNotBeAdded(string tasktype)
+        public async Task ThenAddApprenticesTaskShouldNotBeAdded(string tasktype)
         {
-            var tasksbytaskstype = TaskDto(tasktype);
-            NUnit.Framework.Assert.AreEqual(0, tasksbytaskstype?.ItemsDueCount, "AddApprentices Task is added");
+            int count = 0;
+            await PollyRetryAsync(async () =>
+            {
+                var tasksbytaskstype = await TaskDto(tasktype);
+                count++;
+                NUnit.Framework.Assert.AreEqual(0, tasksbytaskstype?.ItemsDueCount, $"AddApprentices Task is added, after {count} retry");
+            });
         }
 
 
         [Then(@"I should have a (ApprenticeChangesToReview|CohortRequestReadyForApproval) Task")]
-        public void ThenIShouldHaveAApprenticeChangesToReviewTask(string tasktype)
+        public async Task ThenIShouldHaveAApprenticeChangesToReviewTask(string tasktype)
         {
-            var tasksbytaskstype = TaskDto(tasktype);
-            NUnit.Framework.Assert.AreEqual(1, tasksbytaskstype?.ItemsDueCount, $"{tasktype} Task is not created");
+            int count = 0;
+            await PollyRetryAsync(async () =>
+            {
+                var tasksbytaskstype = await TaskDto(tasktype);
+                count++;
+                NUnit.Framework.Assert.AreEqual(1, tasksbytaskstype?.ItemsDueCount, $"{tasktype} Task is not created, after {count} retry");
+            });            
         }
 
         [Then(@"I should have a (2|3) (CohortRequestReadyForApproval) Task")]
-        public void ThenIShouldHaveACohortRequestReadyForApprovalTask(int noOfTasks, string tasktype)
+        public async Task ThenIShouldHaveACohortRequestReadyForApprovalTask(int noOfTasks, string tasktype)
         {
-            var tasksbytaskstype = TaskDto(tasktype);
-            NUnit.Framework.Assert.AreEqual(noOfTasks, tasksbytaskstype?.ItemsDueCount, $"{noOfTasks} times {tasktype} Task is not created");
+            int count = 0;
+            await PollyRetryAsync(async () =>
+            {
+                var tasksbytaskstype = await TaskDto(tasktype);
+                count++;
+                NUnit.Framework.Assert.AreEqual(noOfTasks, tasksbytaskstype?.ItemsDueCount, $"{tasktype} Task is not displayed {noOfTasks} times, after {count} retry");
+            });
         }
 
         [Then(@"(ApprenticeChangesToReview|CohortRequestReadyForApproval) Task should be removed")]
-        public void ThenApprenticeChangesToReviewTaskShouldBeRemoved(string tasktype)
+        public async Task ThenApprenticeChangesToReviewTaskShouldBeRemoved(string tasktype)
         {
-            var tasksbytaskstype = TaskDto(tasktype);
-            NUnit.Framework.Assert.AreEqual(0, tasksbytaskstype?.ItemsDueCount, $"{tasktype} Task is not removed");
+            int count = 0;
+            await PollyRetryAsync(async () =>
+            {
+                var tasksbytaskstype = await TaskDto(tasktype);
+                count++;
+                NUnit.Framework.Assert.AreEqual(0, tasksbytaskstype?.ItemsDueCount, $"{tasktype} Task is not removed, after {count} retry");
+            });
         }
 
-        private TaskDto TaskDto(string tasktype)
+        private async Task<TaskDto> TaskDto(string tasktype)
         {
-            var tasksbyAccountid = _taskApiClient.GetTasks(_employerAccountId, string.Empty).Result.ToList();
+            var tasks = await _taskApiClient.GetTasks(_employerAccountId, string.Empty);
+            var tasksbyAccountid = tasks.ToList();
             return tasksbyAccountid.FirstOrDefault(x => x.EmployerAccountId == _employerAccountId && x.Type == tasktype);
+        }
+
+        public async Task PollyRetryAsync(Func<Task> action)
+        {
+            await Policy
+                .Handle<AssertionException>()
+                .WaitAndRetryAsync(new[] { TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(5) })
+                .ExecuteAsync(action);
+        }
+    }
+
+    [TestFixture,Ignore("Tests to test the tests")]
+    public class TestPollyRetry
+    {
+        Assert TestAssertStep;
+
+        [OneTimeSetUp]
+        public void Setup()
+        {
+            TestAssertStep = new Assert();
+        }
+
+        [Test]
+        public void ShouldThrowException()
+        {
+            Func<Task> action = async () =>
+            {
+                await Task.Delay(0);
+                NUnit.Framework.Assert.AreEqual(3, 2);
+            };
+            
+            NUnit.Framework.Assert.ThrowsAsync<AssertionException>(() => TestAssertStep.PollyRetryAsync(action));
+        }
+
+        [Test]
+        public void ShouldNotThrowException()
+        {
+            Func<Task> action = async () =>
+            {
+                await Task.Delay(0);
+                NUnit.Framework.Assert.AreEqual(2, 2);
+            };
+
+            NUnit.Framework.Assert.DoesNotThrowAsync(() => TestAssertStep.PollyRetryAsync(action));
+        }
+
+        [Test]
+        public void ShouldRetryThreeTimes()
+        {
+            int count = 0;
+            Func<Task> action = async () => 
+            {
+                await Task.Delay(0);
+                count++;
+                NUnit.Framework.Assert.AreEqual(3, 2);
+            };
+            NUnit.Framework.Assert.ThrowsAsync<AssertionException>(() => TestAssertStep.PollyRetryAsync(action));
+
+            NUnit.Framework.Assert.AreEqual(3, count);
         }
     }
 }
+
