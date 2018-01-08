@@ -64,12 +64,12 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Sign an Agreement")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void SignAnAgreement()
+        [NUnit.Framework.DescriptionAttribute("010 Sign an Agreement")]
+        [NUnit.Framework.CategoryAttribute("AML1239")]
+        public virtual void _010SignAnAgreement()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sign an Agreement", new string[] {
-                        "mytag"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("010 Sign an Agreement", new string[] {
+                        "AML1239"});
 #line 4
 this.ScenarioSetup(scenarioInfo);
 #line 5
@@ -85,34 +85,38 @@ testRunner.And("AgreementToSign Task should be removed", ((string)(null)), ((Tec
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create Draft Cohort")]
-        public virtual void CreateDraftCohort()
+        [NUnit.Framework.DescriptionAttribute("011 Create Draft Cohort")]
+        [NUnit.Framework.CategoryAttribute("AML1415")]
+        public virtual void _011CreateDraftCohort()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create Draft Cohort", ((string[])(null)));
-#line 10
-this.ScenarioSetup(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("011 Create Draft Cohort", new string[] {
+                        "AML1415"});
 #line 11
-testRunner.Given("I Create Draft Cohort", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 12
-testRunner.When("cohort_created message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Given("I Create Draft Cohort", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 13
+testRunner.When("cohort_created message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 14
 testRunner.Then("AddApprentices Task should be removed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create Draft Cohort And Sign An Agreement")]
-        public virtual void CreateDraftCohortAndSignAnAgreement()
+        [NUnit.Framework.DescriptionAttribute("012 Create Draft Cohort And Sign An Agreement")]
+        [NUnit.Framework.CategoryAttribute("AML1415")]
+        public virtual void _012CreateDraftCohortAndSignAnAgreement()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create Draft Cohort And Sign An Agreement", ((string[])(null)));
-#line 15
-this.ScenarioSetup(scenarioInfo);
-#line 16
-testRunner.Given("I have Draft Cohort", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("012 Create Draft Cohort And Sign An Agreement", new string[] {
+                        "AML1415"});
 #line 17
-testRunner.When("agreement_signed_cohort_created message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 18
+testRunner.Given("I have Draft Cohort", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 19
+testRunner.When("agreement_signed_cohort_created message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 20
 testRunner.Then("AddApprentices Task should not be added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

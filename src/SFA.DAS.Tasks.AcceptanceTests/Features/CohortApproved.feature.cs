@@ -66,10 +66,10 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Cohort Approval Requested By Provider")]
-        public virtual void CohortApprovalRequestedByProvider()
+        [NUnit.Framework.DescriptionAttribute("030 Cohort Approval Requested By Provider")]
+        public virtual void _030CohortApprovalRequestedByProvider()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Cohort Approval Requested By Provider", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("030 Cohort Approval Requested By Provider", ((string[])(null)));
 #line 5
 this.ScenarioSetup(scenarioInfo);
 #line 6
@@ -83,10 +83,10 @@ testRunner.Then("I should have a CohortRequestReadyForApproval Task", ((string)(
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Cohort Approved By Employer")]
-        public virtual void CohortApprovedByEmployer()
+        [NUnit.Framework.DescriptionAttribute("031 Cohort Approved By Employer")]
+        public virtual void _031CohortApprovedByEmployer()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Cohort Approved By Employer", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("031 Cohort Approved By Employer", ((string[])(null)));
 #line 11
 this.ScenarioSetup(scenarioInfo);
 #line 12
@@ -95,6 +95,42 @@ testRunner.Given("I have Approved A Cohort", ((string)(null)), ((TechTalk.SpecFl
 testRunner.When("cohort_approved_by_employer message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 14
 testRunner.Then("CohortRequestReadyForApproval Task should be removed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("032 No Of Cohort Approval Requested By Provider")]
+        public virtual void _032NoOfCohortApprovalRequestedByProvider()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("032 No Of Cohort Approval Requested By Provider", ((string[])(null)));
+#line 17
+this.ScenarioSetup(scenarioInfo);
+#line 18
+testRunner.Given("I have Cohort Ready For Approval", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 19
+testRunner.When("There are 3 cohort_approval_requested_by_provider message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 20
+testRunner.Then("I should have a 3 CohortRequestReadyForApproval Task", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("033 No Of Pending Cohort Approval By Employer")]
+        public virtual void _033NoOfPendingCohortApprovalByEmployer()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("033 No Of Pending Cohort Approval By Employer", ((string[])(null)));
+#line 23
+this.ScenarioSetup(scenarioInfo);
+#line 24
+testRunner.Given("I have Approved A Cohort", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 25
+testRunner.When("There are 3 cohort_approval_requested_by_provider message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 26
+testRunner.When("cohort_approved_by_employer message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 27
+testRunner.Then("I should have a 2 CohortRequestReadyForApproval Task", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

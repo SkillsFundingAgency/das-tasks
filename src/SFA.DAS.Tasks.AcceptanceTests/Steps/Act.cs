@@ -67,6 +67,17 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             }
         }
 
+        [When(@"There are (3) (cohort_approval_requested_by_provider) message get publish")]
+        public async Task WhenThereAreCohort_Approval_Requested_By_ProviderMessageGetPublish(int noOfTimes, string message)
+        {
+            for(int i=0; i<noOfTimes;i++)
+            {
+                await WhenCohort_Approval_Requested_By_ProviderMessageGetPublish(message);
+            }
+        }
+
+
+
         [When(@"(cohort_approval_requested_by_provider|cohort_approved_by_employer) message get publish")]
         public async Task WhenCohort_Approval_Requested_By_ProviderMessageGetPublish(string message)
         {

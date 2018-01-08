@@ -66,10 +66,10 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Apprentice Changes To Review")]
-        public virtual void ApprenticeChangesToReview()
+        [NUnit.Framework.DescriptionAttribute("020 Apprentice Changes To Review")]
+        public virtual void _020ApprenticeChangesToReview()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Apprentice Changes To Review", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("020 Apprentice Changes To Review", ((string[])(null)));
 #line 4
 this.ScenarioSetup(scenarioInfo);
 #line 5
@@ -83,10 +83,10 @@ testRunner.Then("I should have a ApprenticeChangesToReview Task", ((string)(null
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Apprentice Changes Accepted")]
-        public virtual void ApprenticeChangesAccepted()
+        [NUnit.Framework.DescriptionAttribute("021 Apprentice Changes Accepted")]
+        public virtual void _021ApprenticeChangesAccepted()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Apprentice Changes Accepted", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("021 Apprentice Changes Accepted", ((string[])(null)));
 #line 9
 this.ScenarioSetup(scenarioInfo);
 #line 10
@@ -100,10 +100,10 @@ testRunner.Then("ApprenticeChangesToReview Task should be removed", ((string)(nu
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Apprentice Changes Rejected")]
-        public virtual void ApprenticeChangesRejected()
+        [NUnit.Framework.DescriptionAttribute("022 Apprentice Changes Rejected")]
+        public virtual void _022ApprenticeChangesRejected()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Apprentice Changes Rejected", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("022 Apprentice Changes Rejected", ((string[])(null)));
 #line 14
 this.ScenarioSetup(scenarioInfo);
 #line 15
@@ -117,10 +117,10 @@ testRunner.Then("ApprenticeChangesToReview Task should be removed", ((string)(nu
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Apprentice Changes Cancelled")]
-        public virtual void ApprenticeChangesCancelled()
+        [NUnit.Framework.DescriptionAttribute("023 Apprentice Changes Cancelled")]
+        public virtual void _023ApprenticeChangesCancelled()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Apprentice Changes Cancelled", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("023 Apprentice Changes Cancelled", ((string[])(null)));
 #line 19
 this.ScenarioSetup(scenarioInfo);
 #line 20

@@ -65,10 +65,10 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create Account Or Add an Organisation")]
-        public virtual void CreateAccountOrAddAnOrganisation()
+        [NUnit.Framework.DescriptionAttribute("001 Create Account Or Add an Organisation")]
+        public virtual void _001CreateAccountOrAddAnOrganisation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create Account Or Add an Organisation", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("001 Create Account Or Add an Organisation", ((string[])(null)));
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
@@ -82,10 +82,10 @@ testRunner.Then("I should have a AgreementToSign Task", ((string)(null)), ((Tech
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Remove an Organisation")]
-        public virtual void RemoveAnOrganisation()
+        [NUnit.Framework.DescriptionAttribute("002 Remove an Organisation")]
+        public virtual void _002RemoveAnOrganisation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove an Organisation", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("002 Remove an Organisation", ((string[])(null)));
 #line 12
 this.ScenarioSetup(scenarioInfo);
 #line 13
