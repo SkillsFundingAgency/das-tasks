@@ -125,5 +125,16 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             var cohortApprovedByEmployer = _testMessages.CohortApprovedByEmployer(cohortApprovalRequestedByProvider.AccountId, cohortApprovalRequestedByProvider.CommitmentId, cohortApprovalRequestedByProvider.ProviderId);
             _objectContainer.RegisterInstanceAs(cohortApprovedByEmployer);
         }
+
+        [Given(@"I have 3 Cohorts to Approve")]
+        public void GivenIHaveCohortToApprove()
+        {
+            Given(@"I have Cohort Ready For Approval");
+            When(@"There are 3 cohort_approval_requested_by_provider message get publish");
+            var cohortApprovalRequestedByProvider = _objectContainer.Resolve<CohortApprovalRequestedByProvider>();
+            var cohortApprovedByEmployer = _testMessages.CohortApprovedByEmployer(cohortApprovalRequestedByProvider.AccountId, cohortApprovalRequestedByProvider.CommitmentId, cohortApprovalRequestedByProvider.ProviderId);
+            _objectContainer.RegisterInstanceAs(cohortApprovedByEmployer);
+        }
+
     }
 }

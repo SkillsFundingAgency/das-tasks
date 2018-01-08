@@ -21,7 +21,6 @@ Then I should have a 3 CohortRequestReadyForApproval Task
 
 
 Scenario: 033 No Of Pending Cohort Approval By Employer
-Given I have Approved A Cohort
-When There are 3 cohort_approval_requested_by_provider message get publish
+Given I have 3 Cohorts to Approve
 When cohort_approved_by_employer message get publish
 Then I should have a 2 CohortRequestReadyForApproval Task
