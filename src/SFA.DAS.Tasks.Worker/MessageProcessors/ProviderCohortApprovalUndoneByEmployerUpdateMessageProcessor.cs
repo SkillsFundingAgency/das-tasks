@@ -13,7 +13,7 @@ using SFA.DAS.Tasks.Infrastructure.Attributes;
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("Commitments")]
-    [TopicSubscription("Task_ProviderCohortApprovalUndoneByEmployerUpdate")]
+    [TopicSubscription("Task_ProviderCohortApprovalUndoneByEmployer")]
     public class ProviderCohortApprovalUndoneByEmployerUpdateMessageProcessor : MessageProcessor<ProviderCohortApprovalUndoneByEmployerUpdate>
     {
         private readonly ILog _logger;
