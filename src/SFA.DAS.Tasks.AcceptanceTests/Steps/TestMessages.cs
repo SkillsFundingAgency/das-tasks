@@ -66,6 +66,11 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             };
         }
 
+        public ProviderCohortApprovalUndoneByEmployerUpdate ProviderCohortApprovalUndoneByEmployerUpdate(long accountId, long commitmentid, long providerid)
+        {
+            return new ProviderCohortApprovalUndoneByEmployerUpdate(accountId, providerid, commitmentid);
+        }
+
         public ApprenticeshipUpdateCreated ApprenticeshipUpdateCreated(long accountId, long providerid)
         {
             return new ApprenticeshipUpdateCreated
