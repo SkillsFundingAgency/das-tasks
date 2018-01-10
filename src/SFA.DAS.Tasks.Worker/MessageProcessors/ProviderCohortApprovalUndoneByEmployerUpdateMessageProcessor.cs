@@ -3,13 +3,17 @@ using System.Threading.Tasks;
 using MediatR;
 using SFA.DAS.Commitments.Events;
 using SFA.DAS.Messaging;
+using SFA.DAS.Messaging.AzureServiceBus.Attributes;
 using SFA.DAS.Messaging.Interfaces;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Commands.SaveTask;
 using SFA.DAS.Tasks.API.Types.Enums;
+using SFA.DAS.Tasks.Infrastructure.Attributes;
 
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
+    [ServiceBusConnectionString("Commitments")]
+    [TopicSubscription("Task_ProviderCohortApprovalUndoneByEmployerUpdate")]
     public class ProviderCohortApprovalUndoneByEmployerUpdateMessageProcessor : MessageProcessor<ProviderCohortApprovalUndoneByEmployerUpdate>
     {
         private readonly ILog _logger;
