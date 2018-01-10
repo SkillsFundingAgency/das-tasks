@@ -78,7 +78,7 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
 
 
 
-        [When(@"(cohort_approval_requested_by_provider|cohort_approved_by_employer) message get publish")]
+        [When(@"(cohort_approval_requested_by_provider|cohort_approved_by_employer|provider_cohort_approval_undone_by_employer_update) message get publish")]
         public async Task WhenCohort_Approval_Requested_By_ProviderMessageGetPublish(string message)
         {
             switch (message)
@@ -88,6 +88,9 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
                     break;
                 case "cohort_approved_by_employer":
                     await PublishAndPeak<CohortApprovedByEmployer>();
+                    break;
+                case "provider_cohort_approval_undone_by_employer_update":
+                    await PublishAndPeak<ProviderCohortApprovalUndoneByEmployerUpdate>();
                     break;
             }
         }

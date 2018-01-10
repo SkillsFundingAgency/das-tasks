@@ -132,6 +132,25 @@ testRunner.Then("I should have a 2 CohortRequestReadyForApproval Task", ((string
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("034 Cohort Approval Undone By Employer")]
+        public virtual void _034CohortApprovalUndoneByEmployer()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("034 Cohort Approval Undone By Employer", ((string[])(null)));
+#line 28
+this.ScenarioSetup(scenarioInfo);
+#line 29
+testRunner.Given("I have Cohort Ready For Approval", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 30
+testRunner.When("cohort_approval_requested_by_provider message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 31
+testRunner.And("provider_cohort_approval_undone_by_employer_update message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 32
+testRunner.Then("CohortRequestReadyForApproval Task should be removed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
