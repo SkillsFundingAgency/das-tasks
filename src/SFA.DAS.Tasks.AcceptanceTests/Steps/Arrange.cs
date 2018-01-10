@@ -42,7 +42,7 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             When(@"agreement_created message get publish");
             When(@"agreement_created message get publish");
             var agreementcreated = _objectContainer.Resolve<AgreementCreatedMessage>();
-            var legalEntityRemoved = _testMessages.LegalEntityRemovedMessage(agreementcreated.AccountId, agreementcreated.LegalEntityId, agreementcreated.AgreementId, false);
+            var legalEntityRemoved = _testMessages.LegalEntityRemovedMessage(agreementcreated.AccountId, agreementcreated.LegalEntityId, agreementcreated.OrganisationName, agreementcreated.AgreementId, false);
             _objectContainer.RegisterInstanceAs(legalEntityRemoved);
         }
 

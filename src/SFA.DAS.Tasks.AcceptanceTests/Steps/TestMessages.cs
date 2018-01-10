@@ -34,10 +34,10 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
                 TestUserRef);
         }
 
-        public LegalEntityRemovedMessage LegalEntityRemovedMessage(long accountId, long legalEntityId, long agreementId,bool agreementSigned)
+        public LegalEntityRemovedMessage LegalEntityRemovedMessage(long accountId, long legalEntityId, string legalEntityName, long agreementId,bool agreementSigned)
         {
-            return new LegalEntityRemovedMessage(accountId, agreementId, agreementSigned, legalEntityId, TestUserName,
-                TestUserRef);
+            return new LegalEntityRemovedMessage(accountId, agreementId, agreementSigned, legalEntityId, 
+                legalEntityName, TestUserName, TestUserRef);
         }
 
         public CohortCreated CohortCreated(long accountId)

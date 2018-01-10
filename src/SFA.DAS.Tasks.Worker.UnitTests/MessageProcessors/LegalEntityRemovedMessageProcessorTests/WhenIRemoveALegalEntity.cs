@@ -45,7 +45,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.LegalEntityRemovedMes
             var message = new Mock<IMessage<LegalEntityRemovedMessage>>();
 
             message.Setup(x => x.Content)
-                .Returns(new LegalEntityRemovedMessage(accountId, 123, false, 345, "Test User", "ABC123"))
+                .Returns(new LegalEntityRemovedMessage(accountId, 123, false, 345, "Test Org", "Test User", "ABC123"))
                 .Callback(_cancellationTokenSource.Cancel);
 
             _subscriber.Setup(x => x.ReceiveAsAsync()).ReturnsAsync(message.Object);
@@ -66,7 +66,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.LegalEntityRemovedMes
             var message = new Mock<IMessage<LegalEntityRemovedMessage>>();
 
             message.Setup(x => x.Content)
-                .Returns(new LegalEntityRemovedMessage(12, 123, true, 345, "Test User", "ABC123"))
+                .Returns(new LegalEntityRemovedMessage(12, 123, true, 345, "Test Org", "Test User", "ABC123"))
                 .Callback(_cancellationTokenSource.Cancel);
 
             _subscriber.Setup(x => x.ReceiveAsAsync()).ReturnsAsync(message.Object);
