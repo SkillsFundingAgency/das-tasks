@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -26,12 +27,28 @@ namespace SFA.DAS.Tasks.Worker
         {
             Trace.TraceInformation("SFA.DAS.Tasks.Worker is running");
 
+            var logger = _container.GetInstance<ILog>();
+
             try
             {
-                var messageProcessors = _container.GetAllInstances<IMessageProcessor>();
+                logger.Debug("Getting message processors");
+
+                var messageProcessors = _container.GetAllInstances<IMessageProcessor>().ToList();
+
+                logger.Debug($"Found {messageProcessors.Count} message processors");
+
+                foreach (var processor in messageProcessors)
+                {
+                    logger.Debug($"Found message processor of type {processor.GetType().FullName}");
+                }
 
                 var tasks = messageProcessors.Select(x => x.RunAsync(_cancellationTokenSource.Token)).ToArray();
                 Task.WaitAll(tasks);
+            }
+            catch (Exception ex)
+            {
+                logger.Fatal(ex, "Task Worker has had an unhandled excdeption and is exiting");
+                throw;
             }
             finally
             {
