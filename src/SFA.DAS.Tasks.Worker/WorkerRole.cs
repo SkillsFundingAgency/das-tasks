@@ -42,7 +42,7 @@ namespace SFA.DAS.Tasks.Worker
                     logger.Debug($"Found message processor of type {processor.GetType().FullName}");
                 }
 
-                var tasks = messageProcessors.Select(x => x.RunAsync(_cancellationTokenSource.Token)).ToArray();
+                var tasks = messageProcessors.Select(x => x.RunAsync(_cancellationTokenSource)).ToArray();
                 Task.WaitAll(tasks);
             }
             catch (Exception ex)

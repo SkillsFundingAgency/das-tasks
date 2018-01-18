@@ -51,7 +51,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.LegalEntityRemovedMes
             _subscriber.Setup(x => x.ReceiveAsAsync()).ReturnsAsync(message.Object);
 
             //Act
-            await _processor.RunAsync(_cancellationTokenSource.Token);
+            await _processor.RunAsync(_cancellationTokenSource);
 
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(t => t.TaskCompleted && 
@@ -72,7 +72,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.LegalEntityRemovedMes
             _subscriber.Setup(x => x.ReceiveAsAsync()).ReturnsAsync(message.Object);
 
             //Act
-            await _processor.RunAsync(_cancellationTokenSource.Token);
+            await _processor.RunAsync(_cancellationTokenSource);
 
             //Assert
             _subscriber.Verify(x => x.ReceiveAsAsync(), Times.Once);

@@ -53,7 +53,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.CreatedEmployerAgreem
         public async Task ThenTheMessageShouldBeHandledByAHandler()
         {
             //Act
-            await _processor.RunAsync(_tokenSource.Token);
+            await _processor.RunAsync(_tokenSource);
 
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.EmployerAccountId.Equals(_messageContent.AccountId.ToString()) &&
