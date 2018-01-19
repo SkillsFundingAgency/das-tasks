@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using SFA.DAS.EmployerAccounts.Events.Messages;
 using SFA.DAS.Commitments.Events;
 using SFA.DAS.Tasks.AcceptanceTests.DependencyResolution;
+using SFA.DAS.Tasks.AcceptanceTests.EmployerAccounts;
+using SFA.DAS.Tasks.AcceptanceTests.Commitments;
 
 namespace SFA.DAS.Tasks.AcceptanceTests.Steps
 {
@@ -19,6 +21,19 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             _objectContainer = objectContainer;
             _testMessages = _objectContainer.Resolve<TestMessages>();
             _azureTopicMessageBus = _objectContainer.Resolve<IAzureTopicMessageBus>();
+        }
+
+        [When(@"(.*) bad message get publish by EAS")]
+        public async Task WhenBadMessageGetPublishbyEAS(string message)
+        {
+            _objectContainer.RegisterInstanceAs(new EasBadTestMessage(), message);
+            await PublishAndPeak<EasBadTestMessage>(message);
+        }
+        [When(@"(.*) bad message get publish by Commitments")]
+        public async Task WhenBadMessageGetPublishByCommitments(string message)
+        {
+             _objectContainer.RegisterInstanceAs(new CommitmentsBadTestMessage(), message);
+             await PublishAndPeak<CommitmentsBadTestMessage>(message);
         }
 
         [When(@"(agreement_created|agreement_signed|agreement_signed_cohort_created|legal_entity_removed|cohort_created) message get publish")]
@@ -99,8 +114,17 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
         private async Task PublishAndPeak<T>(string name = null)
         {
             var agreement = _objectContainer.Resolve<T>(name);
-            await _azureTopicMessageBus.PublishAsync(agreement);
-            await Task.Delay(10000);
+
+            if ((name == null) || (name != null && name == "cohortcreated=true"))
+            {
+                await _azureTopicMessageBus.PublishAsync(agreement);
+                await Task.Delay(10000);
+            }
+            else
+            {
+                await _azureTopicMessageBus.PublishAsync(agreement, name);
+            }
+
             //int count = 0;
             //while (true)
             //{
@@ -121,3 +145,4 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
         }
     }
 }
+

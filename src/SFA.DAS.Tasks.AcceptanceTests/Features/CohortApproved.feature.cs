@@ -150,6 +150,25 @@ testRunner.Then("CohortRequestReadyForApproval Task should be removed", ((string
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("035 Cohort Approval Requested By Provider Should Handle Bad Message")]
+        public virtual void _035CohortApprovalRequestedByProviderShouldHandleBadMessage()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("035 Cohort Approval Requested By Provider Should Handle Bad Message", ((string[])(null)));
+#line 33
+this.ScenarioSetup(scenarioInfo);
+#line 34
+testRunner.When("cohort_approval_requested_by_provider bad message get publish by Commitments", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 35
+testRunner.Given("I have Cohort Ready For Approval", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 36
+testRunner.When("cohort_approval_requested_by_provider message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 37
+testRunner.Then("I should have a CohortRequestReadyForApproval Task", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

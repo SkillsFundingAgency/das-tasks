@@ -43,6 +43,12 @@ namespace SFA.DAS.Tasks.AcceptanceTests.DependencyResolution
         public async Task PublishAsync(object message)
         {
             var messageGroupName = MessageGroupHelper.GetMessageGroupName(message);
+
+            await PublishAsync(message, messageGroupName);
+        }
+
+        public async Task PublishAsync(object message, string messageGroupName)
+        {
             var connectionString = GetConnectionString(message);
 
             TopicClient client = null;
@@ -52,7 +58,7 @@ namespace SFA.DAS.Tasks.AcceptanceTests.DependencyResolution
                 client = TopicClient.CreateFromConnectionString(connectionString, messageGroupName);
                 await client.SendAsync(new BrokeredMessage(message));
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 throw ex;
             }

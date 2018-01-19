@@ -7,6 +7,8 @@ namespace SFA.DAS.Tasks.AcceptanceTests.DependencyResolution
     {
         Task PublishAsync(object message);
 
+        Task PublishAsync(object message, string messageGroupName);
+
         Task<BrokeredMessage> PeekAsync(object message);
     }
 }

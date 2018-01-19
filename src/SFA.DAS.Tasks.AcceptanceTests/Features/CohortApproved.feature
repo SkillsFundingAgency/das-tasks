@@ -29,3 +29,9 @@ Scenario: 034 Cohort Approval Undone By Employer
 Given I have updated Cohort Approved By Provider
 When provider_cohort_approval_undone_by_employer message get publish
 Then CohortRequestReadyForApproval Task should be removed
+
+Scenario: 035 Cohort Approval Requested By Provider Should Handle Bad Message
+When cohort_approval_requested_by_provider bad message get publish by Commitments
+Given I have Cohort Ready For Approval
+When cohort_approval_requested_by_provider message get publish
+Then I should have a CohortRequestReadyForApproval Task
