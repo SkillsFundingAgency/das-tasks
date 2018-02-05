@@ -8,6 +8,7 @@
         AddApprentices = 3,
         ApprenticeChangesToReview = 4,
         CohortRequestReadyForApproval = 5,
-        IncompleteApprenticeshipDetails = 6
+        IncompleteApprenticeshipDetails = 6,
+        ReviewConnectionRequest = 7
     }
 }

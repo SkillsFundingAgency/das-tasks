@@ -52,8 +52,8 @@
     <Reference Include="SFA.DAS.Commitments.Events, Version=2.0.0.52184, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Commitments.Events.2.0.0.52184\lib\net45\SFA.DAS.Commitments.Events.dll</HintPath>
     </Reference>
-    <Reference Include="SFA.DAS.EmployerAccounts.Events, Version=1.0.0.51318, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.EmployerAccounts.Events.1.0.0.51318\lib\net45\SFA.DAS.EmployerAccounts.Events.dll</HintPath>
+    <Reference Include="SFA.DAS.EmployerAccounts.Events, Version=1.1.0.57098, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.EmployerAccounts.Events.1.1.0.57098\lib\net45\SFA.DAS.EmployerAccounts.Events.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.Messaging, Version=3.0.0.53105, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Messaging.3.0.0.53105\lib\net45\SFA.DAS.Messaging.dll</HintPath>
@@ -86,6 +86,7 @@
     <Compile Include="MessageProcessors\CohortApprovalRequestedMessageProcessorTests\WhenACohortIsReadForApprovalMessageIsProcessed.cs" />
     <Compile Include="MessageProcessors\CohortApprovedMessageProcessortests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\CohortCreatedMessageProcessorTests\WhenIProcessAMessage.cs" />
+    <Compile Include="MessageProcessors\TransferConnectionInvitationSentMessageProcessorTests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\CreatedEmployerAgreementMessageProcessorTests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\LegalEntityRemovedMessageProcessorTests\WhenIRemoveALegalEntity.cs" />
     <Compile Include="MessageProcessors\ProviderCohortApprovalUndoneByEmployerUpdateMessageProcessorTests\WhenIProcessAMessage.cs" />
