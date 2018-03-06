@@ -113,8 +113,8 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             return new SentTransferConnectionInvitationEvent
             {
                 TransferConnectionInvitationId = 1,
-                SenderAccountId = accountId,
-                ReceiverAccountId = accountId + 1,
+                SenderAccountId = accountId + 1,
+                ReceiverAccountId = accountId,
                 SenderAccountName = "Transfers Sender",
                 ReceiverAccountName = "Transfers Receiver",
                 SentByUserName = TestUserName,
