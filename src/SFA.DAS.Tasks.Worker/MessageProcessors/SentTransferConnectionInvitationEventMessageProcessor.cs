@@ -12,20 +12,20 @@ using SFA.DAS.Tasks.Infrastructure.Attributes;
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("ManageApprenticeships")]
-    [TopicSubscription("transfer_connection_invitation_sent")]
-    public class TransferConnectionInvitationSentMessageProcessor : MessageProcessor<TransferConnectionInvitationSentMessage>
+    [TopicSubscription("Task_SentTransferConnectionInvitiationProcessor")]
+    public class SentTransferConnectionInvitationEventMessageProcessor : MessageProcessor<SentTransferConnectionInvitationEvent>
     {
         private readonly ILog _logger;
         private readonly IMediator _mediator;
 
-        public TransferConnectionInvitationSentMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog log, IMediator mediator) 
+        public SentTransferConnectionInvitationEventMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog log, IMediator mediator) 
             : base(subscriberFactory, log)
         {
             _logger = log;
             _mediator = mediator;
         }
 
-        protected override async Task ProcessMessage(TransferConnectionInvitationSentMessage message)
+        protected override async Task ProcessMessage(SentTransferConnectionInvitationEvent message)
         {
             _logger.Debug($"Connection request created. Completing '{nameof(TaskType.ReviewConnectionRequest)}' task for sender account id {message.SenderAccountId} / receiver account {message.ReceiverAccountId}");
 

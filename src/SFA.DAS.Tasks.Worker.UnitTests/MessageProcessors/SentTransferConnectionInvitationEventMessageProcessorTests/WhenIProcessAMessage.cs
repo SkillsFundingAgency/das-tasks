@@ -14,33 +14,42 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.TransferConnectionInv
 {
     public class WhenIProcessAMessage
     {
-        private TransferConnectionInvitationSentMessageProcessor _processor;
+        private SentTransferConnectionInvitationEventMessageProcessor _processor;
         private Mock<IMessageSubscriberFactory> _subscriptionFactory;
-        private Mock<IMessageSubscriber<TransferConnectionInvitationSentMessage>> _subscriber;
+        private Mock<IMessageSubscriber<SentTransferConnectionInvitationEvent>> _subscriber;
         private CancellationTokenSource _tokenSource;
         private Mock<IMediator> _mediator;
-        private Mock<IMessage<TransferConnectionInvitationSentMessage>> _mockMessage;
-        private TransferConnectionInvitationSentMessage _messageContent;
+        private Mock<IMessage<SentTransferConnectionInvitationEvent>> _mockMessage;
+        private SentTransferConnectionInvitationEvent _messageContent;
 
         [SetUp]
         public void Arrange()
         {
             _subscriptionFactory = new Mock<IMessageSubscriberFactory>();
-            _subscriber = new Mock<IMessageSubscriber<TransferConnectionInvitationSentMessage>>();
+            _subscriber = new Mock<IMessageSubscriber<SentTransferConnectionInvitationEvent>>();
 
-            _messageContent = new TransferConnectionInvitationSentMessage(123, 456, "Sender Account", 789, "Receiver Account", "Bill", "ABC123");
+            _messageContent = new SentTransferConnectionInvitationEvent
+            {
+                TransferConnectionInvitationId = 123,
+                SenderAccountId = 456,
+                SenderAccountName = "Sender Account",
+                ReceiverAccountId = 789,
+                ReceiverAccountName = "Receiver Account",
+                SentByUserName = "Bill",
+                SenderAccountHashedId = "ABC123"
+            };
 
-            _mockMessage = new Mock<IMessage<TransferConnectionInvitationSentMessage>>();
+            _mockMessage = new Mock<IMessage<SentTransferConnectionInvitationEvent>>();
 
             _mockMessage.Setup(x => x.Content).Returns(_messageContent);
 
             _mediator = new Mock<IMediator>();
             _tokenSource = new CancellationTokenSource();
 
-            _processor = new Worker.MessageProcessors.TransferConnectionInvitationSentMessageProcessor(_subscriptionFactory.Object, Mock.Of<ILog>(), 
+            _processor = new Worker.MessageProcessors.SentTransferConnectionInvitationEventMessageProcessor(_subscriptionFactory.Object, Mock.Of<ILog>(), 
                 _mediator.Object);
 
-            _subscriptionFactory.Setup(x => x.GetSubscriber<TransferConnectionInvitationSentMessage>()).Returns(_subscriber.Object);
+            _subscriptionFactory.Setup(x => x.GetSubscriber<SentTransferConnectionInvitationEvent>()).Returns(_subscriber.Object);
 
             _subscriber.Setup(x => x.ReceiveAsAsync())
                             .ReturnsAsync(() => _mockMessage.Object)

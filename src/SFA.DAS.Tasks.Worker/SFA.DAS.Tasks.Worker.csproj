@@ -84,8 +84,8 @@
     <Reference Include="SFA.DAS.Configuration.FileStorage, Version=1.0.0.49931, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Configuration.FileStorage.1.0.0.49931\lib\net45\SFA.DAS.Configuration.FileStorage.dll</HintPath>
     </Reference>
-    <Reference Include="SFA.DAS.EmployerAccounts.Events, Version=1.1.0.57098, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.EmployerAccounts.Events.1.1.0.57098\lib\net45\SFA.DAS.EmployerAccounts.Events.dll</HintPath>
+    <Reference Include="SFA.DAS.EmployerAccounts.Events, Version=1.2.0.62826, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.EmployerAccounts.Events.1.2.0.62826\lib\net45\SFA.DAS.EmployerAccounts.Events.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.Messaging, Version=3.0.0.53105, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Messaging.3.0.0.53105\lib\net45\SFA.DAS.Messaging.dll</HintPath>
@@ -139,7 +139,7 @@
     <Compile Include="MessageProcessors\ApprovedCohortReturnedToProviderMessageProcessor.cs" />
     <Compile Include="MessageProcessors\CohortApprovalRequestedMessageProcessor.cs" />
     <Compile Include="MessageProcessors\CohortApprovedMessageProcessor.cs" />
-    <Compile Include="MessageProcessors\TransferConnectionInvitationSentMessageProcessor.cs" />
+    <Compile Include="MessageProcessors\SentTransferConnectionInvitationEventMessageProcessor.cs" />
     <Compile Include="MessageProcessors\CohortCreatedMessageProcessor.cs" />
     <Compile Include="MessageProcessors\LegalEntityRemovedMessageProcessor.cs" />
     <Compile Include="MessageProcessors\ProviderCohortApprovalUndoneByEmployerUpdateMessageProcessor.cs" />
