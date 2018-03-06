@@ -144,5 +144,13 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             var cohortUpdatedByEmployer = _testMessages.ProviderCohortApprovalUndoneByEmployerUpdate(cohortApprovalupdate.AccountId, cohortApprovalupdate.CommitmentId, cohortApprovalupdate.ProviderId);
             _objectContainer.RegisterInstanceAs(cohortUpdatedByEmployer);
         }
+        
+        [Given(@"I have Sent Transfer Connection Invitation")]
+        public void GivenIHaveSentTransferConnectionInvitation()
+        {
+            var id = _objectContainer.Resolve<Dictionary<string, object>>("dictionary");
+            _objectContainer.RegisterInstanceAs(_testMessages.SentTransferConnectionInvitationEvent((long)id["employerAccountId"]));
+        }
+
     }
 }

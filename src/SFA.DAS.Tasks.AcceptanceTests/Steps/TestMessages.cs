@@ -107,5 +107,22 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
                 ProviderId = providerid
             };
         }
+
+        public SentTransferConnectionInvitationEvent SentTransferConnectionInvitationEvent(long accountId)
+        {
+            return new SentTransferConnectionInvitationEvent
+            {
+                TransferConnectionInvitationId = 1,
+                SenderAccountId = accountId,
+                ReceiverAccountId = accountId + 1,
+                SenderAccountName = "Transfers Sender",
+                ReceiverAccountName = "Transfers Receiver",
+                SentByUserName = TestUserName,
+                SenderAccountHashedId = "MK786S",
+                CreatedAt = DateTime.Now,
+                SentByUserId = 98987,
+                ReceiverAccountHashedId = "MK786G"
+            };
+        }
     }
 }
