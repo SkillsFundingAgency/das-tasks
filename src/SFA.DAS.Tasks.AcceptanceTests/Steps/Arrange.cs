@@ -31,7 +31,7 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             Given(@"I Create an Account or add an Organisation");
             When(@"agreement_created message get publish");
             var agreementcreated = _objectContainer.Resolve<AgreementCreatedMessage>();
-            var agreementsigned = _testMessages.AgreementSigned(agreementcreated.AccountId, agreementcreated.LegalEntityId, agreementcreated.AgreementId);
+            var agreementsigned = _testMessages.AgreementSigned(agreementcreated.AccountId, agreementcreated.OrganisationName, agreementcreated.LegalEntityId, agreementcreated.AgreementId);
             _objectContainer.RegisterInstanceAs(agreementsigned);
         }
 
@@ -63,7 +63,7 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             When(@"cohort_created message get publish");
             When(@"agreement_created message get publish");
             var agreementcreated = _objectContainer.Resolve<AgreementCreatedMessage>();
-            var agreementsigned = _testMessages.AgreementSigned(agreementcreated.AccountId, agreementcreated.LegalEntityId, agreementcreated.AgreementId, true);
+            var agreementsigned = _testMessages.AgreementSigned(agreementcreated.AccountId, agreementcreated.OrganisationName, agreementcreated.LegalEntityId, agreementcreated.AgreementId, true);
             _objectContainer.RegisterInstanceAs(agreementsigned, "cohortcreated=true");
         }
 

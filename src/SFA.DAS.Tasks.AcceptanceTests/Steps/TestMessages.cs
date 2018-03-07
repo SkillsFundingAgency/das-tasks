@@ -28,9 +28,9 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             return new AgreementCreatedMessage(accountId, 9856, TestOrgainsationName, 8547, TestUserName, TestUserRef);
         }
 
-        public AgreementSignedMessage AgreementSigned(long accountId, long legalEntityId, long agreementId, bool cohortCreated = false)
+        public AgreementSignedMessage AgreementSigned(long accountId, string organisationName, long legalEntityId, long agreementId, bool cohortCreated = false)
         {
-            return new AgreementSignedMessage(accountId, agreementId, legalEntityId, cohortCreated, TestUserName,
+            return new AgreementSignedMessage(accountId, agreementId, organisationName, legalEntityId, cohortCreated, TestUserName,
                 TestUserRef);
         }
 

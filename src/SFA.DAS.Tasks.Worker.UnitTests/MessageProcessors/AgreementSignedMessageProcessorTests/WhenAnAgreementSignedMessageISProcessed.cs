@@ -77,7 +77,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.AgreementSignedMessag
         public async Task ThenTheAddAppreticesTaskIsNotSavedIfCohortsHaveAlreadyBeenAdded()
         {
             //Arrange
-            _messageContent = new AgreementSignedMessage(12,2,34,true,"Test User", "ABC123");
+            _messageContent = new AgreementSignedMessage(12,2, "Test organisation", 34,true,"Test User", "ABC123");
             _mockMessage.Setup(x => x.Content).Returns(_messageContent);
 
             //Act
