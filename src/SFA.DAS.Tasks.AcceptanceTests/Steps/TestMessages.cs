@@ -30,7 +30,7 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
 
         public AgreementSignedMessage AgreementSigned(long accountId, long legalEntityId, long agreementId, bool cohortCreated = false)
         {
-            return new AgreementSignedMessage(accountId, agreementId, legalEntityId, cohortCreated, TestUserName,
+            return new AgreementSignedMessage(accountId, agreementId, "ACME Fireworks", legalEntityId, cohortCreated, TestUserName,
                 TestUserRef);
         }
 
@@ -105,6 +105,23 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
                 AccountId = accountId,
                 ApprenticeshipId = apprenticeshipId,
                 ProviderId = providerid
+            };
+        }
+
+        public SentTransferConnectionInvitationEvent SentTransferConnectionInvitationEvent(long accountId)
+        {
+            return new SentTransferConnectionInvitationEvent
+            {
+                TransferConnectionInvitationId = 1,
+                SenderAccountId = accountId + 1,
+                ReceiverAccountId = accountId,
+                SenderAccountName = "Transfers Sender",
+                ReceiverAccountName = "Transfers Receiver",
+                SentByUserName = TestUserName,
+                SenderAccountHashedId = "MK786S",
+                CreatedAt = DateTime.Now,
+                SentByUserId = 98987,
+                ReceiverAccountHashedId = "MK786G"
             };
         }
     }

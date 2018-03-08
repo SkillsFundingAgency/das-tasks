@@ -96,7 +96,7 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
         }
 
 
-        [Then(@"I should have a (ApprenticeChangesToReview|CohortRequestReadyForApproval) Task")]
+        [Then(@"I should have a (ApprenticeChangesToReview|CohortRequestReadyForApproval|ReviewConnectionRequest) Task")]
         public async Task ThenIShouldHaveAApprenticeChangesToReviewTask(string tasktype)
         {
             int count = 0;

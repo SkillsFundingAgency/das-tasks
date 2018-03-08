@@ -110,7 +110,18 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             }
         }
 
+        [When(@"(transfer_connection_invitation_sent) message get publish")]
+        public async Task WhenTransfer_Connection_Invitation_SentMessageGetPublish(string message)
+        {
+            switch (message)
+            {
+                case "transfer_connection_invitation_sent":
+                    await PublishAndPeak<SentTransferConnectionInvitationEvent>();
+                    break;
+            }
+        }
 
+        
         private async Task PublishAndPeak<T>(string name = null)
         {
             var agreement = _objectContainer.Resolve<T>(name);
