@@ -137,6 +137,8 @@
     <Compile Include="MessageProcessors\ApprenticeshipUpdateRejectedMessageProcessor.cs" />
     <Compile Include="MessageProcessors\ApprenticeshipUpdateCreatedMessageProcessor.cs" />
     <Compile Include="MessageProcessors\ApprovedCohortReturnedToProviderMessageProcessor.cs" />
+    <Compile Include="MessageProcessors\RejectedTransferConnectionInvitationMessageProcessor.cs" />
+    <Compile Include="MessageProcessors\ApprovedTransferConnectionInvitationMessageProcessor.cs" />
     <Compile Include="MessageProcessors\CohortApprovalRequestedMessageProcessor.cs" />
     <Compile Include="MessageProcessors\CohortApprovedMessageProcessor.cs" />
     <Compile Include="MessageProcessors\SentTransferConnectionInvitationEventMessageProcessor.cs" />
