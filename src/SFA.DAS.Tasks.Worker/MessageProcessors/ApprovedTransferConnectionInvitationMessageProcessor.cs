@@ -12,7 +12,7 @@ using SFA.DAS.Tasks.Infrastructure.Attributes;
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("ManageApprenticeships")]
-    [TopicSubscription("Task_ApprovedTransferConnectionInvitationMessageProcessor")]
+    [TopicSubscription("Task_ApprovedTransferConnectionInvitation")]
 
     public class ApprovedTransferConnectionInvitationMessageProcessor : MessageProcessor<ApprovedTransferConnectionInvitationEvent>
     {
