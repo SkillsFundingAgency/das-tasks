@@ -42,7 +42,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.RejectedTransferConne
 
             _subscriber.Setup(x => x.ReceiveAsAsync())
                 .ReturnsAsync(() => _mockMessage.Object)
-                .Callback(() => { _tokenSource.Cancel(); });
+                .Callback(() =>  _tokenSource.Cancel() );
         }
 
 
