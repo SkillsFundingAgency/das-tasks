@@ -16,7 +16,7 @@ Given I have Approved A Transfer Connection Invitation
 When approved_transfer_connection_invitation message get publish
 Then I should not have a ReviewConnectionRequest Task
 
-Scenario: 042 Accept Transfer Connection Invitation
+Scenario: 042 Reject Transfer Connection Invitation
 Given I have Sent Transfer Connection Invitation
 When transfer_connection_invitation_sent message get publish
 Then I should have a ReviewConnectionRequest Task

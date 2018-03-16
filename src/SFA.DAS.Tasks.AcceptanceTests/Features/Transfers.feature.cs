@@ -106,10 +106,10 @@ testRunner.Then("I should not have a ReviewConnectionRequest Task", ((string)(nu
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("042 Accept Transfer Connection Invitation")]
-        public virtual void _042AcceptTransferConnectionInvitation()
+        [NUnit.Framework.DescriptionAttribute("042 Reject Transfer Connection Invitation")]
+        public virtual void _042RejectTransferConnectionInvitation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("042 Accept Transfer Connection Invitation", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("042 Reject Transfer Connection Invitation", ((string[])(null)));
 #line 19
 this.ScenarioSetup(scenarioInfo);
 #line 20
