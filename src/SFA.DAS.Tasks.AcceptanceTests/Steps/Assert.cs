@@ -95,7 +95,6 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             });
         }
 
-
         [Then(@"I should have a (ApprenticeChangesToReview|CohortRequestReadyForApproval|ReviewConnectionRequest) Task")]
         public async Task ThenIShouldHaveAApprenticeChangesToReviewTask(string tasktype)
         {
@@ -131,6 +130,21 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
                 NUnit.Framework.Assert.AreEqual(0, tasksbytaskstype?.ItemsDueCount, $"{tasktype} Task is not removed, after {count} retry");
             });
         }
+
+        [Then(@"I should not have a (ReviewConnectionRequest) Task")]
+        public async Task ThenIShouldNotHaveAApprenticeChangesToReviewTask(string tasktype)
+        {
+            int count = 0;
+            await PollyRetryAsync(async () =>
+            {
+                var tasksbytaskstype = await TaskDto(tasktype);
+                count++;
+                NUnit.Framework.Assert.AreEqual(0, tasksbytaskstype?.ItemsDueCount, $"{tasktype} Task is not removed, after {count} retry");
+
+                //NUnit.Framework.Assert.IsNull(tasksbytaskstype, $"{tasktype} Task is still present, after {count} retry");
+            });
+        }
+
 
         private async Task<TaskDto> TaskDto(string tasktype)
         {

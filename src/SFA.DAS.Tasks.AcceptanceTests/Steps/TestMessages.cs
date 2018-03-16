@@ -124,5 +124,41 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
                 ReceiverAccountHashedId = "MK786G"
             };
         }
+
+        public ApprovedTransferConnectionInvitationEvent ApprovedTransferConnectionInvitationEvent(long accountId)
+        {
+            return new ApprovedTransferConnectionInvitationEvent
+            {
+                TransferConnectionInvitationId = 1,
+                SenderAccountId = accountId + 1,
+                ReceiverAccountId = accountId,
+                SenderAccountName = "Transfers Sender",
+                ReceiverAccountName = "Transfers Receiver",
+                SenderAccountHashedId = "MK786S",
+                CreatedAt = DateTime.Now,
+                ReceiverAccountHashedId = "MK786G",
+                ApprovedByUserExternalId = Guid.Empty,
+                ApprovedByUserId = 12345,
+                ApprovedByUserName = "AproverName"
+            };
+        }
+
+        public RejectedTransferConnectionInvitationEvent RejectedTransferConnectionInvitationEvent(long accountId)
+        {
+            return new RejectedTransferConnectionInvitationEvent
+            {
+                TransferConnectionInvitationId = 1,
+                SenderAccountId = accountId + 1,
+                ReceiverAccountId = accountId,
+                SenderAccountName = "Transfers Sender",
+                ReceiverAccountName = "Transfers Receiver",
+                SenderAccountHashedId = "MK786S",
+                CreatedAt = DateTime.Now,
+                ReceiverAccountHashedId = "MK786G",
+                RejectorUserExternalId =  Guid.Empty,
+                RejectorUserId = 12345,
+                RejectorUserName = "AproverName"
+            };
+        }
     }
 }

@@ -81,6 +81,52 @@ testRunner.Then("I should have a ReviewConnectionRequest Task", ((string)(null))
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("041 Accept Transfer Connection Invitation")]
+        public virtual void _041AcceptTransferConnectionInvitation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("041 Accept Transfer Connection Invitation", ((string[])(null)));
+#line 11
+this.ScenarioSetup(scenarioInfo);
+#line 12
+testRunner.Given("I have Sent Transfer Connection Invitation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 13
+testRunner.When("transfer_connection_invitation_sent message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 14
+testRunner.Then("I should have a ReviewConnectionRequest Task", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 15
+testRunner.Given("I have Approved A Transfer Connection Invitation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 16
+testRunner.When("approved_transfer_connection_invitation message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 17
+testRunner.Then("I should not have a ReviewConnectionRequest Task", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("042 Reject Transfer Connection Invitation")]
+        public virtual void _042RejectTransferConnectionInvitation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("042 Reject Transfer Connection Invitation", ((string[])(null)));
+#line 19
+this.ScenarioSetup(scenarioInfo);
+#line 20
+testRunner.Given("I have Sent Transfer Connection Invitation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 21
+testRunner.When("transfer_connection_invitation_sent message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 22
+testRunner.Then("I should have a ReviewConnectionRequest Task", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 23
+testRunner.Given("I have Rejected A Transfer Connection Invitation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 24
+testRunner.When("rejected_transfer_connection_invitation message get publish", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 25
+testRunner.Then("I should not have a ReviewConnectionRequest Task", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

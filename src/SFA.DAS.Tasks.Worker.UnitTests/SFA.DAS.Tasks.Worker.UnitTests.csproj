@@ -77,6 +77,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MessageProcessors\RejectedTransferConnectionInvitationMessageProcessor\WhenARejectedTransferConnectionInvitationMessageIsProcessed.cs" />
+    <Compile Include="MessageProcessors\ApprovedTransferConnectionInvitationMessageProcessorTests\WhenAnApprovedTransferConnectionInvitationMessageIsProcessed.cs" />
     <Compile Include="MessageProcessors\AgreementSignedMessageProcessorTests\WhenAnAgreementSignedMessageISProcessed.cs" />
     <Compile Include="MessageProcessors\ApprenticeshipUpdateCancelledMessageProcessorTests\WhenIProcessAMessage.cs" />
     <Compile Include="MessageProcessors\ApprenticeshipUpdatedAcceptedMessageProcessorTests\WhenIProcessAMessage.cs" />
