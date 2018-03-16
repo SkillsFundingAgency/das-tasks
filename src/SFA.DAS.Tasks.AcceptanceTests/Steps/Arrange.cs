@@ -152,5 +152,18 @@ namespace SFA.DAS.Tasks.AcceptanceTests.Steps
             _objectContainer.RegisterInstanceAs(_testMessages.SentTransferConnectionInvitationEvent((long)id["employerAccountId"]));
         }
 
+        [Given(@"I have Approved A Transfer Connection Invitation")]
+        public void GivenIHaveApprovedTransferConnectionInvitation()
+        {
+            var id = _objectContainer.Resolve<Dictionary<string, object>>("dictionary");
+            _objectContainer.RegisterInstanceAs(_testMessages.ApprovedTransferConnectionInvitationEvent((long)id["employerAccountId"]));
+        }
+
+        [Given(@"I have Rejected A Transfer Connection Invitation")]
+        public void GivenIHaveRejectedTransferConnectionInvitation()
+        {
+            var id = _objectContainer.Resolve<Dictionary<string, object>>("dictionary");
+            _objectContainer.RegisterInstanceAs(_testMessages.RejectedTransferConnectionInvitationEvent((long)id["employerAccountId"]));
+        }
     }
 }
