@@ -1,5 +1,5 @@
-﻿using System.Web;
-using SFA.DAS.NLog.Logger;
+﻿using SFA.DAS.NLog.Logger;
+using System.Web;
 
 namespace SFA.DAS.Tasks.API
 {
@@ -7,12 +7,13 @@ namespace SFA.DAS.Tasks.API
     {
         public RequestContext(HttpContextBase context)
         {
-            IpAddress = context?.Request.UserHostAddress;
-            Url = context?.Request.RawUrl;
+            HttpMethod = context?.Request.HttpMethod;
+            IsAuthenticated = context?.Request.IsAuthenticated;
+            Url = context?.Request.Url?.PathAndQuery;
         }
 
-        public string IpAddress { get; private set; }
-
-        public string Url { get; private set; }
+        public string HttpMethod { get; set; }
+        public bool? IsAuthenticated { get; set; }
+        public string Url { get; }
     }
 }
