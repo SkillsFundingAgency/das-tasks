@@ -9,6 +9,7 @@
         ApprenticeChangesToReview = 4,
         CohortRequestReadyForApproval = 5,
         IncompleteApprenticeshipDetails = 6,
-        ReviewConnectionRequest = 7
+        ReviewConnectionRequest = 7,
+        TransferRequestReceived = 8
     }
 }
