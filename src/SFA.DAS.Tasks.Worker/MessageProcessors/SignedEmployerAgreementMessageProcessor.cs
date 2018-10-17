@@ -32,14 +32,14 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
 
             if (message.CohortCreated) return;
 
-            await CreateAddApprenticesTask(message);
+            await SendSaveTaskCommand(message);
         }
 
-        private async Task CreateAddApprenticesTask(AgreementSignedMessage message)
+        private async Task SendSaveTaskCommand(AgreementSignedMessage message)
         {
             try
             {
-                _logger.Debug($"Saving 'add apprentices' task for account id {message.AccountId} as the agreement " +
+                _logger.Debug($"Saving 'agreement to sign' task for account id {message.AccountId} as the agreement " +
                               $"(ID: {message.AgreementId}) has been signed");
 
                 await _mediator.SendAsync(new SaveTaskCommand
@@ -51,7 +51,7 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
             }
             catch (Exception e)
             {
-                _logger.Error(e, $"Failed to create add apprentices task [Account ID: {message.AccountId}, " +
+                _logger.Error(e, $"Failed to create agreement to sign task [Account ID: {message.AccountId}, " +
                                  $"Agreement ID: {message.AgreementId}, Legal Entity ID: {message.LegalEntityId}");
             }
         }
