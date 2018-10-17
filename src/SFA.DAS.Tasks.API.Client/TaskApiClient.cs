@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.API.Types.DTOs;
 
 namespace SFA.DAS.Tasks.API.Client
@@ -10,10 +11,12 @@ namespace SFA.DAS.Tasks.API.Client
     {
         private readonly ITaskApiConfiguration _configuration;
         private readonly SecureHttpClient _httpClient;
+        private readonly ILog _logger;
 
-        public TaskApiClient(ITaskApiConfiguration configuration)
+        public TaskApiClient(ITaskApiConfiguration configuration, ILog logger)
         {
             _configuration = configuration;
+            _logger = logger;
             _httpClient = new SecureHttpClient(configuration);
         }
 
@@ -22,6 +25,7 @@ namespace SFA.DAS.Tasks.API.Client
             var baseUrl = GetBaseUrl();
             var url = $"{baseUrl}api/tasks/{employerAccountId}/{userId}";
 
+            _logger.Info($"Get: {url}");
             var json = await _httpClient.GetAsync(url);
             return JsonConvert.DeserializeObject<IEnumerable<TaskDto>>(json);
         }
@@ -31,6 +35,7 @@ namespace SFA.DAS.Tasks.API.Client
             var baseUrl = GetBaseUrl();
             var url = $"{baseUrl}api/tasks/{employerAccountId}/supressions/{userId}/add/{taskType}";
 
+            _logger.Info($"Post: {url}");
             await _httpClient.PostAsync(url, new StringContent(string.Empty));
         }
 
