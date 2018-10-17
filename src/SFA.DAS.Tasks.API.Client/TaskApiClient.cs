@@ -25,7 +25,7 @@ namespace SFA.DAS.Tasks.API.Client
             var baseUrl = GetBaseUrl();
             var url = $"{baseUrl}api/tasks/{employerAccountId}/{userId}";
 
-            _logger.Info($"Calling: {url}");
+            _logger.Info($"Get: {url}");
             var json = await _httpClient.GetAsync(url);
             return JsonConvert.DeserializeObject<IEnumerable<TaskDto>>(json);
         }
@@ -35,7 +35,7 @@ namespace SFA.DAS.Tasks.API.Client
             var baseUrl = GetBaseUrl();
             var url = $"{baseUrl}api/tasks/{employerAccountId}/supressions/{userId}/add/{taskType}";
 
-            _logger.Info($"Calling: {url}");
+            _logger.Info($"Post: {url}");
             await _httpClient.PostAsync(url, new StringContent(string.Empty));
         }
 
