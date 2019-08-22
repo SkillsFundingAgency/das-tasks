@@ -10,7 +10,6 @@
       </Site>
     </Sites>
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
       <Setting name="StorageConnectionString" />
       <Setting name="InstrumentationKey" />
       <Setting name="EnvironmentName" />
@@ -31,7 +30,6 @@
   </WebRole>
   <WorkerRole name="SFA.DAS.Tasks.Worker" vmsize="Standard_D2_v2">
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
       <Setting name="StorageConnectionString" />
       <Setting name="EnvironmentName" />
       <Setting name="ConfigurationStorageConnectionString" />
