@@ -28,24 +28,4 @@
       <Setting name="LoggingRedisKey" value="__LoggingRedisKey__" />
     </ConfigurationSettings>
   </Role>
-  <NetworkConfiguration>
-    <VirtualNetworkSite name="__vnet__" />
-    <AddressAssignments>
-      <InstanceAddress roleName="SFA.DAS.Tasks.API">
-        <Subnets>
-          <Subnet name="__subnet__" />
-        </Subnets>
-      </InstanceAddress>
-      <InstanceAddress roleName="SFA.DAS.Tasks.Worker">
-        <Subnets>
-          <Subnet name="__subnet__" />
-        </Subnets>
-      </InstanceAddress>
-    </AddressAssignments>
-    <LoadBalancers>
-      <LoadBalancer name="__ilbname__">
-        <FrontendIPConfiguration type="private" subnet="__subnet__" staticVirtualNetworkIPAddress="10.78.124.249" />
-      </LoadBalancer>
-    </LoadBalancers>
-  </NetworkConfiguration>
 </ServiceConfiguration>
