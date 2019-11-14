@@ -28,7 +28,7 @@
       <Certificate name="WebSslCert" storeLocation="LocalMachine" storeName="My"  />
     </Certificates>
   </WebRole>
-  <WorkerRole name="SFA.DAS.Tasks.Worker" vmsize="Small">
+  <WorkerRole name="SFA.DAS.Tasks.Worker" vmsize="Standard_D2_v2">
     <ConfigurationSettings>
       <Setting name="StorageConnectionString" />
       <Setting name="EnvironmentName" />
