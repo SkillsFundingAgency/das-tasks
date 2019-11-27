@@ -14,8 +14,15 @@ Post-Deployment Script Template
 -- Populate monthly Employer Acccounts Reminder Tasks table --
 ------------------------------------------------
 
-if(not exists(select top 1 * from [Tasks].[MonthlyReminderTasks] WHERE [Type] = 'LevyDeclarationDue'))
-begin
-	INSERT INTO [Tasks].[MonthlyReminderTasks] (Id, Type, StartDay, EndDay) 
-	VALUES (NEWID(), 'LevyDeclarationDue', 16, 19)
-end
+MERGE [Tasks].[MonthlyReminderTasks] AS target
+USING (SELECT NEWID(), 'LevyDeclarationDue', 16, 19, 1) 
+	AS source (Id, Type, StartDay, EndDay, ApplicableToApprenticeshipEmployerType)
+ON (target.Type = source.Type)
+WHEN MATCHED THEN
+	UPDATE SET 
+		StartDay = source.StartDay,
+		EndDay = source.EndDay,
+		ApplicableToApprenticeshipEmployerType = source.ApplicableToApprenticeshipEmployerType
+WHEN NOT MATCHED THEN 
+	INSERT (Id, Type, StartDay, EndDay, ApplicableToApprenticeshipEmployerType)
+	VALUES (source.Id, source.Type, source.StartDay, source.EndDay, source.ApplicableToApprenticeshipEmployerType);
