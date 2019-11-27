@@ -8,6 +8,7 @@ using SFA.DAS.Tasks.Application.Commands.SaveUserReminderSuppression;
 using SFA.DAS.Tasks.Application.Queries.GetTasksByEmployerAccountId;
 using SFA.DAS.Tasks.API.Attributes;
 using SFA.DAS.Tasks.API.Types.DTOs;
+using SFA.DAS.Tasks.API.Types.Enums;
 
 namespace SFA.DAS.Tasks.API.Controllers
 {
@@ -30,20 +31,21 @@ namespace SFA.DAS.Tasks.API.Controllers
         public async Task<IHttpActionResult> GetTasks(string employerAccountId)
         {
             //This method is here to support clients that are older than the current breaking change
-            return await GetUserTasks(employerAccountId, string.Empty);
+            return await GetUserTasks(employerAccountId, string.Empty, ApprenticeshipEmployerType.All);
         }
 
         [Route("{userId}", Name = "GetUserTasks")]
         [ApiAuthorize(Roles = "ReadOwnerTasks")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetUserTasks(string employerAccountId, string userId)
+        public async Task<IHttpActionResult> GetUserTasks(string employerAccountId, string userId, ApprenticeshipEmployerType apprenticeshipEmployerType)
         {
             _logger.Debug($"Getting tasks for employer account {employerAccountId}");
 
             var result = await _mediator.SendAsync(new GetTasksByEmployerAccountIdRequest
             {
                 EmployerAccountId = employerAccountId,
-                UserId = userId
+                UserId = userId,
+                ApplicableToApprenticeshipEmployerType = apprenticeshipEmployerType
             });
 
             if (result?.Tasks == null)

@@ -46,7 +46,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByEmployerAccountI
 
             _repository = new Mock<ITaskRepository>();
             _repository.Setup(x => x.GetTasks(It.IsAny<string>())).ReturnsAsync(_tasks);
-            _repository.Setup(x => x.GetMonthlyReminderTasks(It.IsAny<string>())).ReturnsAsync(_monthlyRemindertasks);
+            _repository.Setup(x => x.GetMonthlyReminderTasks(It.IsAny<string>(), It.IsAny<ApprenticeshipEmployerType>())).ReturnsAsync(_monthlyRemindertasks);
             _repository.Setup(x => x.GetUserTaskSuppressions(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(new List<TaskType>());
 
             RequestHandler = new GetTasksByEmployerAccountIdHandler(_repository.Object, RequestValidator.Object);
@@ -64,7 +64,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByEmployerAccountI
 
             //Assert
             _repository.Verify(x => x.GetTasks(TaskEmployerAccountId), Times.Once);
-            _repository.Verify(x => x.GetMonthlyReminderTasks(TaskEmployerAccountId), Times.Once);
+            _repository.Verify(x => x.GetMonthlyReminderTasks(TaskEmployerAccountId, It.IsAny<ApprenticeshipEmployerType>()), Times.Once);
             Assert.AreEqual(expectedTasks, result.Tasks);
         }
 

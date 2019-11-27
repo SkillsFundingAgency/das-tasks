@@ -47,12 +47,15 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
             });
         }
 
-        public async Task<IEnumerable<DasTask>> GetMonthlyReminderTasks(string employerAccountId)
+        public async Task<IEnumerable<DasTask>> GetMonthlyReminderTasks(string employerAccountId, ApprenticeshipEmployerType apprenticeshipEmployerTypes)
         {
             return await WithConnection(async c =>
             {
+                var parameters = new DynamicParameters();
+                parameters.Add("@applicableToApprenticeshipEmployerType", apprenticeshipEmployerTypes, DbType.Int32);
                 var tasks = (await c.QueryAsync<DasTask>(
                     sql: "[tasks].[GetMonthlyReminderTasks]",
+                    param: parameters,
                     commandType: CommandType.StoredProcedure)).ToList();
 
                 foreach (var task in tasks)

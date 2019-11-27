@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Application.Exceptions;
 using SFA.DAS.Tasks.Application.Validation;
 using SFA.DAS.Tasks.Domain.Repositories;
@@ -29,7 +30,7 @@ namespace SFA.DAS.Tasks.Application.Queries.GetTasksByEmployerAccountId
 
             var tasks = await _repository.GetTasks(message.EmployerAccountId);
 
-            var monthlyReminderTasks = await _repository.GetMonthlyReminderTasks(message.EmployerAccountId);
+            var monthlyReminderTasks = await _repository.GetMonthlyReminderTasks(message.EmployerAccountId, message.ApplicableToApprenticeshipEmployerType);
 
             if (!string.IsNullOrEmpty(message.UserId))
             {
