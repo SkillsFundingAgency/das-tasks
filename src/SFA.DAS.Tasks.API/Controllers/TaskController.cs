@@ -37,7 +37,7 @@ namespace SFA.DAS.Tasks.API.Controllers
         [Route("{userId}", Name = "GetUserTasks")]
         [ApiAuthorize(Roles = "ReadOwnerTasks")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetUserTasks(string employerAccountId, string userId, ApprenticeshipEmployerType apprenticeshipEmployerType)
+        public async Task<IHttpActionResult> GetUserTasks(string employerAccountId, string userId, ApprenticeshipEmployerType applicableToApprenticeshipEmployerType)
         {
             _logger.Debug($"Getting tasks for employer account {employerAccountId}");
 
@@ -45,7 +45,7 @@ namespace SFA.DAS.Tasks.API.Controllers
             {
                 EmployerAccountId = employerAccountId,
                 UserId = userId,
-                ApplicableToApprenticeshipEmployerType = apprenticeshipEmployerType
+                ApplicableToApprenticeshipEmployerType = applicableToApprenticeshipEmployerType
             });
 
             if (result?.Tasks == null)
