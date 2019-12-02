@@ -21,7 +21,7 @@ namespace SFA.DAS.Tasks.API.Client
             _httpClient = new SecureHttpClient(configuration);
         }
 
-        public async Task<IEnumerable<TaskDto>> GetTasks(string employerAccountId, string userId, ApprenticeshipEmployerType applicableToApprenticeshipEmployerType)
+        public async Task<IEnumerable<TaskDto>> GetTasks(string employerAccountId, string userId, ApprenticeshipEmployerType applicableToApprenticeshipEmployerType = ApprenticeshipEmployerType.All)
         {
             var baseUrl = GetBaseUrl();
             var url = $"{baseUrl}api/tasks/{employerAccountId}/{userId}?{nameof(applicableToApprenticeshipEmployerType)}={(int)applicableToApprenticeshipEmployerType}";
