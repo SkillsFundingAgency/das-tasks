@@ -7,9 +7,11 @@
 
 ## Developer setup
 ### Requirements
-Azure storage account or Azure storage emulator
+- Visual Studio
+- Azure storage account or Azure storage emulator
 
 ### Setup local environment
+- Open the solution in Visual Studio `admin` mode
 - Set SFA.DAS.Tasks.CloudService as the startup project
 - Update ConfigurationSettings in [ServiceConfiguration.Local.cscfg](src/SFA.DAS.Tasks.CloudService.API)
   ```
@@ -25,6 +27,6 @@ Azure storage account or Azure storage emulator
       <Setting name="idaAudience" value="https://citizenazuresfabisgov.onmicrosoft.com/tasks-api" />
     </ConfigurationSettings>
   ```
-- Disable Diagnostics on API and Worker Roles under the CloudService. Expand `Roles` folder in Visual Studio or directly edit `diagnostics.wadcfgx`
+- Disable Diagnostics on API and Worker Roles under the CloudService. Expand `Roles` folder in Visual Studio or directly edit `diagnostics.wadcfgx`for both the roles. 
 
-_If you have issues starting on port 443 make sure that the certificates are installed and no other process is running on 443. I found Cosmos emulator uses port 443, this is not required so can be turned off_
+_If you have issues starting on port 443 make sure that the certificates are installed and no other process is running on 443. I found Cosmos emulator uses port 443, this is not required so can be turned off._
