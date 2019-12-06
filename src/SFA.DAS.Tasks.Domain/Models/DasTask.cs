@@ -9,5 +9,6 @@ namespace SFA.DAS.Tasks.Domain.Models
         public TaskType Type { get; set; }
         public string EmployerAccountId { get; set; }
         public ushort ItemsDueCount { get; set; }
+        public ApprenticeshipEmployerType ApplicableToApprenticeshipEmployerType { get; set; }
     }
 }

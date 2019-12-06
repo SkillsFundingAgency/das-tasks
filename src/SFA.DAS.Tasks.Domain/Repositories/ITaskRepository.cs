@@ -11,7 +11,7 @@ namespace SFA.DAS.Tasks.Domain.Repositories
 
         Task<DasTask> GetTask(string employerAccountId, TaskType type);
 
-        Task<IEnumerable<DasTask>> GetMonthlyReminderTasks(string employerAccountId);
+        Task<IEnumerable<DasTask>> GetMonthlyReminderTasks(string employerAccountId, ApprenticeshipEmployerType apprenticeshipEmployerTypes);
 
         Task SaveUserReminderSuppression(UserReminderSuppressionFlag flag);
 

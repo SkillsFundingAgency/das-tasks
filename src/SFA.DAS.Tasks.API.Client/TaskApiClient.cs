@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.API.Types.DTOs;
+using SFA.DAS.Tasks.API.Types.Enums;
 
 namespace SFA.DAS.Tasks.API.Client
 {
@@ -20,10 +21,10 @@ namespace SFA.DAS.Tasks.API.Client
             _httpClient = new SecureHttpClient(configuration);
         }
 
-        public async Task<IEnumerable<TaskDto>> GetTasks(string employerAccountId, string userId)
+        public async Task<IEnumerable<TaskDto>> GetTasks(string employerAccountId, string userId, ApprenticeshipEmployerType applicableToApprenticeshipEmployerType = ApprenticeshipEmployerType.All)
         {
             var baseUrl = GetBaseUrl();
-            var url = $"{baseUrl}api/tasks/{employerAccountId}/{userId}";
+            var url = $"{baseUrl}api/tasks/{employerAccountId}/{userId}?{nameof(applicableToApprenticeshipEmployerType)}={(int)applicableToApprenticeshipEmployerType}";
 
             _logger.Info($"Get: {url}");
             var json = await _httpClient.GetAsync(url);
