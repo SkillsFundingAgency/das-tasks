@@ -58,16 +58,6 @@ jobs:
           arguments: "--configuration $(buildConfiguration) --output $(build.artifactstagingdirectory)/publish/ --no-restore --no-build"
           zipAfterPublish: false
           modifyOutputPath: false
-          
-      - task: DotNetCoreCLI@2
-        displayName: "dotnet pack"
-        inputs:
-          command: pack
-          packagesToPack: >
-            src/SFA.DAS.Notifications.Messages/SFA.DAS.Notifications.Messages.csproj
-          packDirectory: "$(build.artifactstagingdirectory)/publish"
-          versioningScheme: byBuildNumber
-          buildProperties: 'Version="$(Build.BuildNumber)"'
 
       - task: CopyFiles@2
         displayName: "Copy Files to: $(build.artifactstagingdirectory)"
