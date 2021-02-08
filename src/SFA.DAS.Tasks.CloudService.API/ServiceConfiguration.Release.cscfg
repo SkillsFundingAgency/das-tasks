@@ -14,7 +14,7 @@
       <Setting name="idaAudience" value="__IdentifierUri__" />
     </ConfigurationSettings>
     <Certificates>
-      <Certificate name="WebSslCert" thumbprint="748905DDCD4D24379BAEBC2ADF6EE5AAF2FC4BC9" thumbprintAlgorithm="sha1" />
+      <Certificate name="WebSslCert" thumbprint="8AE37A1F42515AEEB9754AC61B762AF231DE9C6F" thumbprintAlgorithm="sha1" />
     </Certificates>
   </Role>
   <Role name="SFA.DAS.Tasks.Worker">
