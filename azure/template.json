@@ -50,6 +50,9 @@
         "sharedEnvResourceGroup": {
             "type": "string"
         },
+        "sharedEnvVirtualNetworkName": {
+            "type": "string"
+        },
         "sharedKeyVaultName": {
             "type": "string"
         },
@@ -59,15 +62,37 @@
         "sharedStorageConnectionString": {
             "type": "securestring"
         },
+        "subnetObject": {
+            "type": "object"
+        },
+        "subnetDelegations": {
+            "type": "array"
+        },
+        "subnetServiceEndpointList": {
+            "type": "array"
+        },
         "tags": {
             "type": "object"
+        },
+        "workerAccessRestrictions": {
+            "type": "array"
+        },
+        "appServicePlanInstances": {
+            "type": "int",
+            "defaultValue": 1
+        },
+        "appServicePlanSize": {
+            "type": "string",
+            "defaultValue": "1"
         }
     },
     "variables": {
         "deploymentUrlBase": "https://raw.githubusercontent.com/SkillsFundingAgency/das-platform-building-blocks/master/templates/",
         "resourceNamePrefix": "[toLower(concat('das-', parameters('resourceEnvironmentName'),'-', parameters('serviceName')))]",
         "resourceGroupName": "[concat(variables('resourceNamePrefix'), '-rg')]",
-        "appServiceName": "[concat(variables('resourceNamePrefix'), '-as')]",
+        "apiAppServiceName": "[concat(variables('resourceNamePrefix'), 'api-as')]",
+        "wkrAppServiceName": "[concat(variables('resourceNamePrefix'), 'wkr-as')]",
+        "wkrAppServicePlanName": "[concat(variables('resourceNamePrefix'), 'wkr-asp')]",
         "configNames": "SFA.DAS.Tasks"
     },
     "resources": [
@@ -119,10 +144,10 @@
                 },
                 "parameters": {
                     "appInsightsName": {
-                        "value": "[variables('appServiceName')]"
+                        "value": "[variables('apiAppServiceName')]"
                     },
                     "attachedService": {
-                        "value": "[variables('appServiceName')]"
+                        "value": "[variables('apiAppServiceName')]"
                     }
                 }
             },
@@ -143,7 +168,7 @@
                 },
                 "parameters": {
                     "appServiceName": {
-                        "value": "[variables('appServiceName')]"
+                        "value": "[variables('apiAppServiceName')]"
                     },
                     "appServicePlanName": {
                         "value": "[parameters('sharedBackEndAppServicePlanName')]"
@@ -232,10 +257,70 @@
                 },
                 "parameters": {
                     "appInsightsName": {
-                        "value": "[variables('appServiceName')]"
+                        "value": "[variables('wkrAppServiceName')]"
                     },
                     "attachedService": {
-                        "value": "[variables('appServiceName')]"
+                        "value": "[variables('wkrAppServiceName')]"
+                    }
+                }
+            },
+            "dependsOn": [
+                "[variables('resourceGroupName')]"
+            ]
+        },
+        {
+            "apiVersion": "2020-10-01",
+            "name": "wkr-app-service-plan",
+            "type": "Microsoft.Resources/deployments",
+            "resourceGroup": "[variables('resourceGroupName')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('deploymentUrlBase'),'app-service-plan.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "appServicePlanName": {
+                        "value": "[variables('wkrAppServicePlanName')]"
+                    },
+                    "aspSize": {
+                        "value": "[parameters('appServicePlanSize')]"
+                    },
+                    "aspInstances": {
+                        "value": "[parameters('appServicePlanInstances')]"
+                    }
+                }
+            },
+            "dependsOn": [
+                "[variables('resourceGroupName')]"
+            ]
+        },
+        {
+            "apiVersion": "2020-10-01",
+            "name": "wkr-app-subnet",
+            "type": "Microsoft.Resources/deployments",
+            "resourceGroup": "[parameters('sharedEnvResourceGroup')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('deploymentUrlBase'),'subnet.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "virtualNetworkName": {
+                        "value": "[parameters('sharedEnvVirtualNetworkName')]"
+                    },
+                    "subnetName": {
+                        "value": "[parameters('subnetObject').name]"
+                    },
+                    "subnetAddressPrefix": {
+                        "value": "[parameters('subnetObject').addressSpace]"
+                    },
+                    "serviceEndpointList": {
+                        "value": "[parameters('subnetServiceEndpointList')]"
+                    },
+                    "delegations": {
+                        "value": "[parameters('subnetDelegations')]"
                     }
                 }
             },
@@ -256,16 +341,16 @@
                 },
                 "parameters": {
                     "appServiceName": {
-                        "value": "[variables('appServiceName')]"
+                        "value": "[variables('wkrAppServiceName')]"
                     },
                     "appServicePlanName": {
-                        "value": "[parameters('sharedBackEndAppServicePlanName')]"
+                        "value": "[variables('wkrAppServicePlanName')]"
                     },
                     "appServicePlanResourceGroup": {
-                        "value": "[parameters('sharedEnvResourceGroup')]"
+                        "value": "[variables('resourceGroupName')]"
                     },
                     "subnetResourceId": {
-                        "value": "[parameters('sharedBackEndSubnetResourceId')]"
+                        "value": "[reference('wkr-app-subnet').outputs.SubnetResourceId.value]"
                     },
                     "appServiceAppSettings": {
                         "value": {
@@ -309,19 +394,14 @@
                             ]
                         }
                     },
-                    "customHostName": {
-                        "value": "[parameters('customHostname')]"
-                    },
-                    "certificateThumbprint": {
-                        "value": "[reference('app-service-certificate').outputs.certificateThumbprint.value]"
-                    },
-                    "ipSecurityRestrictions": {
-                        "value": "[parameters('backEndAccessRestrictions')]"
+                     "ipSecurityRestrictions": {
+                        "value": "[parameters('workerAccessRestrictions')]"
                     }
                 }
             },
             "dependsOn": [
-                "[variables('resourceGroupName')]"
+                "[variables('resourceGroupName')]",
+                "wkr-app-service-plan"
             ]
         }
     ],
@@ -330,9 +410,13 @@
             "type": "string",
             "value": "[variables('resourceGroupName')]"
         },
-        "AppServiceName": {
+        "ApiAppServiceName": {
             "type": "string",
-            "value": "[variables('appServiceName')]"
+            "value": "[variables('apiAppServiceName')]"
+        },
+        "WorkerAppServiceName": {
+            "type": "string",
+            "value": "[variables('wkrAppServiceName')]"
         }
     }
 }
