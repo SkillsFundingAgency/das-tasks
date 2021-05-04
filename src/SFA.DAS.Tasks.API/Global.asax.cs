@@ -1,5 +1,6 @@
 ﻿using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Azure;
+using System.Configuration;
 using System.Web.Http;
 using System.Web.Mvc;
 
@@ -9,7 +10,7 @@ namespace SFA.DAS.Tasks.API
     {
         protected void Application_Start()
         {
-            TelemetryConfiguration.Active.InstrumentationKey = CloudConfigurationManager.GetSetting("InstrumentationKey");
+            TelemetryConfiguration.Active.InstrumentationKey = ConfigurationManager.AppSettings["InstrumentationKey"];
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
         }
