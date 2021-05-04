@@ -1,0 +1,71 @@
+﻿parameters:
+- name: OverrideBlockOnPossibleDataLoss
+  displayName: Add /p:BlockOnPossibleDataLoss=false argument to DACPAC deployment
+  type: boolean
+  default: false
+
+resources:
+  repositories:
+  - repository: self
+  - repository: das-platform-building-blocks
+    type: github
+    name: SkillsFundingAgency/das-platform-building-blocks
+    ref: refs/tags/0.4.55
+    endpoint: GitHub (SFA)
+  - repository: das-platform-automation
+    type: github
+    name: SkillsFundingAgency/das-platform-automation
+    ref: refs/tags/4.6.0
+    endpoint: GitHub (SFA)
+  pipelines:
+  - pipeline: das-employer-config
+    project: Digital Apprenticeship Service
+    source: das-employer-config
+    branch: master
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - "*"
+
+variables:
+  - name: SolutionBaseName
+    value: SFA.DAS.Tasks
+  - name: BuildConfiguration
+    value: release
+  - name: BuildPlatform
+    value: any cpu
+  - group: RELEASE Management Resources
+  - group: RELEASE das-tasks
+
+stages:
+- stage: Build
+  variables:
+    - group: BUILD Management Resources
+  jobs:
+  - template: pipeline-templates/job/code-build.yml
+    parameters:
+      SolutionBaseName: $(SolutionBaseName)
+      BuildConfiguration: $(BuildConfiguration)
+      BuildPlatform: $(BuildPlatform)
+- template: azure-pipelines-templates/deploy/stage/nuget-publish.yml@das-platform-building-blocks
+- stage: Deploy_AT
+  dependsOn: Build
+  displayName: Deploy to AT
+  variables:
+  - group: DevTest Management Resources
+  - group: AT DevTest Shared Resources
+  - group: AT das-tasks
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ConfigurationStorageConnectionString: $(ConfigurationStorageConnectionString)
+      Environment: AT
+      LoggingRedisConnectionString: $(LoggingRedisConnectionString)
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+      ResourceGroupLocation: $(ResourceGroupLocation)
+      ServiceConnection: SFA-DAS-DevTest-ARM
+      SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
+      SolutionBaseName: $(SolutionBaseName)
+      SubscriptionId: $(SubscriptionId)

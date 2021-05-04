@@ -1,0 +1,90 @@
+﻿parameters:
+  SolutionBaseName:
+  BuildConfiguration:
+  BuildPlatform:
+
+jobs:
+- job: CodeBuild
+  pool:
+    name: DAS - Continuous Integration
+    demands: Agent.OS -equals Windows_NT
+    workspace:
+      clean: all
+  steps:
+  - template: azure-pipelines-templates/build/step/gitversion.yml@das-platform-building-blocks
+
+  - task: NuGetCommand@2
+    displayName: Restore
+    inputs:
+      command: 'restore'
+      restoreSolution: '**/*.sln'
+  - task: VSBuild@1
+    displayName: Build
+    inputs:
+      solution: '**/*.sln'
+      configuration: ${{ parameters.BuildConfiguration }}
+      platform: ${{ parameters.BuildPlatform }}
+
+  - task: VSTest@2
+    displayName: Unit Tests
+    inputs:
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: |
+        **\*UnitTests.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
+      configuration: ${{ parameters.BuildConfiguration }}
+      platform: ${{ parameters.BuildPlatform }}
+
+  - task: VSBuild@1
+    displayName: 'Publish API'
+    inputs:
+      solution: src/${{ parameters.SolutionBaseName }}.API/${{ parameters.SolutionBaseName }}.API.csproj
+      vsVersion: '16.0'
+      msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)/publish/${{ parameters.SolutionBaseName }}.API/"'
+      platform: 'anycpu'
+      configuration: '$(buildConfiguration)'
+      clean: true
+
+  - task: VSBuild@1
+    displayName: 'Publish Worker'
+    inputs:
+      solution: src\${{ parameters.SolutionBaseName }}.Worker\${{ parameters.SolutionBaseName }}.Worker.csproj
+      vsVersion: '16.0'
+      msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)/publish/${{ parameters.SolutionBaseName }}.Worker/"'
+      platform: 'anycpu'
+      configuration: '$(buildConfiguration)'
+      clean: true
+
+  - task: VSBuild@1
+    displayName: 'Publish Acceptance Tests'
+    inputs:
+      solution: src\${{ parameters.SolutionBaseName }}.AcceptanceTests\${{ parameters.SolutionBaseName }}.AcceptanceTests.csproj
+      vsVersion: '16.0'
+      msbuildArgs: '/p:SkipInvalidConfigurations=true /p:OutputPath="$(build.artifactstagingdirectory)/publish/${{ parameters.SolutionBaseName }}.AcceptanceTests/"'
+      platform: 'anycpu'
+      configuration: '$(buildConfiguration)'
+      clean: true
+
+  - task: CopyFiles@2
+    displayName: Copy Files to $(build.artifactstagingdirectory)/publish
+    inputs:
+      Contents: |
+        azure/**
+      TargetFolder: $(build.artifactstagingdirectory)/publish
+      OverWrite: true
+  - task: PublishPipelineArtifact@1
+    displayName: Publish Artifact ${{ parameters.SolutionBaseName }}
+    inputs:
+      targetPath: $(build.artifactstagingdirectory)/publish
+      artifactName: ${{ parameters.SolutionBaseName }}
+
+  - template: azure-pipelines-templates/build/step/nuget-pack.yml@das-platform-building-blocks
+    parameters:
+      DotNetFrameworkPackagesToPack: |
+        src\${{ parameters.SolutionBaseName }}.API.Client\${{ parameters.SolutionBaseName }}.API.Client.csproj
+
+- template: azure-pipelines-templates/build/job/dacpac-template.yml@das-platform-building-blocks
+  parameters:
+    SolutionBaseName: ${{ parameters.SolutionBaseName }}
+    SqlProjectPath: src/${{ parameters.SolutionBaseName }}.Database/${{ parameters.SolutionBaseName }}.Database.sqlproj
