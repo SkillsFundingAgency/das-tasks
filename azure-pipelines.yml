@@ -32,4 +32,5 @@ stages:
       SolutionBaseName: $(SolutionBaseName)
       BuildConfiguration: $(BuildConfiguration)
       BuildPlatform: $(BuildPlatform)
+- template: azure-pipelines-templates/deploy/stage/nuget-publish.yml@das-platform-building-blocks
     

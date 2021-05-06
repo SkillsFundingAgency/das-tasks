@@ -89,3 +89,7 @@ jobs:
         targetPath: $(build.artifactstagingdirectory)/publish
         artifactName: SFA.DAS.Tasks
 
+    - template: azure-pipelines-templates/build/step/nuget-pack.yml@das-platform-building-blocks
+      parameters: 
+        DotNetFrameworkPackagesToPack: |
+          src\SFA.DAS.Tasks.API.Client\SFA.DAS.Tasks.API.Client.csproj
