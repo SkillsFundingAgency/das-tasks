@@ -30,7 +30,7 @@ jobs:
       inputs:
         solution: '**/*.sln'
         configuration: ${{ parameters.BuildConfiguration }}
-        platform: ${{ platform.BuildPlatform }}
+        platform: ${{ parameters.BuildPlatform }}
 
     - task: VSTest@2
       displayName: Unit Tests
@@ -41,7 +41,7 @@ jobs:
           !**\*TestAdapter.dll
           !**\obj\** 
         configuration: ${{ parameters.BuildConfiguration }}
-        platform: ${{ platform.BuildPlatform }}
+        platform: ${{ parameters.BuildPlatform }}
 
     ##TO DO: run acceptance tests
 
