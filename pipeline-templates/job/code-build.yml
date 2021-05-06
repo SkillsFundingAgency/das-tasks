@@ -18,7 +18,14 @@ jobs:
         useConfigFile: true
         configFilePath: GitVersion.yml
 
-    - template: azure-pipelines-templates/build/step/app-build.yml@das-platform-building-blocks
+    - task: NuGetCommand@2
+      inputs:
+        command: 'restore'
+        restoreSolution: '**/*.sln'
+    - task: VSBuild@1
+      inputs:
+        solution: '**/*.sln'
+        configuration: ${{ parameters.BuildConfiguration }}
 
     - template: azure-pipelines-templates/build/step/dependency-check.yml@das-platform-building-blocks
 
