@@ -60,7 +60,7 @@ jobs:
       inputs:
         solution: src\SFA.DAS.Tasks.Worker\SFA.DAS.Tasks.Worker.csproj
         vsVersion: '16.0'
-        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)/publish/SFA.DAS.Tasks.Worker/"'
+        msbuildArgs: '/p:SkipInvalidConfigurations=true /p:OutputPath="$(build.artifactstagingdirectory)/publish/SFA.DAS.Tasks.Worker/"'
         platform: 'anycpu'
         configuration: '$(buildConfiguration)'
         clean: true
@@ -70,7 +70,7 @@ jobs:
       inputs:
         solution: src\SFA.DAS.Tasks.AcceptanceTests\SFA.DAS.Tasks.AcceptanceTests.csproj
         vsVersion: '16.0'
-        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)/publish/SFA.DAS.Tasks.AcceptanceTests/"'
+        msbuildArgs: '/p:SkipInvalidConfigurations=true /p:OutputPath="$(build.artifactstagingdirectory)/publish/SFA.DAS.Tasks.AcceptanceTests/"'
         platform: 'anycpu'
         configuration: '$(buildConfiguration)'
         clean: true
