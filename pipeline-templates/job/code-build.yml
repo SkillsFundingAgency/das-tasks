@@ -1,6 +1,7 @@
 ﻿parameters:
   SolutionBaseName:
   BuildConfiguration:
+  BuildPlatform:
 
 jobs:
 - job: CodeBuild
@@ -29,6 +30,7 @@ jobs:
       inputs:
         solution: '**/*.sln'
         configuration: ${{ parameters.BuildConfiguration }}
+        platform: ${{ platform.BuildPlatform }}
 
     - task: VSTest@2
       displayName: Unit Tests
@@ -39,6 +41,7 @@ jobs:
           !**\*TestAdapter.dll
           !**\obj\** 
         configuration: ${{ parameters.BuildConfiguration }}
+        platform: ${{ platform.BuildPlatform }}
 
     ##TO DO: run acceptance tests
 

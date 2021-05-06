@@ -31,4 +31,5 @@ stages:
     parameters:
       SolutionBaseName: $(SolutionBaseName)
       BuildConfiguration: $(BuildConfiguration)
+      BuildPlatform: $(BuildPlatform)
     
