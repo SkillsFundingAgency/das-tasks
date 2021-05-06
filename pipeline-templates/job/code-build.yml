@@ -43,11 +43,17 @@ jobs:
         configuration: ${{ parameters.BuildConfiguration }}
         platform: ${{ parameters.BuildPlatform }}
 
-    ##TO DO: run acceptance tests
-
     - template: azure-pipelines-templates/build/step/dependency-check.yml@das-platform-building-blocks
 
-    ##TO DO: publish output
+    - task: VSBuild@1
+      displayName: 'Publish API'
+      inputs:
+        solution: src/SFA.DAS.Tasks.API/SFA.DAS.Tasks.API.csproj
+        vsVersion: '16.0'
+        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)/publish/SFA.DAS.Tasks.API/"'
+        platform: 'anycpu'
+        configuration: '$(buildConfiguration)'
+        clean: true
 
     - task: CopyFiles@2
       displayName: Copy Files to $(build.artifactstagingdirectory)/publish
@@ -58,7 +64,8 @@ jobs:
         OverWrite: true
 
     - task: PublishPipelineArtifact@1
-      displayName: Publish Artifact drop
+      displayName: Publish Artifact SFA.DAS.Tasks
       inputs:
         targetPath: $(build.artifactstagingdirectory)/publish
-        artifactName: drop
+        artifactName: SFA.DAS.Tasks
+
