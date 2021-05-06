@@ -13,7 +13,7 @@ variables:
   value: any cpu
 
 pool:
-  name: DAS - Continuous Integration
+  name: 'Azure Pipelines'
   demands: Agent.OS -equals Windows_NT
   workspace:
     clean: all
