@@ -13,7 +13,7 @@ variables:
   value: any cpu
 
 pool:
-  name: 'Azure Pipelines'
+  vmImage: 'windows-latest'  
 
 resources:
   repositories:
