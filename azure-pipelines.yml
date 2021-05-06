@@ -14,8 +14,6 @@ variables:
 
 pool:
   name: 'Azure Pipelines'
-  workspace:
-    clean: all
 
 resources:
   repositories:
