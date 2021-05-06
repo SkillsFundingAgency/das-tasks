@@ -45,8 +45,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PreReqs", "PreReqs", "{9241
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.AcceptanceTests", "SFA.DAS.Tasks.AcceptanceTests\SFA.DAS.Tasks.AcceptanceTests.csproj", "{76F2367E-F47B-4392-A01B-1838FFB7B29D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.API.AcceptanceTests", "SFA.DAS.Tasks.API.IntegrationTests\SFA.DAS.Tasks.API.IntegrationTests.csproj", "{4249EB17-1CB7-43D7-AA52-6A5B1F4939D3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
