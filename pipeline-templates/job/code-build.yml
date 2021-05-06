@@ -43,7 +43,16 @@ jobs:
         configuration: ${{ parameters.BuildConfiguration }}
         platform: ${{ parameters.BuildPlatform }}
 
-    ##TO DO: run acceptance tests
+    - task: VSTest@2
+      displayName: Acceptance Tests
+      inputs:
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: | 
+          **\*AcceptanceTests.dll
+          !**\*TestAdapter.dll
+          !**\obj\** 
+        configuration: ${{ parameters.BuildConfiguration }}
+        platform: ${{ parameters.BuildPlatform }}
 
     - template: azure-pipelines-templates/build/step/dependency-check.yml@das-platform-building-blocks
 
