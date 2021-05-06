@@ -55,6 +55,26 @@ jobs:
         configuration: '$(buildConfiguration)'
         clean: true
 
+    - task: VSBuild@1
+      displayName: 'Publish Worker'
+      inputs:
+        solution: src\SFA.DAS.Tasks.Worker\SFA.DAS.Tasks.Worker.csproj
+        vsVersion: '16.0'
+        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)/publish/SFA.DAS.Tasks.Worker/"'
+        platform: 'anycpu'
+        configuration: '$(buildConfiguration)'
+        clean: true
+
+    - task: VSBuild@1
+      displayName: 'Publish Acceptance Tests'
+      inputs:
+        solution: src\SFA.DAS.Tasks.AcceptanceTests\SFA.DAS.Tasks.AcceptanceTests.csproj
+        vsVersion: '16.0'
+        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)/publish/SFA.DAS.Tasks.AcceptanceTests/"'
+        platform: 'anycpu'
+        configuration: '$(buildConfiguration)'
+        clean: true
+
     - task: CopyFiles@2
       displayName: Copy Files to $(build.artifactstagingdirectory)/publish
       inputs:
