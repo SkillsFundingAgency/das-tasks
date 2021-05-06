@@ -10,8 +10,6 @@ jobs:
     demands: Agent.OS -equals Windows_NT
     workspace:
       clean: all
-  variables:
-  - group: BUILD Management Resources
   steps:
     - task: gitversion/setup@0
       displayName: gitversion/setup

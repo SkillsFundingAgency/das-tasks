@@ -1,31 +1,42 @@
-﻿trigger:
+﻿resources:
+  repositories:
+  - repository: self
+  - repository: das-platform-building-blocks
+    type: github
+    name: SkillsFundingAgency/das-platform-building-blocks
+    ref: refs/tags/0.3.13
+    endpoint: GitHub (SFA)
+  - repository: das-platform-automation
+    type: github
+    name: SkillsFundingAgency/das-platform-automation
+    ref: refs/tags/4.3.5
+    endpoint: GitHub (SFA)
+  pipelines:
+  - pipeline: das-employer-config
+    project: Digital Apprenticeship Service
+    source: das-employer-config
+    branch: master
+
+trigger:
   batch: true
   branches:
     include:
       - "*"
 
 variables:
-- name: SolutionBaseName
-  value: SFA.DAS.Tasks.API
-- name: BuildConfiguration
-  value: release
-- name: BuildPlatform
-  value: any cpu
-
-pool:
-  vmImage: 'vs2017-win2016'
-
-resources:
-  repositories:
-  - repository: self
-  - repository: das-platform-building-blocks
-    type: github
-    name: SkillsFundingAgency/das-platform-building-blocks
-    ref: refs/heads/master
-    endpoint: GitHub (SFA)
+  - name: SolutionBaseName
+    value: SFA.DAS.Tasks.API
+  - name: BuildConfiguration
+    value: release
+  - name: BuildPlatform
+    value: any cpu
+  - group: RELEASE Management Resources
+  - group: RELEASE das-tasks
 
 stages:
 - stage: Build
+  variables:
+    - group: BUILD Management Resources
   jobs:
   - template: pipeline-templates/job/code-build.yml
     parameters:
@@ -33,4 +44,19 @@ stages:
       BuildConfiguration: $(BuildConfiguration)
       BuildPlatform: $(BuildPlatform)
 - template: azure-pipelines-templates/deploy/stage/nuget-publish.yml@das-platform-building-blocks
-    
+- stage: Deploy_AT
+  dependsOn: Build
+  displayName: Deploy to AT
+  variables:
+  - group: DevTest Management Resources
+  - group: AT DevTest Shared Resources
+  - group: AT das-tasks
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ConfigurationStorageConnectionString: $(ConfigurationStorageConnectionString)
+      Environment: $(EnvironmentName)
+      LoggingRedisConnectionString: $(LoggingRedisConnectionString)
+      ResourceGroupLocation: $(ResourceGroupLocation)
+      ServiceConnection: $(ARMServiceConnection)
+      SubscriptionId: $(SubscriptionId)
