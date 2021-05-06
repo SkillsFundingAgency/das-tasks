@@ -58,5 +58,5 @@ stages:
       Environment: AT
       LoggingRedisConnectionString: $(LoggingRedisConnectionString)
       ResourceGroupLocation: $(ResourceGroupLocation)
-      ServiceConnection: $(ARMServiceConnection)
+      ServiceConnection: SFA-DAS-DevTest-ARM
       SubscriptionId: $(SubscriptionId)
