@@ -38,6 +38,7 @@ jobs:
           **\*UnitTests.dll
           !**\*TestAdapter.dll
           !**\obj\** 
+        configuration: ${{ parameters.BuildConfiguration }}
 
     ##TO DO: run acceptance tests
 
