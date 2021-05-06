@@ -55,7 +55,7 @@ stages:
   - template: pipeline-templates/job/deploy.yml
     parameters:
       ConfigurationStorageConnectionString: $(ConfigurationStorageConnectionString)
-      Environment: $(EnvironmentName)
+      Environment: ${{ variables.EnvironmentName }}
       LoggingRedisConnectionString: $(LoggingRedisConnectionString)
       ResourceGroupLocation: $(ResourceGroupLocation)
       ServiceConnection: $(ARMServiceConnection)
