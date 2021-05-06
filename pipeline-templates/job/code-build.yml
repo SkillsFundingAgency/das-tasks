@@ -19,13 +19,25 @@ jobs:
         configFilePath: GitVersion.yml
 
     - task: NuGetCommand@2
+      displayName: Restore
       inputs:
         command: 'restore'
         restoreSolution: '**/*.sln'
+
     - task: VSBuild@1
+      displayName: Build
       inputs:
         solution: '**/*.sln'
         configuration: ${{ parameters.BuildConfiguration }}
+
+    - task: VSTest@2
+      displayName: Unit Tests
+      inputs:
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: | 
+          **\*UnitTests.dll
+          !**\*TestAdapter.dll
+          !**\obj\** 
 
     - template: azure-pipelines-templates/build/step/dependency-check.yml@das-platform-building-blocks
 
