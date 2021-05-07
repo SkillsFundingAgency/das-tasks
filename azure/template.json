@@ -11,12 +11,6 @@
         "customHostName": {
             "type": "string"
         },
-        "databaseSkuName": {
-            "type": "string"
-        },
-        "databaseTier": {
-            "type": "string"
-        },
         "elasticPoolName": {
             "type": "string"
         },
@@ -102,6 +96,14 @@
         "appServicePlanSize": {
             "type": "string",
             "defaultValue": "1"
+        },
+        "databaseSkuName": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "databaseTier": {
+            "type": "string",
+            "defaultValue": ""
         }
     },
     "variables": {
@@ -243,7 +245,7 @@
                                 },
                                 {
                                     "name": "StorageConnectionString",
-                                    "value": "[parameters('sharedStorageConnectionString')]"
+                                    "value": "[parameters('sharedStorageAccountConnectionString')]"
                                 }
                             ]
                         }
@@ -447,7 +449,7 @@
                                 },
                                 {
                                     "name": "StorageConnectionString",
-                                    "value": "[parameters('sharedStorageConnectionString')]"
+                                    "value": "[parameters('sharedStorageAccountConnectionString')]"
                                 }
                             ]
                         }
