@@ -26,6 +26,9 @@
         "idaTenant": {
             "type": "string"
         },
+        "logAnalyticsSubscriptionId": {
+            "type": "string"
+        },
         "logAnalyticsWorkspaceName": {
             "type": "string"
         },
@@ -101,10 +104,6 @@
         "databaseTier": {
             "type": "string",
             "defaultValue": ""
-        },
-        "logAnalyticsSubscriptionId": {
-            "type": "string",
-            "defaultValue": "[subscription().subscriptionId]"
         }
     },
     "variables": {
