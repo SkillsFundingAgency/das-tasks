@@ -59,4 +59,5 @@ stages:
       LoggingRedisConnectionString: $(LoggingRedisConnectionString)
       ResourceGroupLocation: $(ResourceGroupLocation)
       ServiceConnection: SFA-DAS-DevTest-ARM
+      SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
       SubscriptionId: $(SubscriptionId)

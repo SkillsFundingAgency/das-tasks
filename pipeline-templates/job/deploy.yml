@@ -4,6 +4,7 @@
   LoggingRedisConnectionString:
   ResourceGroupLocation:
   ServiceConnection:
+  SharedStorageAccountConnectionString:
   SubscriptionId:
 
 jobs:
@@ -15,8 +16,6 @@ jobs:
     runOnce:
       deploy:
         steps:
-        ##TO DO: remove this task
-        - pwsh: Get-ChildItem ENV:* | Sort-Object Name | Format-Table -AutoSize
         - template: azure-pipelines-templates/deploy/step/arm-deploy.yml@das-platform-building-blocks
           parameters:
             ServiceConnection: ${{ parameters.ServiceConnection }}
@@ -28,6 +27,7 @@ jobs:
             TemplateSecrets:
               LoggingRedisConnectionString: ${{ parameters.LoggingRedisConnectionString }}
               ConfigurationStorageConnectionString: ${{ parameters.ConfigurationStorageConnectionString }}
+              SharedStorageAccountConnectionString: ${{ parameters.SharedStorageAccountConnectionString }}
         - template: azure-pipelines-templates/deploy/step/generate-config.yml@das-platform-building-blocks
           parameters:
             ServiceConnection: ${{ parameters.ServiceConnection }}
