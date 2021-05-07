@@ -38,4 +38,4 @@ jobs:
           parameters:
             ServiceConnection: ${{ parameters.ServiceConnection }}
             AppServiceName: $(ApiAppServiceName)
-            DeploymentPackagePath: $(Pipeline.Workspace)/SFA.DAS.Tasks/SFA.DAS.Tasks.API.zip
+            DeploymentPackagePath: $(Pipeline.Workspace)/SFA.DAS.Tasks/SFA.DAS.Tasks.API/SFA.DAS.Tasks.API.zip
