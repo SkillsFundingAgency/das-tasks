@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using SFA.DAS.Tasks.API.Types.Enums;
@@ -8,7 +9,7 @@ using SFA.DAS.Tasks.Domain.Repositories;
 
 namespace SFA.DAS.Tasks.Application.Queries.GetTasksByEmployerAccountId
 {
-    public class GetTasksByEmployerAccountIdHandler : IAsyncRequestHandler<GetTasksByEmployerAccountIdRequest, GetTasksByEmployerAccountIdResponse>
+    public class GetTasksByEmployerAccountIdHandler : IRequestHandler<GetTasksByEmployerAccountIdRequest, GetTasksByEmployerAccountIdResponse>
     {
         private readonly ITaskRepository _repository;
         private readonly IValidator<GetTasksByEmployerAccountIdRequest> _validator;
@@ -19,7 +20,7 @@ namespace SFA.DAS.Tasks.Application.Queries.GetTasksByEmployerAccountId
             _validator = validator;
         }
 
-        public async Task<GetTasksByEmployerAccountIdResponse> Handle(GetTasksByEmployerAccountIdRequest message)
+        public async Task<GetTasksByEmployerAccountIdResponse> Handle(GetTasksByEmployerAccountIdRequest message, CancellationToken cancellationToken)
         {
             var validationResult = _validator.Validate(message);
 

@@ -41,7 +41,7 @@ namespace SFA.DAS.Tasks.API.Controllers
         {
             _logger.Debug($"Getting tasks for employer account {employerAccountId}");
 
-            var result = await _mediator.SendAsync(new GetTasksByEmployerAccountIdRequest
+            var result = await _mediator.Send(new GetTasksByEmployerAccountIdRequest
             {
                 EmployerAccountId = employerAccountId,
                 UserId = userId,
@@ -68,7 +68,7 @@ namespace SFA.DAS.Tasks.API.Controllers
         {
             _logger.Debug($"Adding task reminder supression for employer account Id {employerAccountId}, user Id {userId} and task type {taskType}");
 
-            await _mediator.SendAsync(new SaveUserReminderSuppressionFlagCommand
+            await _mediator.Send(new SaveUserReminderSuppressionFlagCommand
             {
                 EmployerAccountId = employerAccountId,
                 UserId = userId,

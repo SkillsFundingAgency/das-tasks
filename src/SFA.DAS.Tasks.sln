@@ -15,13 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D56B9FC1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.API.UnitTests", "SFA.DAS.Tasks.API.UnitTests\SFA.DAS.Tasks.API.UnitTests.csproj", "{A8061FE4-C08C-46AE-9E3E-FE54E6170810}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.Worker.UnitTests", "SFA.DAS.Tasks.Worker.UnitTests\SFA.DAS.Tasks.Worker.UnitTests.csproj", "{BBF03398-57DA-4FFE-AEE1-567E5E4D2461}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.Application", "SFA.DAS.Tasks.Application\SFA.DAS.Tasks.Application.csproj", "{B96FB4DB-3DCE-4D4A-B7F1-EDE97233B177}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.Tasks.Application", "SFA.DAS.Tasks.Application\SFA.DAS.Tasks.Application.csproj", "{B96FB4DB-3DCE-4D4A-B7F1-EDE97233B177}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.DataAccess", "SFA.DAS.Tasks.DataAccess\SFA.DAS.Tasks.DataAccess.csproj", "{3E3AEAC4-F54F-4532-99B5-E707A9A86D88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.Application.UnitTests", "SFA.DAS.Tasks.Application.UnitTests\SFA.DAS.Tasks.Application.UnitTests.csproj", "{09F60916-ACFE-403A-8822-FF5EF4EC3D1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.Tasks.Application.UnitTests", "SFA.DAS.Tasks.Application.UnitTests\SFA.DAS.Tasks.Application.UnitTests.csproj", "{09F60916-ACFE-403A-8822-FF5EF4EC3D1E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.API.Types", "SFA.DAS.Tasks.API.Types\SFA.DAS.Tasks.API.Types.csproj", "{0FA10E00-F9B9-433A-AAC0-FEE0E4EF179A}"
 EndProject
@@ -44,6 +42,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PreReqs", "PreReqs", "{9241
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Tasks.AcceptanceTests", "SFA.DAS.Tasks.AcceptanceTests\SFA.DAS.Tasks.AcceptanceTests.csproj", "{76F2367E-F47B-4392-A01B-1838FFB7B29D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.Tasks.Functions", "SFA.DAS.Tasks.Functions\SFA.DAS.Tasks.Functions.csproj", "{6F5E06C6-3737-4F6A-9195-3C9FD007B205}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,10 +73,6 @@ Global
 		{A8061FE4-C08C-46AE-9E3E-FE54E6170810}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8061FE4-C08C-46AE-9E3E-FE54E6170810}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8061FE4-C08C-46AE-9E3E-FE54E6170810}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BBF03398-57DA-4FFE-AEE1-567E5E4D2461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBF03398-57DA-4FFE-AEE1-567E5E4D2461}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBF03398-57DA-4FFE-AEE1-567E5E4D2461}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BBF03398-57DA-4FFE-AEE1-567E5E4D2461}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B96FB4DB-3DCE-4D4A-B7F1-EDE97233B177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B96FB4DB-3DCE-4D4A-B7F1-EDE97233B177}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B96FB4DB-3DCE-4D4A-B7F1-EDE97233B177}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -105,13 +101,16 @@ Global
 		{76F2367E-F47B-4392-A01B-1838FFB7B29D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76F2367E-F47B-4392-A01B-1838FFB7B29D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76F2367E-F47B-4392-A01B-1838FFB7B29D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F5E06C6-3737-4F6A-9195-3C9FD007B205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F5E06C6-3737-4F6A-9195-3C9FD007B205}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F5E06C6-3737-4F6A-9195-3C9FD007B205}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F5E06C6-3737-4F6A-9195-3C9FD007B205}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A8061FE4-C08C-46AE-9E3E-FE54E6170810} = {D56B9FC1-9B4E-4695-9951-737094E2729F}
-		{BBF03398-57DA-4FFE-AEE1-567E5E4D2461} = {D56B9FC1-9B4E-4695-9951-737094E2729F}
 		{09F60916-ACFE-403A-8822-FF5EF4EC3D1E} = {D56B9FC1-9B4E-4695-9951-737094E2729F}
 		{76F2367E-F47B-4392-A01B-1838FFB7B29D} = {D56B9FC1-9B4E-4695-9951-737094E2729F}
 	EndGlobalSection

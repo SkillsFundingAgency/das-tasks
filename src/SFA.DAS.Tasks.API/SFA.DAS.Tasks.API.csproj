@@ -57,8 +57,8 @@
     <Reference Include="FluentValidation.Mvc, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.Mvc5.7.1.1\lib\net45\FluentValidation.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="MediatR, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MediatR.2.1.0\lib\net45\MediatR.dll</HintPath>
+    <Reference Include="MediatR, Version=7.0.0.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.7.0.0\lib\net461\MediatR.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -329,10 +329,6 @@
     <ProjectReference Include="..\SFA.DAS.Tasks.Infrastructure\SFA.DAS.Tasks.Infrastructure.csproj">
       <Project>{45583202-8542-480A-BE71-BA3BB1D69A6C}</Project>
       <Name>SFA.DAS.Tasks.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SFA.DAS.Tasks.Worker\SFA.DAS.Tasks.Worker.csproj">
-      <Project>{F4163AC8-357E-4C9A-A3B7-C5B0F8708E0A}</Project>
-      <Name>SFA.DAS.Tasks.Worker</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

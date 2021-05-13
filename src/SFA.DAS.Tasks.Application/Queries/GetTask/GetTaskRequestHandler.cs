@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using SFA.DAS.Tasks.Application.Exceptions;
 using SFA.DAS.Tasks.Application.Validation;
@@ -6,7 +7,7 @@ using SFA.DAS.Tasks.Domain.Repositories;
 
 namespace SFA.DAS.Tasks.Application.Queries.GetTask
 {
-    public class GetTaskRequestHandler : IAsyncRequestHandler<GetTaskRequest, GetTaskResponse>
+    public class GetTaskRequestHandler : IRequestHandler<GetTaskRequest, GetTaskResponse>
     {
         private readonly ITaskRepository _repository;
         private readonly IValidator<GetTaskRequest> _validator;
@@ -17,7 +18,7 @@ namespace SFA.DAS.Tasks.Application.Queries.GetTask
             _validator = validator;
         }
 
-        public async Task<GetTaskResponse> Handle(GetTaskRequest message)
+        public async Task<GetTaskResponse> Handle(GetTaskRequest message, CancellationToken cancellationToken)
         {
             var validationResult = _validator.Validate(message);
 

@@ -2,7 +2,7 @@
 
 namespace SFA.DAS.Tasks.Application.Commands.SaveUserReminderSuppression
 {
-    public class SaveUserReminderSuppressionFlagCommand : IAsyncRequest<SaveUserReminderSuppressionFlagCommandResponse>
+    public class SaveUserReminderSuppressionFlagCommand : IRequest<SaveUserReminderSuppressionFlagCommandResponse>
     {
         public string UserId { get; set; }
         public string EmployerAccountId { get; set; }

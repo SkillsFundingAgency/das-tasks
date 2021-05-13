@@ -7,6 +7,7 @@ using SFA.DAS.Tasks.Application.Validation;
 using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Domain.Models;
 using SFA.DAS.Tasks.Domain.Repositories;
+using System.Threading;
 
 namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
 {
@@ -38,7 +39,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
         public override async Task ThenIfTheMessageIsValidTheTasksAreReturned()
         {
             //Act
-            var response = await RequestHandler.Handle(Query);
+            var response = await RequestHandler.Handle(Query, new CancellationToken());
 
             //Assert
             _repository.Verify(x => x.GetTask(Query.EmployerAccountId, Query.Type), Times.Once);
@@ -67,7 +68,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
             _repository.Setup(x => x.GetTask(Query.EmployerAccountId, Query.Type)).ReturnsAsync(existingTask);
             
             //Act
-            await RequestHandler.Handle(Query);
+            await RequestHandler.Handle(Query, new CancellationToken());
 
             //Assert
             _repository.Verify(x => x.GetTask(Query.EmployerAccountId, Query.Type), Times.Once);
@@ -98,7 +99,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
             _repository.Setup(x => x.GetTask(Query.EmployerAccountId, Query.Type)).ReturnsAsync(existingTask);
 
             //Act
-            await RequestHandler.Handle(Query);
+            await RequestHandler.Handle(Query, new CancellationToken());
 
             //Assert
             _repository.Verify(x => x.GetTask(Query.EmployerAccountId, Query.Type), Times.Once);
@@ -117,7 +118,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
             Query.TaskCompleted = true;
 
             //Act
-            await RequestHandler.Handle(Query);
+            await RequestHandler.Handle(Query, new CancellationToken());
 
             //Assert
             _repository.Verify(x => x.GetTask(Query.EmployerAccountId, Query.Type), Times.Once);
@@ -141,7 +142,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveTaskCommandTests
             _repository.Setup(x => x.GetTask(Query.EmployerAccountId, Query.Type)).ReturnsAsync(existingTask);
 
             //Act
-            await RequestHandler.Handle(Query);
+            await RequestHandler.Handle(Query, new CancellationToken());
 
             //Assert
             _repository.Verify(x => x.GetTask(Query.EmployerAccountId, Query.Type), Times.Once);

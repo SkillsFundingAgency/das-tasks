@@ -10,6 +10,7 @@ using SFA.DAS.Tasks.Application.Validation;
 using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Domain.Models;
 using SFA.DAS.Tasks.Domain.Repositories;
+using System.Threading;
 
 namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSuppressionFlagTests
 {
@@ -47,7 +48,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSuppressi
         public async Task ThenThatSupressionShouldBeSaved()
         {
             //Act
-            await _handler.Handle(_command);
+            await _handler.Handle(_command, new CancellationToken());
 
             //Assert
             _validator.Verify(x => x.Validate(_command), Times.Once);
@@ -71,7 +72,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSuppressi
                 });
 
             //Act
-            Assert.ThrowsAsync<InvalidRequestException>(async() => await _handler.Handle(_command));
+            Assert.ThrowsAsync<InvalidRequestException>(async() => await _handler.Handle(_command, new CancellationToken()));
 
             //Assert
             _validator.Verify(x => x.Validate(_command), Times.Once);
@@ -92,7 +93,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Commands.SaveUserReminderSuppressi
             //Act
             Assert.ThrowsAsync<Exception>(async () =>
             {
-                await _handler.Handle(_command);
+                await _handler.Handle(_command, new CancellationToken());
             });
         }
     }

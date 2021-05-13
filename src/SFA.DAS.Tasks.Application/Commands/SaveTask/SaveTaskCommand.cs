@@ -3,7 +3,7 @@ using SFA.DAS.Tasks.API.Types.Enums;
 
 namespace SFA.DAS.Tasks.Application.Commands.SaveTask
 {
-    public class SaveTaskCommand : IAsyncRequest<SaveTaskCommandResponse>
+    public class SaveTaskCommand : IRequest<SaveTaskCommandResponse>
     {
         public TaskType Type { get; set; }
         public string EmployerAccountId { get; set; }

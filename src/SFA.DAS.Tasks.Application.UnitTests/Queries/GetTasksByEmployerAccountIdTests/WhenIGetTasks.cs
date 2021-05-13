@@ -8,6 +8,7 @@ using SFA.DAS.Tasks.Application.Validation;
 using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Domain.Models;
 using SFA.DAS.Tasks.Domain.Repositories;
+using System.Threading;
 
 namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByEmployerAccountIdTests
 {
@@ -60,7 +61,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByEmployerAccountI
             var expectedTasks = _tasks.Concat(_monthlyRemindertasks).ToList();
 
             //Act
-            var result = await RequestHandler.Handle(Query);
+            var result = await RequestHandler.Handle(Query, new CancellationToken());
 
             //Assert
             _repository.Verify(x => x.GetTasks(TaskEmployerAccountId), Times.Once);
@@ -82,7 +83,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByEmployerAccountI
            
 
             //Act
-            var result = await RequestHandler.Handle(Query);
+            var result = await RequestHandler.Handle(Query, new CancellationToken());
 
             //Assert
             _repository.Verify(x => x.GetUserTaskSuppressions(Query.UserId, Query.EmployerAccountId), Times.Once);
@@ -95,7 +96,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTasksByEmployerAccountI
             Query.UserId = null;
 
             //Act
-            await RequestHandler.Handle(Query);
+            await RequestHandler.Handle(Query, new CancellationToken());
 
             //Assert
             _repository.Verify(x => x.GetUserTaskSuppressions(It.IsAny<string>(), It.IsAny<string>()), Times.Never);

@@ -11,6 +11,7 @@ using SFA.DAS.Tasks.API.Controllers;
 using SFA.DAS.Tasks.API.Types.DTOs;
 using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Domain.Models;
+using System.Threading;
 
 namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
 {
@@ -38,7 +39,7 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
 
             _mediator = new Mock<IMediator>();
 
-            _mediator.Setup(x => x.SendAsync(It.Is<GetTasksByEmployerAccountIdRequest>(a => a.EmployerAccountId == EmployerAccountId)))
+            _mediator.Setup(x => x.Send(It.Is<GetTasksByEmployerAccountIdRequest>(a => a.EmployerAccountId == EmployerAccountId), new CancellationToken()))
                 .ReturnsAsync(new GetTasksByEmployerAccountIdResponse { Tasks = _tasks });
 
             _controller = new TaskController(_mediator.Object, Mock.Of<ILog>());
@@ -52,7 +53,7 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
             var result = response as OkNegotiatedContentResult<IEnumerable<TaskDto>>;
 
             //Assert
-            _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByEmployerAccountIdRequest>(request => request.EmployerAccountId.Equals(EmployerAccountId))), Times.Once);
+            _mediator.Verify(x => x.Send(It.Is<GetTasksByEmployerAccountIdRequest>(request => request.EmployerAccountId.Equals(EmployerAccountId)), new CancellationToken()), Times.Once);
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Content.Count());
 
@@ -71,7 +72,7 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
             var result = response as OkNegotiatedContentResult<IEnumerable<TaskDto>>;
 
             //Assert
-            _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByEmployerAccountIdRequest>(request => request.EmployerAccountId.Equals(DifferentEmployerAccountId))), Times.Once);
+            _mediator.Verify(x => x.Send(It.Is<GetTasksByEmployerAccountIdRequest>(request => request.EmployerAccountId.Equals(DifferentEmployerAccountId)), new CancellationToken()), Times.Once);
             Assert.IsNotNull(result);
             Assert.False(result.Content.Any());
         }
@@ -80,7 +81,7 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
         public async Task GivenThereAreNoTasksThenIShouldGetOkResultWithZeroTasks()
         {
             //Arrange
-            _mediator.Setup(x => x.SendAsync(It.Is<GetTasksByEmployerAccountIdRequest>(a => a.EmployerAccountId == EmployerAccountId)))
+            _mediator.Setup(x => x.Send(It.Is<GetTasksByEmployerAccountIdRequest>(a => a.EmployerAccountId == EmployerAccountId), new CancellationToken()))
                 .ReturnsAsync(new GetTasksByEmployerAccountIdResponse { Tasks = null });
 
             //Act
@@ -88,7 +89,7 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
             var result = response as OkNegotiatedContentResult<IEnumerable<TaskDto>>;
 
             //Assert
-            _mediator.Verify(x => x.SendAsync(It.Is<GetTasksByEmployerAccountIdRequest>(request => request.EmployerAccountId.Equals(EmployerAccountId))), Times.Once);
+            _mediator.Verify(x => x.Send(It.Is<GetTasksByEmployerAccountIdRequest>(request => request.EmployerAccountId.Equals(EmployerAccountId)), new CancellationToken()), Times.Once);
             Assert.IsNotNull(result);
             Assert.IsEmpty(result.Content);
         }

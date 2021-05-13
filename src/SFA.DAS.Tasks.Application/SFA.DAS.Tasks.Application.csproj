@@ -1,100 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B96FB4DB-3DCE-4D4A-B7F1-EDE97233B177}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SFA.DAS.Tasks.Application</RootNamespace>
-    <AssemblyName>SFA.DAS.Tasks.Application</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MediatR, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MediatR.2.1.0\lib\net45\MediatR.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
-    </Reference>
-    <Reference Include="SFA.DAS.NLog.Logger, Version=1.0.0.47445, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.NLog.Logger.1.0.0.47445\lib\net45\SFA.DAS.NLog.Logger.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.0" />
+    <PackageReference Include="NLog" Version="4.0.0" />
+    <PackageReference Include="SFA.DAS.NLog.Logger" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\SaveUserReminderSuppression\SaveUserReminderSuppressionFlagCommand.cs" />
-    <Compile Include="Commands\SaveUserReminderSuppression\SaveUserReminderSuppressionFlagCommandHandler.cs" />
-    <Compile Include="Commands\SaveUserReminderSuppression\SaveUserReminderSuppressionFlagCommandValidator.cs" />
-    <Compile Include="Commands\SaveUserReminderSuppression\SaveUserReminderSuppressionFlagCommandResponse.cs" />
-    <Compile Include="Commands\SaveTask\SaveTaskCommand.cs" />
-    <Compile Include="Commands\SaveTask\SaveTaskCommandHandler.cs" />
-    <Compile Include="Commands\SaveTask\SaveTaskCommandResponse.cs" />
-    <Compile Include="Commands\SaveTask\SaveTaskCommandValidator.cs" />
-    <Compile Include="Exceptions\InvalidRequestException.cs" />
-    <Compile Include="Exceptions\NotFoundException.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queries\GetTasksByEmployerAccountId\GetTasksByEmployerAccountIdRequest.cs" />
-    <Compile Include="Queries\GetTasksByEmployerAccountId\GetTasksByEmployerAccountIdHandler.cs" />
-    <Compile Include="Queries\GetTasksByEmployerAccountId\GetTasksByEmployerAccountIdResponse.cs" />
-    <Compile Include="Queries\GetTasksByEmployerAccountId\GetTasksByEmployerAccountIdValidator.cs" />
-    <Compile Include="Queries\GetTask\GetTaskRequest.cs" />
-    <Compile Include="Queries\GetTask\GetTaskRequestHandler.cs" />
-    <Compile Include="Queries\GetTask\GetTaskRequestValidator.cs" />
-    <Compile Include="Queries\GetTask\GetTaskResponse.cs" />
-    <Compile Include="Validation\IValidator.cs" />
-    <Compile Include="Validation\ValidationResult.cs" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
+    <ProjectReference Include="..\SFA.DAS.Tasks.API.Types\SFA.DAS.Tasks.API.Types.csproj" />
+    <ProjectReference Include="..\SFA.DAS.Tasks.Domain\SFA.DAS.Tasks.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SFA.DAS.Tasks.API.Types\SFA.DAS.Tasks.API.Types.csproj">
-      <Project>{0FA10E00-F9B9-433A-AAC0-FEE0E4EF179A}</Project>
-      <Name>SFA.DAS.Tasks.API.Types</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SFA.DAS.Tasks.Domain\SFA.DAS.Tasks.Domain.csproj">
-      <Project>{316591ff-d233-4529-bc3b-fa6b79c2db11}</Project>
-      <Name>SFA.DAS.Tasks.Domain</Name>
-    </ProjectReference>
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

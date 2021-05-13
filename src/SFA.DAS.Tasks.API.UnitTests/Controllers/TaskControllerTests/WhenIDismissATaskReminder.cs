@@ -11,6 +11,7 @@ using SFA.DAS.Tasks.API.Controllers;
 using SFA.DAS.Tasks.API.Types.DTOs;
 using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Domain.Models;
+using System.Threading;
 
 namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
 {
@@ -38,10 +39,11 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
             await _controller.AddUserReminderSupression(EmployerAccountId, UserId, TaskType);
 
            //Assert
-            _mediator.Verify(x => x.SendAsync(It.Is<SaveUserReminderSuppressionFlagCommand>(
+            _mediator.Verify(x => x.Send(It.Is<SaveUserReminderSuppressionFlagCommand>(
                 flag => flag.EmployerAccountId.Equals(EmployerAccountId) &&
                         flag.UserId.Equals(UserId) &&
-                        flag.TaskType.Equals(TaskType))));
+                        flag.TaskType.Equals(TaskType)),
+                new CancellationToken()));
         }
     }
 }

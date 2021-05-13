@@ -7,10 +7,11 @@ using SFA.DAS.Tasks.Application.Validation;
 using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Domain.Models;
 using SFA.DAS.Tasks.Domain.Repositories;
+using System.Threading;
 
 namespace SFA.DAS.Tasks.Application.Commands.SaveUserReminderSuppression
 {
-    public class SaveUserReminderSuppressionFlagCommandHandler : IAsyncRequestHandler<SaveUserReminderSuppressionFlagCommand, SaveUserReminderSuppressionFlagCommandResponse>
+    public class SaveUserReminderSuppressionFlagCommandHandler : IRequestHandler<SaveUserReminderSuppressionFlagCommand, SaveUserReminderSuppressionFlagCommandResponse>
     {
         private readonly ITaskRepository _repository;
         private readonly ILog _logger;
@@ -23,7 +24,7 @@ namespace SFA.DAS.Tasks.Application.Commands.SaveUserReminderSuppression
             _validator = validator;
         }
 
-        public async Task<SaveUserReminderSuppressionFlagCommandResponse> Handle(SaveUserReminderSuppressionFlagCommand command)
+        public async Task<SaveUserReminderSuppressionFlagCommandResponse> Handle(SaveUserReminderSuppressionFlagCommand command, CancellationToken cancellationToken)
         {
             var validationResults = _validator.Validate(command);
 

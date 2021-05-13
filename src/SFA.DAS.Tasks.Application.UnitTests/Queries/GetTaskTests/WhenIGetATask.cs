@@ -6,6 +6,7 @@ using SFA.DAS.Tasks.Application.Validation;
 using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Domain.Models;
 using SFA.DAS.Tasks.Domain.Repositories;
+using System.Threading;
 
 namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTaskTests
 {
@@ -42,7 +43,7 @@ namespace SFA.DAS.Tasks.Application.UnitTests.Queries.GetTaskTests
         public override async Task ThenIfTheMessageIsValidTheTasksAreReturned()
         {
             //Act
-            var response = await RequestHandler.Handle(Query);
+            var response = await RequestHandler.Handle(Query, new CancellationToken());
 
             //Assert
             _repository.Verify(x => x.GetTask(Query.EmployerAccountId, Query.Type), Times.Once);
