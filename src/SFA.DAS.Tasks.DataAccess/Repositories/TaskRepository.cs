@@ -15,7 +15,7 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
 {
     public class TaskRepository : BaseRepository, ITaskRepository
     {
-        public TaskRepository(TasksConfiguration configuration, ILog logger) : base(configuration.DatabaseConnectionString, logger)
+        public TaskRepository(ITaskConfiguration configuration, ILog logger) : base(configuration.DatabaseConnectionString, logger)
         {  }
 
         public async Task<IEnumerable<DasTask>> GetTasks(string employerAccountId)

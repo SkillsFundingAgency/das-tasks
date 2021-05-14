@@ -6,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using SFA.DAS.Configuration.AzureTableStorage;
 using SFA.DAS.Tasks.Application.Commands.SaveTask;
 using SFA.DAS.Tasks.Application.Validation;
+using SFA.DAS.Tasks.DataAccess.Repositories;
+using SFA.DAS.Tasks.Domain.Configurations;
+using SFA.DAS.Tasks.Domain.Repositories;
 using System.IO;
 
 [assembly: FunctionsStartup(typeof(Mediatr.AzureFunctions.Startup))]
@@ -39,6 +42,9 @@ namespace Mediatr.AzureFunctions
 
             var config = configBuilder.Build();
             builder.Services.Replace(ServiceDescriptor.Singleton(typeof(IConfiguration), config));
+
+            builder.Services.AddScoped<ITaskConfiguration, TasksConfiguration>();
+            builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 
             builder.Services.AddMediatR(typeof(SaveTaskCommandHandler));
             builder.Services.AddSingleton<IValidator<SaveTaskCommand>, SaveTaskCommandValidator>();

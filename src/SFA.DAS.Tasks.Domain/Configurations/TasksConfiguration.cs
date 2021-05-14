@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using SFA.DAS.Configuration;
 
 namespace SFA.DAS.Tasks.Domain.Configurations
 {

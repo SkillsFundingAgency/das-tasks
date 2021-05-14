@@ -9,12 +9,15 @@
     <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.0.0" />
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.ServiceBus" Version="4.3.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.27" />
+    <PackageReference Include="Polly" Version="5.1.0" />
     <PackageReference Include="SFA.DAS.Commitments.Events" Version="7.25.0" />
     <PackageReference Include="SFA.DAS.Configuration.AzureTableStorage" Version="3.0.84" />
+    <PackageReference Include="SFA.DAS.Sql.Client" Version="1.0.0.44965" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SFA.DAS.Tasks.API.Types\SFA.DAS.Tasks.API.Types.csproj" />
     <ProjectReference Include="..\SFA.DAS.Tasks.Application\SFA.DAS.Tasks.Application.csproj" />
+    <ProjectReference Include="..\SFA.DAS.Tasks.DataAccess\SFA.DAS.Tasks.DataAccess.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

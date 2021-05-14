@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
-using SFA.DAS.Configuration;
 
 namespace SFA.DAS.Tasks.Domain.Configurations
 {
-    public interface ITaskConfiguration : IConfiguration
+    public interface ITaskConfiguration
     {
+        string DatabaseConnectionString { get; set; }
+        string ServiceBusConnectionString { get; set; }
+        string MessageServiceBusConnectionString { get; set; }
         Dictionary<string, string> MessageServiceBusConnectionStringLookup { get; set; }
     }
 }
