@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
-using SFA.DAS.Configuration;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SFA.DAS.Tasks.Domain.Configurations
 {
-    public class TasksConfiguration : ITaskConfiguration, IConfiguration
+    public class FunctionsConfiguration : ITaskConfiguration
     {
         public string DatabaseConnectionString { get; set; }
         public string ServiceBusConnectionString { get; set; }

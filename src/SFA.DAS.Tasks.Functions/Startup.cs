@@ -42,8 +42,12 @@ namespace Mediatr.AzureFunctions
 
             var config = configBuilder.Build();
             builder.Services.Replace(ServiceDescriptor.Singleton(typeof(IConfiguration), config));
+            builder.Services.AddOptions<FunctionsConfiguration>()
+                .Configure<IConfiguration>((settings, configuration) =>
+                {
+                    configuration.Bind(settings);
+                });
 
-            builder.Services.AddScoped<ITaskConfiguration, TasksConfiguration>();
             builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 
             builder.Services.AddMediatR(typeof(SaveTaskCommandHandler));
