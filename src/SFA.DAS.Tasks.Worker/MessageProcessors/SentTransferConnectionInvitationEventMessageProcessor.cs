@@ -13,13 +13,13 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("ManageApprenticeships")]
     [TopicSubscription("Task_SentTransferConnectionInvitiationProcessor")]
-    public class SentTransferConnectionInvitationEventMessageProcessor : MessageProcessor<SentTransferConnectionInvitationEvent>
+    public class SentTransferConnectionInvitationEventMessageProcessor : MessageProcessor2<SentTransferConnectionInvitationEvent>
     {
         private readonly ILog _logger;
         private readonly IMediator _mediator;
 
         public SentTransferConnectionInvitationEventMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog log, IMediator mediator) 
-            : base(subscriberFactory, log)
+            : base(subscriberFactory, log, new MessageContextProvider())
         {
             _logger = log;
             _mediator = mediator;

@@ -13,7 +13,7 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("Commitments")]
     [TopicSubscription("Task_ApprovedCohortReturnedToProvider")]
-    public class ApprovedCohortReturnedToProviderMessageProcessor : MessageProcessor<ApprovedCohortReturnedToProvider>
+    public class ApprovedCohortReturnedToProviderMessageProcessor : MessageProcessor2<ApprovedCohortReturnedToProvider>
     {
         private readonly ILog _logger;
         private readonly IMediator _mediator;
@@ -22,7 +22,7 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
             IMessageSubscriberFactory subscriberFactory, 
             ILog logger, 
             IMediator mediator) 
-            : base(subscriberFactory, logger)
+            : base(subscriberFactory, logger, new MessageContextProvider())
         {
             _logger = logger;
             _mediator = mediator;

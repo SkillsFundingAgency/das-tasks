@@ -14,13 +14,13 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("Commitments")]
     [TopicSubscription("Task_ApprenticeshipUpdateAccepted")]
-    public class ApprenticeshipUpdateAcceptedMessageProcessor : MessageProcessor<ApprenticeshipUpdateAccepted>
+    public class ApprenticeshipUpdateAcceptedMessageProcessor : MessageProcessor2<ApprenticeshipUpdateAccepted>
     {
         private readonly ILog _logger;
         private readonly IMediator _mediator;
 
         public ApprenticeshipUpdateAcceptedMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog logger, IMediator mediator) 
-            : base(subscriberFactory, logger)
+            : base(subscriberFactory, logger, new MessageContextProvider())
         {
             _logger = logger;
             _mediator = mediator;
@@ -28,7 +28,7 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
 
         protected override async Task ProcessMessage(ApprenticeshipUpdateAccepted message)
         {
-            _logger.Debug($"Aprretniceship update accepted. Completing 'apprentice changes to review' task for account id {message.AccountId}, " +
+            _logger.Debug($"Apprenticeship update accepted. Completing 'apprentice changes to review' task for account id {message.AccountId}, " +
                        $"apprentice id {message.ApprenticeshipId} and provider id {message.ProviderId}");
 
             await _mediator.SendAsync(new SaveTaskCommand

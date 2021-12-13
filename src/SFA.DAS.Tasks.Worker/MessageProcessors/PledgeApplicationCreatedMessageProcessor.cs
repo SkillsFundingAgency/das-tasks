@@ -13,13 +13,13 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("LevyTransferMatching")]
     [TopicSubscription("Task_PledgeApplicationCreated")]
-    public class PledgeApplicationCreatedMessageProcessor : MessageProcessor<PledgeApplicationCreated>
+    public class PledgeApplicationCreatedMessageProcessor : MessageProcessor2<PledgeApplicationCreated>
     {
         private readonly ILog _logger;
         private readonly IMediator _mediator;
 
         public PledgeApplicationCreatedMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog logger, IMediator mediator)
-            : base(subscriberFactory, logger)
+            : base(subscriberFactory, logger, new MessageContextProvider())
         {
             _logger = logger;
             _mediator = mediator;

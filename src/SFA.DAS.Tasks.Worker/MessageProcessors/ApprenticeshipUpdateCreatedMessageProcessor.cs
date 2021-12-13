@@ -13,13 +13,13 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("Commitments")]
     [TopicSubscription("Task_ApprenticeUpdateCreated")]
-    public class ApprenticeshipUpdateCreatedMessageProcessor : MessageProcessor<ApprenticeshipUpdateCreated>
+    public class ApprenticeshipUpdateCreatedMessageProcessor : MessageProcessor2<ApprenticeshipUpdateCreated>
     {
         private readonly ILog _log;
         private readonly IMediator _mediator;
 
         public ApprenticeshipUpdateCreatedMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog log, IMediator mediator) 
-            : base(subscriberFactory, log)
+            : base(subscriberFactory, log, new MessageContextProvider())
         {
             _log = log;
             _mediator = mediator;

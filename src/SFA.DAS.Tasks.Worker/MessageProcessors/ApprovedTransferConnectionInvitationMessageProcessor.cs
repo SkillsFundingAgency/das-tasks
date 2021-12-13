@@ -14,13 +14,13 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
     [ServiceBusConnectionString("ManageApprenticeships")]
     [TopicSubscription("Task_ApprovedTransferConnectionInvitation")]
 
-    public class ApprovedTransferConnectionInvitationMessageProcessor : MessageProcessor<ApprovedTransferConnectionInvitationEvent>
+    public class ApprovedTransferConnectionInvitationMessageProcessor : MessageProcessor2<ApprovedTransferConnectionInvitationEvent>
     {
         private readonly ILog _logger;
         private readonly IMediator _mediator;
 
         public ApprovedTransferConnectionInvitationMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog logger, IMediator mediator)
-            : base(subscriberFactory, logger)
+            : base(subscriberFactory, logger, new MessageContextProvider())
         {
             _logger = logger;
             _mediator = mediator;
