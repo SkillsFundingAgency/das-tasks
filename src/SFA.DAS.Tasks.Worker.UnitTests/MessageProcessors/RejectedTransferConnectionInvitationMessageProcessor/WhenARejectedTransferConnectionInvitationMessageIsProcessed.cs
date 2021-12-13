@@ -50,7 +50,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.RejectedTransferConne
         public async Task ThenTheTaskIsCompleted()
         {
             //Act
-            await _processor.RunAsync(_tokenSource);
+            await _processor.RunAsync(_tokenSource.Token);
 
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.EmployerAccountId.Equals(_messageContent.ReceiverAccountId.ToString()) &&

@@ -11,7 +11,7 @@ using SFA.DAS.Tasks.Infrastructure.Attributes;
 
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
-    [ServiceBusConnectionString("LevyTransferMatching")]
+    [ServiceBusConnectionString("SharedServicesBus")]
     [TopicSubscription("Task_PledgeApplicationCreated")]
     public class PledgeApplicationCreatedMessageProcessor : MessageProcessor2<PledgeApplicationCreated>
     {

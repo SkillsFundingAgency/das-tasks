@@ -5,6 +5,7 @@ using MediatR;
 using Moq;
 using NUnit.Framework;
 using SFA.DAS.EmployerAccounts.Events.Messages;
+using SFA.DAS.Messaging;
 using SFA.DAS.Messaging.Interfaces;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Commands.SaveTask;
@@ -52,7 +53,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.AgreementSignedMessag
         public async Task ThenTheSignAgreementTaskTaskIsCompleted()
         {
             //Act
-            await _processor.RunAsync(_tokenSource);
+            await _processor.RunAsync(_tokenSource.Token);
 
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.EmployerAccountId.Equals(_messageContent.AccountId.ToString()) &&
@@ -65,7 +66,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.AgreementSignedMessag
         {
 
             //Act
-            await _processor.RunAsync(_tokenSource);
+            await _processor.RunAsync(_tokenSource.Token);
 
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.EmployerAccountId.Equals(_messageContent.AccountId.ToString()) &&
@@ -81,7 +82,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.AgreementSignedMessag
             _mockMessage.Setup(x => x.Content).Returns(_messageContent);
 
             //Act
-            await _processor.RunAsync(_tokenSource);
+            await _processor.RunAsync(_tokenSource.Token);
 
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.Type.Equals(TaskType.AddApprentices))), Times.Never());
@@ -94,7 +95,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.AgreementSignedMessag
             _mediator.Setup(x => x.SendAsync(It.IsAny<SaveTaskCommand>())).ThrowsAsync(new Exception());
             
             //Act
-            await _processor.RunAsync(_tokenSource);
+            await _processor.RunAsync(_tokenSource.Token);
 
             //Assert
             _mediator.Verify(x => x.SendAsync(It.IsAny<SaveTaskCommand>()), Times.Exactly(2));
