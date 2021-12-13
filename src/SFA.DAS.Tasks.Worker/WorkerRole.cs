@@ -33,7 +33,7 @@ namespace SFA.DAS.Tasks.Worker
             {
                 logger.Debug("Getting message processors");
 
-                var messageProcessors = _container.GetAllInstances<IMessageProcessor>().ToList();
+                var messageProcessors = _container.GetAllInstances<IMessageProcessor2>().ToList();
 
                 logger.Debug($"Found {messageProcessors.Count} message processors");
 
@@ -42,7 +42,7 @@ namespace SFA.DAS.Tasks.Worker
                     logger.Debug($"Found message processor of type {processor.GetType().FullName}");
                 }
 
-                var tasks = messageProcessors.Select(x => x.RunAsync(_cancellationTokenSource)).ToArray();
+                var tasks = messageProcessors.Select(x => x.RunAsync(_cancellationTokenSource.Token)).ToArray();
                 Task.WaitAll(tasks);
             }
             catch (Exception ex)

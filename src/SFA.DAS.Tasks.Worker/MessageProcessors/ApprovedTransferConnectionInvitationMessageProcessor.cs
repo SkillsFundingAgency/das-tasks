@@ -19,8 +19,8 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
         private readonly ILog _logger;
         private readonly IMediator _mediator;
 
-        public ApprovedTransferConnectionInvitationMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog logger, IMediator mediator)
-            : base(subscriberFactory, logger, new MessageContextProvider())
+        public ApprovedTransferConnectionInvitationMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog logger, IMediator mediator, IMessageContextProvider messageContextProvider)
+            : base(subscriberFactory, logger, messageContextProvider)
         {
             _logger = logger;
             _mediator = mediator;

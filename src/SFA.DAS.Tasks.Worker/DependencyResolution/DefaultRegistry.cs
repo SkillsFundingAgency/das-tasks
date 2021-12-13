@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using SFA.DAS.Messaging;
 using SFA.DAS.Messaging.Interfaces;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.DataAccess.Repositories;
@@ -15,7 +16,7 @@ namespace SFA.DAS.Tasks.Worker.DependencyResolution
             {
                 scan.AssembliesFromApplicationBaseDirectory(a => a.GetName().Name.StartsWith("SFA.DAS."));
                 scan.RegisterConcreteTypesAgainstTheFirstInterface();
-                scan.AddAllTypesOf<IMessageProcessor>();
+                scan.AddAllTypesOf<IMessageProcessor2>();
             });
 
             AddMediatrRegistrations();
@@ -29,6 +30,8 @@ namespace SFA.DAS.Tasks.Worker.DependencyResolution
             For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
 
             For<IMediator>().Use<Mediator>();
+
+            For<IMessageContextProvider>().Use<MessageContextProvider>().Singleton();
         }
 
         private void RegisterLogger()
