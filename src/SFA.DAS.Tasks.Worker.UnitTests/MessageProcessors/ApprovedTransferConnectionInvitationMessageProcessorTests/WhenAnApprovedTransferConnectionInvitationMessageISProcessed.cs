@@ -4,6 +4,7 @@ using MediatR;
 using Moq;
 using NUnit.Framework;
 using SFA.DAS.EmployerAccounts.Events.Messages;
+using SFA.DAS.Messaging;
 using SFA.DAS.Messaging.Interfaces;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Commands.SaveTask;
@@ -37,7 +38,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.ApprovedTransferConne
             _tokenSource = new CancellationTokenSource();
 
             _processor = new ApprovedTransferConnectionInvitationMessageProcessor(_subscriptionFactory.Object, Mock.Of<ILog>(),
-                _mediator.Object);
+                _mediator.Object, new MessageContextProvider());
 
             _subscriptionFactory.Setup(x => x.GetSubscriber<ApprovedTransferConnectionInvitationEvent>()).Returns(_subscriber.Object);
 
