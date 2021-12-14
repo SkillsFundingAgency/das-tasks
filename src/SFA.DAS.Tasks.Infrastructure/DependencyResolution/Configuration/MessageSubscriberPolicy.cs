@@ -40,8 +40,11 @@ namespace SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration
             {
                 var subscriptionName = TopicSubscriptionHelper.GetMessageGroupName(instance.Constructor.DeclaringType);
 
-                //var useManagedIdentity = !messageQueueConnectionString.Contains("SharedAccessKey");
-                var useManagedIdentity = false;
+                var useManagedIdentity = !messageQueueConnectionString.Contains("SharedAccessKey");
+                if (useManagedIdentity && !messageQueueConnectionString.StartsWith("sb://"))
+                {
+                    messageQueueConnectionString = $"sb://{messageQueueConnectionString}";
+                }
 
                 var factory = new TopicSubscriberFactory(messageQueueConnectionString, subscriptionName, new NLogLogger(typeof(TopicSubscriberFactory)), false, useManagedIdentity);
 
