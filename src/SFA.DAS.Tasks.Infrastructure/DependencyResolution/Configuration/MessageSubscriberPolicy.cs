@@ -38,15 +38,20 @@ namespace SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration
             }
             else
             {
+                var logger = new NLogLogger(typeof(TopicSubscriberFactory));
+
                 var subscriptionName = TopicSubscriptionHelper.GetMessageGroupName(instance.Constructor.DeclaringType);
 
+                logger.Info($"Applying MessageSubscriberPolicy for subscription {subscriptionName}");
+
                 var useManagedIdentity = !messageQueueConnectionString.Contains("SharedAccessKey");
+                logger.Info($"Using ManagedIdentity: {useManagedIdentity}");
                 if (useManagedIdentity && !messageQueueConnectionString.StartsWith("sb://"))
                 {
                     messageQueueConnectionString = $"sb://{messageQueueConnectionString}";
                 }
-
-                var factory = new TopicSubscriberFactory(messageQueueConnectionString, subscriptionName, new NLogLogger(typeof(TopicSubscriberFactory)), false, useManagedIdentity);
+                
+                var factory = new TopicSubscriberFactory(messageQueueConnectionString, subscriptionName, logger, false, useManagedIdentity);
 
                 instance.Dependencies.AddForConstructorParameter(subscriberFactory, factory);
             }   
