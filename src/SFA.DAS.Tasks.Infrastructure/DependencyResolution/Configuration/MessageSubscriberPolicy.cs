@@ -45,8 +45,9 @@ namespace SFA.DAS.Tasks.Infrastructure.DependencyResolution.Configuration
             else
             {
                 var subscriptionName = TopicSubscriptionHelper.GetMessageGroupName(instance.Constructor.DeclaringType);
-
-                var factory = new TopicSubscriberFactory(messageQueueConnectionString, subscriptionName, new NLogLogger(typeof(TopicSubscriberFactory)));
+                var logger = new NLogLogger(typeof(TopicSubscriberFactory));
+                logger.Info($"Creating TopicSubscriberFactory for {subscriptionName} connection {connectionStringName}");
+                var factory = new TopicSubscriberFactory(messageQueueConnectionString, subscriptionName, logger);
 
                 instance.Dependencies.AddForConstructorParameter(subscriberFactory, factory);
             }   
