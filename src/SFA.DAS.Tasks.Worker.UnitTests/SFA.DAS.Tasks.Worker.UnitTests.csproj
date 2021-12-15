@@ -55,6 +55,9 @@
     <Reference Include="SFA.DAS.EmployerAccounts.Events, Version=1.2.0.62826, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.EmployerAccounts.Events.1.2.0.62826\lib\net45\SFA.DAS.EmployerAccounts.Events.dll</HintPath>
     </Reference>
+    <Reference Include="SFA.DAS.LevyTransferMatching.Messages, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.LevyTransferMatching.Messages.0.1.70-prerelease-12\lib\netstandard2.0\SFA.DAS.LevyTransferMatching.Messages.dll</HintPath>
+    </Reference>
     <Reference Include="SFA.DAS.Messaging, Version=3.0.0.53105, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Messaging.3.0.0.53105\lib\net45\SFA.DAS.Messaging.dll</HintPath>
     </Reference>
@@ -77,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MessageProcessors\PledgeApplicationCreatedMessageProcessorTests\WhenICreateAPledgeApplication.cs" />
     <Compile Include="MessageProcessors\RejectedTransferConnectionInvitationMessageProcessor\WhenARejectedTransferConnectionInvitationMessageIsProcessed.cs" />
     <Compile Include="MessageProcessors\ApprovedTransferConnectionInvitationMessageProcessorTests\WhenAnApprovedTransferConnectionInvitationMessageIsProcessed.cs" />
     <Compile Include="MessageProcessors\AgreementSignedMessageProcessorTests\WhenAnAgreementSignedMessageISProcessed.cs" />
