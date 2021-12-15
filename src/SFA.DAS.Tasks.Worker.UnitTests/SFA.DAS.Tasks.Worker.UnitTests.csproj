@@ -116,7 +116,7 @@
       <Name>SFA.DAS.Tasks.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\SFA.DAS.Tasks.Worker\SFA.DAS.Tasks.Worker.csproj">
-      <Project>{F4163AC8-357E-4C9A-A3B7-C5B0F8708E0A}</Project>
+      <Project>{f4163ac8-357e-4c9a-a3b7-c5b0f8708e0a}</Project>
       <Name>SFA.DAS.Tasks.Worker</Name>
     </ProjectReference>
   </ItemGroup>
