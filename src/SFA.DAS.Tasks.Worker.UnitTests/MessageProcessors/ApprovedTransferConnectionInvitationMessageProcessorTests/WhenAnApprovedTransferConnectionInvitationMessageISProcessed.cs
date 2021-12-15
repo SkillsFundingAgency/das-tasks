@@ -37,7 +37,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.ApprovedTransferConne
             _tokenSource = new CancellationTokenSource();
 
             _processor = new ApprovedTransferConnectionInvitationMessageProcessor(_subscriptionFactory.Object, Mock.Of<ILog>(),
-                _mediator.Object, Mock.Of<IMessageContextProvider>());
+                _mediator.Object);
 
             _subscriptionFactory.Setup(x => x.GetSubscriber<ApprovedTransferConnectionInvitationEvent>()).Returns(_subscriber.Object);
 
@@ -51,7 +51,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.ApprovedTransferConne
         public async Task ThenTheTaskIsCompleted()
         {
             //Act
-            await _processor.RunAsync(_tokenSource.Token);
+            await _processor.RunAsync(_tokenSource);
 
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.EmployerAccountId.Equals(_messageContent.ReceiverAccountId.ToString()) &&

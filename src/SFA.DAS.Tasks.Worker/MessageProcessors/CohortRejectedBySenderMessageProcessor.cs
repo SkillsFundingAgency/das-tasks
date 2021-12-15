@@ -13,13 +13,13 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("Commitments")]
     [TopicSubscription("Task_CohortRejectedByTransferSender")]
-    public class CohortRejectedBySenderMessageProcessor : MessageProcessor2<CohortRejectedByTransferSender>
+    public class CohortRejectedBySenderMessageProcessor : MessageProcessor<CohortRejectedByTransferSender>
     {
         private readonly ILog _log;
         private readonly IMediator _mediator;
 
-        public CohortRejectedBySenderMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog log, IMediator mediator, IMessageContextProvider messageContextProvider) 
-            : base(subscriberFactory, log, messageContextProvider)
+        public CohortRejectedBySenderMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog log, IMediator mediator) 
+            : base(subscriberFactory, log)
         {
             _log = log;
             _mediator = mediator;

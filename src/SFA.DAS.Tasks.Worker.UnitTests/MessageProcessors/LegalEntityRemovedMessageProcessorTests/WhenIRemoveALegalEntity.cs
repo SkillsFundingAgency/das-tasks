@@ -34,7 +34,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.LegalEntityRemovedMes
             _subscriberFactory.Setup(x => x.GetSubscriber<LegalEntityRemovedMessage>())
                 .Returns(_subscriber.Object);
 
-            _processor = new LegalEntityRemovedMessageProcessor(_subscriberFactory.Object, _logger.Object, _mediator.Object, Mock.Of<IMessageContextProvider>());
+            _processor = new LegalEntityRemovedMessageProcessor(_subscriberFactory.Object, _logger.Object, _mediator.Object);
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.LegalEntityRemovedMes
             _subscriber.Setup(x => x.ReceiveAsAsync()).ReturnsAsync(message.Object);
 
             //Act
-            await _processor.RunAsync(_cancellationTokenSource.Token);
+            await _processor.RunAsync(_cancellationTokenSource);
 
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(t => t.TaskCompleted && 
@@ -72,7 +72,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.LegalEntityRemovedMes
             _subscriber.Setup(x => x.ReceiveAsAsync()).ReturnsAsync(message.Object);
 
             //Act
-            await _processor.RunAsync(_cancellationTokenSource.Token);
+            await _processor.RunAsync(_cancellationTokenSource);
 
             //Assert
             _subscriber.Verify(x => x.ReceiveAsAsync(), Times.Once);

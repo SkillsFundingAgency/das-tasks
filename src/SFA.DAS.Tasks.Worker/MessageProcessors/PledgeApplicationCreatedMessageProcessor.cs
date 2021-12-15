@@ -13,13 +13,13 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("SharedServiceBus")]
     [TopicSubscription("Task_PledgeApplicationCreated")]
-    public class PledgeApplicationCreatedMessageProcessor : MessageProcessor2<PledgeApplicationCreated>
+    public class PledgeApplicationCreatedMessageProcessor : MessageProcessor<PledgeApplicationCreated>
     {
         private readonly ILog _logger;
         private readonly IMediator _mediator;
 
-        public PledgeApplicationCreatedMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog logger, IMediator mediator, IMessageContextProvider messageContextProvider)
-            : base(subscriberFactory, logger, messageContextProvider)
+        public PledgeApplicationCreatedMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog logger, IMediator mediator)
+            : base(subscriberFactory, logger)
         {
             _logger = logger;
             _mediator = mediator;

@@ -38,7 +38,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.CohortApprovalRequest
             _tokenSource = new CancellationTokenSource();
 
             _processor = new CohortApprovalRequestedMessageProcessor(_subscriptionFactory.Object, Mock.Of<ILog>(),
-                _mediator.Object, Mock.Of<IMessageContextProvider>());
+                _mediator.Object);
 
             _subscriptionFactory.Setup(x => x.GetSubscriber<CohortApprovalRequestedByProvider>()).Returns(_subscriber.Object);
 
@@ -51,7 +51,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.CohortApprovalRequest
         public async Task ThenTheTaskIsSaved()
         {
             //Act
-            await _processor.RunAsync(_tokenSource.Token);
+            await _processor.RunAsync(_tokenSource);
 
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.EmployerAccountId.Equals(_messageContent.AccountId.ToString()) &&
