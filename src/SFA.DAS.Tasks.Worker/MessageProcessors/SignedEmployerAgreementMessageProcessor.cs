@@ -14,13 +14,13 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("ManageApprenticeships")]
     [TopicSubscription("Task_SignedEmployerAgreementProcessor")]
-    public class SignedEmployerAgreementMessageProcessor : MessageProcessor<AgreementSignedMessage>
+    public class SignedEmployerAgreementMessageProcessor : MessageProcessor2<AgreementSignedMessage>
     {
         private readonly ILog _logger;
         private readonly IMediator _mediator;
 
-        public SignedEmployerAgreementMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog logger, IMediator mediator) 
-            : base(subscriberFactory, logger)
+        public SignedEmployerAgreementMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog logger, IMediator mediator, IMessageContextProvider messageContextProvider) 
+            : base(subscriberFactory, logger, messageContextProvider)
         {
             _logger = logger;
             _mediator = mediator;

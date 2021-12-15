@@ -14,7 +14,7 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("Commitments")]
     [TopicSubscription("Task_ProviderCohortApprovalUndoneByEmployer")]
-    public class ProviderCohortApprovalUndoneByEmployerUpdateMessageProcessor : MessageProcessor<ProviderCohortApprovalUndoneByEmployerUpdate>
+    public class ProviderCohortApprovalUndoneByEmployerUpdateMessageProcessor : MessageProcessor2<ProviderCohortApprovalUndoneByEmployerUpdate>
     {
         private readonly ILog _logger;
         private readonly IMediator _mediator;
@@ -22,7 +22,7 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
         public ProviderCohortApprovalUndoneByEmployerUpdateMessageProcessor(
             IMessageSubscriberFactory subscriberFactory, 
             ILog logger,
-            IMediator mediator) : base(subscriberFactory, logger)
+            IMediator mediator, IMessageContextProvider messageContextProvider) : base(subscriberFactory, logger, messageContextProvider)
         {
             _logger = logger;
             _mediator = mediator;

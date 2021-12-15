@@ -58,6 +58,9 @@
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="Polly, Version=5.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Polly.5.7.0\lib\net45\Polly.dll</HintPath>
+    </Reference>
     <Reference Include="SFA.DAS.Configuration, Version=1.0.0.49931, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Configuration.1.0.0.49931\lib\net45\SFA.DAS.Configuration.dll</HintPath>
     </Reference>
@@ -67,11 +70,11 @@
     <Reference Include="SFA.DAS.Configuration.FileStorage, Version=1.0.0.49931, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Configuration.FileStorage.1.0.0.49931\lib\net45\SFA.DAS.Configuration.FileStorage.dll</HintPath>
     </Reference>
-    <Reference Include="SFA.DAS.Messaging, Version=3.0.0.53105, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Messaging.3.0.0.53105\lib\net45\SFA.DAS.Messaging.dll</HintPath>
+    <Reference Include="SFA.DAS.Messaging, Version=3.1.120.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Messaging.3.1.120\lib\net45\SFA.DAS.Messaging.dll</HintPath>
     </Reference>
-    <Reference Include="SFA.DAS.Messaging.AzureServiceBus, Version=3.0.0.53105, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Messaging.AzureServiceBus.3.0.0.53105\lib\net45\SFA.DAS.Messaging.AzureServiceBus.dll</HintPath>
+    <Reference Include="SFA.DAS.Messaging.AzureServiceBus, Version=3.1.120.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Messaging.AzureServiceBus.3.1.120\lib\net45\SFA.DAS.Messaging.AzureServiceBus.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.NLog.Logger, Version=1.0.0.47445, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.NLog.Logger.1.0.0.47445\lib\net45\SFA.DAS.NLog.Logger.dll</HintPath>

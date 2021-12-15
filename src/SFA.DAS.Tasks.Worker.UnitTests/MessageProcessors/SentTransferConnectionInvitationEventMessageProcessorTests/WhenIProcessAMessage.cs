@@ -47,7 +47,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.TransferConnectionInv
             _tokenSource = new CancellationTokenSource();
 
             _processor = new Worker.MessageProcessors.SentTransferConnectionInvitationEventMessageProcessor(_subscriptionFactory.Object, Mock.Of<ILog>(), 
-                _mediator.Object);
+                _mediator.Object, Mock.Of<IMessageContextProvider>());
 
             _subscriptionFactory.Setup(x => x.GetSubscriber<SentTransferConnectionInvitationEvent>()).Returns(_subscriber.Object);
 
@@ -60,7 +60,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.TransferConnectionInv
         public async Task ThenTheMessageShouldBeHandledByAHandler()
         {
             //Act
-            await _processor.RunAsync(_tokenSource);
+            await _processor.RunAsync(_tokenSource.Token);
 
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.EmployerAccountId.Equals(_messageContent.ReceiverAccountId.ToString()) &&
