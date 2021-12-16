@@ -11,7 +11,7 @@ using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Application.Commands.SaveTask;
 using SFA.DAS.Tasks.Worker.MessageProcessors;
 
-namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.PledgeApplicationCreatedMessageProcessorTests
+namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.PledgeApplicationMessageProcessorTests
 {
     public class WhenICreateAPledgeApplication
     {
