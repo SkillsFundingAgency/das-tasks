@@ -6,6 +6,9 @@
         public string EmployerAccountId { get; set; }
         public int ItemsDueCount { get; set; }
 
-        public string OwnerId => EmployerAccountId; //This has been left to support legacy clients. Remove then clients have been updated
+        public string OwnerId
+        {
+            get { return EmployerAccountId; }
+        }
     }
 }
