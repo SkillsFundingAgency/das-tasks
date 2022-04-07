@@ -29,7 +29,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.PledgeApplicationMess
             _subscriptionFactory = new Mock<IMessageSubscriberFactory>();
             _subscriber = new Mock<IMessageSubscriber<PledgeApplicationApproved>>();
 
-            _messageContent = new PledgeApplicationApproved(1, 2, DateTime.UtcNow, 3, 4);
+            _messageContent = new PledgeApplicationApproved(1, 2, DateTime.UtcNow, 3, 4, 5);
 
             _mockMessage = new Mock<IMessage<PledgeApplicationApproved>>();
 
@@ -59,6 +59,19 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.PledgeApplicationMess
                 cmd.EmployerAccountId.Equals(_messageContent.TransferSenderId.ToString()) &&
                 cmd.Type.Equals(TaskType.PledgeApplicationForReview) &&
                 cmd.TaskCompleted.Equals(true))), Times.Once);
+        }
+
+        [Test]
+        public async Task ThenTheAcceptanceTaskShouldBeCreated()
+        {
+            //Act
+            await _processor.RunAsync(_tokenSource);
+
+            //Assert
+            _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd =>
+                cmd.EmployerAccountId.Equals(_messageContent.ReceiverAccountId.ToString()) &&
+                cmd.Type.Equals(TaskType.PledgeApplicationForAcceptance) &&
+                cmd.TaskCompleted.Equals(false))), Times.Once);
         }
     }
 }

@@ -35,6 +35,13 @@ namespace SFA.DAS.Tasks.Worker.MessageProcessors
                 Type = TaskType.PledgeApplicationForReview,
                 TaskCompleted = true
             });
+
+            await _mediator.SendAsync(new SaveTaskCommand
+            {
+                EmployerAccountId = message.ReceiverAccountId.ToString(),
+                Type = TaskType.PledgeApplicationForAcceptance,
+                TaskCompleted = false
+            });
         }
     }
 }
