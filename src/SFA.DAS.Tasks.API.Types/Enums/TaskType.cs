@@ -11,6 +11,7 @@
         IncompleteApprenticeshipDetails = 6,
         ReviewConnectionRequest = 7,
         TransferRequestReceived = 8,
-        PledgeApplicationForReview = 9
+        PledgeApplicationForReview = 9,
+        PledgeApplicationForAcceptance = 10
     }
 }
