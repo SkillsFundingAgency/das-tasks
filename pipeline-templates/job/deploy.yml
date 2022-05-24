@@ -39,6 +39,7 @@ jobs:
             Environment: ${{ parameters.Environment }}
             TemplatePath: $(Pipeline.Workspace)/SFA.DAS.Tasks/azure/template.json
             ParametersPath: $(Pipeline.Workspace)/SFA.DAS.Tasks/azure/template.parameters.json
+            IsMultiRepoCheckout: true
             TemplateSecrets:
               LoggingRedisConnectionString: ${{ parameters.LoggingRedisConnectionString }}
               ConfigurationStorageConnectionString: ${{ parameters.ConfigurationStorageConnectionString }}
