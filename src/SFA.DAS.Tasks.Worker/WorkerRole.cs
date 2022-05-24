@@ -1,10 +1,12 @@
 using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using SFA.DAS.Messaging.Interfaces;
 using SFA.DAS.NLog.Logger;
@@ -25,6 +27,7 @@ namespace SFA.DAS.Tasks.Worker
 
         public override void Run()
         {
+            SetupApplicationInsights();
             Trace.TraceInformation("SFA.DAS.Tasks.Worker is running");
 
             var logger = _container.GetInstance<ILog>();
@@ -89,6 +92,13 @@ namespace SFA.DAS.Tasks.Worker
             base.OnStop();
 
             Trace.TraceInformation("SFA.DAS.Tasks.Worker has stopped");
+        }
+
+        private void SetupApplicationInsights()
+        {
+            TelemetryConfiguration.Active.InstrumentationKey = ConfigurationManager.AppSettings["APPINSIGHTS_INSTRUMENTATIONKEY"];
+
+            TelemetryConfiguration.Active.TelemetryInitializers.Add(new ApplicationInsightsInitializer());
         }
     }
 }
