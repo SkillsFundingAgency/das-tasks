@@ -13,6 +13,7 @@ namespace SFA.DAS.Tasks.Worker.DependencyResolution
         {
             Scan(scan =>
             {
+                scan.TheCallingAssembly();
                 scan.AssembliesFromApplicationBaseDirectory(a => a.GetName().Name.StartsWith("SFA.DAS."));
                 scan.RegisterConcreteTypesAgainstTheFirstInterface();
                 scan.AddAllTypesOf<IMessageProcessor>();

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31112.23
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SFA.DAS.Tasks.Database", "SFA.DAS.Tasks.Database\SFA.DAS.Tasks.Database.sqlproj", "{FF795555-8AE7-461A-A8AA-E8FD9B0CC541}"
 EndProject
