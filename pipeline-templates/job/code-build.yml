@@ -56,7 +56,7 @@ jobs:
     inputs:
       solution: src\SFA.DAS.Tasks.Worker\SFA.DAS.Tasks.Worker.csproj
       vsVersion: '16.0'
-      msbuildArgs: '/p:SkipInvalidConfigurations=true /p:OutputPath="$(build.artifactstagingdirectory)/publish/SFA.DAS.Tasks.Worker/"'
+      msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:OutputPath="$(build.artifactstagingdirectory)/publish/SFA.DAS.Tasks.Worker/"'
       platform: 'anycpu'
       configuration: '$(buildConfiguration)'
       clean: true
