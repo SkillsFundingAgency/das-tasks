@@ -186,6 +186,9 @@
     <Compile Include="Steps\TestMessages.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\packages\NUnit.ConsoleRunner.3.7.0\tools\nunit3-console.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="App.config">
       <TransformOnBuild>true</TransformOnBuild>
       <SubType>Designer</SubType>
