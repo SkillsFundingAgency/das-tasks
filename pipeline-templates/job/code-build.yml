@@ -39,9 +39,9 @@ jobs:
   - task: VSBuild@1
     displayName: 'Publish API'
     inputs:
-      solution: src/SFA.DAS.Tasks.API/SFA.DAS.Tasks.API.csproj
+      solution: src/${{ parameters.SolutionBaseName }}.API/${{ parameters.SolutionBaseName }}.API.csproj
       vsVersion: '16.0'
-      msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)/publish/SFA.DAS.Tasks.API/"'
+      msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)/publish/${{ parameters.SolutionBaseName }}.API/"'
       platform: 'anycpu'
       configuration: '$(buildConfiguration)'
       clean: true
@@ -49,9 +49,9 @@ jobs:
   - task: VSBuild@1
     displayName: 'Publish Worker'
     inputs:
-      solution: src\SFA.DAS.Tasks.Worker\SFA.DAS.Tasks.Worker.csproj
+      solution: src\${{ parameters.SolutionBaseName }}.Worker\${{ parameters.SolutionBaseName }}.Worker.csproj
       vsVersion: '16.0'
-      msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)/publish/SFA.DAS.Tasks.Worker/"'
+      msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)/publish/${{ parameters.SolutionBaseName }}.Worker/"'
       platform: 'anycpu'
       configuration: '$(buildConfiguration)'
       clean: true
@@ -64,9 +64,9 @@ jobs:
   - task: VSBuild@1
     displayName: 'Publish Acceptance Tests'
     inputs:
-      solution: src\SFA.DAS.Tasks.AcceptanceTests\SFA.DAS.Tasks.AcceptanceTests.csproj
+      solution: src\${{ parameters.SolutionBaseName }}.AcceptanceTests\${{ parameters.SolutionBaseName }}.AcceptanceTests.csproj
       vsVersion: '16.0'
-      msbuildArgs: '/p:SkipInvalidConfigurations=true /p:OutputPath="$(build.artifactstagingdirectory)/publish/SFA.DAS.Tasks.AcceptanceTests/"'
+      msbuildArgs: '/p:SkipInvalidConfigurations=true /p:OutputPath="$(build.artifactstagingdirectory)/publish/${{ parameters.SolutionBaseName }}.AcceptanceTests/"'
       platform: 'anycpu'
       configuration: '$(buildConfiguration)'
       clean: true
@@ -79,12 +79,12 @@ jobs:
       TargetFolder: $(build.artifactstagingdirectory)/publish
       OverWrite: true
   - task: PublishPipelineArtifact@1
-    displayName: Publish Artifact SFA.DAS.Tasks
+    displayName: Publish Artifact ${{ parameters.SolutionBaseName }}
     inputs:
       targetPath: $(build.artifactstagingdirectory)/publish
-      artifactName: SFA.DAS.Tasks
+      artifactName: ${{ parameters.SolutionBaseName }}
 
   - template: azure-pipelines-templates/build/step/nuget-pack.yml@das-platform-building-blocks
     parameters:
       DotNetFrameworkPackagesToPack: |
-        src\SFA.DAS.Tasks.API.Client\SFA.DAS.Tasks.API.Client.csproj
+        src\${{ parameters.SolutionBaseName }}.API.Client\${{ parameters.SolutionBaseName }}.API.Client.csproj
