@@ -5,6 +5,7 @@ parameters:
 
 jobs:
 - job: AcceptanceTest
+  dependsOn: DeployWebApp
   pool:
     name: DAS - Continuous Deployment Agents
     workspace:
