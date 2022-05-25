@@ -39,8 +39,8 @@ jobs:
             SubscriptionId: ${{ parameters.SubscriptionId }}
             Location: ${{ parameters.ResourceGroupLocation }}
             Environment: ${{ parameters.Environment }}
-            TemplatePath: $(Pipeline.Workspace)/SFA.DAS.Tasks/azure/template.json
-            ParametersPath: $(Pipeline.Workspace)/SFA.DAS.Tasks/azure/template.parameters.json
+            TemplatePath: $(Pipeline.Workspace)/${{ parameters.SolutionBaseName }}/azure/template.json
+            ParametersPath: $(Pipeline.Workspace)/${{ parameters.SolutionBaseName }}/azure/template.parameters.json
             IsMultiRepoCheckout: true
             TemplateSecrets:
               LoggingRedisConnectionString: ${{ parameters.LoggingRedisConnectionString }}
@@ -56,12 +56,12 @@ jobs:
           parameters:
             ServiceConnection: ${{ parameters.ServiceConnection }}
             AppServiceName: $(ApiAppServiceName)
-            DeploymentPackagePath: $(Pipeline.Workspace)/SFA.DAS.Tasks/SFA.DAS.Tasks.API/SFA.DAS.Tasks.API.zip
+            DeploymentPackagePath: $(Pipeline.Workspace)/${{ parameters.SolutionBaseName }}/${{ parameters.SolutionBaseName }}.API/${{ parameters.SolutionBaseName }}.API.zip
         - template: azure-pipelines-templates/deploy/step/app-deploy.yml@das-platform-building-blocks
           parameters:
             ServiceConnection: ${{ parameters.ServiceConnection }}
             AppServiceName: $(WorkerAppServiceName)
-            DeploymentPackagePath: $(Pipeline.Workspace)/SFA.DAS.Tasks/SFA.DAS.Tasks.Worker/SFA.DAS.Tasks.Worker.zip
+            DeploymentPackagePath: $(Pipeline.Workspace)/${{ parameters.SolutionBaseName }}/${{ parameters.SolutionBaseName }}.Worker/${{ parameters.SolutionBaseName }}.Worker.zip
         - template: azure-pipelines-templates/deploy/step/sql-dacpac-deploy.yml@das-platform-building-blocks
           parameters:
             AzureSubscription: ${{ parameters.ServiceConnection }}
