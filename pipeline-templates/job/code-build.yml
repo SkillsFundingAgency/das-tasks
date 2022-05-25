@@ -56,6 +56,11 @@ jobs:
       configuration: '$(buildConfiguration)'
       clean: true
 
+  - template: azure-pipelines-templates/build/job/dacpac-template.yml@das-platform-building-blocks
+      parameters:
+        SolutionBaseName: ${{ parameters.SolutionBaseName }}
+        SqlProjectPath: src/${{ parameters.SolutionBaseName }}.Database/${{ parameters.SolutionBaseName }}.Database.sqlproj
+
   - task: VSBuild@1
     displayName: 'Publish Acceptance Tests'
     inputs:

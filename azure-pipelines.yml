@@ -25,7 +25,7 @@ trigger:
 
 variables:
   - name: SolutionBaseName
-    value: SFA.DAS.Tasks.API
+    value: SFA.DAS.Tasks
   - name: BuildConfiguration
     value: release
   - name: BuildPlatform
