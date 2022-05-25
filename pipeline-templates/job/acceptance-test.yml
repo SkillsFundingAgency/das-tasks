@@ -14,6 +14,7 @@ jobs:
   steps:
   - download: current
     artifact: ${{ parameters.SolutionBaseName }}
+  - pwsh: Install-Package NUnit.ConsoleRunner -RequiredVersion 3.7.0 -Source nuget.org -Scope CurrentUser -Force
   - task: VSTest@2
     displayName: Acceptance Tests
     inputs:
