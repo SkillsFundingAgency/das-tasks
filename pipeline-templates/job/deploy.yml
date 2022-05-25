@@ -2,9 +2,11 @@
   ConfigurationStorageConnectionString:
   Environment:
   LoggingRedisConnectionString:
+  OverrideBlockOnPossibleDataLoss:
   ResourceGroupLocation:
   ServiceConnection:
   SharedStorageAccountConnectionString:
+  SolutionBaseName:
   SubscriptionId:
 
 jobs:
@@ -60,3 +62,13 @@ jobs:
             ServiceConnection: ${{ parameters.ServiceConnection }}
             AppServiceName: $(WorkerAppServiceName)
             DeploymentPackagePath: $(Pipeline.Workspace)/SFA.DAS.Tasks/SFA.DAS.Tasks.Worker/SFA.DAS.Tasks.Worker.zip
+        - template: azure-pipelines-templates/deploy/step/sql-dacpac-deploy.yml@das-platform-building-blocks
+          parameters:
+            AzureSubscription: ${{ parameters.ServiceConnection }}
+            DacpacFile: $(Pipeline.Workspace)/DacpacArtifact/src/${{ parameters.SolutionBaseName }}.Database/bin/Output/${{ parameters.SolutionBaseName }}.Database.dacpac
+            DatabaseName: $(DatabaseName)
+            Environment: ${{ parameters.Environment }}
+            OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+            ServerName: $(SharedSQLServerFQDN)
+            SqlUsername: $(SharedSQLServerUsername)
+            SqlPassword: $(SharedSQLServerPassword)

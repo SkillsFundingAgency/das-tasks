@@ -1,4 +1,10 @@
-﻿resources:
+﻿parameters:
+- name: OverrideBlockOnPossibleDataLoss
+  displayName: Add /p:BlockOnPossibleDataLoss=false argument to DACPAC deployment
+  type: boolean
+  default: false
+
+resources:
   repositories:
   - repository: self
   - repository: das-platform-building-blocks
@@ -57,7 +63,9 @@ stages:
       ConfigurationStorageConnectionString: $(ConfigurationStorageConnectionString)
       Environment: AT
       LoggingRedisConnectionString: $(LoggingRedisConnectionString)
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
       ResourceGroupLocation: $(ResourceGroupLocation)
       ServiceConnection: SFA-DAS-DevTest-ARM
       SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
+      SolutionBaseName: $(SolutionBaseName)
       SubscriptionId: $(SubscriptionId)
