@@ -11,16 +11,8 @@ jobs:
     workspace:
       clean: all
   steps:
-  ##TO DO: replace with building block
-  - task: gitversion/setup@0
-    displayName: gitversion/setup
-    inputs:
-      versionSpec: 5.x
-  - task: gitversion/execute@0
-    displayName: gitversion/execute
-    inputs:
-      useConfigFile: true
-      configFilePath: GitVersion.yml
+  - template: azure-pipelines-templates/build/step/gitversion.yml@das-platform-building-blocks
+
   - task: NuGetCommand@2
     displayName: Restore
     inputs:
@@ -32,6 +24,7 @@ jobs:
       solution: '**/*.sln'
       configuration: ${{ parameters.BuildConfiguration }}
       platform: ${{ parameters.BuildPlatform }}
+
   - task: VSTest@2
     displayName: Unit Tests
     inputs:
@@ -42,6 +35,7 @@ jobs:
         !**\obj\**
       configuration: ${{ parameters.BuildConfiguration }}
       platform: ${{ parameters.BuildPlatform }}
+
   - task: VSBuild@1
     displayName: 'Publish API'
     inputs:
@@ -51,6 +45,7 @@ jobs:
       platform: 'anycpu'
       configuration: '$(buildConfiguration)'
       clean: true
+
   - task: VSBuild@1
     displayName: 'Publish Worker'
     inputs:
@@ -60,6 +55,7 @@ jobs:
       platform: 'anycpu'
       configuration: '$(buildConfiguration)'
       clean: true
+
   - task: VSBuild@1
     displayName: 'Publish Acceptance Tests'
     inputs:
@@ -69,6 +65,7 @@ jobs:
       platform: 'anycpu'
       configuration: '$(buildConfiguration)'
       clean: true
+
   - task: CopyFiles@2
     displayName: Copy Files to $(build.artifactstagingdirectory)/publish
     inputs:
@@ -81,6 +78,7 @@ jobs:
     inputs:
       targetPath: $(build.artifactstagingdirectory)/publish
       artifactName: SFA.DAS.Tasks
+
   - template: azure-pipelines-templates/build/step/nuget-pack.yml@das-platform-building-blocks
     parameters:
       DotNetFrameworkPackagesToPack: |
