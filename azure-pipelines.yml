@@ -69,3 +69,8 @@ stages:
       SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
       SolutionBaseName: $(SolutionBaseName)
       SubscriptionId: $(SubscriptionId)
+  - template: pipeline-templates/job/acceptance-test.yml
+    parameters:
+        SolutionBaseName: $(SolutionBaseName)
+        BuildConfiguration: $(BuildConfiguration)
+        BuildPlatform: $(BuildPlatform)

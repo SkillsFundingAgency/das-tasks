@@ -1,0 +1,21 @@
+parameters:
+  SolutionBaseName:
+  BuildConfiguration:
+  BuildPlatform:
+
+jobs:
+- job: AcceptanceTest
+  pool:
+    name: DAS - Continuous Deployment Agents
+    workspace:
+      clean: all
+  steps:
+  - download: current
+    artifact: ${{ parameters.SolutionBaseName }}
+  - task: VSTest@2
+    displayName: Acceptance Tests
+    inputs:
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: $(Pipeline.Workspace)/${{ parameters.SolutionBaseName }}/${{ parameters.SolutionBaseName }}.AcceptanceTests/${{ parameters.SolutionBaseName }}.AcceptanceTests.dll
+      configuration: ${{ parameters.BuildConfiguration }}
+      platform: ${{ parameters.BuildPlatform }}
