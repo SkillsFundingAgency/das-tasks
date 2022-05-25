@@ -56,11 +56,6 @@ jobs:
       configuration: '$(buildConfiguration)'
       clean: true
 
-  - template: azure-pipelines-templates/build/job/dacpac-template.yml@das-platform-building-blocks
-    parameters:
-      SolutionBaseName: ${{ parameters.SolutionBaseName }}
-      SqlProjectPath: src/${{ parameters.SolutionBaseName }}.Database/${{ parameters.SolutionBaseName }}.Database.sqlproj
-
   - task: VSBuild@1
     displayName: 'Publish Acceptance Tests'
     inputs:
@@ -88,3 +83,8 @@ jobs:
     parameters:
       DotNetFrameworkPackagesToPack: |
         src\${{ parameters.SolutionBaseName }}.API.Client\${{ parameters.SolutionBaseName }}.API.Client.csproj
+
+- template: azure-pipelines-templates/build/job/dacpac-template.yml@das-platform-building-blocks
+  parameters:
+    SolutionBaseName: ${{ parameters.SolutionBaseName }}
+    SqlProjectPath: src/${{ parameters.SolutionBaseName }}.Database/${{ parameters.SolutionBaseName }}.Database.sqlproj
