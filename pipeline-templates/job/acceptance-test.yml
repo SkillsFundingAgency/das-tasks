@@ -5,7 +5,7 @@ parameters:
 
 jobs:
 - job: AcceptanceTest
-  dependsOn: DeployWebApp
+  dependsOn: DeployAppsAndDatabase
   pool:
     name: DAS - Continuous Integration
     demands: Agent.OS -equals Windows_NT
