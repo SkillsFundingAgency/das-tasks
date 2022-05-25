@@ -10,7 +10,7 @@
   SubscriptionId:
 
 jobs:
-- deployment: DeployWebApp
+- deployment: DeployAppsAndDatabase
   pool:
     name: DAS - Continuous Deployment Agents
   environment: ${{ parameters.Environment }}

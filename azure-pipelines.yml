@@ -69,3 +69,11 @@ stages:
       SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
       SolutionBaseName: $(SolutionBaseName)
       SubscriptionId: $(SubscriptionId)
+  - template: pipeline-templates/job/acceptance-test.yml
+    parameters:
+      BuildConfiguration: $(BuildConfiguration)
+      BuildPlatform: $(BuildPlatform)
+      Environment: AT
+      ServiceConnection: SFA-DAS-DevTest-ARM
+      SharedSQLServerName: $(SharedSQLServerName)
+      SolutionBaseName: $(SolutionBaseName)

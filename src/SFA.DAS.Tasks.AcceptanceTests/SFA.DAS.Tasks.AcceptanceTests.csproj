@@ -186,6 +186,12 @@
     <Compile Include="Steps\TestMessages.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\packages\NUnit.ConsoleRunner.3.15.0\tools\nunit3-console.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\packages\NUnit.Extension.NUnitProjectLoader.3.6.0\tools\nunit-project-loader.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="App.config">
       <TransformOnBuild>true</TransformOnBuild>
       <SubType>Designer</SubType>
