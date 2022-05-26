@@ -12,13 +12,10 @@ jobs:
     workspace:
       clean: all
   steps:
-  - download: current
-    artifact: ${{ parameters.SolutionBaseName }}
-  #- pwsh: Install-Package NUnit.ConsoleRunner -RequiredVersion 3.7.0 -Scope CurrentUser -Force
   - task: VSTest@2
     displayName: Acceptance Tests
     inputs:
       testSelector: 'testAssemblies'
-      testAssemblyVer2: $(Pipeline.Workspace)/${{ parameters.SolutionBaseName }}/${{ parameters.SolutionBaseName }}.AcceptanceTests/${{ parameters.SolutionBaseName }}.AcceptanceTests.dll
+      testAssemblyVer2: src\${{ parameters.SolutionBaseName }}.AcceptanceTests\${{ parameters.SolutionBaseName }}.AcceptanceTests.csproj
       configuration: ${{ parameters.BuildConfiguration }}
       platform: ${{ parameters.BuildPlatform }}
