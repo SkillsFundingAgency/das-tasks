@@ -17,14 +17,25 @@ jobs:
   - name: WhitelistRuleName
     value: $[ replace(variables['Build.Repository.Name'], '/', '_') ] ##TO DO: refactor as deployment job and append Environment.Name to Name
   steps:
-  - download: current
-    artifact: ${{ parameters.SolutionBaseName }}
+  - checkout: self
   - checkout: das-platform-automation
+
+  - task: NuGetCommand@2
+    displayName: Restore
+    inputs:
+      command: 'restore'
+      restoreSolution: '**/*.sln'
+  - task: VSBuild@1
+    displayName: Build
+    inputs:
+      solution: '**/*.sln'
+      configuration: ${{ parameters.BuildConfiguration }}
+      platform: ${{ parameters.BuildPlatform }}
 
   - task: esfadevops.Tokenization.custom-build-task.Tokenization@0
     displayName: 'Tokenization: Transform file *.config'
     inputs:
-      SourcePath: '$(Pipeline.Workspace)/'
+      SourcePath: '$(System.DefaultWorkingDirectory)/'
       TargetFileNames: '*.config'
       RequireVariable: true
 
