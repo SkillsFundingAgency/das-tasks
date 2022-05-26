@@ -15,7 +15,7 @@ jobs:
       clean: all
   variables:
   - name: WhitelistRuleName
-    value: ${{ replace(variables.BUILD_REPOSITORY_NAME, '/', '_') }} ##TO DO: refactor as deployment job and append Environment.Name to Name
+    value: $[ replace(variables['Build.Repository.Name'], '/', '_') ] ##TO DO: refactor as deployment job and append Environment.Name to Name
   steps:
   - checkout: self
   - checkout: das-platform-automation
