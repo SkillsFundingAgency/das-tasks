@@ -53,7 +53,8 @@ jobs:
       configuration: ${{ parameters.BuildConfiguration }}
       platform: ${{ parameters.BuildPlatform }}
   - task: AzurePowerShell@5
-    condition: succeededOrFailed() ##TO DO: can this run if whitelist succeeds and tests succeed/fail
+    ##TO DO: test this by breaking ip address task
+    condition: and(always(), ne(variables.IPAddress, '')
     displayName: Remove Whitelisted Agent's IP Address
     inputs:
       azureSubscription: ${{ parameters.ServiceConnection }}
