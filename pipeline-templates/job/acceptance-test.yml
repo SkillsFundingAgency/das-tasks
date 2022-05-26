@@ -47,7 +47,7 @@ jobs:
     inputs:
       testSelector: 'testAssemblies'
       testAssemblyVer2: |
-        $(Pipeline.Workspace)\**\*AcceptanceTests.dll
+        **\*AcceptanceTests.dll
         !**\*TestAdapter.dll
         !**\obj\**
       configuration: ${{ parameters.BuildConfiguration }}
