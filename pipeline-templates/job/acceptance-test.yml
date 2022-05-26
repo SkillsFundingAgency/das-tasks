@@ -7,7 +7,7 @@ jobs:
 - job: AcceptanceTest
   dependsOn: DeployAppsAndDatabase
   pool:
-    name: DAS - Continuous Integration
+    name: Azure Pipelines
     demands: Agent.OS -equals Windows_NT
     workspace:
       clean: all
