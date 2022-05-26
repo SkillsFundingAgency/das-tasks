@@ -13,6 +13,9 @@ jobs:
     vmImage: 'windows-latest'
     workspace:
       clean: all
+  variables:
+  - name: WhitelistRuleName
+    value: ${{ replace(variables.BUILD_REPOSITORY_NAME, '/', '_')) }} ##TO DO: refactor as deployment job and append Environment.Name to Name
   steps:
   - checkout: self
   - checkout: das-platform-automation
@@ -48,7 +51,7 @@ jobs:
     inputs:
       azureSubscription: ${{ parameters.ServiceConnection }}
       ScriptPath: '$(System.DefaultWorkingDirectory)/das-platform-automation/Infrastructure-Scripts/Add-AzSqlIpException.ps1'
-      ScriptArguments: '-Name $(Build.Repository.Name) -IPAddress  $(IPAddress) -ResourceNamePattern ${{ parameters.SharedSQLServerName }}' ##TO DO: refactor as deployment job and append Environment.Name to Name
+      ScriptArguments: '-Name $(WhitelistRuleName) -IPAddress  $(IPAddress) -ResourceNamePattern ${{ parameters.SharedSQLServerName }}'
       azurePowerShellVersion: LatestVersion
   - task: VSTest@2
     displayName: Acceptance Tests
@@ -66,5 +69,5 @@ jobs:
     inputs:
       azureSubscription: ${{ parameters.ServiceConnection }}
       ScriptPath: '$(System.DefaultWorkingDirectory)/das-platform-automation/Infrastructure-Scripts/Remove-AzSqlIpException.ps1'
-      ScriptArguments: '-Name  $(Build.Repository.Name) -IPAddress $(IPAddress) -ResourceNamePattern ${{ parameters.SharedSQLServerName }}'
+      ScriptArguments: '-Name  $(WhitelistRuleName) -IPAddress $(IPAddress) -ResourceNamePattern ${{ parameters.SharedSQLServerName }}'
       azurePowerShellVersion: LatestVersion
