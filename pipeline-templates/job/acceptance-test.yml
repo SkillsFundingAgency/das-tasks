@@ -32,7 +32,7 @@ jobs:
       RequireVariable: true
 
   - task: VSTest@2
-    displayName: Unit Tests
+    displayName: Acceptance Tests
     inputs:
       testSelector: 'testAssemblies'
       testAssemblyVer2: |
