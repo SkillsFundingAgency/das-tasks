@@ -24,6 +24,13 @@ jobs:
       configuration: ${{ parameters.BuildConfiguration }}
       platform: ${{ parameters.BuildPlatform }}
 
+  - task: esfadevops.Tokenization.custom-build-task.Tokenization@0
+    displayName: 'Tokenization: Transform file *.config'
+    inputs:
+      SourcePath: '$(System.DefaultWorkingDirectory)/'
+      TargetFileNames: '*.config'
+      RequireVariable: true
+
   - task: VSTest@2
     displayName: Unit Tests
     inputs:
