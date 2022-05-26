@@ -54,7 +54,7 @@ jobs:
       platform: ${{ parameters.BuildPlatform }}
   - task: AzurePowerShell@5
     ##TO DO: test this by breaking ip address task
-    condition: and(always(), ne(variables.IPAddress, '')
+    condition: and(always(), ne(variables.IPAddress, ''))
     displayName: Remove Whitelisted Agent's IP Address
     inputs:
       azureSubscription: ${{ parameters.ServiceConnection }}
