@@ -12,10 +12,25 @@ jobs:
     workspace:
       clean: all
   steps:
+  - task: NuGetCommand@2
+    displayName: Restore
+    inputs:
+      command: 'restore'
+      restoreSolution: '**/*.sln'
+  - task: VSBuild@1
+    displayName: Build
+    inputs:
+      solution: '**/*.sln'
+      configuration: ${{ parameters.BuildConfiguration }}
+      platform: ${{ parameters.BuildPlatform }}
+
   - task: VSTest@2
-    displayName: Acceptance Tests
+    displayName: Unit Tests
     inputs:
       testSelector: 'testAssemblies'
-      testAssemblyVer2: src\${{ parameters.SolutionBaseName }}.AcceptanceTests\${{ parameters.SolutionBaseName }}.AcceptanceTests.csproj
+      testAssemblyVer2: |
+        **\*AcceptanceTests.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
       configuration: ${{ parameters.BuildConfiguration }}
       platform: ${{ parameters.BuildPlatform }}
