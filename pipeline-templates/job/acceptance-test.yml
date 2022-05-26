@@ -7,7 +7,7 @@ parameters:
 
 jobs:
 - job: AcceptanceTest
-  dependsOn: DeployAppsAndDatabase
+  #dependsOn: DeployAppsAndDatabase
   pool:
     name: Azure Pipelines
     vmImage: 'windows-latest'

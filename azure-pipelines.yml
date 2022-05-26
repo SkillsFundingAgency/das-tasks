@@ -58,17 +58,17 @@ stages:
   - group: AT DevTest Shared Resources
   - group: AT das-tasks
   jobs:
-  - template: pipeline-templates/job/deploy.yml
-    parameters:
-      ConfigurationStorageConnectionString: $(ConfigurationStorageConnectionString)
-      Environment: AT
-      LoggingRedisConnectionString: $(LoggingRedisConnectionString)
-      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
-      ResourceGroupLocation: $(ResourceGroupLocation)
-      ServiceConnection: SFA-DAS-DevTest-ARM
-      SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
-      SolutionBaseName: $(SolutionBaseName)
-      SubscriptionId: $(SubscriptionId)
+  # - template: pipeline-templates/job/deploy.yml
+  #   parameters:
+  #     ConfigurationStorageConnectionString: $(ConfigurationStorageConnectionString)
+  #     Environment: AT
+  #     LoggingRedisConnectionString: $(LoggingRedisConnectionString)
+  #     OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+  #     ResourceGroupLocation: $(ResourceGroupLocation)
+  #     ServiceConnection: SFA-DAS-DevTest-ARM
+  #     SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
+  #     SolutionBaseName: $(SolutionBaseName)
+  #     SubscriptionId: $(SubscriptionId)
   - template: pipeline-templates/job/acceptance-test.yml
     parameters:
         SolutionBaseName: $(SolutionBaseName)
