@@ -8,6 +8,7 @@ jobs:
   dependsOn: DeployAppsAndDatabase
   pool:
     name: Azure Pipelines
+    vmImage: 'windows-latest'
     workspace:
       clean: all
   steps:
