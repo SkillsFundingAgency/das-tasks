@@ -48,7 +48,7 @@ jobs:
     inputs:
       azureSubscription: ${{ parameters.ServiceConnection }}
       ScriptPath: '$(System.DefaultWorkingDirectory)/das-platform-automation/Infrastructure-Scripts/Add-AzSqlIpException.ps1'
-      ScriptArguments: '-Name $(Release.DefinitionName) -IPAddress  $(IPAddress) -ResourceNamePattern ${{ parameters.SharedSQLServerName }}'
+      ScriptArguments: '-Name $(Build.Repository.Name) -IPAddress  $(IPAddress) -ResourceNamePattern ${{ parameters.SharedSQLServerName }}' ##TO DO: refactor as deployment job and append Environment.Name to Name
       azurePowerShellVersion: LatestVersion
   - task: VSTest@2
     displayName: Acceptance Tests
@@ -66,5 +66,5 @@ jobs:
     inputs:
       azureSubscription: ${{ parameters.ServiceConnection }}
       ScriptPath: '$(System.DefaultWorkingDirectory)/das-platform-automation/Infrastructure-Scripts/Remove-AzSqlIpException.ps1'
-      ScriptArguments: '-Name  $(Release.DefinitionName) -IPAddress $(IPAddress) -ResourceNamePattern ${{ parameters.SharedSQLServerName }}'
+      ScriptArguments: '-Name  $(Build.Repository.Name) -IPAddress $(IPAddress) -ResourceNamePattern ${{ parameters.SharedSQLServerName }}'
       azurePowerShellVersion: LatestVersion
