@@ -8,7 +8,6 @@ jobs:
   dependsOn: DeployAppsAndDatabase
   pool:
     name: Azure Pipelines
-    demands: Agent.OS -equals Windows_NT
     workspace:
       clean: all
   steps:
