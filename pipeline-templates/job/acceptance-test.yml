@@ -14,6 +14,7 @@ jobs:
     workspace:
       clean: all
   steps:
+  - checkout: self
   - checkout: das-platform-automation
 
   - task: NuGetCommand@2
