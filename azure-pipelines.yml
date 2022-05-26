@@ -74,3 +74,5 @@ stages:
         SolutionBaseName: $(SolutionBaseName)
         BuildConfiguration: $(BuildConfiguration)
         BuildPlatform: $(BuildPlatform)
+        ServiceConnection: SFA-DAS-DevTest-ARM
+        SharedSQLServerName: $(SharedSQLServerName)

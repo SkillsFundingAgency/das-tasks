@@ -2,6 +2,8 @@ parameters:
   SolutionBaseName:
   BuildConfiguration:
   BuildPlatform:
+  ServiceConnection:
+  SharedSQLServerName:
 
 jobs:
 - job: AcceptanceTest
@@ -31,6 +33,20 @@ jobs:
       TargetFileNames: '*.config'
       RequireVariable: true
 
+  - task: AzurePowerShell@5
+    displayName: Get Agent's IP Address
+    inputs:
+      azureSubscription: ${{ parameters.ServiceConnection }}
+      ScriptPath: '$(System.DefaultWorkingDirectory)/das-platform-automation/Infrastructure-Scripts/Get-MyIpAddress.ps1'
+      ScriptArguments: '-WhatsMyIpUrl  "https://ifconfig.me/ip"'
+      azurePowerShellVersion: LatestVersion
+  - task: AzurePowerShell@5
+    displayName: Whitelist agent's IP address
+    inputs:
+      azureSubscription: ${{ parameters.ServiceConnection }}
+      ScriptPath: '$(System.DefaultWorkingDirectory)/das-platform-automation/Infrastructure-Scripts/Add-AzSqlIpException.ps1'
+      ScriptArguments: '-Name $(Release.DefinitionName) -IPAddress  $(IPAddress) -ResourceNamePattern ${{ parameters.SharedSQLServerName }}'
+      azurePowerShellVersion: LatestVersion
   - task: VSTest@2
     displayName: Acceptance Tests
     inputs:
@@ -41,3 +57,10 @@ jobs:
         !**\obj\**
       configuration: ${{ parameters.BuildConfiguration }}
       platform: ${{ parameters.BuildPlatform }}
+  - task: AzurePowerShell@5
+    displayName: Remove Whitelisted Agent's IP Address
+    inputs:
+      azureSubscription: ${{ parameters.ServiceConnection }}
+      ScriptPath: '$(System.DefaultWorkingDirectory)/das-platform-automation/Infrastructure-Scripts/Remove-AzSqlIpException.ps1'
+      ScriptArguments: '-Name  $(Release.DefinitionName) -IPAddress $(IPAddress) -ResourceNamePattern ${{ parameters.SharedSQLServerName }}'
+      azurePowerShellVersion: LatestVersion
