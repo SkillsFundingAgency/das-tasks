@@ -14,6 +14,8 @@ jobs:
     workspace:
       clean: all
   steps:
+  - checkout: das-platform-automation
+
   - task: NuGetCommand@2
     displayName: Restore
     inputs:
