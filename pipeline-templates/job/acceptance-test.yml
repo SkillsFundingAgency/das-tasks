@@ -39,31 +39,30 @@ jobs:
       TargetFileNames: '*.config'
       RequireVariable: true
 
-  # - task: AzurePowerShell@5
-  #   displayName: Get Agent's IP Address
-  #   inputs:
-  #     azureSubscription: ${{ parameters.ServiceConnection }}
-  #     ScriptPath: '$(System.DefaultWorkingDirectory)/das-platform-automation/Infrastructure-Scripts/Get-MyIpAddress.ps1'
-  #     ScriptArguments: '-WhatsMyIpUrl  "https://ifconfig.me/ip"'
-  #     azurePowerShellVersion: LatestVersion
-  # - task: AzurePowerShell@5
-  #   displayName: Whitelist agent's IP address
-  #   inputs:
-  #     azureSubscription: ${{ parameters.ServiceConnection }}
-  #     ScriptPath: '$(System.DefaultWorkingDirectory)/das-platform-automation/Infrastructure-Scripts/Add-AzSqlIpException.ps1'
-  #     ScriptArguments: '-Name $(WhitelistRuleName) -IPAddress  $(IPAddress) -ResourceNamePattern ${{ parameters.SharedSQLServerName }}'
-  #     azurePowerShellVersion: LatestVersion
-  # - task: VSTest@2
-  #   displayName: Acceptance Tests
-  #   inputs:
-  #     testSelector: 'testAssemblies'
-  #     testAssemblyVer2: |
-  #       **\*AcceptanceTests.dll
-  #       !**\*TestAdapter.dll
-  #       !**\obj\**
-  #     configuration: ${{ parameters.BuildConfiguration }}
-  #     platform: ${{ parameters.BuildPlatform }}
-  #   continueOnError: true
+  - task: AzurePowerShell@5
+    displayName: Get Agent's IP Address
+    inputs:
+      azureSubscription: ${{ parameters.ServiceConnection }}
+      ScriptPath: '$(System.DefaultWorkingDirectory)/das-platform-automation/Infrastructure-Scripts/Get-MyIpAddress.ps1'
+      ScriptArguments: '-WhatsMyIpUrl  "https://ifconfig.me/ip"'
+      azurePowerShellVersion: LatestVersion
+  - task: AzurePowerShell@5
+    displayName: Whitelist agent's IP address
+    inputs:
+      azureSubscription: ${{ parameters.ServiceConnection }}
+      ScriptPath: '$(System.DefaultWorkingDirectory)/das-platform-automation/Infrastructure-Scripts/Add-AzSqlIpException.ps1'
+      ScriptArguments: '-Name $(WhitelistRuleName) -IPAddress  $(IPAddress) -ResourceNamePattern ${{ parameters.SharedSQLServerName }}'
+      azurePowerShellVersion: LatestVersion
+  - task: VSTest@2
+    displayName: Acceptance Tests
+    inputs:
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: |
+        **\*AcceptanceTests.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
+      configuration: ${{ parameters.BuildConfiguration }}
+      platform: ${{ parameters.BuildPlatform }}
   - task: AzurePowerShell@5
     ##TO DO: test this by breaking ip address task
     condition: and(always(), ne(variables.IPAddress, ''))
