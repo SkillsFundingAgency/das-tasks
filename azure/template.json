@@ -434,6 +434,9 @@
                     "appServicePlanResourceGroup": {
                         "value": "[variables('resourceGroupName')]"
                     },
+                    "deployStagingSlot": {
+                        "value": false
+                    },
                     "subnetResourceId": {
                         "value": "[reference(concat('wkr-app-subnet','-',parameters('utcValue'))).outputs.SubnetResourceId.value]"
                     },

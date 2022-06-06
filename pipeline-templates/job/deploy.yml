@@ -57,11 +57,17 @@ jobs:
             ServiceConnection: ${{ parameters.ServiceConnection }}
             AppServiceName: $(ApiAppServiceName)
             DeploymentPackagePath: $(Pipeline.Workspace)/${{ parameters.SolutionBaseName }}/${{ parameters.SolutionBaseName }}.API/${{ parameters.SolutionBaseName }}.API.zip
-        - template: azure-pipelines-templates/deploy/step/app-deploy.yml@das-platform-building-blocks
-          parameters:
-            ServiceConnection: ${{ parameters.ServiceConnection }}
-            AppServiceName: $(WorkerAppServiceName)
-            DeploymentPackagePath: $(Pipeline.Workspace)/${{ parameters.SolutionBaseName }}/${{ parameters.SolutionBaseName }}.Worker/${{ parameters.SolutionBaseName }}.Worker.zip
+        - task: AzureRmWebAppDeployment@4
+          displayName: Deploy Worker - $(WorkerAppServiceName)
+          inputs:
+            azureSubscription: ${{ parameters.ServiceConnection }}
+            appType: webApp
+            WebAppName: $(WorkerAppServiceName)
+            ResourceGroupName: $(ResourceGroupName)
+            Package: $(Pipeline.Workspace)/${{ parameters.SolutionBaseName }}/${{ parameters.SolutionBaseName }}.Worker/${{ parameters.SolutionBaseName }}.Worker.zip
+            RemoveAdditionalFilesFlag: true
+            DeploymentType: webDeploy
+            UseWebDeploy: true
         - template: azure-pipelines-templates/deploy/step/sql-dacpac-deploy.yml@das-platform-building-blocks
           parameters:
             AzureSubscription: ${{ parameters.ServiceConnection }}
