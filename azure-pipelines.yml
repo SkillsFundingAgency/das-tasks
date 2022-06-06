@@ -10,13 +10,13 @@ resources:
   - repository: das-platform-building-blocks
     type: github
     name: SkillsFundingAgency/das-platform-building-blocks
-    ref: refs/tags/0.4.55
-    endpoint: GitHub (SFA)
+    ref: refs/tags/0.4.57
+    endpoint: SkillsFundingAgency
   - repository: das-platform-automation
     type: github
     name: SkillsFundingAgency/das-platform-automation
-    ref: refs/tags/4.6.0
-    endpoint: GitHub (SFA)
+    ref: refs/tags/5.0.2
+    endpoint: SkillsFundingAgency
   pipelines:
   - pipeline: das-employer-config
     project: Digital Apprenticeship Service
