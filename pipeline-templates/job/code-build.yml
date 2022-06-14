@@ -49,20 +49,34 @@ jobs:
     inputs:
       solution: src/${{ parameters.SolutionBaseName }}.API/${{ parameters.SolutionBaseName }}.API.csproj
       vsVersion: '16.0'
-      msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)/publish/${{ parameters.SolutionBaseName }}.API/"'
+      msbuildArgs: /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /p:publishUrl="$(build.artifactstagingdirectory)/publish/${{ parameters.SolutionBaseName }}.API/"
       platform: 'anycpu'
-      configuration: '$(buildConfiguration)'
+      configuration: ${{ parameters.BuildConfiguration }}
       clean: true
+
+  - task: ArchiveFiles@2
+    displayName: 'Archive API'
+    inputs:
+      includeRootFolder: false
+      rootFolderOrFile: '$(build.artifactstagingdirectory)/publish/${{ parameters.SolutionBaseName }}.API'
+      archiveFile: '$(build.artifactstagingdirectory)/publish/${{ parameters.SolutionBaseName }}.API/${{ parameters.SolutionBaseName }}.API.zip'
 
   - task: VSBuild@1
     displayName: 'Publish Worker'
     inputs:
       solution: src\${{ parameters.SolutionBaseName }}.Worker\${{ parameters.SolutionBaseName }}.Worker.csproj
       vsVersion: '16.0'
-      msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)/publish/${{ parameters.SolutionBaseName }}.Worker/"'
+      msbuildArgs: /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /p:publishUrl="$(build.artifactstagingdirectory)/publish/${{ parameters.SolutionBaseName }}.Worker/"
       platform: 'anycpu'
-      configuration: '$(buildConfiguration)'
+      configuration: ${{ parameters.BuildConfiguration }}
       clean: true
+
+  - task: ArchiveFiles@2
+    displayName: 'Archive Worker'
+    inputs:
+      includeRootFolder: false
+      rootFolderOrFile: '$(build.artifactstagingdirectory)/publish/${{ parameters.SolutionBaseName }}.Worker'
+      archiveFile: '$(build.artifactstagingdirectory)/publish/${{ parameters.SolutionBaseName }}.Worker/${{ parameters.SolutionBaseName }}.Worker.zip'
 
   - task: VSBuild@1
     displayName: 'Publish Acceptance Tests'
@@ -71,7 +85,7 @@ jobs:
       vsVersion: '16.0'
       msbuildArgs: '/p:SkipInvalidConfigurations=true /p:OutputPath="$(build.artifactstagingdirectory)/publish/${{ parameters.SolutionBaseName }}.AcceptanceTests/"'
       platform: 'anycpu'
-      configuration: '$(buildConfiguration)'
+      configuration: ${{ parameters.BuildConfiguration }}
       clean: true
 
   - task: CopyFiles@2
