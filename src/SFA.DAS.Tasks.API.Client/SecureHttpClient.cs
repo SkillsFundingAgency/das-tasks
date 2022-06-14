@@ -17,20 +17,20 @@ namespace SFA.DAS.Tasks.API.Client
             // So we can mock for testing
         }
 
-        private static async Task<AuthenticationResult> GetAuthenticationResult(string clientId, string appKey, string resourceId, string tenant)
+        private static async Task<AuthenticationResult> GetAuthenticationResult(string clientId, string clientSecret, string identifierUri, string tenant)
         {
             if (string.IsNullOrEmpty(clientId) ||
-                string.IsNullOrEmpty(appKey) ||
-                string.IsNullOrEmpty(resourceId) ||
+                string.IsNullOrEmpty(clientSecret) ||
+                string.IsNullOrEmpty(identifierUri) ||
                 string.IsNullOrEmpty(tenant))
             {
                 return null;
             }
 
             var authority = $"https://login.microsoftonline.com/{tenant}";
-            var clientCredential = new ClientCredential(clientId, appKey);
+            var clientCredential = new ClientCredential(clientId, clientSecret);
             var context = new AuthenticationContext(authority, true);
-            var result = await context.AcquireTokenAsync(resourceId, clientCredential);
+            var result = await context.AcquireTokenAsync(identifierUri, clientCredential);
             return result;
         }
 
