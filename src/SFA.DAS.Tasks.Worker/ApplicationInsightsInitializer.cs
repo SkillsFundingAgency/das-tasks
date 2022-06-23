@@ -9,7 +9,7 @@ namespace SFA.DAS.Tasks.Worker
     {
         public void Initialize(ITelemetry telemetry)
         {
-            telemetry.Context.Properties["Application"] = "SFA.DAS.Support.Indexer.Worker";
+            telemetry.Context.Properties["Application"] = "SFA.DAS.Tasks.Worker";
         }
     }
 }
