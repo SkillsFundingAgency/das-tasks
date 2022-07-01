@@ -11,9 +11,6 @@
         "customHostName": {
             "type": "string"
         },
-        "elasticPoolName": {
-            "type": "string"
-        },
         "environmentName": {
             "type": "string"
         },
@@ -102,6 +99,10 @@
             "defaultValue": ""
         },
         "databaseTier": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "elasticPoolName": {
             "type": "string",
             "defaultValue": ""
         },
