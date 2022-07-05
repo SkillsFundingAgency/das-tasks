@@ -1,0 +1,78 @@
+parameters:
+  BuildConfiguration:
+  BuildPlatform:
+  Environment:
+  ServiceConnection:
+  SharedSQLServerName:
+  SolutionBaseName:
+
+jobs:
+- deployment: AcceptanceTest
+  dependsOn: DeployAppsAndDatabase
+  pool:
+    name: Azure Pipelines
+    vmImage: 'windows-latest'
+    workspace:
+      clean: all
+  variables:
+  - name: WhitelistRuleName
+    value: $[ format('{0}_{1}', replace(variables['Build.Repository.Name'], '/', '_'), variables['System.StageName']) ]
+  environment: ${{ parameters.Environment }}
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - checkout: self
+        - checkout: das-platform-automation
+
+        - task: NuGetCommand@2
+          displayName: Restore
+          inputs:
+            command: 'restore'
+            restoreSolution: '**/*.sln'
+        - task: VSBuild@1
+          displayName: Build
+          inputs:
+            solution: '**/*.sln'
+            configuration: ${{ parameters.BuildConfiguration }}
+            platform: ${{ parameters.BuildPlatform }}
+
+        - task: esfadevops.Tokenization.custom-build-task.Tokenization@0
+          displayName: 'Tokenization: Transform file *.config'
+          inputs:
+            SourcePath: '$(Pipeline.Workspace)/'
+            TargetFileNames: '*.config'
+            RequireVariable: true
+
+        - task: AzurePowerShell@5
+          displayName: Get Agent's IP Address
+          inputs:
+            azureSubscription: ${{ parameters.ServiceConnection }}
+            ScriptPath: '$(System.DefaultWorkingDirectory)/das-platform-automation/Infrastructure-Scripts/Get-MyIpAddress.ps1'
+            ScriptArguments: '-WhatsMyIpUrl  "https://ifconfig.me/ip"'
+            azurePowerShellVersion: LatestVersion
+        - task: AzurePowerShell@5
+          displayName: Whitelist agent's IP address
+          inputs:
+            azureSubscription: ${{ parameters.ServiceConnection }}
+            ScriptPath: '$(System.DefaultWorkingDirectory)/das-platform-automation/Infrastructure-Scripts/Add-AzSqlIpException.ps1'
+            ScriptArguments: '-Name $(WhitelistRuleName) -IPAddress  $(IPAddress) -ResourceNamePattern ${{ parameters.SharedSQLServerName }}'
+            azurePowerShellVersion: LatestVersion
+        - task: VSTest@2
+          displayName: Acceptance Tests
+          inputs:
+            testSelector: 'testAssemblies'
+            testAssemblyVer2: |
+              **\*AcceptanceTests.dll
+              !**\*TestAdapter.dll
+              !**\obj\**
+            configuration: ${{ parameters.BuildConfiguration }}
+            platform: ${{ parameters.BuildPlatform }}
+        - task: AzurePowerShell@5
+          condition: and(always(), ne(variables.IPAddress, ''))
+          displayName: Remove Whitelisted Agent's IP Address
+          inputs:
+            azureSubscription: ${{ parameters.ServiceConnection }}
+            ScriptPath: '$(System.DefaultWorkingDirectory)/das-platform-automation/Infrastructure-Scripts/Remove-AzSqlIpException.ps1'
+            ScriptArguments: '-Name  $(WhitelistRuleName) -IPAddress $(IPAddress) -ResourceNamePattern ${{ parameters.SharedSQLServerName }}'
+            azurePowerShellVersion: LatestVersion

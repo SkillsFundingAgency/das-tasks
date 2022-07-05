@@ -1,0 +1,136 @@
+﻿parameters:
+- name: OverrideBlockOnPossibleDataLoss
+  displayName: Add /p:BlockOnPossibleDataLoss=false argument to DACPAC deployment
+  type: boolean
+  default: false
+
+resources:
+  repositories:
+  - repository: self
+  - repository: das-platform-building-blocks
+    type: github
+    name: SkillsFundingAgency/das-platform-building-blocks
+    ref: refs/tags/0.4.57
+    endpoint: SkillsFundingAgency
+  - repository: das-platform-automation
+    type: github
+    name: SkillsFundingAgency/das-platform-automation
+    ref: refs/tags/5.0.2
+    endpoint: SkillsFundingAgency
+  pipelines:
+  - pipeline: das-employer-config
+    project: Digital Apprenticeship Service
+    source: das-employer-config
+    branch: master
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+
+variables:
+  - name: SolutionBaseName
+    value: SFA.DAS.Tasks
+  - name: BuildConfiguration
+    value: release
+  - name: BuildPlatform
+    value: any cpu
+  - group: RELEASE Management Resources
+  - group: RELEASE das-tasks
+
+stages:
+- stage: Build
+  variables:
+    - group: BUILD Management Resources
+  jobs:
+  - template: pipeline-templates/job/code-build.yml
+    parameters:
+      SolutionBaseName: $(SolutionBaseName)
+      BuildConfiguration: $(BuildConfiguration)
+      BuildPlatform: $(BuildPlatform)
+- template: azure-pipelines-templates/deploy/stage/nuget-publish.yml@das-platform-building-blocks
+- stage: Deploy_AT
+  dependsOn: Build
+  displayName: Deploy to AT
+  variables:
+  - group: DevTest Management Resources
+  - group: AT DevTest Shared Resources
+  - group: AT das-tasks
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ConfigurationStorageConnectionString: $(ConfigurationStorageConnectionString)
+      Environment: AT
+      LoggingRedisConnectionString: $(LoggingRedisConnectionString)
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+      ResourceGroupLocation: $(ResourceGroupLocation)
+      ServiceConnection: SFA-DAS-DevTest-ARM
+      SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
+      SolutionBaseName: $(SolutionBaseName)
+      SubscriptionId: $(SubscriptionId)
+  - template: pipeline-templates/job/acceptance-test.yml
+    parameters:
+      BuildConfiguration: $(BuildConfiguration)
+      BuildPlatform: $(BuildPlatform)
+      Environment: AT
+      ServiceConnection: SFA-DAS-DevTest-ARM
+      SharedSQLServerName: $(SharedSQLServerName)
+      SolutionBaseName: $(SolutionBaseName)
+- stage: Deploy_TEST
+  dependsOn: Build
+  displayName: Deploy to TEST
+  variables:
+  - group: DevTest Management Resources
+  - group: TEST DevTest Shared Resources
+  - group: TEST das-tasks
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ConfigurationStorageConnectionString: $(ConfigurationStorageConnectionString)
+      Environment: TEST
+      LoggingRedisConnectionString: $(LoggingRedisConnectionString)
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+      ResourceGroupLocation: $(ResourceGroupLocation)
+      ServiceConnection: SFA-DAS-DevTest-ARM
+      SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
+      SolutionBaseName: $(SolutionBaseName)
+      SubscriptionId: $(SubscriptionId)
+- stage: Deploy_TEST2
+  dependsOn: Build
+  displayName: Deploy to TEST2
+  variables:
+  - group: DevTest Management Resources
+  - group: TEST2 DevTest Shared Resources
+  - group: TEST2 das-tasks
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ConfigurationStorageConnectionString: $(ConfigurationStorageConnectionString)
+      Environment: TEST2
+      LoggingRedisConnectionString: $(LoggingRedisConnectionString)
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+      ResourceGroupLocation: $(ResourceGroupLocation)
+      ServiceConnection: SFA-DAS-DevTest-ARM
+      SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
+      SolutionBaseName: $(SolutionBaseName)
+      SubscriptionId: $(SubscriptionId)
+- stage: Deploy_PP
+  dependsOn: Build
+  displayName: Deploy to PP
+  variables:
+  - group: PreProd Management Resources
+  - group: PreProd Shared Resources
+  - group: PREPROD das-tasks
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ConfigurationStorageConnectionString: $(ConfigurationStorageConnectionString)
+      Environment: PP
+      LoggingRedisConnectionString: $(LoggingRedisConnectionString)
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+      ResourceGroupLocation: $(ResourceGroupLocation)
+      ServiceConnection: SFA-DIG-PreProd-ARM
+      SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
+      SolutionBaseName: $(SolutionBaseName)
+      SubscriptionId: $(SubscriptionId)
