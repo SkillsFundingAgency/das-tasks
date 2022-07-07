@@ -134,3 +134,41 @@ stages:
       SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
       SolutionBaseName: $(SolutionBaseName)
       SubscriptionId: $(SubscriptionId)
+- stage: Deploy_PROD
+  dependsOn: Build
+  displayName: Deploy to PROD
+  variables:
+  - group: Prod Management Resources
+  - group: Prod Shared Resources
+  - group: PROD das-tasks
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ConfigurationStorageConnectionString: $(ConfigurationStorageConnectionString)
+      Environment: PROD
+      LoggingRedisConnectionString: $(LoggingRedisConnectionString)
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+      ResourceGroupLocation: $(ResourceGroupLocation)
+      ServiceConnection: SFA-DIG-Prod-ARM
+      SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
+      SolutionBaseName: $(SolutionBaseName)
+      SubscriptionId: $(SubscriptionId)
+- stage: Deploy_MO
+  dependsOn: Build
+  displayName: Deploy to MO
+  variables:
+  - group: MO Management Resources
+  - group: MO Shared Resources
+  - group: MO das-tasks
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ConfigurationStorageConnectionString: $(ConfigurationStorageConnectionString)
+      Environment: MO
+      LoggingRedisConnectionString: $(LoggingRedisConnectionString)
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+      ResourceGroupLocation: $(ResourceGroupLocation)
+      ServiceConnection: SFA-ASM-ModelOffice-ARM
+      SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
+      SolutionBaseName: $(SolutionBaseName)
+      SubscriptionId: $(SubscriptionId)
