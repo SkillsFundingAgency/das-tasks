@@ -329,10 +329,6 @@
       <Project>{45583202-8542-480A-BE71-BA3BB1D69A6C}</Project>
       <Name>SFA.DAS.Tasks.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SFA.DAS.Tasks.Worker\SFA.DAS.Tasks.Worker.csproj">
-      <Project>{F4163AC8-357E-4C9A-A3B7-C5B0F8708E0A}</Project>
-      <Name>SFA.DAS.Tasks.Worker</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
