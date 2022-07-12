@@ -1,8 +1,7 @@
-﻿using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.Azure;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Web.Http;
 using System.Web.Mvc;
+using Microsoft.ApplicationInsights.Extensibility;
 
 namespace SFA.DAS.Tasks.API
 {
