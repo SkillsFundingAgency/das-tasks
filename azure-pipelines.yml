@@ -172,3 +172,23 @@ stages:
       SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
       SolutionBaseName: $(SolutionBaseName)
       SubscriptionId: $(SubscriptionId)
+- stage: Deploy_DEMO
+  dependsOn: Build
+  displayName: Deploy to DEMO
+  variables:
+  - group: DevTest Management Resources
+  - group: DEMO DevTest Shared Resources
+  - group: DEMO das-tasks
+  jobs:
+  - template: pipeline-templates/job/deploy.yml
+    parameters:
+      ConfigurationStorageConnectionString: $(ConfigurationStorageConnectionString)
+      Environment: DEMO
+      LoggingRedisConnectionString: $(LoggingRedisConnectionString)
+      OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss }}
+      ResourceGroupLocation: $(ResourceGroupLocation)
+      ServiceConnection: SFA-DAS-DevTest-ARM
+      SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
+      SolutionBaseName: $(SolutionBaseName)
+      SubscriptionId: $(SubscriptionId)
+      
