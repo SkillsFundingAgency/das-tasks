@@ -1,7 +1,5 @@
-﻿using Microsoft.Azure;
-using Microsoft.Owin.Security.ActiveDirectory;
+﻿using Microsoft.Owin.Security.ActiveDirectory;
 using Owin;
-using System;
 using System.Configuration;
 
 namespace SFA.DAS.Tasks.API
@@ -15,7 +13,7 @@ namespace SFA.DAS.Tasks.API
                {
                    TokenValidationParameters = new System.IdentityModel.Tokens.TokenValidationParameters
                    {
-                       ValidAudience = ConfigurationManager.AppSettings["idaAudience"],
+                       ValidAudiences = ConfigurationManager.AppSettings["idaAudience"].Split(','),
                        RoleClaimType = "roles"
                    },
                    Tenant = ConfigurationManager.AppSettings["idaTenant"]
