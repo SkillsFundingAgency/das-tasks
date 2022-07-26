@@ -20,14 +20,6 @@ namespace SFA.DAS.Tasks.API.Client
 
         private static async Task<string> GetAuthenticationResult(string clientId, string clientSecret, string identifierUri, string tenant)
         {
-            if (string.IsNullOrEmpty(clientId) ||
-                string.IsNullOrEmpty(clientSecret) ||
-                string.IsNullOrEmpty(identifierUri) ||
-                string.IsNullOrEmpty(tenant))
-            {
-                return null;
-            }
-
             var accessToken = IsClientCredentialConfiguration(clientId, clientSecret, tenant)
                ? await GetClientCredentialAuthenticationResult(clientId, clientSecret, identifierUri, tenant)
                : await GetManagedIdentityAuthenticationResult(identifierUri);
