@@ -13,6 +13,18 @@ jobs:
   steps:
   - template: azure-pipelines-templates/build/step/gitversion.yml@das-platform-building-blocks
 
+  - task: SonarCloudPrepare@1
+    displayName: Prepare SonarCloud analysis configuration
+    condition: and(succeeded(), or(in(variables['Build.SourceBranch'], 'refs/heads/master', 'refs/heads/main'), eq(variables['Build.Reason'], 'PullRequest')))
+    inputs:
+      SonarCloud: ESFA - SonarCloud
+      organization: $(SonarCloudOrganisationKey)
+      scannerMode: MSBuild
+      projectName: "$(Build.DefinitionName)"
+      projectKey: ${{ replace(variables['Build.Repository.Name'], '/', '_') }}
+      extraProperties: |
+        sonar.cs.opencover.reportsPaths=$(Agent.TempDirectory)/CoverageResults/coverage.opencover.xml
+
   - task: NuGetCommand@2
     displayName: Restore
     inputs:
@@ -105,6 +117,16 @@ jobs:
     parameters:
       DotNetFrameworkPackagesToPack: |
         src\${{ parameters.SolutionBaseName }}.API.Client\${{ parameters.SolutionBaseName }}.API.Client.csproj
+
+  - task: SonarCloudAnalyze@1
+    displayName: Run SonarCloud analysis
+    condition: and(succeeded(), or(in(variables['Build.SourceBranch'], 'refs/heads/master', 'refs/heads/main'), eq(variables['Build.Reason'], 'PullRequest')))
+
+  - task: SonarCloudPublish@1
+    displayName: Publish SonarCloud analysis results on build summary
+    condition: and(succeeded(), or(in(variables['Build.SourceBranch'], 'refs/heads/master', 'refs/heads/main'), eq(variables['Build.Reason'], 'PullRequest')))
+    inputs:
+      pollingTimeoutSec: '300'
 
 - template: azure-pipelines-templates/build/job/dacpac-template.yml@das-platform-building-blocks
   parameters:
