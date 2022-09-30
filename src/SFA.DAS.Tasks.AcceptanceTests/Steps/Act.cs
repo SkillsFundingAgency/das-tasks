@@ -1,11 +1,14 @@
-﻿using TechTalk.SpecFlow;
+﻿using System.Threading.Tasks;
 using BoDi;
-using System.Threading.Tasks;
-using SFA.DAS.EmployerAccounts.Events.Messages;
 using SFA.DAS.Commitments.Events;
+using SFA.DAS.EmployerAccounts.Events.Messages;
+using SFA.DAS.Tasks.AcceptanceTests.Commitments;
 using SFA.DAS.Tasks.AcceptanceTests.DependencyResolution;
 using SFA.DAS.Tasks.AcceptanceTests.EmployerAccounts;
-using SFA.DAS.Tasks.AcceptanceTests.Commitments;
+using TechTalk.SpecFlow;
+using ApprovedTransferConnectionInvitationEvent = SFA.DAS.EmployerFinance.Events.Messages.ApprovedTransferConnectionInvitationEvent;
+using RejectedTransferConnectionInvitationEvent = SFA.DAS.EmployerFinance.Events.Messages.RejectedTransferConnectionInvitationEvent;
+using SentTransferConnectionInvitationEvent = SFA.DAS.EmployerFinance.Events.Messages.SentTransferConnectionInvitationEvent;
 
 namespace SFA.DAS.Tasks.AcceptanceTests.Steps
 {
