@@ -73,7 +73,13 @@ namespace SFA.DAS.Tasks.AcceptanceTests.DependencyResolution
 
         private string GetConnectionString(object message)
         {
-            return message.GetType().FullName.Contains("EmployerAccounts") ? _manageApprenticeshipsServiceBus : _commitmentsServiceBus;
+            if(message.GetType().FullName.Contains("EmployerAccounts") ||
+               message.GetType().FullName.Contains("EmployerFinance"))
+            {
+                return _manageApprenticeshipsServiceBus;
+            }
+
+            return _commitmentsServiceBus;
         }
     }
 }
