@@ -7,4 +7,4 @@
 )
 GO
 
---CREATE INDEX [IX_Tasks_EmployerAccountId] ON [Tasks].[Tasks] ([EmployerAccountId])
+CREATE INDEX [IX_Tasks_EmployerAccountId] ON [Tasks].[Tasks] ([EmployerAccountId])
