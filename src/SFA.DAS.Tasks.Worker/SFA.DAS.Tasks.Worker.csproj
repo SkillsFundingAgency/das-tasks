@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SFA.DAS.Tasks.Worker</RootNamespace>
     <AssemblyName>SFA.DAS.Tasks.Worker</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <RoleType>Worker</RoleType>
     <TargetFrameworkProfile />
@@ -38,6 +38,14 @@
   <PropertyGroup>
     <StartupObject>SFA.DAS.Tasks.Worker.Program</StartupObject>
   </PropertyGroup>
+  <ItemDefinitionGroup>
+    <_NoneWithTargetPath>
+      <TransformOnBuild>false</TransformOnBuild>
+    </_NoneWithTargetPath>
+    <ContentWithTargetPath>
+      <TransformOnBuild>false</TransformOnBuild>
+    </ContentWithTargetPath>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="MediatR, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MediatR.2.1.0\lib\net45\MediatR.dll</HintPath>
@@ -93,14 +101,17 @@
     <Reference Include="SFA.DAS.Configuration.FileStorage, Version=1.0.0.49931, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Configuration.FileStorage.1.0.0.49931\lib\net45\SFA.DAS.Configuration.FileStorage.dll</HintPath>
     </Reference>
-    <Reference Include="SFA.DAS.EmployerAccounts.Events, Version=1.2.0.62826, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.EmployerAccounts.Events.1.2.0.62826\lib\net45\SFA.DAS.EmployerAccounts.Events.dll</HintPath>
+    <Reference Include="SFA.DAS.EmployerAccounts.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.EmployerAccounts.Events.1.6.3165\lib\net48\SFA.DAS.EmployerAccounts.Events.dll</HintPath>
+    </Reference>
+    <Reference Include="SFA.DAS.EmployerFinance.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.EmployerFinance.Events.1.6.3165\lib\net48\SFA.DAS.EmployerFinance.Events.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.LevyTransferMatching.Messages, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.LevyTransferMatching.Messages.0.1.70-prerelease-16\lib\netstandard2.0\SFA.DAS.LevyTransferMatching.Messages.dll</HintPath>
     </Reference>
-    <Reference Include="SFA.DAS.Messaging, Version=3.0.0.53105, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Messaging.3.0.0.53105\lib\net45\SFA.DAS.Messaging.dll</HintPath>
+    <Reference Include="SFA.DAS.Messaging, Version=3.1.133.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Messaging.3.1.133\lib\net45\SFA.DAS.Messaging.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.Messaging.AzureServiceBus, Version=3.0.0.53105, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Messaging.AzureServiceBus.3.0.0.53105\lib\net45\SFA.DAS.Messaging.AzureServiceBus.dll</HintPath>

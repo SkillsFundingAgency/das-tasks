@@ -22,7 +22,6 @@ namespace SFA.DAS.Tasks.API.UnitTests.Controllers.TaskControllerTests
 
         private TaskController _controller;
         private Mock<IMediator> _mediator;
-        private List<DasTask> _tasks;
 
         [SetUp]
         public void Arrange()
