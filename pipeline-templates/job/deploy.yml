@@ -48,10 +48,20 @@ jobs:
               SharedStorageAccountConnectionString: ${{ parameters.SharedStorageAccountConnectionString }}
         - template: azure-pipelines-templates/deploy/step/generate-config.yml@das-platform-building-blocks
           parameters:
+            EnvironmentName: $(EnvironmentName)
             ServiceConnection: ${{ parameters.ServiceConnection }}
             SourcePath: $(Pipeline.Workspace)/das-employer-config/Configuration/das-tasks
+            StorageAccountName: $(ConfigurationStorageAccountName)
+            StorageAccountResourceGroup: $(SharedEnvResourceGroup)
             TargetFileName: '*.schema.json'
             TableName: Configuration
+            ConfigurationSecrets:
+              ClientSecret: $(ClientSecret)
+              TasksDBString: $(TasksDBString)
+              TasksMessageServiceBusConnectionString: $(TasksMessageServiceBusConnectionString)
+              MAMessageServiceBusConnectionString: $(MAMessageServiceBusConnectionString)
+              CommitmentsMessageServiceBusConnectionString: $(CommitmentsMessageServiceBusConnectionString)
+              SharedServiceBusConnectionString: $(SharedServiceBusConnectionString)
         - template: azure-pipelines-templates/deploy/step/app-deploy.yml@das-platform-building-blocks
           parameters:
             ServiceConnection: ${{ parameters.ServiceConnection }}
