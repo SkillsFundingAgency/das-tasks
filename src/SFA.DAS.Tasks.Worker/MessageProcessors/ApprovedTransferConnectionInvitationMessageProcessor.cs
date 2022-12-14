@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
-using SFA.DAS.EmployerAccounts.Events.Messages;
 using SFA.DAS.Messaging;
 using SFA.DAS.Messaging.AzureServiceBus.Attributes;
 using SFA.DAS.Messaging.Interfaces;
@@ -8,19 +7,20 @@ using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Commands.SaveTask;
 using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Infrastructure.Attributes;
+using SFA.DAS.EmployerFinance.Events.Messages;
 
 namespace SFA.DAS.Tasks.Worker.MessageProcessors
 {
     [ServiceBusConnectionString("ManageApprenticeships")]
     [TopicSubscription("Task_ApprovedTransferConnectionInvitation")]
 
-    public class ApprovedTransferConnectionInvitationMessageProcessor : MessageProcessor<ApprovedTransferConnectionInvitationEvent>
+    public class ApprovedTransferConnectionInvitationMessageProcessor : MessageProcessor2<ApprovedTransferConnectionInvitationEvent>
     {
         private readonly ILog _logger;
         private readonly IMediator _mediator;
 
-        public ApprovedTransferConnectionInvitationMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog logger, IMediator mediator)
-            : base(subscriberFactory, logger)
+        public ApprovedTransferConnectionInvitationMessageProcessor(IMessageSubscriberFactory subscriberFactory, ILog logger, IMessageContextProvider messageContextProvider, IMediator mediator)
+            : base(subscriberFactory, logger, messageContextProvider)
         {
             _logger = logger;
             _mediator = mediator;

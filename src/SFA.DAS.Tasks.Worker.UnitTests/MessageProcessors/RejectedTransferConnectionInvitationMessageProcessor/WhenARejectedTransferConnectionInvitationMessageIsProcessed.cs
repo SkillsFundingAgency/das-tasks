@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using MediatR;
 using Moq;
 using NUnit.Framework;
-using SFA.DAS.EmployerAccounts.Events.Messages;
 using SFA.DAS.Messaging.Interfaces;
 using SFA.DAS.NLog.Logger;
 using SFA.DAS.Tasks.Application.Commands.SaveTask;
 using SFA.DAS.Tasks.API.Types.Enums;
+using SFA.DAS.EmployerFinance.Events.Messages;
 
 namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.RejectedTransferConnectionInvitationMessageProcessor
 {
@@ -36,7 +36,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.RejectedTransferConne
             _tokenSource = new CancellationTokenSource();
 
             _processor = new Worker.MessageProcessors.RejectedTransferConnectionInvitationMessageProcessor(_subscriptionFactory.Object, Mock.Of<ILog>(),
-                _mediator.Object);
+                Mock.Of<IMessageContextProvider>(), _mediator.Object);
 
             _subscriptionFactory.Setup(x => x.GetSubscriber<RejectedTransferConnectionInvitationEvent>()).Returns(_subscriber.Object);
 
@@ -50,7 +50,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.RejectedTransferConne
         public async Task ThenTheTaskIsCompleted()
         {
             //Act
-            await _processor.RunAsync(_tokenSource);
+            await _processor.RunAsync(_tokenSource.Token);
 
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.EmployerAccountId.Equals(_messageContent.ReceiverAccountId.ToString()) &&

@@ -39,7 +39,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.PledgeApplicationMess
             _tokenSource = new CancellationTokenSource();
 
             _processor = new PledgeApplicationWithdrawnMessageProcessor(_subscriptionFactory.Object, Mock.Of<ILog>(),
-                _mediator.Object);
+                Mock.Of<IMessageContextProvider>(), _mediator.Object);
 
             _subscriptionFactory.Setup(x => x.GetSubscriber<PledgeApplicationWithdrawn>()).Returns(_subscriber.Object);
 
@@ -52,7 +52,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.PledgeApplicationMess
         public async Task ThenTheMessageShouldBeHandledByAHandler()
         {
             //Act
-            await _processor.RunAsync(_tokenSource);
+            await _processor.RunAsync(_tokenSource.Token);
 
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd =>

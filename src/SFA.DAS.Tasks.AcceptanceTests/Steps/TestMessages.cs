@@ -1,6 +1,9 @@
-﻿using SFA.DAS.EmployerAccounts.Events.Messages;
+﻿using System;
 using SFA.DAS.Commitments.Events;
-using System;
+using SFA.DAS.EmployerAccounts.Events.Messages;
+using ApprovedTransferConnectionInvitationEvent = SFA.DAS.EmployerFinance.Events.Messages.ApprovedTransferConnectionInvitationEvent;
+using RejectedTransferConnectionInvitationEvent = SFA.DAS.EmployerFinance.Events.Messages.RejectedTransferConnectionInvitationEvent;
+using SentTransferConnectionInvitationEvent = SFA.DAS.EmployerFinance.Events.Messages.SentTransferConnectionInvitationEvent;
 
 namespace SFA.DAS.Tasks.AcceptanceTests.Steps
 {

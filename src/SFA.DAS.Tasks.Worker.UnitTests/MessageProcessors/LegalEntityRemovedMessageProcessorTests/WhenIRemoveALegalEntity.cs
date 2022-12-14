@@ -20,7 +20,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.LegalEntityRemovedMes
         private Mock<ILog> _logger;
         private Mock<IMediator> _mediator;
         private Mock<IMessageSubscriber<LegalEntityRemovedMessage>> _subscriber;
-        private CancellationTokenSource _cancellationTokenSource;
+        private CancellationTokenSource _tokenSource;
 
         [SetUp]
         public void Arrange()
@@ -29,12 +29,13 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.LegalEntityRemovedMes
             _subscriber = new Mock<IMessageSubscriber<LegalEntityRemovedMessage>>();
             _logger = new Mock<ILog>();
             _mediator = new Mock<IMediator>();
-            _cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+            _tokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(5));
 
             _subscriberFactory.Setup(x => x.GetSubscriber<LegalEntityRemovedMessage>())
                 .Returns(_subscriber.Object);
 
-            _processor = new LegalEntityRemovedMessageProcessor(_subscriberFactory.Object, _logger.Object, _mediator.Object);
+            _processor = new LegalEntityRemovedMessageProcessor(_subscriberFactory.Object, _logger.Object,
+                Mock.Of<IMessageContextProvider>(), _mediator.Object);
         }
 
         [Test]
@@ -46,12 +47,12 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.LegalEntityRemovedMes
 
             message.Setup(x => x.Content)
                 .Returns(new LegalEntityRemovedMessage(accountId, 123, false, 345, "Test Org", "Test User", "ABC123"))
-                .Callback(_cancellationTokenSource.Cancel);
+                .Callback(_tokenSource.Cancel);
 
             _subscriber.Setup(x => x.ReceiveAsAsync()).ReturnsAsync(message.Object);
 
             //Act
-            await _processor.RunAsync(_cancellationTokenSource);
+            await _processor.RunAsync(_tokenSource.Token);
 
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(t => t.TaskCompleted && 
@@ -67,12 +68,12 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.LegalEntityRemovedMes
 
             message.Setup(x => x.Content)
                 .Returns(new LegalEntityRemovedMessage(12, 123, true, 345, "Test Org", "Test User", "ABC123"))
-                .Callback(_cancellationTokenSource.Cancel);
+                .Callback(_tokenSource.Cancel);
 
             _subscriber.Setup(x => x.ReceiveAsAsync()).ReturnsAsync(message.Object);
 
             //Act
-            await _processor.RunAsync(_cancellationTokenSource);
+            await _processor.RunAsync(_tokenSource.Token);
 
             //Assert
             _subscriber.Verify(x => x.ReceiveAsAsync(), Times.Once);

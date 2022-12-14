@@ -39,8 +39,8 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.CreatedEmployerAgreem
             _mediator = new Mock<IMediator>();
             _tokenSource = new CancellationTokenSource();
 
-            _processor = new CreatedEmployerAgreementMessageProcessor(_subscriptionFactory.Object, Mock.Of<ILog>(), 
-                _mediator.Object);
+            _processor = new CreatedEmployerAgreementMessageProcessor(_subscriptionFactory.Object, Mock.Of<ILog>(),
+                Mock.Of<IMessageContextProvider>(), _mediator.Object);
 
             _subscriptionFactory.Setup(x => x.GetSubscriber<AgreementCreatedMessage>()).Returns(_subscriber.Object);
 
@@ -53,7 +53,7 @@ namespace SFA.DAS.Tasks.Worker.UnitTests.MessageProcessors.CreatedEmployerAgreem
         public async Task ThenTheMessageShouldBeHandledByAHandler()
         {
             //Act
-            await _processor.RunAsync(_tokenSource);
+            await _processor.RunAsync(_tokenSource.Token);
 
             //Assert
             _mediator.Verify(x => x.SendAsync(It.Is<SaveTaskCommand>(cmd => cmd.EmployerAccountId.Equals(_messageContent.AccountId.ToString()) &&

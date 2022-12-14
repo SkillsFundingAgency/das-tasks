@@ -16,7 +16,7 @@ namespace SFA.DAS.Tasks.Worker.DependencyResolution
                 scan.TheCallingAssembly();
                 scan.AssembliesFromApplicationBaseDirectory(a => a.GetName().Name.StartsWith("SFA.DAS."));
                 scan.RegisterConcreteTypesAgainstTheFirstInterface();
-                scan.AddAllTypesOf<IMessageProcessor>();
+                scan.AddAllTypesOf<IMessageProcessor2>();
             });
 
             AddMediatrRegistrations();
