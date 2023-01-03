@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using SFA.DAS.NLog.Logger;
-using SFA.DAS.Sql.Client;
 using SFA.DAS.Tasks.API.Types.Enums;
 using SFA.DAS.Tasks.Domain.Configurations;
 using SFA.DAS.Tasks.Domain.Models;
@@ -16,7 +15,8 @@ namespace SFA.DAS.Tasks.DataAccess.Repositories
     public class TaskRepository : BaseRepository, ITaskRepository
     {
         public TaskRepository(TasksConfiguration configuration, ILog logger) : base(configuration.DatabaseConnectionString, logger)
-        {  }
+        {
+        }
 
         public async Task<IEnumerable<DasTask>> GetTasks(string employerAccountId)
         {
